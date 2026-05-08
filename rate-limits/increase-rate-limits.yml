@@ -16,9 +16,11 @@ tags:
 - Quotas
 - Throttling
 description: Placeholder rate-limit artifact for Increase. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+notes: "Initial scaffold \u2014 limits have not yet been reconciled."
 sources:
 - https://increase.com/
+- https://increase.com/documentation
+- https://increase.com/documentation/api
 responseCodes:
   throttled: 429
 limits:
