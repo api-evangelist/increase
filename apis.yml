@@ -1,7 +1,7 @@
 aid: increase
 url: https://raw.githubusercontent.com/api-evangelist/increase/refs/heads/main/apis.yml
 name: Increase
-x-type: company
+kind: company
 description: Increase is a banking and payments API providing direct ACH, wire, RTP, FedNow, check, and card programs. Bank-direct
   connectivity (no aggregator middle layer).
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
