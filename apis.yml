@@ -91,6 +91,8 @@ apis:
   - type: OpenAPI
     url: openapi/increase-openapi.json
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/increasebank
 - type: Website
   url: https://increase.com/
 - type: Plans
