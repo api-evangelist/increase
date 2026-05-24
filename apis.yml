@@ -103,6 +103,8 @@ common:
     url: rate-limits/increase-rate-limits.yml
   - type: FinOps
     url: finops/increase-finops.yml
+  - type: LLMsTxt
+    url: https://increase.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
