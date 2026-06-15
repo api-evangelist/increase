@@ -1,0 +1,5868 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List Account Numbers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_numbers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "ach_debit_status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Account Numbers"
+    },
+    {
+      "info": {
+        "name": "Create an Account Number",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/account_numbers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Account Number"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Account Number",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_numbers/:account_number_id",
+        "params": [
+          {
+            "name": "account_number_id",
+            "value": "account_number_v18nkfqm6afpsrvy82b2",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Account Number"
+    },
+    {
+      "info": {
+        "name": "Update an Account Number",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/account_numbers/:account_number_id",
+        "params": [
+          {
+            "name": "account_number_id",
+            "value": "account_number_v18nkfqm6afpsrvy82b2",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update an Account Number"
+    },
+    {
+      "info": {
+        "name": "List Account Statements",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_statements",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "statement_period_start.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "statement_period_start.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "statement_period_start.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "statement_period_start.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Account Statements"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Account Statement",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_statements/:account_statement_id",
+        "params": [
+          {
+            "name": "account_statement_id",
+            "value": "account_statement_lkc03a4skm2k7f38vj15",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Account Statement"
+    },
+    {
+      "info": {
+        "name": "List Account Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Account Transfers"
+    },
+    {
+      "info": {
+        "name": "Create an Account Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/account_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Account Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Account Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/account_transfers/:account_transfer_id",
+        "params": [
+          {
+            "name": "account_transfer_id",
+            "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Account Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve an Account Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/account_transfers/:account_transfer_id/approve",
+        "params": [
+          {
+            "name": "account_transfer_id",
+            "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approves an Account Transfer in status `pending_approval`."
+    },
+    {
+      "info": {
+        "name": "Cancel an Account Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/account_transfers/:account_transfer_id/cancel",
+        "params": [
+          {
+            "name": "account_transfer_id",
+            "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancels an Account Transfer in status `pending_approval`."
+    },
+    {
+      "info": {
+        "name": "List Accounts",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/accounts",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "query"
+          },
+          {
+            "name": "informational_entity_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "program_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Accounts"
+    },
+    {
+      "info": {
+        "name": "Create an Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/accounts",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Account"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/accounts/:account_id",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Account"
+    },
+    {
+      "info": {
+        "name": "Update an Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/accounts/:account_id",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update an Account"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Account Balance",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/accounts/:account_id/balance",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          },
+          {
+            "name": "at_time",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Retrieve the current and available balances for an account in minor units of the account's currency. Learn more about [account balances](/documentation/balance)."
+    },
+    {
+      "info": {
+        "name": "Close an Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/accounts/:account_id/close",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Close an Account"
+    },
+    {
+      "info": {
+        "name": "Get IntraFi balance",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/accounts/:account_id/intrafi_balance",
+        "params": [
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Returns the IntraFi balance for the given account. IntraFi may sweep funds to multiple banks. This endpoint will include both the total balance and the amount swept to each institution."
+    },
+    {
+      "info": {
+        "name": "List ACH Prenotifications",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/ach_prenotifications",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List ACH Prenotifications"
+    },
+    {
+      "info": {
+        "name": "Create an ACH Prenotification",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/ach_prenotifications",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an ACH Prenotification"
+    },
+    {
+      "info": {
+        "name": "Retrieve an ACH Prenotification",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/ach_prenotifications/:ach_prenotification_id",
+        "params": [
+          {
+            "name": "ach_prenotification_id",
+            "value": "ach_prenotification_ubjf9qqsxl3obbcn1u34",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an ACH Prenotification"
+    },
+    {
+      "info": {
+        "name": "List ACH Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/ach_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "external_account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List ACH Transfers"
+    },
+    {
+      "info": {
+        "name": "Create an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/ach_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/ach_transfers/:ach_transfer_id",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/ach_transfers/:ach_transfer_id/approve",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approves an ACH Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "Cancel a pending ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/ach_transfers/:ach_transfer_id/cancel",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancels an ACH Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "List Card Disputes",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_disputes",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Disputes"
+    },
+    {
+      "info": {
+        "name": "Create a Card Dispute",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_disputes",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Card Dispute"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Dispute",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_disputes/:card_dispute_id",
+        "params": [
+          {
+            "name": "card_dispute_id",
+            "value": "card_dispute_h9sc95nbl1cgltpp7men",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Dispute"
+    },
+    {
+      "info": {
+        "name": "Submit a User Submission for a Card Dispute",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_disputes/:card_dispute_id/submit_user_submission",
+        "params": [
+          {
+            "name": "card_dispute_id",
+            "value": "card_dispute_h9sc95nbl1cgltpp7men",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Submit a User Submission for a Card Dispute"
+    },
+    {
+      "info": {
+        "name": "Withdraw a Card Dispute",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_disputes/:card_dispute_id/withdraw",
+        "params": [
+          {
+            "name": "card_dispute_id",
+            "value": "card_dispute_h9sc95nbl1cgltpp7men",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Withdraw a Card Dispute"
+    },
+    {
+      "info": {
+        "name": "List Card Payments",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_payments",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "card_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Payments"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Payment",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_payments/:card_payment_id",
+        "params": [
+          {
+            "name": "card_payment_id",
+            "value": "card_payment_nd3k2kacrqjli8482ave",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Payment"
+    },
+    {
+      "info": {
+        "name": "List Card Purchase Supplements",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_purchase_supplements",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "card_payment_id",
+            "value": "card_payment_nd3k2kacrqjli8482ave",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Purchase Supplements"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Purchase Supplement",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_purchase_supplements/:card_purchase_supplement_id",
+        "params": [
+          {
+            "name": "card_purchase_supplement_id",
+            "value": "card_purchase_supplement_ijuc45iym4jchnh2sfk3",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Purchase Supplement"
+    },
+    {
+      "info": {
+        "name": "List Card Push Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_push_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Push Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a Card Push Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_push_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Card Push Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Push Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id",
+        "params": [
+          {
+            "name": "card_push_transfer_id",
+            "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Push Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a Card Push Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id/approve",
+        "params": [
+          {
+            "name": "card_push_transfer_id",
+            "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approves a Card Push Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "Cancel a pending Card Push Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id/cancel",
+        "params": [
+          {
+            "name": "card_push_transfer_id",
+            "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancels a Card Push Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "List Card Tokens",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_tokens",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Tokens"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_tokens/:card_token_id",
+        "params": [
+          {
+            "name": "card_token_id",
+            "value": "outbound_card_token_zlt0ml6youq3q7vcdlg0",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Token"
+    },
+    {
+      "info": {
+        "name": "Retrieve the capabilities of a Card Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_tokens/:card_token_id/capabilities",
+        "params": [
+          {
+            "name": "card_token_id",
+            "value": "outbound_card_token_zlt0ml6youq3q7vcdlg0",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "The capabilities of a Card Token describe whether the card can be used for specific operations, such as Card Push Transfers. The capabilities can change over time based on the issuing bank's configuration of the card range."
+    },
+    {
+      "info": {
+        "name": "List Card Validations",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_validations",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Validations"
+    },
+    {
+      "info": {
+        "name": "Create a Card Validation",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/card_validations",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Card Validation"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Validation",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/card_validations/:card_validation_id",
+        "params": [
+          {
+            "name": "card_validation_id",
+            "value": "outbound_card_validation_qqlzagpc6v1x2gcdhe24",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Validation"
+    },
+    {
+      "info": {
+        "name": "List Cards",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/cards",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Cards"
+    },
+    {
+      "info": {
+        "name": "Create a Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/cards",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Card"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/cards/:card_id",
+        "params": [
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card"
+    },
+    {
+      "info": {
+        "name": "Update a Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/cards/:card_id",
+        "params": [
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Card"
+    },
+    {
+      "info": {
+        "name": "Create a Card details iframe",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/cards/:card_id/create_details_iframe",
+        "params": [
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an iframe URL for a Card to display the card details. More details about styling and usage can be found in the [documentation](/documentation/embedded-card-component)."
+    },
+    {
+      "info": {
+        "name": "Retrieve sensitive details for a Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/cards/:card_id/details",
+        "params": [
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Sensitive details for a Card include the primary account number, expiry, card verification code, and PIN."
+    },
+    {
+      "info": {
+        "name": "Update a Card's PIN",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/cards/:card_id/update_pin",
+        "params": [
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Card's PIN"
+    },
+    {
+      "info": {
+        "name": "List Check Deposits",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/check_deposits",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Check Deposits"
+    },
+    {
+      "info": {
+        "name": "Create a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/check_deposits",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Check Deposit"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/check_deposits/:check_deposit_id",
+        "params": [
+          {
+            "name": "check_deposit_id",
+            "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Check Deposit"
+    },
+    {
+      "info": {
+        "name": "List Check Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/check_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Check Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/check_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Check Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/check_transfers/:check_transfer_id",
+        "params": [
+          {
+            "name": "check_transfer_id",
+            "value": "check_transfer_30b43acfu9vw8fyc4f5",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Check Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/check_transfers/:check_transfer_id/approve",
+        "params": [
+          {
+            "name": "check_transfer_id",
+            "value": "check_transfer_30b43acfu9vw8fyc4f5",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approve a Check Transfer"
+    },
+    {
+      "info": {
+        "name": "Cancel a pending Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/check_transfers/:check_transfer_id/cancel",
+        "params": [
+          {
+            "name": "check_transfer_id",
+            "value": "check_transfer_30b43acfu9vw8fyc4f5",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancel a Check Transfer with the `pending_approval` status. See [Transfer Approvals](/documentation/transfer-approvals) for more information."
+    },
+    {
+      "info": {
+        "name": "Stop payment on a Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/check_transfers/:check_transfer_id/stop_payment",
+        "params": [
+          {
+            "name": "check_transfer_id",
+            "value": "check_transfer_30b43acfu9vw8fyc4f5",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Stop payment on a Check Transfer"
+    },
+    {
+      "info": {
+        "name": "List Declined Transactions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/declined_transactions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "route_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "category.in",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Declined Transactions"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Declined Transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/declined_transactions/:declined_transaction_id",
+        "params": [
+          {
+            "name": "declined_transaction_id",
+            "value": "declined_transaction_17jbn0yyhvkt4v4ooym8",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Declined Transaction"
+    },
+    {
+      "info": {
+        "name": "List Card Profiles",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/digital_card_profiles",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Card Profiles"
+    },
+    {
+      "info": {
+        "name": "Create a Digital Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/digital_card_profiles",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Digital Card Profile"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Digital Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id",
+        "params": [
+          {
+            "name": "digital_card_profile_id",
+            "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Digital Card Profile"
+    },
+    {
+      "info": {
+        "name": "Archive a Digital Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id/archive",
+        "params": [
+          {
+            "name": "digital_card_profile_id",
+            "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Archive a Digital Card Profile"
+    },
+    {
+      "info": {
+        "name": "Clones a Digital Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id/clone",
+        "params": [
+          {
+            "name": "digital_card_profile_id",
+            "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Clones a Digital Card Profile"
+    },
+    {
+      "info": {
+        "name": "List Digital Wallet Tokens",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/digital_wallet_tokens",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Digital Wallet Tokens"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Digital Wallet Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/digital_wallet_tokens/:digital_wallet_token_id",
+        "params": [
+          {
+            "name": "digital_wallet_token_id",
+            "value": "digital_wallet_token_izi62go3h51p369jrie0",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Digital Wallet Token"
+    },
+    {
+      "info": {
+        "name": "List Entities",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entities",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Entities"
+    },
+    {
+      "info": {
+        "name": "Create an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entities",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Entity"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entities/:entity_id",
+        "params": [
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Entity"
+    },
+    {
+      "info": {
+        "name": "Update an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/entities/:entity_id",
+        "params": [
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update an Entity"
+    },
+    {
+      "info": {
+        "name": "Archive an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entities/:entity_id/archive",
+        "params": [
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Archive an Entity"
+    },
+    {
+      "info": {
+        "name": "List Beneficial Owners",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entity_beneficial_owners",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Beneficial Owners"
+    },
+    {
+      "info": {
+        "name": "Create a Beneficial Owner",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entity_beneficial_owners",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Beneficial Owner"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Beneficial Owner",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id",
+        "params": [
+          {
+            "name": "entity_beneficial_owner_id",
+            "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Beneficial Owner"
+    },
+    {
+      "info": {
+        "name": "Update a Beneficial Owner",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id",
+        "params": [
+          {
+            "name": "entity_beneficial_owner_id",
+            "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Beneficial Owner"
+    },
+    {
+      "info": {
+        "name": "Archive a Beneficial Owner",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id/archive",
+        "params": [
+          {
+            "name": "entity_beneficial_owner_id",
+            "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Archive a Beneficial Owner"
+    },
+    {
+      "info": {
+        "name": "List Entity Onboarding Session",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entity_onboarding_sessions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Entity Onboarding Session"
+    },
+    {
+      "info": {
+        "name": "Create an Entity Onboarding Session",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entity_onboarding_sessions",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Entity Onboarding Session"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Entity Onboarding Session",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entity_onboarding_sessions/:entity_onboarding_session_id",
+        "params": [
+          {
+            "name": "entity_onboarding_session_id",
+            "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Entity Onboarding Session"
+    },
+    {
+      "info": {
+        "name": "Expire an Entity Onboarding Session",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entity_onboarding_sessions/:entity_onboarding_session_id/expire",
+        "params": [
+          {
+            "name": "entity_onboarding_session_id",
+            "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Expire an Entity Onboarding Session"
+    },
+    {
+      "info": {
+        "name": "List Entity Supplemental Document Submissions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/entity_supplemental_documents",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Entity Supplemental Document Submissions"
+    },
+    {
+      "info": {
+        "name": "Create a supplemental document for an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/entity_supplemental_documents",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a supplemental document for an Entity"
+    },
+    {
+      "info": {
+        "name": "List Event Subscriptions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/event_subscriptions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Event Subscriptions"
+    },
+    {
+      "info": {
+        "name": "Create an Event Subscription",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/event_subscriptions",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Event Subscription"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Event Subscription",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/event_subscriptions/:event_subscription_id",
+        "params": [
+          {
+            "name": "event_subscription_id",
+            "value": "event_subscription_001dzz0r20rcdxgb013zqb8m04g",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Event Subscription"
+    },
+    {
+      "info": {
+        "name": "Update an Event Subscription",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/event_subscriptions/:event_subscription_id",
+        "params": [
+          {
+            "name": "event_subscription_id",
+            "value": "event_subscription_001dzz0r20rcdxgb013zqb8m04g",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update an Event Subscription"
+    },
+    {
+      "info": {
+        "name": "List Events",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/events",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "category.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "associated_object_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "order_by.direction",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "order_by.field",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Events"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Event",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/events/:event_id",
+        "params": [
+          {
+            "name": "event_id",
+            "value": "event_001dzz0r20rzr4zrhrr1364hy80",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Event"
+    },
+    {
+      "info": {
+        "name": "List Exports",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/exports",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "category",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "form_1099_int.account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "form_1099_misc.account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Exports"
+    },
+    {
+      "info": {
+        "name": "Create an Export",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/exports",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an Export"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Export",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/exports/:export_id",
+        "params": [
+          {
+            "name": "export_id",
+            "value": "export_8s4m48qz3bclzje0zwh9",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Export"
+    },
+    {
+      "info": {
+        "name": "List External Accounts",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/external_accounts",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "routing_number",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List External Accounts"
+    },
+    {
+      "info": {
+        "name": "Create an External Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/external_accounts",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an External Account"
+    },
+    {
+      "info": {
+        "name": "Retrieve an External Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/external_accounts/:external_account_id",
+        "params": [
+          {
+            "name": "external_account_id",
+            "value": "external_account_ukk55lr923a3ac0pp7iv",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an External Account"
+    },
+    {
+      "info": {
+        "name": "Update an External Account",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/external_accounts/:external_account_id",
+        "params": [
+          {
+            "name": "external_account_id",
+            "value": "external_account_ukk55lr923a3ac0pp7iv",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update an External Account"
+    },
+    {
+      "info": {
+        "name": "List FedNow Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/fednow_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "external_account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List FedNow Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/fednow_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a FedNow Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id",
+        "params": [
+          {
+            "name": "fednow_transfer_id",
+            "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a FedNow Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id/approve",
+        "params": [
+          {
+            "name": "fednow_transfer_id",
+            "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approve a FedNow Transfer"
+    },
+    {
+      "info": {
+        "name": "Cancel a pending FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id/cancel",
+        "params": [
+          {
+            "name": "fednow_transfer_id",
+            "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancel a pending FedNow Transfer"
+    },
+    {
+      "info": {
+        "name": "Create a File Link",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/file_links",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a File Link"
+    },
+    {
+      "info": {
+        "name": "List Files",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/files",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "purpose.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Files"
+    },
+    {
+      "info": {
+        "name": "Create a File",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/files",
+        "body": {
+          "type": "multipart-form",
+          "data": []
+        }
+      },
+      "docs": "To upload a file to Increase, you'll need to send a request of Content-Type `multipart/form-data`. The request should contain the file you would like to upload, as well as the parameters for creating a file."
+    },
+    {
+      "info": {
+        "name": "Retrieve a File",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/files/:file_id",
+        "params": [
+          {
+            "name": "file_id",
+            "value": "file_makxrc67oh9l6sg7w9yc",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a File"
+    },
+    {
+      "info": {
+        "name": "Retrieve Group details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/groups/current"
+      },
+      "docs": "Returns details for the currently authenticated Group."
+    },
+    {
+      "info": {
+        "name": "List Inbound ACH Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_ach_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "account_number_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound ACH Transfers"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id",
+        "params": [
+          {
+            "name": "inbound_ach_transfer_id",
+            "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "Create a notification of change for an Inbound ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/create_notification_of_change",
+        "params": [
+          {
+            "name": "inbound_ach_transfer_id",
+            "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a notification of change for an Inbound ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "Decline an Inbound ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/decline",
+        "params": [
+          {
+            "name": "inbound_ach_transfer_id",
+            "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Decline an Inbound ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "Return an Inbound ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/transfer_return",
+        "params": [
+          {
+            "name": "inbound_ach_transfer_id",
+            "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Return an Inbound ACH Transfer"
+    },
+    {
+      "info": {
+        "name": "List Inbound Check Deposits",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_check_deposits",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "check_transfer_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound Check Deposits"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id",
+        "params": [
+          {
+            "name": "inbound_check_deposit_id",
+            "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound Check Deposit"
+    },
+    {
+      "info": {
+        "name": "Decline an Inbound Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id/decline",
+        "params": [
+          {
+            "name": "inbound_check_deposit_id",
+            "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Decline an Inbound Check Deposit"
+    },
+    {
+      "info": {
+        "name": "Return an Inbound Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id/return",
+        "params": [
+          {
+            "name": "inbound_check_deposit_id",
+            "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Return an Inbound Check Deposit"
+    },
+    {
+      "info": {
+        "name": "List Inbound FedNow Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_fednow_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "account_number_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound FedNow Transfers"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_fednow_transfers/:inbound_fednow_transfer_id",
+        "params": [
+          {
+            "name": "inbound_fednow_transfer_id",
+            "value": "inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound FedNow Transfer"
+    },
+    {
+      "info": {
+        "name": "List Inbound Mail Items",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_mail_items",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "lockbox_recipient_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "lockbox_address_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound Mail Items"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound Mail Item",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_mail_items/:inbound_mail_item_id",
+        "params": [
+          {
+            "name": "inbound_mail_item_id",
+            "value": "inbound_mail_item_q6rrg7mmqpplx80zceev",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound Mail Item"
+    },
+    {
+      "info": {
+        "name": "Action an Inbound Mail Item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_mail_items/:inbound_mail_item_id/action",
+        "params": [
+          {
+            "name": "inbound_mail_item_id",
+            "value": "inbound_mail_item_q6rrg7mmqpplx80zceev",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Action an Inbound Mail Item"
+    },
+    {
+      "info": {
+        "name": "List Inbound Real-Time Payments Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_real_time_payments_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "account_number_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound Real-Time Payments Transfers"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_real_time_payments_transfers/:inbound_real_time_payments_transfer_id",
+        "params": [
+          {
+            "name": "inbound_real_time_payments_transfer_id",
+            "value": "inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound Real-Time Payments Transfer"
+    },
+    {
+      "info": {
+        "name": "List Inbound Wire Drawdown Requests",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_wire_drawdown_requests",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound Wire Drawdown Requests"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound Wire Drawdown Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_wire_drawdown_requests/:inbound_wire_drawdown_request_id",
+        "params": [
+          {
+            "name": "inbound_wire_drawdown_request_id",
+            "value": "inbound_wire_drawdown_request_u5a92ikqhz1ytphn799e",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound Wire Drawdown Request"
+    },
+    {
+      "info": {
+        "name": "List Inbound Wire Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_wire_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "account_number_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "wire_drawdown_request_id",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Inbound Wire Transfers"
+    },
+    {
+      "info": {
+        "name": "Retrieve an Inbound Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/inbound_wire_transfers/:inbound_wire_transfer_id",
+        "params": [
+          {
+            "name": "inbound_wire_transfer_id",
+            "value": "inbound_wire_transfer_f228m6bmhtcxjco9pwp0",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an Inbound Wire Transfer"
+    },
+    {
+      "info": {
+        "name": "Reverse an Inbound Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/inbound_wire_transfers/:inbound_wire_transfer_id/reverse",
+        "params": [
+          {
+            "name": "inbound_wire_transfer_id",
+            "value": "inbound_wire_transfer_f228m6bmhtcxjco9pwp0",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Reverse an Inbound Wire Transfer"
+    },
+    {
+      "info": {
+        "name": "List IntraFi Account Enrollments",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/intrafi_account_enrollments",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List IntraFi Account Enrollments"
+    },
+    {
+      "info": {
+        "name": "Enroll an account in the IntraFi deposit sweep network",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/intrafi_account_enrollments",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Enroll an account in the IntraFi deposit sweep network"
+    },
+    {
+      "info": {
+        "name": "Get an IntraFi Account Enrollment",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/intrafi_account_enrollments/:intrafi_account_enrollment_id",
+        "params": [
+          {
+            "name": "intrafi_account_enrollment_id",
+            "value": "intrafi_account_enrollment_w8l97znzreopkwf2tg75",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get an IntraFi Account Enrollment"
+    },
+    {
+      "info": {
+        "name": "Unenroll an account from IntraFi",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/intrafi_account_enrollments/:intrafi_account_enrollment_id/unenroll",
+        "params": [
+          {
+            "name": "intrafi_account_enrollment_id",
+            "value": "intrafi_account_enrollment_w8l97znzreopkwf2tg75",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Unenroll an account from IntraFi"
+    },
+    {
+      "info": {
+        "name": "List IntraFi Exclusions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/intrafi_exclusions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List IntraFi Exclusions"
+    },
+    {
+      "info": {
+        "name": "Create an IntraFi Exclusion",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/intrafi_exclusions",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an IntraFi Exclusion"
+    },
+    {
+      "info": {
+        "name": "Get an IntraFi Exclusion",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/intrafi_exclusions/:intrafi_exclusion_id",
+        "params": [
+          {
+            "name": "intrafi_exclusion_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get an IntraFi Exclusion"
+    },
+    {
+      "info": {
+        "name": "Archive an IntraFi Exclusion",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/intrafi_exclusions/:intrafi_exclusion_id/archive",
+        "params": [
+          {
+            "name": "intrafi_exclusion_id",
+            "value": "intrafi_exclusion_ygfqduuzpau3jqof6jyh",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Archive an IntraFi Exclusion"
+    },
+    {
+      "info": {
+        "name": "List Lockbox Addresses",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/lockbox_addresses",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Lockbox Addresses"
+    },
+    {
+      "info": {
+        "name": "Create a Lockbox Address",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/lockbox_addresses",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Lockbox Address"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Lockbox Address",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/lockbox_addresses/:lockbox_address_id",
+        "params": [
+          {
+            "name": "lockbox_address_id",
+            "value": "lockbox_address_lw6sbzl9ol5dfd8hdml6",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Lockbox Address"
+    },
+    {
+      "info": {
+        "name": "Update a Lockbox Address",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/lockbox_addresses/:lockbox_address_id",
+        "params": [
+          {
+            "name": "lockbox_address_id",
+            "value": "lockbox_address_lw6sbzl9ol5dfd8hdml6",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Lockbox Address"
+    },
+    {
+      "info": {
+        "name": "List Lockbox Recipients",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/lockbox_recipients",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "lockbox_address_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Lockbox Recipients"
+    },
+    {
+      "info": {
+        "name": "Create a Lockbox Recipient",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/lockbox_recipients",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Lockbox Recipient"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Lockbox Recipient",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/lockbox_recipients/:lockbox_recipient_id",
+        "params": [
+          {
+            "name": "lockbox_recipient_id",
+            "value": "lockbox_3xt21ok13q19advds4t5",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Lockbox Recipient"
+    },
+    {
+      "info": {
+        "name": "Update a Lockbox Recipient",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/lockbox_recipients/:lockbox_recipient_id",
+        "params": [
+          {
+            "name": "lockbox_recipient_id",
+            "value": "lockbox_3xt21ok13q19advds4t5",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Lockbox Recipient"
+    },
+    {
+      "info": {
+        "name": "Create an OAuth Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/oauth/tokens",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create an OAuth Token"
+    },
+    {
+      "info": {
+        "name": "List OAuth Applications",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/oauth_applications",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List OAuth Applications"
+    },
+    {
+      "info": {
+        "name": "Retrieve an OAuth Application",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/oauth_applications/:oauth_application_id",
+        "params": [
+          {
+            "name": "oauth_application_id",
+            "value": "application_gj9ufmpgh5i56k4vyriy",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an OAuth Application"
+    },
+    {
+      "info": {
+        "name": "List OAuth Connections",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/oauth_connections",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "oauth_application_id",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List OAuth Connections"
+    },
+    {
+      "info": {
+        "name": "Retrieve an OAuth Connection",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/oauth_connections/:oauth_connection_id",
+        "params": [
+          {
+            "name": "oauth_connection_id",
+            "value": "connection_dauknoksyr4wilz4e6my",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve an OAuth Connection"
+    },
+    {
+      "info": {
+        "name": "List Pending Transactions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/pending_transactions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "route_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "category.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Pending Transactions"
+    },
+    {
+      "info": {
+        "name": "Create a Pending Transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/pending_transactions",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Creates a pending transaction on an account. This can be useful to hold funds for an external payment or known future transaction outside of Increase (only negative amounts are supported). The resulting Pending Transaction will have a `category` of `user_initiated_hold` and can be released via the API to unlock the held funds."
+    },
+    {
+      "info": {
+        "name": "Retrieve a Pending Transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/pending_transactions/:pending_transaction_id",
+        "params": [
+          {
+            "name": "pending_transaction_id",
+            "value": "pending_transaction_k1sfetcau2qbvjbzgju4",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Pending Transaction"
+    },
+    {
+      "info": {
+        "name": "Release a user-initiated Pending Transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/pending_transactions/:pending_transaction_id/release",
+        "params": [
+          {
+            "name": "pending_transaction_id",
+            "value": "pending_transaction_k1sfetcau2qbvjbzgju4",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Release a Pending Transaction you had previously created. The Pending Transaction must have a `category` of `user_initiated_hold` and a `status` of `pending`. This will unlock the held funds and mark the Pending Transaction as complete."
+    },
+    {
+      "info": {
+        "name": "List Physical Card Profiles",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/physical_card_profiles",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Physical Card Profiles"
+    },
+    {
+      "info": {
+        "name": "Create a Physical Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/physical_card_profiles",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Physical Card Profile"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id",
+        "params": [
+          {
+            "name": "physical_card_profile_id",
+            "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Card Profile"
+    },
+    {
+      "info": {
+        "name": "Archive a Physical Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id/archive",
+        "params": [
+          {
+            "name": "physical_card_profile_id",
+            "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Archive a Physical Card Profile"
+    },
+    {
+      "info": {
+        "name": "Clone a Physical Card Profile",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id/clone",
+        "params": [
+          {
+            "name": "physical_card_profile_id",
+            "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Clone a Physical Card Profile"
+    },
+    {
+      "info": {
+        "name": "List Physical Cards",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/physical_cards",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "card_id",
+            "value": "card_oubs0hwk5rn6knuecxg2",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Physical Cards"
+    },
+    {
+      "info": {
+        "name": "Create a Physical Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/physical_cards",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Physical Card"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Physical Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/physical_cards/:physical_card_id",
+        "params": [
+          {
+            "name": "physical_card_id",
+            "value": "physical_card_ode8duyq5v2ynhjoharl",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Physical Card"
+    },
+    {
+      "info": {
+        "name": "Update a Physical Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.increase.com/physical_cards/:physical_card_id",
+        "params": [
+          {
+            "name": "physical_card_id",
+            "value": "physical_card_ode8duyq5v2ynhjoharl",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update a Physical Card"
+    },
+    {
+      "info": {
+        "name": "List Programs",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/programs",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Programs"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Program",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/programs/:program_id",
+        "params": [
+          {
+            "name": "program_id",
+            "value": "program_i2v2os4mwza1oetokh9i",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Program"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Real-Time Decision",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/real_time_decisions/:real_time_decision_id",
+        "params": [
+          {
+            "name": "real_time_decision_id",
+            "value": "real_time_decision_j76n2e810ezcg3zh5qtn",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Real-Time Decision"
+    },
+    {
+      "info": {
+        "name": "Action a Real-Time Decision",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/real_time_decisions/:real_time_decision_id/action",
+        "params": [
+          {
+            "name": "real_time_decision_id",
+            "value": "real_time_decision_j76n2e810ezcg3zh5qtn",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Action a Real-Time Decision"
+    },
+    {
+      "info": {
+        "name": "List Real-Time Payments Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/real_time_payments_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "external_account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Real-Time Payments Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/real_time_payments_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Real-Time Payments Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id",
+        "params": [
+          {
+            "name": "real_time_payments_transfer_id",
+            "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Real-Time Payments Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id/approve",
+        "params": [
+          {
+            "name": "real_time_payments_transfer_id",
+            "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approves a Real-Time Payments Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "Cancel a pending Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id/cancel",
+        "params": [
+          {
+            "name": "real_time_payments_transfer_id",
+            "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancels a Real-Time Payments Transfer in a pending_approval state."
+    },
+    {
+      "info": {
+        "name": "List Routing Numbers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/routing_numbers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "routing_number",
+            "value": "021000021",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "You can use this API to confirm if a routing number is valid, such as when a user is providing you with bank account details. Since routing numbers uniquely identify a bank, this will always return 0 or 1 entry. In Sandbox, only a few [routing numbers are valid](/documentation/sandbox-test-values#routing-numbers). `110000000` is an example of a Sandbox routing number."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an account revenue payment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/account_revenue_payments",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an account revenue payment to your account. In production, this happens automatically on the first of each month."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Account Statement",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/account_statements",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an [Account Statement](#account-statements) being created for an account. In production, Account Statements are generated once per month."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Acknowledge an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/acknowledge",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the acknowledgement of an [ACH Transfer](#ach-transfers) by the Federal Reserve. This transfer must first have a `status` of `submitted`. In production, the Federal Reserve generally acknowledges submitted ACH files within 30 minutes. Since sandbox ACH Transfers are not submitted to the Federal Reserve, this endpoint allows you to skip that delay and add the acknowledgement subresource to the ACH Transfer."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Notification of Change for an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/create_notification_of_change",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates receiving a Notification of Change for an [ACH Transfer](#ach-transfers)."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Return an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/return",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the return of an [ACH Transfer](#ach-transfers) by the Federal Reserve due to an error condition. This will also create a Transaction to account for the returned funds. This transfer must first have a `status` of `submitted`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Settle an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/settle",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the settlement of an [ACH Transfer](#ach-transfers) by the Federal Reserve. This transfer must first have a `status` of `pending_submission` or `submitted`. For convenience, if the transfer is in `status`: `pending_submission`, the simulation will also submit the transfer. Without this simulation the transfer will eventually settle on its own following the same Federal Reserve timeline as in production. Additionally, you can specify the behavior of the inbound funds hold that is create"
+    },
+    {
+      "info": {
+        "name": "Sandbox: Submit an ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/submit",
+        "params": [
+          {
+            "name": "ach_transfer_id",
+            "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the submission of an [ACH Transfer](#ach-transfers) to the Federal Reserve. This transfer must first have a `status` of `pending_approval` or `pending_submission`. In production, Increase submits ACH Transfers to the Federal Reserve three times per day on weekdays. Since sandbox ACH Transfers are not submitted to the Federal Reserve, this endpoint allows you to skip that delay and transition the ACH Transfer to a status of `submitted`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Authentication attempt",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_authentications",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates a Card Authentication attempt on a [Card](#cards). The attempt always results in a [Card Payment](#card_payments) being created, either with a status that allows further action or a terminal failed status."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Authentication Challenge attempt",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_authentications/:card_payment_id/challenge_attempts",
+        "params": [
+          {
+            "name": "card_payment_id",
+            "value": "card_payment_nd3k2kacrqjli8482ave",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an attempt at a Card Authentication Challenge. This updates the `card_authentications` object under the [Card Payment](#card_payments). You can also attempt the challenge by navigating to https://dashboard.increase.com/card_authentication_simulation/:card_payment_id."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an initial Card Authentication Challenge",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_authentications/:card_payment_id/challenges",
+        "params": [
+          {
+            "name": "card_payment_id",
+            "value": "card_payment_nd3k2kacrqjli8482ave",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates starting a Card Authentication Challenge for an existing Card Authentication. This updates the `card_authentications` object under the [Card Payment](#card_payments). To attempt the challenge, use the `/simulations/card_authentications/:card_payment_id/challenge_attempts` endpoint or navigate to https://dashboard.increase.com/card_authentication_simulation/:card_payment_id."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Expire a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_authorization_expirations",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates expiring a Card Authorization immediately."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_authorizations",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates a purchase authorization on a [Card](#cards). Depending on the balance available to the card and the `amount` submitted, the authorization activity will result in a [Pending Transaction](#pending-transactions) of type `card_authorization` or a [Declined Transaction](#declined-transactions) of type `card_decline`. You can pass either a Card id or a [Digital Wallet Token](#digital-wallet-tokens) id to simulate the two different ways purchases can be made."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Balance Inquiry",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_balance_inquiries",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates a balance inquiry on a [Card](#cards)."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Advance the state of a Card Dispute",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_disputes/:card_dispute_id/action",
+        "params": [
+          {
+            "name": "card_dispute_id",
+            "value": "card_dispute_h9sc95nbl1cgltpp7men",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "After a [Card Dispute](#card-disputes) is created in production, the dispute will initially be in a `pending_user_submission_reviewing` state. Since no review or further action happens in sandbox, this endpoint simulates moving a Card Dispute through its various states."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Confirm the fuel pump amount for a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_fuel_confirmations",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the fuel confirmation of an authorization by a card acquirer. This happens asynchronously right after a fuel pump transaction is completed. A fuel confirmation can only happen once per authorization."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Increment a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_increments",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the increment of an authorization by a card acquirer. An authorization can be incremented multiple times."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Purchase Supplement",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_purchase_supplements",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the creation of a Card Purchase Supplement (Level 3 data) for a card settlement. This happens asynchronously in production when Visa sends enhanced transaction data about a purchase."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Refund a card transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_refunds",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates refunding a card transaction. The full value of the original sandbox transaction is refunded."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Reverse a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_reversals",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the reversal of an authorization by a card acquirer. An authorization can be partially reversed multiple times, up until the total authorized amount. Marks the pending transaction as complete if the authorization is fully reversed."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Settle a Card Authorization",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_settlements",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the settlement of an authorization by a card acquirer. After a card authorization is created, the merchant will eventually send a settlement. This simulates that event, which may occur many days after the purchase in production. The amount settled can be different from the amount originally authorized, for example, when adding a tip to a restaurant bill."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Card Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/card_tokens",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates tokenizing a card in the sandbox environment."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Adjust a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/adjustment",
+        "params": [
+          {
+            "name": "check_deposit_id",
+            "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the creation of a [Check Deposit Adjustment](#check-deposit-adjustments) on a [Check Deposit](#check-deposits). This Check Deposit must first have a `status` of `submitted`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Reject a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/reject",
+        "params": [
+          {
+            "name": "check_deposit_id",
+            "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the rejection of a [Check Deposit](#check-deposits) by Increase due to factors like poor image quality. This Check Deposit must first have a `status` of `pending`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Return a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/return",
+        "params": [
+          {
+            "name": "check_deposit_id",
+            "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the return of a [Check Deposit](#check-deposits). This Check Deposit must first have a `status` of `submitted`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Submit a Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/submit",
+        "params": [
+          {
+            "name": "check_deposit_id",
+            "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates the submission of a [Check Deposit](#check-deposits) to the Federal Reserve. This Check Deposit must first have a `status` of `pending`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Mail a Check Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/check_transfers/:check_transfer_id/mail",
+        "params": [
+          {
+            "name": "check_transfer_id",
+            "value": "check_transfer_30b43acfu9vw8fyc4f5",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the mailing of a [Check Transfer](#check-transfers), which happens periodically throughout the day in production but can be sped up in sandbox. This transfer must first have a `status` of `pending_approval` or `pending_submission`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a digital wallet token request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/digital_wallet_token_requests",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates a user attempting to add a [Card](#cards) to a digital wallet such as Apple Pay."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Simulate validation of an Entity",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/entities/:entity_id/update_validation",
+        "params": [
+          {
+            "name": "entity_id",
+            "value": "entity_n8y8tnk2p9339ti393yi",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulate updates to an [Entity's validation](/documentation/api/entities#entity-object.validation). In production, Know Your Customer validations [run automatically](/documentation/entity-validation#entity-validation) for eligible programs. While developing, use this API to simulate issues with information submissions."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Submit an Entity Onboarding Session",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/entity_onboarding_sessions/:entity_onboarding_session_id/submit",
+        "params": [
+          {
+            "name": "entity_onboarding_session_id",
+            "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the submission of an [Entity Onboarding Session](#entity-onboarding-sessions). This session must have a `status` of `active`. After submission, the session will transition to `expired` and a new Entity will be created."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Generate a Tax Form Export",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/exports",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Many exports are created by you via POST /exports or in the Dashboard. Some exports are created automatically by Increase. For example, tax documents are published once a year. In sandbox, you can trigger the arrival of an export that would normally only be created automatically via this simulation."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound ACH Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_ach_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an inbound ACH transfer to your account. This imitates initiating a transfer to an Increase account from a different financial institution. The transfer may be either a credit or a debit depending on if the `amount` is positive or negative. The result of calling this API will contain the created transfer. You can pass a `resolve_at` parameter to allow for a window to [action on the Inbound ACH Transfer](https://increase.com/documentation/receiving-ach-transfers). Alternatively, if you "
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Check Deposit",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_check_deposits",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an Inbound Check Deposit against your account. This imitates someone depositing a check at their bank that was issued from your account. It may or may not be associated with a Check Transfer. Increase will evaluate the Inbound Check Deposit as we would in production and either create a Transaction or a Declined Transaction as a result. You can inspect the resulting Inbound Check Deposit object to see the result."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Check Deposit Adjustment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_check_deposits/:inbound_check_deposit_id/adjustment",
+        "params": [
+          {
+            "name": "inbound_check_deposit_id",
+            "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an adjustment on an Inbound Check Deposit. The Inbound Check Deposit must have a `status` of `accepted`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound FedNow Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_fednow_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an [Inbound FedNow Transfer](#inbound-fednow-transfers) to your account."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Mail Item",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_mail_items",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an Inbound Mail Item to one of your Lockbox Addresses or Lockbox Recipients, as if someone had mailed a physical check."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_real_time_payments_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an [Inbound Real-Time Payments Transfer](#inbound-real-time-payments-transfers) to your account. Real-Time Payments are a beta feature."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Wire Drawdown request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_wire_drawdown_requests",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates receiving an [Inbound Wire Drawdown Request](#inbound-wire-drawdown-requests)."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an Inbound Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/inbound_wire_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an [Inbound Wire Transfer](#inbound-wire-transfers) to your account."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create an interest payment",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/interest_payments",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates an interest payment to your account. In production, this happens automatically on the first of each month."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Release an Inbound Funds Hold",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/pending_transactions/:pending_transaction_id/release_inbound_funds_hold",
+        "params": [
+          {
+            "name": "pending_transaction_id",
+            "value": "pending_transaction_k1sfetcau2qbvjbzgju4",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "This endpoint simulates immediately releasing an Inbound Funds Hold, which might be created as a result of, for example, an ACH debit."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Advance the shipment status of a Physical Card",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/physical_cards/:physical_card_id/advance_shipment",
+        "params": [
+          {
+            "name": "physical_card_id",
+            "value": "physical_card_ode8duyq5v2ynhjoharl",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This endpoint allows you to simulate advancing the shipment status of a Physical Card, to simulate e.g., that a physical card was attempted shipped but then failed delivery."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Physical Card Shipment Tracking Update",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/physical_cards/:physical_card_id/tracking_updates",
+        "params": [
+          {
+            "name": "physical_card_id",
+            "value": "physical_card_ode8duyq5v2ynhjoharl",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "This endpoint allows you to simulate receiving a tracking update for a Physical Card, to simulate the progress of a shipment."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Create a Program",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/programs",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates a [Program](#programs) being created in your group. By default, your group has one program called Commercial Banking. Note that when your group operates more than one program, `program_id` is a required field when creating accounts."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Complete a Real-Time Payments Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/real_time_payments_transfers/:real_time_payments_transfer_id/complete",
+        "params": [
+          {
+            "name": "real_time_payments_transfer_id",
+            "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Simulates submission of a [Real-Time Payments Transfer](#real-time-payments-transfers) and handling the response from the destination financial institution. This transfer must first have a `status` of `pending_submission`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Refuse a Wire Drawdown Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/wire_drawdown_requests/:wire_drawdown_request_id/refuse",
+        "params": [
+          {
+            "name": "wire_drawdown_request_id",
+            "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates a Wire Drawdown Request being refused by the debtor."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Submit a Wire Drawdown Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/wire_drawdown_requests/:wire_drawdown_request_id/submit",
+        "params": [
+          {
+            "name": "wire_drawdown_request_id",
+            "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates a Wire Drawdown Request being submitted to Fedwire."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Reverse a Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/wire_transfers/:wire_transfer_id/reverse",
+        "params": [
+          {
+            "name": "wire_transfer_id",
+            "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the reversal of a [Wire Transfer](#wire-transfers) by the Federal Reserve due to error conditions. This will also create a [Transaction](#transaction) to account for the returned funds. This Wire Transfer must first have a `status` of `complete`."
+    },
+    {
+      "info": {
+        "name": "Sandbox: Submit a Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/simulations/wire_transfers/:wire_transfer_id/submit",
+        "params": [
+          {
+            "name": "wire_transfer_id",
+            "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Simulates the submission of a [Wire Transfer](#wire-transfers) to the Federal Reserve. This transfer must first have a `status` of `pending_approval` or `pending_creating`."
+    },
+    {
+      "info": {
+        "name": "List Swift Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/swift_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Swift Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a Swift Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/swift_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Swift Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Swift Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/swift_transfers/:swift_transfer_id",
+        "params": [
+          {
+            "name": "swift_transfer_id",
+            "value": "swift_transfer_29h21xkng03788zwd3fh",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Swift Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a Swift Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/swift_transfers/:swift_transfer_id/approve",
+        "params": [
+          {
+            "name": "swift_transfer_id",
+            "value": "swift_transfer_29h21xkng03788zwd3fh",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approve a Swift Transfer"
+    },
+    {
+      "info": {
+        "name": "Cancel a pending Swift Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/swift_transfers/:swift_transfer_id/cancel",
+        "params": [
+          {
+            "name": "swift_transfer_id",
+            "value": "swift_transfer_29h21xkng03788zwd3fh",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancel a pending Swift Transfer"
+    },
+    {
+      "info": {
+        "name": "List Transactions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/transactions",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "category.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "route_id",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Transactions"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Transaction",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/transactions/:transaction_id",
+        "params": [
+          {
+            "name": "transaction_id",
+            "value": "transaction_uyrp7fld2ium70oa7oi",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Transaction"
+    },
+    {
+      "info": {
+        "name": "List Wire Drawdown Requests",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/wire_drawdown_requests",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Wire Drawdown Requests"
+    },
+    {
+      "info": {
+        "name": "Create a Wire Drawdown Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/wire_drawdown_requests",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Wire Drawdown Request"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Wire Drawdown Request",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/wire_drawdown_requests/:wire_drawdown_request_id",
+        "params": [
+          {
+            "name": "wire_drawdown_request_id",
+            "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Wire Drawdown Request"
+    },
+    {
+      "info": {
+        "name": "List Wire Transfers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/wire_transfers",
+        "params": [
+          {
+            "name": "cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "account_id",
+            "value": "account_in71c4amph0vgo2qllky",
+            "type": "query"
+          },
+          {
+            "name": "external_account_id",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "idempotency_key",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "status.in",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.before",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_after",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "created_at.on_or_before",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List Wire Transfers"
+    },
+    {
+      "info": {
+        "name": "Create a Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/wire_transfers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a Wire Transfer"
+    },
+    {
+      "info": {
+        "name": "Retrieve a Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.increase.com/wire_transfers/:wire_transfer_id",
+        "params": [
+          {
+            "name": "wire_transfer_id",
+            "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve a Wire Transfer"
+    },
+    {
+      "info": {
+        "name": "Approve a Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/wire_transfers/:wire_transfer_id/approve",
+        "params": [
+          {
+            "name": "wire_transfer_id",
+            "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Approve a Wire Transfer"
+    },
+    {
+      "info": {
+        "name": "Cancel a pending Wire Transfer",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.increase.com/wire_transfers/:wire_transfer_id/cancel",
+        "params": [
+          {
+            "name": "wire_transfer_id",
+            "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Cancel a pending Wire Transfer"
+    }
+  ],
+  "bundled": true
+}
