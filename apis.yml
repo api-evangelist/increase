@@ -91,6 +91,12 @@ apis:
     - type: OpenAPI
       url: openapi/increase-openapi.json
 common:
+  - type: VulnerabilityDisclosure
+    url: security/increase-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/increase-domain-security.yml
+  - type: Authentication
+    url: authentication/increase-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/Increase
   - type: LinkedIn
@@ -105,6 +111,8 @@ common:
     url: finops/increase-finops.yml
   - type: LlmsText
     url: https://increase.com/llms.txt
+  - type: Blog
+    url: https://increase.com/updates.xml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
