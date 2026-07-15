@@ -91,6 +91,8 @@ apis:
     - type: OpenAPI
       url: openapi/increase-openapi.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/increase-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/increase-vulnerability-disclosure.yml
   - type: DomainSecurity
