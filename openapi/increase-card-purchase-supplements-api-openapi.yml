@@ -1,0 +1,980 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Card Purchase Supplements API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Additional information about a card purchase (e.g., settlement or refund), such as level 3 line item data.
+  name: Card Purchase Supplements
+paths:
+  /card_purchase_supplements:
+    get:
+      operationId: list_card_purchase_supplements
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: card_payment_nd3k2kacrqjli8482ave
+        in: query
+        name: card_payment_id
+        required: false
+        schema:
+          description: Filter Card Purchase Supplements to ones belonging to the specified Card Payment.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Payments
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_purchase_supplement_list'
+          description: Card Purchase Supplement List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Card Purchase Supplements
+      x-sandbox-only: false
+      x-tag: Card Purchase Supplements
+      tags:
+      - Card Purchase Supplements
+  /card_purchase_supplements/{card_purchase_supplement_id}:
+    get:
+      operationId: retrieve_a_card_purchase_supplement
+      parameters:
+      - example: card_purchase_supplement_ijuc45iym4jchnh2sfk3
+        in: path
+        name: card_purchase_supplement_id
+        required: true
+        schema:
+          description: The identifier of the Card Purchase Supplement.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Purchase Supplements
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_purchase_supplement'
+          description: Card Purchase Supplement
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Card Purchase Supplement
+      x-sandbox-only: false
+      x-tag: Card Purchase Supplements
+      tags:
+      - Card Purchase Supplements
+components:
+  schemas:
+    card_purchase_supplement:
+      additionalProperties: true
+      description: Additional information about a card purchase (e.g., settlement or refund), such as level 3 line item data.
+      example:
+        card_payment_id: card_payment_nd3k2kacrqjli8482ave
+        id: card_purchase_supplement_ijuc45iym4jchnh2sfk3
+        invoice:
+          discount_amount: 100
+          discount_currency: USD
+          discount_treatment_code: null
+          duty_tax_amount: 200
+          duty_tax_currency: USD
+          order_date: '2023-07-20'
+          shipping_amount: 300
+          shipping_currency: USD
+          shipping_destination_country_code: US
+          shipping_destination_postal_code: '10045'
+          shipping_source_postal_code: '10045'
+          shipping_tax_amount: 400
+          shipping_tax_currency: USD
+          shipping_tax_rate: '0.2'
+          tax_treatments: null
+          unique_value_added_tax_invoice_reference: '12302'
+        line_items:
+        - detail_indicator: normal
+          discount_amount: null
+          discount_currency: null
+          discount_treatment_code: null
+          id: card_purchase_supplement_invoice_line_item_nf9760lz0apqy5retmqh
+          item_commodity_code: '001'
+          item_descriptor: Coffee
+          item_quantity: '1.0'
+          product_code: '101'
+          sales_tax_amount: null
+          sales_tax_currency: null
+          sales_tax_rate: null
+          total_amount: 500
+          total_amount_currency: USD
+          unit_cost: '5.0'
+          unit_cost_currency: USD
+          unit_of_measure_code: NMB
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: card_purchase_supplement
+      properties:
+        card_payment_id:
+          anyOf:
+          - description: The ID of the Card Payment this transaction belongs to.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Card Payments
+          - type: 'null'
+        id:
+          description: The Card Purchase Supplement identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Purchase Supplements
+        invoice:
+          anyOf:
+          - additionalProperties: false
+            description: Invoice-level information about the payment.
+            properties:
+              discount_amount:
+                anyOf:
+                - description: Discount given to cardholder.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              discount_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the discount.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              discount_treatment_code:
+                anyOf:
+                - description: Indicates how the merchant applied the discount.
+                  enum:
+                  - no_invoice_level_discount_provided
+                  - tax_calculated_on_post_discount_invoice_total
+                  - tax_calculated_on_pre_discount_invoice_total
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - No invoice level discount provided
+                  - Tax calculated on post discount invoice total
+                  - Tax calculated on pre discount invoice total
+                - type: 'null'
+              duty_tax_amount:
+                anyOf:
+                - description: Amount of duty taxes.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              duty_tax_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the duty tax.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              order_date:
+                anyOf:
+                - description: Date the order was taken.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_amount:
+                anyOf:
+                - description: The shipping cost.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the shipping cost.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_destination_country_code:
+                anyOf:
+                - description: Country code of the shipping destination.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_destination_postal_code:
+                anyOf:
+                - description: Postal code of the shipping destination.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_source_postal_code:
+                anyOf:
+                - description: Postal code of the location being shipped from.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_tax_amount:
+                anyOf:
+                - description: Taxes paid for freight and shipping.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_tax_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the shipping tax.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              shipping_tax_rate:
+                anyOf:
+                - description: Tax rate for freight and shipping.
+                  pattern: ^-?\d+(\.\d+)?$
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              tax_treatments:
+                anyOf:
+                - description: Indicates how the merchant applied taxes.
+                  enum:
+                  - no_tax_applies
+                  - net_price_line_item_level
+                  - net_price_invoice_level
+                  - gross_price_line_item_level
+                  - gross_price_invoice_level
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - No tax applies
+                  - Net price line item level
+                  - Net price invoice level
+                  - Gross price line item level
+                  - Gross price invoice level
+                - type: 'null'
+              unique_value_added_tax_invoice_reference:
+                anyOf:
+                - description: Value added tax invoice reference number.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - discount_amount
+            - discount_currency
+            - shipping_amount
+            - shipping_currency
+            - duty_tax_amount
+            - duty_tax_currency
+            - shipping_tax_amount
+            - shipping_tax_currency
+            - shipping_tax_rate
+            - shipping_destination_postal_code
+            - shipping_destination_country_code
+            - shipping_source_postal_code
+            - unique_value_added_tax_invoice_reference
+            - order_date
+            - discount_treatment_code
+            - tax_treatments
+            title: Card Purchase Supplement Invoice
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Invoices
+          - type: 'null'
+        line_items:
+          anyOf:
+          - description: Line item information, such as individual products purchased.
+            items:
+              additionalProperties: false
+              properties:
+                detail_indicator:
+                  anyOf:
+                  - description: Indicates the type of line item.
+                    enum:
+                    - normal
+                    - credit
+                    - payment
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - Normal
+                    - Credit
+                    - Purchase
+                  - type: 'null'
+                discount_amount:
+                  anyOf:
+                  - description: Discount amount for this specific line item.
+                    type: integer
+                    x-documentation-priority: default
+                  - type: 'null'
+                discount_currency:
+                  anyOf:
+                  - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the discount.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                discount_treatment_code:
+                  anyOf:
+                  - description: Indicates how the merchant applied the discount for this specific line item.
+                    enum:
+                    - no_line_item_level_discount_provided
+                    - tax_calculated_on_post_discount_line_item_total
+                    - tax_calculated_on_pre_discount_line_item_total
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - No line item level discount provided
+                    - Tax calculated on post discount line item total
+                    - Tax calculated on pre discount line item total
+                  - type: 'null'
+                id:
+                  description: The Card Purchase Supplement Line Item identifier.
+                  type: string
+                  x-documentation-priority: default
+                item_commodity_code:
+                  anyOf:
+                  - description: Code used to categorize the purchase item.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                item_descriptor:
+                  anyOf:
+                  - description: Description of the purchase item.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                item_quantity:
+                  anyOf:
+                  - description: The number of units of the product being purchased.
+                    pattern: ^-?\d+(\.\d+)?$
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                product_code:
+                  anyOf:
+                  - description: Code used to categorize the product being purchased.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                sales_tax_amount:
+                  anyOf:
+                  - description: Sales tax amount for this line item.
+                    type: integer
+                    x-documentation-priority: default
+                  - type: 'null'
+                sales_tax_currency:
+                  anyOf:
+                  - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the sales tax assessed.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                sales_tax_rate:
+                  anyOf:
+                  - description: Sales tax rate for this line item.
+                    pattern: ^-?\d+(\.\d+)?$
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                total_amount:
+                  anyOf:
+                  - description: Total amount of all line items.
+                    type: integer
+                    x-documentation-priority: default
+                  - type: 'null'
+                total_amount_currency:
+                  anyOf:
+                  - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the total amount.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                unit_cost:
+                  anyOf:
+                  - description: Cost of line item per unit of measure, in major units.
+                    pattern: ^-?\d+(\.\d+)?$
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                unit_cost_currency:
+                  anyOf:
+                  - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the unit cost.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                unit_of_measure_code:
+                  anyOf:
+                  - description: Code indicating unit of measure (gallons, etc.).
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+              required:
+              - id
+              - item_commodity_code
+              - item_descriptor
+              - product_code
+              - item_quantity
+              - unit_of_measure_code
+              - unit_cost
+              - unit_cost_currency
+              - sales_tax_amount
+              - sales_tax_currency
+              - sales_tax_rate
+              - discount_amount
+              - discount_currency
+              - discount_treatment_code
+              - total_amount
+              - total_amount_currency
+              - detail_indicator
+              title: Card Purchase Supplement LineItemsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: LineItemsElements
+            type: array
+            x-documentation-priority: default
+          - type: 'null'
+        transaction_id:
+          description: The ID of the transaction.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Transactions
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_purchase_supplement`.
+          enum:
+          - card_purchase_supplement
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - transaction_id
+      - card_payment_id
+      - invoice
+      - line_items
+      title: Card Purchase Supplement
+      type: object
+      x-event-categories:
+      - card_purchase_supplement.created
+      x-stainless-empty-object: false
+      x-tag: Card Purchase Supplements
+      x-title-plural: Card Purchase Supplements
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    card_purchase_supplement_list:
+      additionalProperties: true
+      description: A list of Card Purchase Supplement objects.
+      example:
+        data:
+        - card_payment_id: card_payment_nd3k2kacrqjli8482ave
+          id: card_purchase_supplement_ijuc45iym4jchnh2sfk3
+          invoice:
+            discount_amount: 100
+            discount_currency: USD
+            discount_treatment_code: null
+            duty_tax_amount: 200
+            duty_tax_currency: USD
+            order_date: '2023-07-20'
+            shipping_amount: 300
+            shipping_currency: USD
+            shipping_destination_country_code: US
+            shipping_destination_postal_code: '10045'
+            shipping_source_postal_code: '10045'
+            shipping_tax_amount: 400
+            shipping_tax_currency: USD
+            shipping_tax_rate: '0.2'
+            tax_treatments: null
+            unique_value_added_tax_invoice_reference: '12302'
+          line_items:
+          - detail_indicator: normal
+            discount_amount: null
+            discount_currency: null
+            discount_treatment_code: null
+            id: card_purchase_supplement_invoice_line_item_nf9760lz0apqy5retmqh
+            item_commodity_code: '001'
+            item_descriptor: Coffee
+            item_quantity: '1.0'
+            product_code: '101'
+            sales_tax_amount: null
+            sales_tax_currency: null
+            sales_tax_rate: null
+            total_amount: 500
+            total_amount_currency: USD
+            unit_cost: '5.0'
+            unit_cost_currency: USD
+            unit_of_measure_code: NMB
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: card_purchase_supplement
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/card_purchase_supplement'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Card Purchase Supplement List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Purchase Supplement Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

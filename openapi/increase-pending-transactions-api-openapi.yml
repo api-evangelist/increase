@@ -1,0 +1,2383 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Pending Transactions API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Pending Transactions are potential future additions and removals of money from your bank account. They impact your available balance, but not your current balance. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
+  name: Pending Transactions
+paths:
+  /pending_transactions:
+    get:
+      operationId: list_pending_transactions
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter pending transactions to those belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: route_id
+        required: false
+        schema:
+          description: Filter pending transactions to those belonging to the specified Route.
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: category.in
+        required: false
+        schema:
+          description: Return results whose value is in the provided list. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - account_transfer_instruction
+            - ach_transfer_instruction
+            - card_authorization
+            - check_deposit_instruction
+            - check_transfer_instruction
+            - fednow_transfer_instruction
+            - inbound_funds_hold
+            - user_initiated_hold
+            - real_time_payments_transfer_instruction
+            - wire_transfer_instruction
+            - inbound_wire_transfer_reversal
+            - swift_transfer_instruction
+            - card_push_transfer_instruction
+            - blockchain_onramp_transfer_instruction
+            - blockchain_offramp_transfer_instruction
+            - other
+            type: string
+            x-enum-descriptions:
+            - 'Account Transfer Instruction: details will be under the `account_transfer_instruction` object.'
+            - 'ACH Transfer Instruction: details will be under the `ach_transfer_instruction` object.'
+            - 'Card Authorization: details will be under the `card_authorization` object.'
+            - 'Check Deposit Instruction: details will be under the `check_deposit_instruction` object.'
+            - 'Check Transfer Instruction: details will be under the `check_transfer_instruction` object.'
+            - 'FedNow Transfer Instruction: details will be under the `fednow_transfer_instruction` object.'
+            - 'Inbound Funds Hold: details will be under the `inbound_funds_hold` object.'
+            - 'User Initiated Hold: details will be under the `user_initiated_hold` object.'
+            - 'Real-Time Payments Transfer Instruction: details will be under the `real_time_payments_transfer_instruction` object.'
+            - 'Wire Transfer Instruction: details will be under the `wire_transfer_instruction` object.'
+            - 'Inbound Wire Transfer Reversal: details will be under the `inbound_wire_transfer_reversal` object.'
+            - 'Swift Transfer Instruction: details will be under the `swift_transfer_instruction` object.'
+            - 'Card Push Transfer Instruction: details will be under the `card_push_transfer_instruction` object.'
+            - 'Blockchain On-Ramp Transfer Instruction: details will be under the `blockchain_onramp_transfer_instruction` object.'
+            - 'Blockchain Off-Ramp Transfer Instruction: details will be under the `blockchain_offramp_transfer_instruction` object.'
+            - The Pending Transaction was made for an undocumented or deprecated reason.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Pending Transactions for those with the specified status. By default only Pending Transactions in with status `pending` will be returned. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending
+            - complete
+            type: string
+            x-enum-descriptions:
+            - The Pending Transaction is still awaiting confirmation.
+            - The Pending Transaction is confirmed. An associated Transaction exists for this object. The Pending Transaction will no longer count against your balance and can generally be hidden from UIs, etc.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pending_transaction_list'
+          description: Pending Transaction List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Pending Transactions
+      x-sandbox-only: false
+      x-tag: Pending Transactions
+      tags:
+      - Pending Transactions
+    post:
+      description: Creates a pending transaction on an account. This can be useful to hold funds for an external payment or known future transaction outside of Increase (only negative amounts are supported). The resulting Pending Transaction will have a `category` of `user_initiated_hold` and can be released via the API to unlock the held funds.
+      operationId: create_a_pending_transaction
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_pending_transaction_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pending_transaction'
+          description: Pending Transaction
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Pending Transaction
+      x-sandbox-only: false
+      x-tag: Pending Transactions
+      tags:
+      - Pending Transactions
+  /pending_transactions/{pending_transaction_id}:
+    get:
+      operationId: retrieve_a_pending_transaction
+      parameters:
+      - example: pending_transaction_k1sfetcau2qbvjbzgju4
+        in: path
+        name: pending_transaction_id
+        required: true
+        schema:
+          description: The identifier of the Pending Transaction.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Pending Transactions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pending_transaction'
+          description: Pending Transaction
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Pending Transaction
+      x-sandbox-only: false
+      x-tag: Pending Transactions
+      tags:
+      - Pending Transactions
+  /pending_transactions/{pending_transaction_id}/release:
+    post:
+      description: Release a Pending Transaction you had previously created. The Pending Transaction must have a `category` of `user_initiated_hold` and a `status` of `pending`. This will unlock the held funds and mark the Pending Transaction as complete.
+      operationId: release_a_user_initiated_pending_transaction
+      parameters:
+      - example: pending_transaction_k1sfetcau2qbvjbzgju4
+        in: path
+        name: pending_transaction_id
+        required: true
+        schema:
+          description: The identifier of the Pending Transaction to release.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Pending Transactions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/pending_transaction'
+          description: Pending Transaction
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Release a user-initiated Pending Transaction
+      x-sandbox-only: false
+      x-tag: Pending Transactions
+      tags:
+      - Pending Transactions
+components:
+  schemas:
+    card_authorization:
+      additionalProperties: true
+      description: Card Authorizations are temporary holds placed on a customer's funds with the intent to later clear a transaction.
+      example:
+        actioner: increase
+        additional_amounts:
+          clinic: null
+          dental: null
+          original: null
+          prescription: null
+          surcharge:
+            amount: 10
+            currency: USD
+          total_cumulative: null
+          total_healthcare: null
+          transit: null
+          unknown: null
+          vision: null
+        amount: 100
+        card_payment_id: card_payment_nd3k2kacrqjli8482ave
+        currency: USD
+        digital_wallet_token_id: null
+        direction: settlement
+        expires_at: '2020-01-31T23:59:59Z'
+        id: card_authorization_6iqxap6ivd0fo5eu3i8x
+        merchant_acceptor_id: '5665270011000168'
+        merchant_category_code: '5734'
+        merchant_city: New York
+        merchant_country: US
+        merchant_descriptor: AMAZON.COM
+        merchant_postal_code: '10045'
+        merchant_state: NY
+        network_details:
+          category: visa
+          pulse: null
+          visa:
+            electronic_commerce_indicator: secure_electronic_commerce
+            point_of_service_entry_mode: manual
+            stand_in_processing_reason: null
+            terminal_entry_capability: magnetic_stripe
+        network_identifiers:
+          authorization_identification_response: null
+          retrieval_reference_number: '785867080153'
+          trace_number: '487941'
+          transaction_id: '627199945183184'
+        network_risk_score: 10
+        pending_transaction_id: null
+        physical_card_id: null
+        presentment_amount: 100
+        presentment_currency: USD
+        processing_category: purchase
+        real_time_decision_id: null
+        scheme_fees:
+        - amount: '0.137465'
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          fee_type: visa_corporate_acceptance_fee
+          fixed_component: null
+          variable_rate: '0.0002'
+        terminal_id: RCN5VNXS
+        type: card_authorization
+        verification:
+          card_verification_code:
+            result: match
+          cardholder_address:
+            actual_line1: 33 Liberty Street
+            actual_postal_code: '94131'
+            provided_line1: 33 Liberty Street
+            provided_postal_code: '94132'
+            result: postal_code_no_match_address_match
+          cardholder_name: null
+      properties:
+        actioner:
+          description: Whether this authorization was approved by Increase, the card network through stand-in processing, or the user through a real-time decision.
+          enum:
+          - user
+          - increase
+          - network
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - This object was actioned by the user through a real-time decision.
+          - This object was actioned by Increase without user intervention.
+          - This object was actioned by the network, through stand-in processing.
+        additional_amounts:
+          additionalProperties: false
+          description: Additional amounts associated with the card authorization, such as ATM surcharges fees. These are usually a subset of the `amount` field and are used to provide more detailed information about the transaction.
+          properties:
+            clinic:
+              anyOf:
+              - additionalProperties: false
+                description: The part of this transaction amount that was for clinic-related services.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            dental:
+              anyOf:
+              - additionalProperties: false
+                description: The part of this transaction amount that was for dental-related services.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            original:
+              anyOf:
+              - additionalProperties: false
+                description: The original pre-authorized amount.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            prescription:
+              anyOf:
+              - additionalProperties: false
+                description: The part of this transaction amount that was for healthcare prescriptions.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            surcharge:
+              anyOf:
+              - additionalProperties: false
+                description: The surcharge amount charged for this transaction by the merchant.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            total_cumulative:
+              anyOf:
+              - additionalProperties: false
+                description: The total amount of a series of incremental authorizations, optionally provided.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            total_healthcare:
+              anyOf:
+              - additionalProperties: false
+                description: The total amount of healthcare-related additional amounts.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            transit:
+              anyOf:
+              - additionalProperties: false
+                description: The part of this transaction amount that was for transit-related services.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            unknown:
+              anyOf:
+              - additionalProperties: false
+                description: An unknown additional amount.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+            vision:
+              anyOf:
+              - additionalProperties: false
+                description: The part of this transaction amount that was for vision-related services.
+                properties:
+                  amount:
+                    description: The amount in minor units of the `currency` field. The amount is positive if it is added to the amount (such as an ATM surcharge fee) and negative if it is subtracted from the amount (such as a discount).
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the additional amount's currency.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - amount
+                - currency
+                title: Card Authorization AdditionalAmounts AdditionalAmount
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: s
+              - type: 'null'
+          required:
+          - total_healthcare
+          - total_cumulative
+          - surcharge
+          - transit
+          - vision
+          - clinic
+          - dental
+          - prescription
+          - original
+          - unknown
+          title: Card Authorization AdditionalAmounts
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: s
+        amount:
+          description: The pending amount in the minor unit of the transaction's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        card_payment_id:
+          description: The ID of the Card Payment this transaction belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Payments
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        digital_wallet_token_id:
+          anyOf:
+          - description: If the authorization was made via a Digital Wallet Token (such as an Apple Pay purchase), the identifier of the token that was used.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Digital Wallet Tokens
+          - type: 'null'
+        direction:
+          description: The direction describes the direction the funds will move, either from the cardholder to the merchant or from the merchant to the cardholder.
+          enum:
+          - settlement
+          - refund
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A regular card authorization where funds are debited from the cardholder.
+          - A refund card authorization, sometimes referred to as a credit voucher authorization, where funds are credited to the cardholder.
+        expires_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) when this authorization will expire and the pending transaction will be released.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Card Authorization identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Authorizations
+        merchant_acceptor_id:
+          description: The merchant identifier (commonly abbreviated as MID) of the merchant the card is transacting with.
+          type: string
+          x-documentation-priority: default
+        merchant_category_code:
+          description: The Merchant Category Code (commonly abbreviated as MCC) of the merchant the card is transacting with.
+          type: string
+          x-documentation-priority: default
+        merchant_city:
+          anyOf:
+          - description: The city the merchant resides in.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        merchant_country:
+          description: The country the merchant resides in.
+          type: string
+          x-documentation-priority: default
+        merchant_descriptor:
+          description: The merchant descriptor of the merchant the card is transacting with.
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          anyOf:
+          - description: The merchant's postal code. For US merchants this is either a 5-digit or 9-digit ZIP code, where the first 5 and last 4 are separated by a dash.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        merchant_state:
+          anyOf:
+          - description: The state the merchant resides in.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        network_details:
+          additionalProperties: false
+          description: Fields specific to the `network`.
+          properties:
+            category:
+              description: The payment network used to process this card authorization.
+              enum:
+              - visa
+              - pulse
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Visa
+              - Pulse
+            pulse:
+              anyOf:
+              - additionalProperties: false
+                description: Fields specific to the `pulse` network.
+                properties: {}
+                title: Card Authorization NetworkDetails Pulse
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: true
+                x-title-plural: Pulses
+              - type: 'null'
+            visa:
+              anyOf:
+              - additionalProperties: false
+                description: Fields specific to the `visa` network.
+                properties:
+                  electronic_commerce_indicator:
+                    anyOf:
+                    - description: For electronic commerce transactions, this identifies the level of security used in obtaining the customer's payment credential. For mail or telephone order transactions, identifies the type of mail or telephone order.
+                      enum:
+                      - mail_phone_order
+                      - recurring
+                      - installment
+                      - unknown_mail_phone_order
+                      - secure_electronic_commerce
+                      - non_authenticated_security_transaction_at_3ds_capable_merchant
+                      - non_authenticated_security_transaction
+                      - non_secure_transaction
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - 'Single transaction of a mail/phone order: Use to indicate that the transaction is a mail/phone order purchase, not a recurring transaction or installment payment. For domestic transactions in the US region, this value may also indicate one bill payment transaction in the card-present or card-absent environments.'
+                      - 'Recurring transaction: Payment indicator used to indicate a recurring transaction that originates from an acquirer in the US region.'
+                      - 'Installment payment: Payment indicator used to indicate one purchase of goods or services that is billed to the account in multiple charges over a period of time agreed upon by the cardholder and merchant from transactions that originate from an acquirer in the US region.'
+                      - 'Unknown classification: other mail order: Use to indicate that the type of mail/telephone order is unknown.'
+                      - 'Secure electronic commerce transaction: Use to indicate that the electronic commerce transaction has been authenticated using e.g., 3-D Secure'
+                      - 'Non-authenticated security transaction at a 3-D Secure-capable merchant, and merchant attempted to authenticate the cardholder using 3-D Secure: Use to identify an electronic commerce transaction where the merchant attempted to authenticate the cardholder using 3-D Secure, but was unable to complete the authentication because the issuer or cardholder does not participate in the 3-D Secure program.'
+                      - 'Non-authenticated security transaction: Use to identify an electronic commerce transaction that uses data encryption for security however, cardholder authentication is not performed using 3-D Secure.'
+                      - 'Non-secure transaction: Use to identify an electronic commerce transaction that has no data protection.'
+                    - type: 'null'
+                  point_of_service_entry_mode:
+                    anyOf:
+                    - description: The method used to enter the cardholder's primary account number and card expiration date.
+                      enum:
+                      - unknown
+                      - manual
+                      - magnetic_stripe_no_cvv
+                      - optical_code
+                      - integrated_circuit_card
+                      - contactless
+                      - credential_on_file
+                      - magnetic_stripe
+                      - contactless_magnetic_stripe
+                      - integrated_circuit_card_no_cvv
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - Unknown
+                      - Manual key entry
+                      - Magnetic stripe read, without card verification value
+                      - Optical code
+                      - Contact chip card
+                      - Contactless read of chip card
+                      - Transaction initiated using a credential that has previously been stored on file
+                      - Magnetic stripe read
+                      - Contactless read of magnetic stripe data
+                      - Contact chip card, without card verification value
+                    - type: 'null'
+                  stand_in_processing_reason:
+                    anyOf:
+                    - description: 'Only present when `actioner: network`. Describes why a card authorization was approved or declined by Visa through stand-in processing.'
+                      enum:
+                      - issuer_error
+                      - invalid_physical_card
+                      - invalid_cryptogram
+                      - invalid_cardholder_authentication_verification_value
+                      - internal_visa_error
+                      - merchant_transaction_advisory_service_authentication_required
+                      - payment_fraud_disruption_acquirer_block
+                      - other
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - Increase failed to process the authorization in a timely manner.
+                      - The physical card read had an invalid CVV or dCVV.
+                      - The card's authorization request cryptogram was invalid. The cryptogram can be from a physical card or a Digital Wallet Token purchase.
+                      - The 3DS cardholder authentication verification value was invalid.
+                      - An internal Visa error occurred. Visa uses this reason code for certain expected occurrences as well, such as Application Transaction Counter (ATC) replays.
+                      - The merchant has enabled Visa's Transaction Advisory Service and requires further authentication to perform the transaction. In practice this is often utilized at fuel pumps to tell the cardholder to see the cashier.
+                      - The transaction was blocked by Visa's Payment Fraud Disruption service due to fraudulent Acquirer behavior, such as card testing.
+                      - An unspecific reason for stand-in processing.
+                    - type: 'null'
+                  terminal_entry_capability:
+                    anyOf:
+                    - description: The capability of the terminal being used to read the card. Shows whether a terminal can e.g., accept chip cards or if it only supports magnetic stripe reads. This reflects the highest capability of the terminal — for example, a terminal that supports both chip and magnetic stripe will be identified as chip-capable.
+                      enum:
+                      - unknown
+                      - terminal_not_used
+                      - magnetic_stripe
+                      - barcode
+                      - optical_character_recognition
+                      - chip_or_contactless
+                      - contactless_only
+                      - no_capability
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - Unknown
+                      - No terminal was used for this transaction.
+                      - The terminal can only read magnetic stripes and does not have chip or contactless reading capability.
+                      - The terminal can only read barcodes.
+                      - The terminal can only read cards via Optical Character Recognition.
+                      - The terminal supports contact chip cards and can also read the magnetic stripe. If contact chip is supported, this value is used regardless of whether contactless is also supported.
+                      - The terminal supports contactless reads but does not support contact chip. Only used when the terminal lacks contact chip capability.
+                      - The terminal has no card reading capability.
+                    - type: 'null'
+                required:
+                - electronic_commerce_indicator
+                - point_of_service_entry_mode
+                - stand_in_processing_reason
+                - terminal_entry_capability
+                title: Card Authorization NetworkDetails Visa
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Visas
+              - type: 'null'
+          required:
+          - category
+          - visa
+          - pulse
+          title: Card Authorization NetworkDetails
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: s
+        network_identifiers:
+          additionalProperties: false
+          description: Network-specific identifiers for a specific request or transaction.
+          example:
+            authorization_identification_response: null
+            retrieval_reference_number: '785867080153'
+            trace_number: '487941'
+            transaction_id: '627199945183184'
+          properties:
+            authorization_identification_response:
+              anyOf:
+              - description: The randomly generated 6-character Authorization Identification Response code sent back to the acquirer in an approved response.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            retrieval_reference_number:
+              anyOf:
+              - description: A life-cycle identifier used across e.g., an authorization and a reversal. Expected to be unique per acquirer within a window of time. For some card networks the retrieval reference number includes the trace counter.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            trace_number:
+              anyOf:
+              - description: A counter used to verify an individual authorization. Expected to be unique per acquirer within a window of time.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            transaction_id:
+              anyOf:
+              - description: A globally unique transaction identifier provided by the card network, used across multiple life-cycle requests.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - transaction_id
+          - trace_number
+          - retrieval_reference_number
+          - authorization_identification_response
+          title: Card Authorization NetworkIdentifiers
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: s
+        network_risk_score:
+          anyOf:
+          - description: The risk score generated by the card network. For Visa this is the Visa Advanced Authorization risk score, from 0 to 99, where 99 is the riskiest. For Pulse the score is from 0 to 999, where 999 is the riskiest.
+            type: integer
+            x-documentation-priority: default
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The identifier of the Pending Transaction associated with this Transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        physical_card_id:
+          anyOf:
+          - description: If the authorization was made in-person with a physical card, the Physical Card that was used.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Physical Cards
+          - type: 'null'
+        presentment_amount:
+          description: The pending amount in the minor unit of the transaction's presentment currency.
+          type: integer
+          x-documentation-priority: default
+        presentment_currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's presentment currency.
+          type: string
+          x-documentation-priority: default
+        processing_category:
+          description: The processing category describes the intent behind the authorization, such as whether it was used for bill payments or an automatic fuel dispenser.
+          enum:
+          - account_funding
+          - automatic_fuel_dispenser
+          - bill_payment
+          - original_credit
+          - purchase
+          - quasi_cash
+          - refund
+          - cash_disbursement
+          - balance_inquiry
+          - unknown
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Account funding transactions are transactions used to e.g., fund an account or transfer funds between accounts.
+          - Automatic fuel dispenser authorizations occur when a card is used at a gas pump, prior to the actual transaction amount being known. They are followed by an advice message that updates the amount of the pending transaction.
+          - A transaction used to pay a bill.
+          - Original credit transactions are used to send money to a cardholder.
+          - A regular purchase.
+          - Quasi-cash transactions represent purchases of items which may be convertible to cash.
+          - A refund card authorization, sometimes referred to as a credit voucher authorization, where funds are credited to the cardholder.
+          - Cash disbursement transactions are used to withdraw cash from an ATM or a point of sale.
+          - A balance inquiry transaction is used to check the balance of an account associated with a card.
+          - The processing category is unknown.
+        real_time_decision_id:
+          anyOf:
+          - description: The identifier of the Real-Time Decision sent to approve or decline this transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Real-Time Decisions
+          - type: 'null'
+        scheme_fees:
+          description: The scheme fees associated with this card authorization.
+          items:
+            additionalProperties: false
+            example:
+              amount: '0.137465'
+              created_at: '2020-01-31T23:59:59Z'
+              currency: USD
+              fee_type: visa_corporate_acceptance_fee
+              fixed_component: null
+              variable_rate: '0.0002'
+            properties:
+              amount:
+                description: The fee amount given as a string containing a decimal number.
+                pattern: ^-?\d+(\.\d+)?$
+                type: string
+                x-documentation-priority: default
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the fee was created.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the fee reimbursement.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+              fee_type:
+                description: The type of fee being assessed.
+                enum:
+                - visa_international_service_assessment_single_currency
+                - visa_international_service_assessment_cross_currency
+                - visa_authorization_domestic_point_of_sale
+                - visa_authorization_international_point_of_sale
+                - visa_authorization_canada_point_of_sale
+                - visa_authorization_reversal_point_of_sale
+                - visa_authorization_reversal_international_point_of_sale
+                - visa_authorization_address_verification_service
+                - visa_advanced_authorization
+                - visa_message_transmission
+                - visa_account_verification_domestic
+                - visa_account_verification_international
+                - visa_account_verification_canada
+                - visa_corporate_acceptance_fee
+                - visa_consumer_debit_acceptance_fee
+                - visa_business_debit_acceptance_fee
+                - visa_purchasing_acceptance_fee
+                - visa_purchase_domestic
+                - visa_purchase_international
+                - visa_credit_purchase_token
+                - visa_debit_purchase_token
+                - visa_clearing_transmission
+                - visa_direct_authorization
+                - visa_direct_transaction_domestic
+                - visa_service_commercial_credit
+                - visa_advertising_service_commercial_credit
+                - visa_community_growth_acceleration_program
+                - visa_processing_guarantee_commercial_credit
+                - pulse_switch_fee
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - International Service Assessment (ISA) single-currency is a fee assessed by the card network for cross-border transactions presented and settled in the same currency.
+                - International Service Assessment (ISA) cross-currency is a fee assessed by the card network for cross-border transactions presented and settled in different currencies.
+                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
+                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) International authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
+                - Activity and charges for Visa Settlement System processing for Canada Region POS (Point-of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified.
+                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
+                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) International reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
+                - A per Address Verification Service (AVS) result fee. Applies to all usable AVS result codes.
+                - Advanced Authorization is a fraud detection tool that monitors and risk evaluates 100 percent of US VisaNet authorizations in real-time. Activity related to Purchase (includes Signature Authenticated Visa and PIN Authenticated Visa Debit (PAVD) transactions).
+                - Issuer Transactions Visa represents a charge based on total actual monthly processing (Visa transactions only) through a VisaNet Access Point (VAP). Charges are assessed to the processor for each VisaNet Access Point.
+                - Activity, per inquiry, related to the domestic Issuer for Account Number Verification.
+                - Activity, per inquiry, related to the international Issuer for Account Number Verification.
+                - Activity, per inquiry, related to the US-Canada Issuer for Account Number Verification.
+                - The Corporate Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
+                - The Consumer Debit Acceptance Fee is charged to issuers and is based on the monthly sales volume of Consumer Debit or Prepaid card transactions. The cashback portion of a Debit and Prepaid card transaction is excluded from the sales volume calculation.
+                - The Business Acceptance Fee is charged to issuers and is based on the monthly sales volume on Business Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions. The cashback portion is included in the sales volume calculation with the exception of a Debit and Prepaid card transactions.
+                - The Purchasing Card Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
+                - Activity and fees for the processing of a sales draft original for a purchase transaction.
+                - Activity and fees for the processing of an international sales draft original for a purchase transaction.
+                - Apple Pay Credit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
+                - Apple Pay Debit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
+                - A per transaction fee assessed for Base II financial draft - Issuer.
+                - Issuer charge for Non-Financial OCT/AFT Authorization 0100 and Declined Financial OCT/AFT 0200 transactions.
+                - Data processing charge for Visa Direct OCTs for all business application identifiers (BAIs) other than money transfer-bank initiated (BI). BASE II transactions.
+                - Issuer card service fee for Commercial Credit cards.
+                - Issuer Advertising Service Fee for Commercial Credit cards.
+                - Issuer Community Growth Acceleration Program Fee.
+                - Issuer Processing Guarantee for Commercial Credit cards.
+                - Pulse Switch Fee is a fee charged by the Pulse network for processing transactions on its network.
+              fixed_component:
+                anyOf:
+                - description: The fixed component of the fee, if applicable, given in major units of the fee amount.
+                  pattern: ^-?\d+(\.\d+)?$
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              variable_rate:
+                anyOf:
+                - description: The variable rate component of the fee, if applicable, given as a decimal (e.g., 0.015 for 1.5%).
+                  pattern: ^-?\d+(\.\d+)?$
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - created_at
+            - amount
+            - currency
+            - fee_type
+            - variable_rate
+            - fixed_component
+            title: Card Authorization Card Scheme Fee
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Scheme Fees
+          type: array
+          x-documentation-priority: default
+        terminal_id:
+          anyOf:
+          - description: The terminal identifier (commonly abbreviated as TID) of the terminal the card is transacting with.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_authorization`.
+          enum:
+          - card_authorization
+          type: string
+          x-documentation-priority: default
+        verification:
+          additionalProperties: false
+          description: Fields related to verification of cardholder-provided values.
+          properties:
+            card_verification_code:
+              additionalProperties: false
+              description: Fields related to verification of the Card Verification Code, a 3-digit code on the back of the card.
+              properties:
+                result:
+                  description: The result of verifying the Card Verification Code.
+                  enum:
+                  - not_checked
+                  - match
+                  - no_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - No card verification code was provided in the authorization request.
+                  - The card verification code matched the one on file.
+                  - The card verification code did not match the one on file.
+              required:
+              - result
+              title: Card Authorization Verification CardVerificationCode
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: CardVerificationCodes
+            cardholder_address:
+              additionalProperties: false
+              description: Cardholder address provided in the authorization request and the address on file we verified it against.
+              properties:
+                actual_line1:
+                  anyOf:
+                  - description: Line 1 of the address on file for the cardholder.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                actual_postal_code:
+                  anyOf:
+                  - description: The postal code of the address on file for the cardholder.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                provided_line1:
+                  anyOf:
+                  - description: The cardholder address line 1 provided for verification in the authorization request.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                provided_postal_code:
+                  anyOf:
+                  - description: The postal code provided for verification in the authorization request.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                result:
+                  description: The address verification result returned to the card network.
+                  enum:
+                  - not_checked
+                  - postal_code_match_address_no_match
+                  - postal_code_no_match_address_match
+                  - match
+                  - no_match
+                  - postal_code_match_address_not_checked
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - No address information was provided in the authorization request.
+                  - Postal code matches, but the street address does not match or was not provided.
+                  - Postal code does not match, but the street address matches or was not provided.
+                  - Postal code and street address match.
+                  - Postal code and street address do not match.
+                  - Postal code matches, but the street address was not verified. (deprecated)
+              required:
+              - provided_postal_code
+              - provided_line1
+              - actual_postal_code
+              - actual_line1
+              - result
+              title: Card Authorization Verification CardholderAddress
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: CardholderAddresses
+            cardholder_name:
+              anyOf:
+              - additionalProperties: false
+                description: Cardholder name provided in the authorization request.
+                properties:
+                  provided_first_name:
+                    anyOf:
+                    - description: The first name provided for verification in the authorization request.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  provided_last_name:
+                    anyOf:
+                    - description: The last name provided for verification in the authorization request.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  provided_middle_name:
+                    anyOf:
+                    - description: The middle name provided for verification in the authorization request.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                required:
+                - provided_first_name
+                - provided_middle_name
+                - provided_last_name
+                title: Card Authorization Verification CardholderName
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: CardholderNames
+              - type: 'null'
+          required:
+          - cardholder_address
+          - cardholder_name
+          - card_verification_code
+          title: Card Authorization Verification
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: s
+      required:
+      - type
+      - id
+      - card_payment_id
+      - merchant_acceptor_id
+      - merchant_descriptor
+      - merchant_category_code
+      - terminal_id
+      - merchant_city
+      - merchant_state
+      - merchant_postal_code
+      - merchant_country
+      - digital_wallet_token_id
+      - physical_card_id
+      - verification
+      - additional_amounts
+      - network_identifiers
+      - network_risk_score
+      - network_details
+      - amount
+      - presentment_amount
+      - presentment_currency
+      - currency
+      - direction
+      - actioner
+      - processing_category
+      - expires_at
+      - real_time_decision_id
+      - pending_transaction_id
+      - scheme_fees
+      title: Card Authorization
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Authorizations
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
+    create_a_pending_transaction_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: -1000
+        description: Hold for pending transaction
+      properties:
+        account_id:
+          description: The Account to place the hold on.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The amount to hold in the minor unit of the account's currency. For dollars, for example, this is cents. This should be a negative amount - to hold $1.00 from the account, you would pass -100.
+          maximum: -1
+          type: integer
+          x-documentation-priority: default
+        description:
+          description: The description you choose to give the hold.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - amount
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    pending_transaction:
+      additionalProperties: true
+      description: Pending Transactions are potential future additions and removals of money from your bank account. They impact your available balance, but not your current balance. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 100
+        completed_at: null
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        description: INVOICE 2468
+        held_amount: 100
+        id: pending_transaction_k1sfetcau2qbvjbzgju4
+        route_id: card_oubs0hwk5rn6knuecxg2
+        route_type: card
+        source:
+          ach_transfer_instruction:
+            amount: 100
+            transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+          category: ach_transfer_instruction
+        status: pending
+        type: pending_transaction
+      properties:
+        account_id:
+          description: The identifier for the account this Pending Transaction belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The Pending Transaction amount in the minor unit of its currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        completed_at:
+          anyOf:
+          - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date on which the Pending Transaction was completed.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date on which the Pending Transaction occurred.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the Pending Transaction's currency. This will match the currency on the Pending Transaction's Account.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        description:
+          description: For a Pending Transaction related to a transfer, this is the description you provide. For a Pending Transaction related to a payment, this is the description the vendor provides.
+          type: string
+          x-documentation-priority: default
+        held_amount:
+          description: The amount that this Pending Transaction decrements the available balance of its Account. This is usually the same as `amount`, but will differ if the amount is positive.
+          type: integer
+          x-documentation-priority: default
+        id:
+          description: The Pending Transaction identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Pending Transactions
+        route_id:
+          anyOf:
+          - description: The identifier for the route this Pending Transaction came through. Routes are things like cards and ACH details.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        route_type:
+          anyOf:
+          - description: The type of the route this Pending Transaction came through.
+            enum:
+            - account_number
+            - card
+            - lockbox
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - An Account Number.
+            - A Card.
+            - A Lockbox.
+          - type: 'null'
+        source:
+          additionalProperties: true
+          description: This is an object giving more details on the network-level event that caused the Pending Transaction. For example, for a card transaction this lists the merchant's industry and location.
+          example:
+            ach_transfer_instruction:
+              amount: 100
+              transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+            category: ach_transfer_instruction
+          properties:
+            account_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: An Account Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `account_transfer_instruction`.
+                example:
+                  amount: 100
+                  currency: USD
+                  transfer_id: account_transfer_7k9qe1ysdgqztnt63l7n
+                properties:
+                  amount:
+                    description: The pending amount in the minor unit of the transaction's currency. For dollars, for example, this is cents.
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the destination account currency.
+                    enum:
+                    - USD
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - US Dollar (USD)
+                  transfer_id:
+                    description: The identifier of the Account Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Account Transfers
+                required:
+                - amount
+                - currency
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Account Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Account Transfer Instructions
+              - type: 'null'
+            ach_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: An ACH Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `ach_transfer_instruction`.
+                example:
+                  amount: 100
+                  transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+                properties:
+                  amount:
+                    description: The pending amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  transfer_id:
+                    description: The identifier of the ACH Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: ACH Transfers
+                required:
+                - amount
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source ACH Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: ACH Transfer Instructions
+              - type: 'null'
+            blockchain_offramp_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A Blockchain Off-Ramp Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `blockchain_offramp_transfer_instruction`.
+                example:
+                  source_blockchain_address_id: blockchain_address_tijjpqp9t5d358ehydqi
+                  transfer_id: blockchain_offramp_transfer_sqd2x3ti6u2sy91v696m
+                properties:
+                  source_blockchain_address_id:
+                    description: The identifier of the Blockchain Address the funds were received at.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Blockchain Addresses
+                  transfer_id:
+                    description: The identifier of the Blockchain Off-Ramp Transfer that led to this Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Blockchain Off-Ramp Transfers
+                required:
+                - transfer_id
+                - source_blockchain_address_id
+                title: Pending Transaction Pending Transaction Source Blockchain Off-Ramp Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Blockchain Off-Ramp Transfer Instructions
+              - type: 'null'
+            blockchain_onramp_transfer_instruction:
+              anyOf:
+              - additionalProperties: false
+                description: A Blockchain On-Ramp Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `blockchain_onramp_transfer_instruction`.
+                example:
+                  amount: 10000
+                  destination_blockchain_address: '0x304a554a310C7e546dfe434669C62820b7D83490'
+                  transfer_id: blockchain_onramp_transfer_sg8nzy569rk0dnfk28bv
+                properties:
+                  amount:
+                    description: The transfer amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  destination_blockchain_address:
+                    description: The blockchain address the funds are being sent to.
+                    type: string
+                    x-documentation-priority: default
+                  transfer_id:
+                    description: The identifier of the Blockchain On-Ramp Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Blockchain On-Ramp Transfers
+                required:
+                - amount
+                - transfer_id
+                - destination_blockchain_address
+                title: Pending Transaction Pending Transaction Source Blockchain On-Ramp Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Blockchain On-Ramp Transfer Instructions
+              - type: 'null'
+            card_authorization:
+              anyOf:
+              - $ref: '#/components/schemas/card_authorization'
+                description: A Card Authorization object. This field will be present in the JSON response if and only if `category` is equal to `card_authorization`. Card Authorizations are temporary holds placed on a customer's funds with the intent to later clear a transaction.
+                x-documentation-priority: default
+              - type: 'null'
+            card_push_transfer_instruction:
+              anyOf:
+              - additionalProperties: false
+                description: A Card Push Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `card_push_transfer_instruction`.
+                example:
+                  amount: 100
+                  transfer_id: outbound_card_push_transfer_e0z9rdpamraczh4tvwye
+                properties:
+                  amount:
+                    description: The transfer amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  transfer_id:
+                    description: The identifier of the Card Push Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Card Push Transfers
+                required:
+                - amount
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Card Push Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Card Push Transfer Instructions
+              - type: 'null'
+            category:
+              description: The type of the resource. We may add additional possible values for this enum over time; your application should be able to handle such additions gracefully.
+              enum:
+              - account_transfer_instruction
+              - ach_transfer_instruction
+              - card_authorization
+              - check_deposit_instruction
+              - check_transfer_instruction
+              - fednow_transfer_instruction
+              - inbound_funds_hold
+              - user_initiated_hold
+              - real_time_payments_transfer_instruction
+              - wire_transfer_instruction
+              - inbound_wire_transfer_reversal
+              - swift_transfer_instruction
+              - card_push_transfer_instruction
+              - blockchain_onramp_transfer_instruction
+              - blockchain_offramp_transfer_instruction
+              - other
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - 'Account Transfer Instruction: details will be under the `account_transfer_instruction` object.'
+              - 'ACH Transfer Instruction: details will be under the `ach_transfer_instruction` object.'
+              - 'Card Authorization: details will be under the `card_authorization` object.'
+              - 'Check Deposit Instruction: details will be under the `check_deposit_instruction` object.'
+              - 'Check Transfer Instruction: details will be under the `check_transfer_instruction` object.'
+              - 'FedNow Transfer Instruction: details will be under the `fednow_transfer_instruction` object.'
+              - 'Inbound Funds Hold: details will be under the `inbound_funds_hold` object.'
+              - 'User Initiated Hold: details will be under the `user_initiated_hold` object.'
+              - 'Real-Time Payments Transfer Instruction: details will be under the `real_time_payments_transfer_instruction` object.'
+              - 'Wire Transfer Instruction: details will be under the `wire_transfer_instruction` object.'
+              - 'Inbound Wire Transfer Reversal: details will be under the `inbound_wire_transfer_reversal` object.'
+              - 'Swift Transfer Instruction: details will be under the `swift_transfer_instruction` object.'
+              - 'Card Push Transfer Instruction: details will be under the `card_push_transfer_instruction` object.'
+              - 'Blockchain On-Ramp Transfer Instruction: details will be under the `blockchain_onramp_transfer_instruction` object.'
+              - 'Blockchain Off-Ramp Transfer Instruction: details will be under the `blockchain_offramp_transfer_instruction` object.'
+              - The Pending Transaction was made for an undocumented or deprecated reason.
+            check_deposit_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A Check Deposit Instruction object. This field will be present in the JSON response if and only if `category` is equal to `check_deposit_instruction`.
+                example:
+                  amount: 100
+                  back_image_file_id: file_26khfk98mzfz90a11oqx
+                  check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+                  currency: USD
+                  front_image_file_id: file_makxrc67oh9l6sg7w9yc
+                properties:
+                  amount:
+                    description: The pending amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  back_image_file_id:
+                    anyOf:
+                    - description: The identifier of the File containing the image of the back of the check that was deposited.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    - type: 'null'
+                  check_deposit_id:
+                    anyOf:
+                    - description: The identifier of the Check Deposit.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Check Deposits
+                    - type: 'null'
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's currency.
+                    enum:
+                    - USD
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - US Dollar (USD)
+                  front_image_file_id:
+                    description: The identifier of the File containing the image of the front of the check that was deposited.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Files
+                required:
+                - amount
+                - currency
+                - front_image_file_id
+                - back_image_file_id
+                - check_deposit_id
+                title: Pending Transaction Pending Transaction Source Check Deposit Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Check Deposit Instructions
+              - type: 'null'
+            check_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A Check Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `check_transfer_instruction`.
+                example:
+                  amount: 100
+                  currency: USD
+                  transfer_id: check_transfer_30b43acfu9vw8fyc4f5
+                properties:
+                  amount:
+                    description: The transfer amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  currency:
+                    description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the check's currency.
+                    enum:
+                    - USD
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - US Dollar (USD)
+                  transfer_id:
+                    description: The identifier of the Check Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Check Transfers
+                required:
+                - amount
+                - currency
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Check Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Check Transfer Instructions
+              - type: 'null'
+            fednow_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A FedNow Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `fednow_transfer_instruction`.
+                example:
+                  transfer_id: fednow_transfer_4i0mptrdu1mueg1196bg
+                properties:
+                  transfer_id:
+                    description: The identifier of the FedNow Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: FedNow Transfers
+                required:
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source FedNow Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: FedNow Transfer Instructions
+              - type: 'null'
+            inbound_funds_hold:
+              anyOf:
+              - $ref: '#/components/schemas/inbound_funds_hold'
+                description: An Inbound Funds Hold object. This field will be present in the JSON response if and only if `category` is equal to `inbound_funds_hold`. We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+                x-documentation-priority: default
+              - type: 'null'
+            inbound_wire_transfer_reversal:
+              anyOf:
+              - $ref: '#/components/schemas/inbound_wire_transfer_reversal'
+                description: An Inbound Wire Transfer Reversal object. This field will be present in the JSON response if and only if `category` is equal to `inbound_wire_transfer_reversal`. An Inbound Wire Transfer Reversal is created when Increase has received a wire and the User requests that it be reversed.
+                x-documentation-priority: default
+              - type: 'null'
+            other:
+              anyOf:
+              - additionalProperties: false
+                description: If the category of this Transaction source is equal to `other`, this field will contain an empty object, otherwise it will contain null.
+                properties: {}
+                title: Pending Transaction Pending Transaction Source Other
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: true
+                x-title-plural: Others
+              - type: 'null'
+            real_time_payments_transfer_instruction:
+              anyOf:
+              - additionalProperties: false
+                description: A Real-Time Payments Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `real_time_payments_transfer_instruction`.
+                example:
+                  amount: 100
+                  transfer_id: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+                properties:
+                  amount:
+                    description: The transfer amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  transfer_id:
+                    description: The identifier of the Real-Time Payments Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Real-Time Payments Transfers
+                required:
+                - amount
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Real-Time Payments Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Real-Time Payments Transfer Instructions
+              - type: 'null'
+            swift_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A Swift Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `swift_transfer_instruction`.
+                example:
+                  transfer_id: swift_transfer_29h21xkng03788zwd3fh
+                properties:
+                  transfer_id:
+                    description: The identifier of the Swift Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Swift Transfers
+                required:
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Swift Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Swift Transfer Instructions
+              - type: 'null'
+            user_initiated_hold:
+              anyOf:
+              - additionalProperties: true
+                description: An User Initiated Hold object. This field will be present in the JSON response if and only if `category` is equal to `user_initiated_hold`. Created when a user initiates a hold on funds in their account.
+                properties: {}
+                title: Pending Transaction Pending Transaction Source User Initiated Hold
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: User Initiated Holds
+              - type: 'null'
+            wire_transfer_instruction:
+              anyOf:
+              - additionalProperties: true
+                description: A Wire Transfer Instruction object. This field will be present in the JSON response if and only if `category` is equal to `wire_transfer_instruction`.
+                example:
+                  account_number: '987654321'
+                  amount: 100
+                  message_to_recipient: HELLO
+                  routing_number: '101050001'
+                  transfer_id: wire_transfer_5akynk7dqsq25qwk9q2u
+                properties:
+                  account_number:
+                    description: The account number for the destination account.
+                    type: string
+                    x-documentation-priority: default
+                  amount:
+                    description: The transfer amount in USD cents.
+                    type: integer
+                    x-documentation-priority: default
+                  message_to_recipient:
+                    description: The message that will show on the recipient's bank statement.
+                    type: string
+                    x-documentation-priority: default
+                  routing_number:
+                    description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+                    type: string
+                    x-documentation-priority: default
+                  transfer_id:
+                    description: The identifier of the Wire Transfer that led to this Pending Transaction.
+                    type: string
+                    x-documentation-priority: default
+                    x-id-reference-to: Wire Transfers
+                required:
+                - amount
+                - account_number
+                - routing_number
+                - message_to_recipient
+                - transfer_id
+                title: Pending Transaction Pending Transaction Source Wire Transfer Instruction
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Wire Transfer Instructions
+              - type: 'null'
+          required:
+          - category
+          title: Pending Transaction Pending Transaction Source
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Pending Transaction Sources
+        status:
+          description: Whether the Pending Transaction has been confirmed and has an associated Transaction.
+          enum:
+          - pending
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Pending Transaction is still awaiting confirmation.
+          - The Pending Transaction is confirmed. An associated Transaction exists for this object. The Pending Transaction will no longer count against your balance and can generally be hidden from UIs, etc.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `pending_transaction`.
+          enum:
+          - pending_transaction
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - amount
+      - held_amount
+      - currency
+      - completed_at
+      - created_at
+      - description
+      - id
+      - route_id
+      - route_type
+      - source
+      - status
+      title: Pending Transaction
+      type: object
+      x-event-categories:
+      - pending_transaction.created
+      - pending_transaction.updated
+      x-stainless-empty-object: false
+      x-tag: Pending Transactions
+      x-title-plural: Pending Transactions
+    pending_transaction_list:
+      additionalProperties: true
+      description: A list of Pending Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 100
+          completed_at: null
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          held_amount: 100
+          id: pending_transaction_k1sfetcau2qbvjbzgju4
+          route_id: card_oubs0hwk5rn6knuecxg2
+          route_type: card
+          source:
+            ach_transfer_instruction:
+              amount: 100
+              transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+            category: ach_transfer_instruction
+          status: pending
+          type: pending_transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/pending_transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Pending Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Pending Transaction Lists
+    inbound_wire_transfer_reversal:
+      additionalProperties: true
+      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
+      example:
+        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+      properties:
+        inbound_wire_transfer_id:
+          description: The ID of the Inbound Wire Transfer that is being reversed.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Transfers
+      required:
+      - inbound_wire_transfer_id
+      title: Inbound Wire Transfer Reversal Intention
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Wire Transfer Reversal Intentions
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

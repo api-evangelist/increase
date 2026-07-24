@@ -1,0 +1,2122 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Cards API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Cards may operate on credit, debit, or prepaid BINs. They’ll immediately work for online purchases after you create them. All cards work on a good funds model, and maintain a maximum limit of 100% of the Account’s available balance at the time of transaction. Funds are deducted from the Account upon transaction settlement.
+  name: Cards
+paths:
+  /cards:
+    get:
+      operationId: list_cards
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Cards to ones belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Cards by status. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - active
+            - disabled
+            - canceled
+            type: string
+            x-enum-descriptions:
+            - The card is active.
+            - The card is temporarily disabled.
+            - The card is permanently canceled.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_list'
+          description: Card List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Cards
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+    post:
+      operationId: create_a_card
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_card_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+          description: Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Card
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+  /cards/{card_id}:
+    get:
+      operationId: retrieve_a_card
+      parameters:
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: path
+        name: card_id
+        required: true
+        schema:
+          description: The identifier of the Card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+          description: Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Card
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+    patch:
+      operationId: update_a_card
+      parameters:
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: path
+        name: card_id
+        required: true
+        schema:
+          description: The card identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_a_card_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+          description: Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update a Card
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+  /cards/{card_id}/create_details_iframe:
+    post:
+      description: Create an iframe URL for a Card to display the card details. More details about styling and usage can be found in the [documentation](/documentation/embedded-card-component).
+      operationId: create_a_card_details_iframe
+      parameters:
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: path
+        name: card_id
+        required: true
+        schema:
+          description: The identifier of the Card to create an iframe for.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_card_details_iframe_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_iframe_url'
+          description: Card iframe URL
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Card details iframe
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+  /cards/{card_id}/details:
+    get:
+      description: Sensitive details for a Card include the primary account number, expiry, card verification code, and PIN.
+      operationId: retrieve_sensitive_details_for_a_card
+      parameters:
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: path
+        name: card_id
+        required: true
+        schema:
+          description: The identifier of the Card to retrieve details for.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_details'
+          description: Card Details
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve sensitive details for a Card
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+  /cards/{card_id}/update_pin:
+    post:
+      operationId: update_a_cards_pin
+      parameters:
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: path
+        name: card_id
+        required: true
+        schema:
+          description: The identifier of the Card to update the PIN for.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_a_cards_pin_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_details'
+          description: Card Details
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update a Card's PIN
+      x-sandbox-only: false
+      x-tag: Cards
+      tags:
+      - Cards
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    update_a_card_parameters:
+      additionalProperties: false
+      example:
+        description: New description
+      properties:
+        authorization_controls:
+          additionalProperties: false
+          description: Controls that restrict how this card can be used.
+          properties:
+            merchant_acceptor_identifier:
+              additionalProperties: false
+              description: Restricts which Merchant Acceptor IDs are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The Merchant Acceptor IDs that are allowed for authorizations on this card. Authorizations with Merchant Acceptor IDs not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      identifier:
+                        description: The Merchant Acceptor ID.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - identifier
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The Merchant Acceptor IDs that are blocked for authorizations on this card. Authorizations with Merchant Acceptor IDs in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      identifier:
+                        description: The Merchant Acceptor ID.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - identifier
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            merchant_category_code:
+              additionalProperties: false
+              description: Restricts which Merchant Category Codes are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The Merchant Category Codes that are allowed for authorizations on this card. Authorizations with Merchant Category Codes not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      code:
+                        description: The Merchant Category Code.
+                        maxLength: 4
+                        minLength: 4
+                        pattern: ^[0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - code
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The Merchant Category Codes that are blocked for authorizations on this card. Authorizations with Merchant Category Codes in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      code:
+                        description: The Merchant Category Code.
+                        maxLength: 4
+                        minLength: 4
+                        pattern: ^[0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - code
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            merchant_country:
+              additionalProperties: false
+              description: Restricts which merchant countries are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The merchant countries that are allowed for authorizations on this card. Authorizations with merchant countries not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      country:
+                        description: The ISO 3166-1 alpha-2 country code.
+                        maxLength: 2
+                        minLength: 2
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - country
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The merchant countries that are blocked for authorizations on this card. Authorizations with merchant countries in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      country:
+                        description: The ISO 3166-1 alpha-2 country code.
+                        maxLength: 2
+                        minLength: 2
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - country
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            usage:
+              additionalProperties: false
+              description: Controls how many times this card can be used.
+              properties:
+                category:
+                  description: Whether the card is for a single use or multiple uses.
+                  enum:
+                  - single_use
+                  - multi_use
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The card can only be used for a single authorization.
+                  - The card can be used for multiple authorizations.
+                multi_use:
+                  additionalProperties: false
+                  description: Controls for multi-use cards. Required if and only if `category` is `multi_use`.
+                  properties:
+                    spending_limits:
+                      description: Spending limits for this card. The most restrictive limit applies if multiple limits match.
+                      items:
+                        additionalProperties: false
+                        properties:
+                          interval:
+                            description: The interval at which the spending limit is enforced.
+                            enum:
+                            - all_time
+                            - per_transaction
+                            - per_day
+                            - per_week
+                            - per_month
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - The spending limit applies over the lifetime of the card.
+                            - The spending limit applies per transaction.
+                            - The spending limit applies per day. Resets nightly at midnight UTC.
+                            - The spending limit applies per week. Resets weekly on Mondays at midnight UTC.
+                            - The spending limit applies per month. Resets on the first of the month, midnight UTC.
+                          merchant_category_codes:
+                            description: The Merchant Category Codes this spending limit applies to. If not set, the limit applies to all transactions.
+                            items:
+                              additionalProperties: false
+                              properties:
+                                code:
+                                  description: The Merchant Category Code.
+                                  maxLength: 200
+                                  minLength: 1
+                                  type: string
+                                  x-documentation-priority: default
+                              required:
+                              - code
+                              type: object
+                              x-event-categories: []
+                              x-stainless-empty-object: false
+                            type: array
+                            x-documentation-priority: default
+                          settlement_amount:
+                            description: The maximum settlement amount permitted in the given interval.
+                            minimum: 0
+                            type: integer
+                            x-documentation-priority: default
+                        required:
+                        - interval
+                        - settlement_amount
+                        type: object
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      type: array
+                      x-documentation-priority: default
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                single_use:
+                  additionalProperties: false
+                  description: Controls for single-use cards. Required if and only if `category` is `single_use`.
+                  properties:
+                    settlement_amount:
+                      additionalProperties: false
+                      description: The settlement amount constraint for this single-use card.
+                      properties:
+                        comparison:
+                          description: The operator used to compare the settlement amount.
+                          enum:
+                          - equals
+                          - less_than_or_equals
+                          type: string
+                          x-documentation-priority: default
+                          x-enum-descriptions:
+                          - The settlement amount must be exactly the specified value.
+                          - The settlement amount must be less than or equal to the specified value.
+                        value:
+                          description: The settlement amount value.
+                          minimum: 0
+                          type: integer
+                          x-documentation-priority: default
+                      required:
+                      - value
+                      - comparison
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                  required:
+                  - settlement_amount
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - category
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        billing_address:
+          additionalProperties: false
+          description: The card's updated billing address.
+          properties:
+            city:
+              description: The city of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The postal code of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The US state of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          - city
+          - state
+          - postal_code
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        description:
+          description: The description you choose to give the card.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        digital_wallet:
+          additionalProperties: false
+          description: The contact information used in the two-factor steps for digital wallet card creation. At least one field must be present to complete the digital wallet steps.
+          properties:
+            digital_card_profile_id:
+              description: The digital card profile assigned to this digital card.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Digital Card Profiles
+            email:
+              description: An email address that can be used to verify the cardholder via one-time passcode over email.
+              format: email
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            phone:
+              description: A phone number that can be used to verify the cardholder via one-time passcode over SMS.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        entity_id:
+          description: The Entity the card belongs to. You only need to supply this in rare situations when the card is not for the Account holder.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        status:
+          description: The status to update the Card with.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The card is active.
+          - The card is temporarily disabled.
+          - The card is permanently canceled.
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    create_a_card_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        description: Card for Ian Crease
+      properties:
+        account_id:
+          description: The Account the card should belong to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        authorization_controls:
+          additionalProperties: false
+          description: Controls that restrict how this card can be used.
+          properties:
+            merchant_acceptor_identifier:
+              additionalProperties: false
+              description: Restricts which Merchant Acceptor IDs are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The Merchant Acceptor IDs that are allowed for authorizations on this card. Authorizations with Merchant Acceptor IDs not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      identifier:
+                        description: The Merchant Acceptor ID.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - identifier
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The Merchant Acceptor IDs that are blocked for authorizations on this card. Authorizations with Merchant Acceptor IDs in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      identifier:
+                        description: The Merchant Acceptor ID.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - identifier
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            merchant_category_code:
+              additionalProperties: false
+              description: Restricts which Merchant Category Codes are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The Merchant Category Codes that are allowed for authorizations on this card. Authorizations with Merchant Category Codes not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      code:
+                        description: The Merchant Category Code.
+                        maxLength: 4
+                        minLength: 4
+                        pattern: ^[0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - code
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The Merchant Category Codes that are blocked for authorizations on this card. Authorizations with Merchant Category Codes in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      code:
+                        description: The Merchant Category Code.
+                        maxLength: 4
+                        minLength: 4
+                        pattern: ^[0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - code
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            merchant_country:
+              additionalProperties: false
+              description: Restricts which merchant countries are allowed or blocked for authorizations on this card.
+              properties:
+                allowed:
+                  description: The merchant countries that are allowed for authorizations on this card. Authorizations with merchant countries not in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      country:
+                        description: The ISO 3166-1 alpha-2 country code.
+                        maxLength: 2
+                        minLength: 2
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - country
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+                blocked:
+                  description: The merchant countries that are blocked for authorizations on this card. Authorizations with merchant countries in this list will be declined.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      country:
+                        description: The ISO 3166-1 alpha-2 country code.
+                        maxLength: 2
+                        minLength: 2
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - country
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            usage:
+              additionalProperties: false
+              description: Controls how many times this card can be used.
+              properties:
+                category:
+                  description: Whether the card is for a single use or multiple uses.
+                  enum:
+                  - single_use
+                  - multi_use
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The card can only be used for a single authorization.
+                  - The card can be used for multiple authorizations.
+                multi_use:
+                  additionalProperties: false
+                  description: Controls for multi-use cards. Required if and only if `category` is `multi_use`.
+                  properties:
+                    spending_limits:
+                      description: Spending limits for this card. The most restrictive limit applies if multiple limits match.
+                      items:
+                        additionalProperties: false
+                        properties:
+                          interval:
+                            description: The interval at which the spending limit is enforced.
+                            enum:
+                            - all_time
+                            - per_transaction
+                            - per_day
+                            - per_week
+                            - per_month
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - The spending limit applies over the lifetime of the card.
+                            - The spending limit applies per transaction.
+                            - The spending limit applies per day. Resets nightly at midnight UTC.
+                            - The spending limit applies per week. Resets weekly on Mondays at midnight UTC.
+                            - The spending limit applies per month. Resets on the first of the month, midnight UTC.
+                          merchant_category_codes:
+                            description: The Merchant Category Codes this spending limit applies to. If not set, the limit applies to all transactions.
+                            items:
+                              additionalProperties: false
+                              properties:
+                                code:
+                                  description: The Merchant Category Code.
+                                  maxLength: 200
+                                  minLength: 1
+                                  type: string
+                                  x-documentation-priority: default
+                              required:
+                              - code
+                              type: object
+                              x-event-categories: []
+                              x-stainless-empty-object: false
+                            type: array
+                            x-documentation-priority: default
+                          settlement_amount:
+                            description: The maximum settlement amount permitted in the given interval.
+                            minimum: 0
+                            type: integer
+                            x-documentation-priority: default
+                        required:
+                        - interval
+                        - settlement_amount
+                        type: object
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      type: array
+                      x-documentation-priority: default
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                single_use:
+                  additionalProperties: false
+                  description: Controls for single-use cards. Required if and only if `category` is `single_use`.
+                  properties:
+                    settlement_amount:
+                      additionalProperties: false
+                      description: The settlement amount constraint for this single-use card.
+                      properties:
+                        comparison:
+                          description: The operator used to compare the settlement amount.
+                          enum:
+                          - equals
+                          - less_than_or_equals
+                          type: string
+                          x-documentation-priority: default
+                          x-enum-descriptions:
+                          - The settlement amount must be exactly the specified value.
+                          - The settlement amount must be less than or equal to the specified value.
+                        value:
+                          description: The settlement amount value.
+                          minimum: 0
+                          type: integer
+                          x-documentation-priority: default
+                      required:
+                      - value
+                      - comparison
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                  required:
+                  - settlement_amount
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - category
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        billing_address:
+          additionalProperties: false
+          description: The card's billing address.
+          properties:
+            city:
+              description: The city of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The postal code of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The US state of the billing address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          - city
+          - state
+          - postal_code
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        description:
+          description: The description you choose to give the card.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        digital_wallet:
+          additionalProperties: false
+          description: The contact information used in the two-factor steps for digital wallet card creation. To add the card to a digital wallet, you may supply an email or phone number with this request. Otherwise, subscribe and then action a Real Time Decision with the category `digital_wallet_token_requested` or `digital_wallet_authentication_requested`.
+          properties:
+            digital_card_profile_id:
+              description: The digital card profile assigned to this digital card.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Digital Card Profiles
+            email:
+              description: An email address that can be used to contact and verify the cardholder via one-time passcode over email.
+              format: email
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            phone:
+              description: A phone number that can be used to contact and verify the cardholder via one-time passcode over SMS.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        entity_id:
+          description: The Entity the card belongs to. You only need to supply this in rare situations when the card is not for the Account holder.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      required:
+      - account_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    card_iframe_url:
+      additionalProperties: false
+      description: An object containing the iframe URL for a Card.
+      example:
+        expires_at: '2020-01-31T23:59:59Z'
+        iframe_url: https://increase.com/card_details_iframe/index.html?token=0
+        type: card_iframe_url
+      properties:
+        expires_at:
+          description: The time the iframe URL will expire.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        iframe_url:
+          description: The iframe URL for the Card. Treat this as an opaque URL.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_iframe_url`.
+          enum:
+          - card_iframe_url
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - iframe_url
+      - expires_at
+      title: Card iframe URL
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card iframe URLs
+    card_details:
+      additionalProperties: false
+      description: An object containing the sensitive details (card number, CVC, PIN, etc) for a Card. These details are not included in the Card object. If you'd prefer to never access these details directly, you can use the [embedded iframe](/documentation/embedded-card-component) to display the information to your users.
+      example:
+        card_id: card_oubs0hwk5rn6knuecxg2
+        expiration_month: 7
+        expiration_year: 2025
+        pin: '1234'
+        primary_account_number: '4242424242424242'
+        type: card_details
+        verification_code: '123'
+      properties:
+        card_id:
+          description: The identifier for the Card for which sensitive details have been returned.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        expiration_month:
+          description: The month the card expires in M format (e.g., August is 8).
+          type: integer
+          x-documentation-priority: default
+        expiration_year:
+          description: The year the card expires in YYYY format (e.g., 2025).
+          type: integer
+          x-documentation-priority: default
+        pin:
+          description: The 4-digit PIN for the card, for use with ATMs.
+          type: string
+          x-documentation-priority: default
+        primary_account_number:
+          description: The card number.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_details`.
+          enum:
+          - card_details
+          type: string
+          x-documentation-priority: default
+        verification_code:
+          description: The three-digit verification code for the card. It's also known as the Card Verification Code (CVC), the Card Verification Value (CVV), or the Card Identification (CID).
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - card_id
+      - primary_account_number
+      - expiration_month
+      - expiration_year
+      - verification_code
+      - pin
+      title: Card Details
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Details
+    card:
+      additionalProperties: true
+      description: Cards may operate on credit, debit, or prepaid BINs. They’ll immediately work for online purchases after you create them. All cards work on a good funds model, and maintain a maximum limit of 100% of the Account’s available balance at the time of transaction. Funds are deducted from the Account upon transaction settlement.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        authorization_controls: null
+        billing_address:
+          city: New York
+          line1: 33 Liberty Street
+          line2: null
+          postal_code: '10045'
+          state: NY
+        created_at: '2020-01-31T23:59:59Z'
+        description: Office Expenses
+        digital_wallet:
+          digital_card_profile_id: digital_card_profile_s3puplu90f04xhcwkiga
+          email: user@example.com
+          phone: '+16505046304'
+        entity_id: null
+        expiration_month: 11
+        expiration_year: 2028
+        id: card_oubs0hwk5rn6knuecxg2
+        idempotency_key: null
+        last4: '4242'
+        status: active
+        type: card
+      properties:
+        account_id:
+          description: The identifier for the account this card belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        authorization_controls:
+          anyOf:
+          - additionalProperties: false
+            description: Controls that restrict how this card can be used.
+            properties:
+              merchant_acceptor_identifier:
+                anyOf:
+                - additionalProperties: false
+                  description: Restricts which Merchant Acceptor IDs are allowed or blocked for authorizations on this card.
+                  properties:
+                    allowed:
+                      anyOf:
+                      - description: The Merchant Acceptor IDs that are allowed for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            identifier:
+                              description: The Merchant Acceptor ID.
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - identifier
+                          title: Card AuthorizationControls MerchantAcceptorIdentifier AllowedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: AllowedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                    blocked:
+                      anyOf:
+                      - description: The Merchant Acceptor IDs that are blocked for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            identifier:
+                              description: The Merchant Acceptor ID.
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - identifier
+                          title: Card AuthorizationControls MerchantAcceptorIdentifier BlockedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: BlockedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - allowed
+                  - blocked
+                  title: Card AuthorizationControls MerchantAcceptorIdentifier
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: MerchantAcceptorIdentifiers
+                - type: 'null'
+              merchant_category_code:
+                anyOf:
+                - additionalProperties: false
+                  description: Restricts which Merchant Category Codes are allowed or blocked for authorizations on this card.
+                  properties:
+                    allowed:
+                      anyOf:
+                      - description: The Merchant Category Codes that are allowed for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            code:
+                              description: The Merchant Category Code (MCC).
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - code
+                          title: Card AuthorizationControls MerchantCategoryCode AllowedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: AllowedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                    blocked:
+                      anyOf:
+                      - description: The Merchant Category Codes that are blocked for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            code:
+                              description: The Merchant Category Code (MCC).
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - code
+                          title: Card AuthorizationControls MerchantCategoryCode BlockedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: BlockedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - allowed
+                  - blocked
+                  title: Card AuthorizationControls MerchantCategoryCode
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: MerchantCategoryCodes
+                - type: 'null'
+              merchant_country:
+                anyOf:
+                - additionalProperties: false
+                  description: Restricts which merchant countries are allowed or blocked for authorizations on this card.
+                  properties:
+                    allowed:
+                      anyOf:
+                      - description: The merchant countries that are allowed for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            country:
+                              description: The ISO 3166-1 alpha-2 country code.
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - country
+                          title: Card AuthorizationControls MerchantCountry AllowedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: AllowedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                    blocked:
+                      anyOf:
+                      - description: The merchant countries that are blocked for authorizations on this card.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            country:
+                              description: The ISO 3166-1 alpha-2 country code.
+                              type: string
+                              x-documentation-priority: default
+                          required:
+                          - country
+                          title: Card AuthorizationControls MerchantCountry BlockedElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: BlockedElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - allowed
+                  - blocked
+                  title: Card AuthorizationControls MerchantCountry
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: MerchantCountries
+                - type: 'null'
+              usage:
+                anyOf:
+                - additionalProperties: false
+                  description: Controls how many times this card can be used.
+                  properties:
+                    category:
+                      description: Whether the card is for a single use or multiple uses.
+                      enum:
+                      - single_use
+                      - multi_use
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - The card can only be used for a single authorization.
+                      - The card can be used for multiple authorizations.
+                    multi_use:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Controls for multi-use cards. Required if and only if `category` is `multi_use`.
+                        properties:
+                          spending_limits:
+                            anyOf:
+                            - description: Spending limits for this card. The most restrictive limit applies if multiple limits match.
+                              items:
+                                additionalProperties: false
+                                properties:
+                                  interval:
+                                    description: The interval at which the spending limit is enforced.
+                                    enum:
+                                    - all_time
+                                    - per_transaction
+                                    - per_day
+                                    - per_week
+                                    - per_month
+                                    type: string
+                                    x-documentation-priority: default
+                                    x-enum-descriptions:
+                                    - The spending limit applies over the lifetime of the card.
+                                    - The spending limit applies per transaction.
+                                    - The spending limit applies per day. Resets nightly at midnight UTC.
+                                    - The spending limit applies per week. Resets weekly on Mondays at midnight UTC.
+                                    - The spending limit applies per month. Resets on the first of the month, midnight UTC.
+                                  merchant_category_codes:
+                                    anyOf:
+                                    - description: The Merchant Category Codes (MCCs) this spending limit applies to. If not set, the limit applies to all transactions.
+                                      items:
+                                        additionalProperties: false
+                                        properties:
+                                          code:
+                                            description: The Merchant Category Code (MCC).
+                                            type: string
+                                            x-documentation-priority: default
+                                        required:
+                                        - code
+                                        title: Card AuthorizationControls Usage MultiUse SpendingLimitsElement MerchantCategoryCodesElement
+                                        type: object
+                                        x-event-categories: []
+                                        x-stainless-empty-object: false
+                                        x-title-plural: MerchantCategoryCodesElements
+                                      type: array
+                                      x-documentation-priority: default
+                                    - type: 'null'
+                                  settlement_amount:
+                                    description: The maximum settlement amount permitted in the given interval.
+                                    type: integer
+                                    x-documentation-priority: default
+                                required:
+                                - interval
+                                - settlement_amount
+                                - merchant_category_codes
+                                title: Card AuthorizationControls Usage MultiUse SpendingLimitsElement
+                                type: object
+                                x-event-categories: []
+                                x-stainless-empty-object: false
+                                x-title-plural: SpendingLimitsElements
+                              type: array
+                              x-documentation-priority: default
+                            - type: 'null'
+                        required:
+                        - spending_limits
+                        title: Card AuthorizationControls Usage MultiUse
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: MultiUses
+                      - type: 'null'
+                    single_use:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Controls for single-use cards. Required if and only if `category` is `single_use`.
+                        properties:
+                          settlement_amount:
+                            additionalProperties: false
+                            description: The settlement amount constraint for this single-use card.
+                            properties:
+                              comparison:
+                                description: The operator used to compare the settlement amount.
+                                enum:
+                                - equals
+                                - less_than_or_equals
+                                type: string
+                                x-documentation-priority: default
+                                x-enum-descriptions:
+                                - The settlement amount must be exactly the specified value.
+                                - The settlement amount must be less than or equal to the specified value.
+                              value:
+                                description: The settlement amount value.
+                                type: integer
+                                x-documentation-priority: default
+                            required:
+                            - value
+                            - comparison
+                            title: Card AuthorizationControls Usage SingleUse SettlementAmount
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                            x-title-plural: SettlementAmounts
+                        required:
+                        - settlement_amount
+                        title: Card AuthorizationControls Usage SingleUse
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: SingleUses
+                      - type: 'null'
+                  required:
+                  - category
+                  - single_use
+                  - multi_use
+                  title: Card AuthorizationControls Usage
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Usages
+                - type: 'null'
+            required:
+            - usage
+            - merchant_category_code
+            - merchant_acceptor_identifier
+            - merchant_country
+            title: Card AuthorizationControls
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: AuthorizationControls
+          - type: 'null'
+        billing_address:
+          additionalProperties: false
+          description: The Card's billing address.
+          example:
+            city: New York
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          properties:
+            city:
+              anyOf:
+              - description: The city of the billing address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            line1:
+              anyOf:
+              - description: The first line of the billing address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            line2:
+              anyOf:
+              - description: The second line of the billing address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            postal_code:
+              anyOf:
+              - description: The postal code of the billing address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            state:
+              anyOf:
+              - description: The US state of the billing address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - line1
+          - line2
+          - city
+          - state
+          - postal_code
+          title: Card Billing Address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Billing Addresses
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Card was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        description:
+          anyOf:
+          - description: The card's description for display purposes.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        digital_wallet:
+          anyOf:
+          - additionalProperties: false
+            description: The contact information used in the two-factor steps for digital wallet card creation. At least one field must be present to complete the digital wallet steps.
+            properties:
+              digital_card_profile_id:
+                anyOf:
+                - description: The digital card profile assigned to this digital card. Card profiles may also be assigned at the program level.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Digital Card Profiles
+                - type: 'null'
+              email:
+                anyOf:
+                - description: An email address that can be used to verify the cardholder via one-time passcode over email.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              phone:
+                anyOf:
+                - description: A phone number that can be used to verify the cardholder via one-time passcode over SMS.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - email
+            - phone
+            - digital_card_profile_id
+            title: Card DigitalWallet
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: DigitalWallets
+          - type: 'null'
+        entity_id:
+          anyOf:
+          - description: The identifier for the entity associated with this card.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Entities
+          - type: 'null'
+        expiration_month:
+          description: The month the card expires in M format (e.g., August is 8).
+          type: integer
+          x-documentation-priority: default
+        expiration_year:
+          description: The year the card expires in YYYY format (e.g., 2025).
+          type: integer
+          x-documentation-priority: default
+        id:
+          description: The card identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        last4:
+          description: The last 4 digits of the Card's Primary Account Number.
+          type: string
+          x-documentation-priority: default
+        status:
+          description: This indicates if payments can be made with the card.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The card is active.
+          - The card is temporarily disabled.
+          - The card is permanently canceled.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card`.
+          enum:
+          - card
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - account_id
+      - entity_id
+      - created_at
+      - description
+      - last4
+      - expiration_month
+      - expiration_year
+      - status
+      - billing_address
+      - digital_wallet
+      - authorization_controls
+      - idempotency_key
+      title: Card
+      type: object
+      x-event-categories:
+      - card.created
+      - card.updated
+      x-stainless-empty-object: false
+      x-tag: Cards
+      x-title-plural: Cards
+    update_a_cards_pin_parameters:
+      additionalProperties: false
+      example:
+        pin: '1234'
+      properties:
+        pin:
+          description: The 4-digit PIN for the card, for use with ATMs.
+          maxLength: 4
+          minLength: 4
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+      required:
+      - pin
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    card_list:
+      additionalProperties: true
+      description: A list of Card objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          authorization_controls: null
+          billing_address:
+            city: New York
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          created_at: '2020-01-31T23:59:59Z'
+          description: Office Expenses
+          digital_wallet:
+            digital_card_profile_id: digital_card_profile_s3puplu90f04xhcwkiga
+            email: user@example.com
+            phone: '+16505046304'
+          entity_id: null
+          expiration_month: 11
+          expiration_year: 2028
+          id: card_oubs0hwk5rn6knuecxg2
+          idempotency_key: null
+          last4: '4242'
+          status: active
+          type: card
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/card'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Card List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Lists
+    create_a_card_details_iframe_parameters:
+      additionalProperties: false
+      example: {}
+      properties:
+        physical_card_id:
+          description: The identifier of the Physical Card to create an iframe for. This will inform the appearance of the card rendered in the iframe.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Cards
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

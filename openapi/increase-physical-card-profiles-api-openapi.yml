@@ -1,0 +1,912 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Physical Card Profiles API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
+  name: Physical Card Profiles
+paths:
+  /physical_card_profiles:
+    get:
+      operationId: list_physical_card_profiles
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Physical Card Profiles for those with the specified statuses. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_creating
+            - pending_reviewing
+            - rejected
+            - pending_submitting
+            - active
+            - archived
+            type: string
+            x-enum-descriptions:
+            - The Card Profile has not yet been processed by Increase.
+            - The card profile is awaiting review by Increase.
+            - There is an issue with the Physical Card Profile preventing it from use.
+            - The card profile is awaiting submission to the fulfillment provider.
+            - The Physical Card Profile has been submitted to the fulfillment provider and is ready to use.
+            - The Physical Card Profile has been archived.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_profile_list'
+          description: Physical Card Profile List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Physical Card Profiles
+      x-sandbox-only: false
+      x-tag: Physical Card Profiles
+      tags:
+      - Physical Card Profiles
+    post:
+      operationId: create_a_physical_card_profile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_physical_card_profile_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_profile'
+          description: Physical Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Physical Card Profile
+      x-sandbox-only: false
+      x-tag: Physical Card Profiles
+      tags:
+      - Physical Card Profiles
+  /physical_card_profiles/{physical_card_profile_id}:
+    get:
+      operationId: retrieve_a_card_profile
+      parameters:
+      - example: physical_card_profile_m534d5rn9qyy9ufqxoec
+        in: path
+        name: physical_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Card Profile.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_profile'
+          description: Physical Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Card Profile
+      x-sandbox-only: false
+      x-tag: Physical Card Profiles
+      tags:
+      - Physical Card Profiles
+  /physical_card_profiles/{physical_card_profile_id}/archive:
+    post:
+      operationId: archive_a_physical_card_profile
+      parameters:
+      - example: physical_card_profile_m534d5rn9qyy9ufqxoec
+        in: path
+        name: physical_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Physical Card Profile to archive.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_profile'
+          description: Physical Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Archive a Physical Card Profile
+      x-sandbox-only: false
+      x-tag: Physical Card Profiles
+      tags:
+      - Physical Card Profiles
+  /physical_card_profiles/{physical_card_profile_id}/clone:
+    post:
+      operationId: clone_a_physical_card_profile
+      parameters:
+      - example: physical_card_profile_m534d5rn9qyy9ufqxoec
+        in: path
+        name: physical_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Physical Card Profile to clone.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/clone_a_physical_card_profile_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_profile'
+          description: Physical Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Clone a Physical Card Profile
+      x-sandbox-only: false
+      x-tag: Physical Card Profiles
+      tags:
+      - Physical Card Profiles
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    physical_card_profile_list:
+      additionalProperties: true
+      description: A list of Physical Card Profile objects.
+      example:
+        data:
+        - back_image_file_id: file_makxrc67oh9l6sg7w9yc
+          carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
+          contact_phone: '+16505046304'
+          created_at: '2020-01-31T23:59:59Z'
+          creator: user
+          description: Corporate logo card
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          front_text: null
+          id: physical_card_profile_m534d5rn9qyy9ufqxoec
+          idempotency_key: null
+          is_default: false
+          program_id: program_i2v2os4mwza1oetokh9i
+          status: active
+          type: physical_card_profile
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/physical_card_profile'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Physical Card Profile List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Physical Card Profile Lists
+    clone_a_physical_card_profile_parameters:
+      additionalProperties: true
+      example:
+        front_image_file_id: file_o6aex13wm1jcc36sgcj1
+      properties:
+        carrier_image_file_id:
+          description: The identifier of the File containing the physical card's carrier image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          description: The identifier of the File containing the physical card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        front_text:
+          additionalProperties: false
+          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
+          properties:
+            line1:
+              description: The first line of text on the front of the card.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        program_id:
+          description: The identifier of the Program to use for the cloned Physical Card Profile.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    physical_card_profile:
+      additionalProperties: true
+      description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
+      example:
+        back_image_file_id: file_makxrc67oh9l6sg7w9yc
+        carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
+        contact_phone: '+16505046304'
+        created_at: '2020-01-31T23:59:59Z'
+        creator: user
+        description: Corporate logo card
+        front_image_file_id: file_makxrc67oh9l6sg7w9yc
+        front_text: null
+        id: physical_card_profile_m534d5rn9qyy9ufqxoec
+        idempotency_key: null
+        is_default: false
+        program_id: program_i2v2os4mwza1oetokh9i
+        status: active
+        type: physical_card_profile
+      properties:
+        back_image_file_id:
+          anyOf:
+          - description: The identifier of the File containing the physical card's back image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        carrier_image_file_id:
+          anyOf:
+          - description: The identifier of the File containing the physical card's carrier image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        contact_phone:
+          anyOf:
+          - description: A phone number the user can contact to receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Physical Card Profile was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        creator:
+          description: The creator of this Physical Card Profile.
+          enum:
+          - increase
+          - user
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - This Physical Card Profile was created by Increase.
+          - This Physical Card Profile was created by you.
+        description:
+          description: A description you can use to identify the Physical Card Profile.
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          anyOf:
+          - description: The identifier of the File containing the physical card's front image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        id:
+          description: The Card Profile identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        is_default:
+          description: Whether this Physical Card Profile is the default for all cards in its Increase group.
+          type: boolean
+          x-documentation-priority: default
+        program_id:
+          description: The identifier for the Program this Physical Card Profile belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        status:
+          description: The status of the Physical Card Profile.
+          enum:
+          - pending_creating
+          - pending_reviewing
+          - rejected
+          - pending_submitting
+          - active
+          - archived
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Card Profile has not yet been processed by Increase.
+          - The card profile is awaiting review by Increase.
+          - There is an issue with the Physical Card Profile preventing it from use.
+          - The card profile is awaiting submission to the fulfillment provider.
+          - The Physical Card Profile has been submitted to the fulfillment provider and is ready to use.
+          - The Physical Card Profile has been archived.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `physical_card_profile`.
+          enum:
+          - physical_card_profile
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - status
+      - description
+      - program_id
+      - is_default
+      - creator
+      - contact_phone
+      - front_image_file_id
+      - back_image_file_id
+      - carrier_image_file_id
+      - idempotency_key
+      title: Physical Card Profile
+      type: object
+      x-event-categories:
+      - physical_card_profile.created
+      - physical_card_profile.updated
+      x-stainless-empty-object: false
+      x-tag: Physical Card Profiles
+      x-title-plural: Physical Card Profiles
+    create_a_physical_card_profile_parameters:
+      additionalProperties: true
+      example:
+        carrier_image_file_id: file_h6v7mtipe119os47ehlu
+        contact_phone: '+16505046304'
+        description: My Card Profile
+        front_image_file_id: file_o6aex13wm1jcc36sgcj1
+        program_id: program_i2v2os4mwza1oetokh9i
+      properties:
+        carrier_image_file_id:
+          description: The identifier of the File containing the physical card's carrier image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          description: The identifier of the File containing the physical card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        front_text:
+          additionalProperties: false
+          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
+          properties:
+            line1:
+              description: The first line of text on the front of the card.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        program_id:
+          description: The identifier for the Program that this Physical Card Profile falls under.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      required:
+      - description
+      - contact_phone
+      - front_image_file_id
+      - carrier_image_file_id
+      - program_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

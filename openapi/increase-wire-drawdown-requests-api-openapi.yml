@@ -1,0 +1,1067 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Wire Drawdown Requests API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
+  name: Wire Drawdown Requests
+paths:
+  /wire_drawdown_requests:
+    get:
+      operationId: list_wire_drawdown_requests
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Wire Drawdown Requests for those with the specified status. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_submission
+            - fulfilled
+            - pending_response
+            - refused
+            type: string
+            x-enum-descriptions:
+            - The drawdown request is queued to be submitted to Fedwire.
+            - The drawdown request has been fulfilled by the recipient.
+            - The drawdown request has been sent and the recipient should respond in some way.
+            - The drawdown request has been refused by the recipient.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_drawdown_request_list'
+          description: Wire Drawdown Request List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Wire Drawdown Requests
+      x-sandbox-only: false
+      x-tag: Wire Drawdown Requests
+      tags:
+      - Wire Drawdown Requests
+    post:
+      operationId: create_a_wire_drawdown_request
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_wire_drawdown_request_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_drawdown_request'
+          description: Wire Drawdown Request
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Wire Drawdown Request
+      x-sandbox-only: false
+      x-tag: Wire Drawdown Requests
+      tags:
+      - Wire Drawdown Requests
+  /wire_drawdown_requests/{wire_drawdown_request_id}:
+    get:
+      operationId: retrieve_a_wire_drawdown_request
+      parameters:
+      - example: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+        in: path
+        name: wire_drawdown_request_id
+        required: true
+        schema:
+          description: The identifier of the Wire Drawdown Request to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Drawdown Requests
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_drawdown_request'
+          description: Wire Drawdown Request
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Wire Drawdown Request
+      x-sandbox-only: false
+      x-tag: Wire Drawdown Requests
+      tags:
+      - Wire Drawdown Requests
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    wire_drawdown_request:
+      additionalProperties: true
+      description: Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
+      example:
+        account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        amount: 10000
+        created_at: '2020-01-31T23:59:59Z'
+        creditor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          line2: null
+          postal_code: '10045'
+          state: NY
+        creditor_name: Ian Crease
+        currency: USD
+        debtor_account_number: '987654321'
+        debtor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          line2: null
+          postal_code: '10045'
+          state: NY
+        debtor_external_account_id: null
+        debtor_name: Ian Crease
+        debtor_routing_number: '101050001'
+        fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+        id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+        idempotency_key: null
+        status: fulfilled
+        submission:
+          input_message_accountability_data: 20220118MMQFMP0P000003
+        type: wire_drawdown_request
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number_id:
+          description: The Account Number to which the debtor—the recipient of this request—is being requested to send funds.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        amount:
+          description: The amount being requested in cents.
+          type: integer
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the wire drawdown request was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        creditor_address:
+          additionalProperties: false
+          description: The creditor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address.
+              type: string
+              x-documentation-priority: default
+            line2:
+              anyOf:
+              - description: The second line of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            postal_code:
+              anyOf:
+              - description: The ZIP code of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            state:
+              anyOf:
+              - description: The address state.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - line1
+          - line2
+          - city
+          - state
+          - postal_code
+          - country
+          title: Wire Drawdown Request Address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Addresses
+        creditor_name:
+          description: The creditor's name.
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the amount being requested. Will always be "USD".
+          type: string
+          x-documentation-priority: default
+        debtor_account_number:
+          description: The debtor's account number.
+          type: string
+          x-documentation-priority: default
+        debtor_address:
+          additionalProperties: false
+          description: The debtor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address.
+              type: string
+              x-documentation-priority: default
+            line2:
+              anyOf:
+              - description: The second line of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            postal_code:
+              anyOf:
+              - description: The ZIP code of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            state:
+              anyOf:
+              - description: The address state.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - line1
+          - line2
+          - city
+          - state
+          - postal_code
+          - country
+          title: Wire Drawdown Request Address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Addresses
+        debtor_external_account_id:
+          anyOf:
+          - description: The debtor's external account identifier.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: External Accounts
+          - type: 'null'
+        debtor_name:
+          description: The debtor's name.
+          type: string
+          x-documentation-priority: default
+        debtor_routing_number:
+          description: The debtor's routing number.
+          type: string
+          x-documentation-priority: default
+        fulfillment_inbound_wire_transfer_id:
+          anyOf:
+          - description: If the recipient fulfills the drawdown request by sending funds, then this will be the identifier of the corresponding Transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Wire Transfers
+          - type: 'null'
+        id:
+          description: The Wire drawdown request identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Drawdown Requests
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The lifecycle status of the drawdown request.
+          enum:
+          - pending_submission
+          - fulfilled
+          - pending_response
+          - refused
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The drawdown request is queued to be submitted to Fedwire.
+          - The drawdown request has been fulfilled by the recipient.
+          - The drawdown request has been sent and the recipient should respond in some way.
+          - The drawdown request has been refused by the recipient.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the drawdown request is submitted to Fedwire, this will contain supplemental details.
+            example:
+              input_message_accountability_data: 20220118MMQFMP0P000003
+            properties:
+              input_message_accountability_data:
+                description: The input message accountability data (IMAD) uniquely identifying the submission with Fedwire.
+                type: string
+                x-documentation-priority: default
+            required:
+            - input_message_accountability_data
+            title: Wire Drawdown Request Wire Drawdown Request Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Wire Drawdown Request Submissions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `wire_drawdown_request`.
+          enum:
+          - wire_drawdown_request
+          type: string
+          x-documentation-priority: default
+        unstructured_remittance_information:
+          description: Remittance information the debtor will see as part of the drawdown request.
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - account_number_id
+      - debtor_account_number
+      - debtor_routing_number
+      - debtor_external_account_id
+      - amount
+      - currency
+      - unstructured_remittance_information
+      - debtor_name
+      - debtor_address
+      - creditor_name
+      - creditor_address
+      - submission
+      - fulfillment_inbound_wire_transfer_id
+      - status
+      - idempotency_key
+      title: Wire Drawdown Request
+      type: object
+      x-event-categories:
+      - wire_drawdown_request.created
+      - wire_drawdown_request.updated
+      x-stainless-empty-object: false
+      x-tag: Wire Drawdown Requests
+      x-title-plural: Wire Drawdown Requests
+    create_a_wire_drawdown_request_parameters:
+      additionalProperties: true
+      example:
+        account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        amount: 10000
+        creditor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          postal_code: '10045'
+          state: NY
+        creditor_name: National Phonograph Company
+        debtor_account_number: '987654321'
+        debtor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          postal_code: '10045'
+          state: NY
+        debtor_name: Ian Crease
+        debtor_routing_number: '101050001'
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number_id:
+          description: The Account Number to which the debtor should send funds.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        amount:
+          description: The amount requested from the debtor, in USD cents.
+          maximum: 999999999999
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        charge_bearer:
+          description: Determines who bears the cost of the drawdown request. Defaults to `shared` if not specified.
+          enum:
+          - shared
+          - debtor
+          - creditor
+          - service_level
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Charges are shared between the debtor and creditor.
+          - Charges are borne by the debtor.
+          - Charges are borne by the creditor.
+          - Charges are determined by the service level.
+        creditor_address:
+          additionalProperties: false
+          description: The creditor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address. This is usually the street number and street.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of the address. This might be the floor or room number.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The ZIP code of the address.
+              maxLength: 16
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The address state.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          - city
+          - country
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        creditor_name:
+          description: The creditor's name.
+          maxLength: 140
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        debtor_account_number:
+          description: The debtor's account number.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+        debtor_address:
+          additionalProperties: false
+          description: The debtor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address. This is usually the street number and street.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of the address. This might be the floor or room number.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The ZIP code of the address.
+              maxLength: 16
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The address state.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          - city
+          - country
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        debtor_external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `debtor_account_number` and `debtor_routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        debtor_name:
+          description: The debtor's name.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+        debtor_routing_number:
+          description: The debtor's routing number.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        end_to_end_identification:
+          description: A free-form reference string set by the sender mirrored back in the subsequent wire transfer.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+        unstructured_remittance_information:
+          description: Remittance information the debtor will see as part of the request.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_number_id
+      - amount
+      - unstructured_remittance_information
+      - debtor_name
+      - debtor_address
+      - creditor_name
+      - creditor_address
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    wire_drawdown_request_list:
+      additionalProperties: true
+      description: A list of Wire Drawdown Request objects.
+      example:
+        data:
+        - account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 10000
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_account_number: '987654321'
+          debtor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          debtor_external_account_id: null
+          debtor_name: Ian Crease
+          debtor_routing_number: '101050001'
+          fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+          id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+          idempotency_key: null
+          status: fulfilled
+          submission:
+            input_message_accountability_data: 20220118MMQFMP0P000003
+          type: wire_drawdown_request
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/wire_drawdown_request'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Wire Drawdown Request List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Wire Drawdown Request Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

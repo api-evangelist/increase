@@ -1,0 +1,938 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Each account can have multiple account and routing numbers. We recommend that you use a set per vendor. This is similar to how you use different passwords for different websites. Account numbers can also be used to seamlessly reconcile inbound payments. Generating a unique account number per vendor ensures you always know the originator of an incoming payment.
+  name: Account Numbers
+paths:
+  /account_numbers:
+    get:
+      operationId: list_account_numbers
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: The status to retrieve Account Numbers for. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - active
+            - disabled
+            - canceled
+            type: string
+            x-enum-descriptions:
+            - The account number is active.
+            - The account number is temporarily disabled.
+            - The account number is permanently disabled.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: ach_debit_status.in
+        required: false
+        schema:
+          description: The ACH Debit status to retrieve Account Numbers for. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - allowed
+            - blocked
+            type: string
+            x-enum-descriptions:
+            - ACH Debits are allowed.
+            - ACH Debits are blocked.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Account Numbers to those belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_number_list'
+          description: Account Number List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Account Numbers
+      x-sandbox-only: false
+      x-tag: Account Numbers
+      tags:
+      - Account Numbers
+    post:
+      operationId: create_an_account_number
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_account_number_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_number'
+          description: Account Number
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an Account Number
+      x-sandbox-only: false
+      x-tag: Account Numbers
+      tags:
+      - Account Numbers
+  /account_numbers/{account_number_id}:
+    get:
+      operationId: retrieve_an_account_number
+      parameters:
+      - example: account_number_v18nkfqm6afpsrvy82b2
+        in: path
+        name: account_number_id
+        required: true
+        schema:
+          description: The identifier of the Account Number to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_number'
+          description: Account Number
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Account Number
+      x-sandbox-only: false
+      x-tag: Account Numbers
+      tags:
+      - Account Numbers
+    patch:
+      operationId: update_an_account_number
+      parameters:
+      - example: account_number_v18nkfqm6afpsrvy82b2
+        in: path
+        name: account_number_id
+        required: true
+        schema:
+          description: The identifier of the Account Number.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_an_account_number_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_number'
+          description: Account Number
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update an Account Number
+      x-sandbox-only: false
+      x-tag: Account Numbers
+      tags:
+      - Account Numbers
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    account_number_list:
+      additionalProperties: true
+      description: A list of Account Number objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          created_at: '2020-01-31T23:59:59Z'
+          id: account_number_v18nkfqm6afpsrvy82b2
+          idempotency_key: null
+          inbound_ach:
+            debit_status: blocked
+          inbound_checks:
+            status: check_transfers_only
+          name: ACH
+          routing_number: '101050001'
+          status: active
+          type: account_number
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/account_number'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Account Number List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Account Number Lists
+    create_an_account_number_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        name: Rent payments
+      properties:
+        account_id:
+          description: The Account the Account Number should belong to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        inbound_ach:
+          additionalProperties: false
+          description: Options related to how this Account Number should handle inbound ACH transfers.
+          properties:
+            debit_status:
+              description: Whether ACH debits are allowed against this Account Number. Note that ACH debits will be declined if this is `allowed` but the Account Number is not active. If you do not specify this field, the default is `allowed`.
+              enum:
+              - allowed
+              - blocked
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - ACH Debits are allowed.
+              - ACH Debits are blocked.
+          required:
+          - debit_status
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        inbound_checks:
+          additionalProperties: false
+          description: Options related to how this Account Number should handle inbound check withdrawals.
+          properties:
+            status:
+              description: How Increase should process checks with this account number printed on them. If you do not specify this field, the default is `check_transfers_only`.
+              enum:
+              - allowed
+              - check_transfers_only
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Checks with this Account Number will be processed even if they are not associated with a Check Transfer.
+              - Checks with this Account Number will be processed only if they can be matched to an existing Check Transfer.
+          required:
+          - status
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        name:
+          description: The name you choose for the Account Number.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - name
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    account_number:
+      additionalProperties: true
+      description: Each account can have multiple account and routing numbers. We recommend that you use a set per vendor. This is similar to how you use different passwords for different websites. Account numbers can also be used to seamlessly reconcile inbound payments. Generating a unique account number per vendor ensures you always know the originator of an incoming payment.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        created_at: '2020-01-31T23:59:59Z'
+        id: account_number_v18nkfqm6afpsrvy82b2
+        idempotency_key: null
+        inbound_ach:
+          debit_status: blocked
+        inbound_checks:
+          status: check_transfers_only
+        name: ACH
+        routing_number: '101050001'
+        status: active
+        type: account_number
+      properties:
+        account_id:
+          description: The identifier for the account this Account Number belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number.
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account Number was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Account Number identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_ach:
+          additionalProperties: false
+          description: Properties related to how this Account Number handles inbound ACH transfers.
+          properties:
+            debit_status:
+              description: Whether ACH debits are allowed against this Account Number. Note that they will still be declined if this is `allowed` if the Account Number is not active.
+              enum:
+              - allowed
+              - blocked
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - ACH Debits are allowed.
+              - ACH Debits are blocked.
+          required:
+          - debit_status
+          title: Account Number InboundACH
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: InboundAchs
+        inbound_checks:
+          additionalProperties: false
+          description: Properties related to how this Account Number should handle inbound check withdrawals.
+          properties:
+            status:
+              description: How Increase should process checks with this account number printed on them.
+              enum:
+              - allowed
+              - check_transfers_only
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Checks with this Account Number will be processed even if they are not associated with a Check Transfer.
+              - Checks with this Account Number will be processed only if they can be matched to an existing Check Transfer.
+          required:
+          - status
+          title: Account Number InboundChecks
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: InboundChecks
+        name:
+          description: The name you choose for the Account Number.
+          type: string
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        status:
+          description: This indicates if payments can be made to the Account Number.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The account number is active.
+          - The account number is temporarily disabled.
+          - The account number is permanently disabled.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `account_number`.
+          enum:
+          - account_number
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - account_number
+      - id
+      - created_at
+      - name
+      - routing_number
+      - status
+      - inbound_ach
+      - inbound_checks
+      - idempotency_key
+      title: Account Number
+      type: object
+      x-event-categories:
+      - account_number.created
+      - account_number.updated
+      x-stainless-empty-object: false
+      x-tag: Account Numbers
+      x-title-plural: Account Numbers
+    update_an_account_number_parameters:
+      additionalProperties: false
+      example:
+        inbound_ach:
+          debit_status: blocked
+        status: disabled
+      properties:
+        inbound_ach:
+          additionalProperties: false
+          description: Options related to how this Account Number handles inbound ACH transfers.
+          properties:
+            debit_status:
+              description: Whether ACH debits are allowed against this Account Number. Note that ACH debits will be declined if this is `allowed` but the Account Number is not active.
+              enum:
+              - allowed
+              - blocked
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - ACH Debits are allowed.
+              - ACH Debits are blocked.
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        inbound_checks:
+          additionalProperties: false
+          description: Options related to how this Account Number should handle inbound check withdrawals.
+          properties:
+            status:
+              description: How Increase should process checks with this account number printed on them.
+              enum:
+              - allowed
+              - check_transfers_only
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Checks with this Account Number will be processed even if they are not associated with a Check Transfer.
+              - Checks with this Account Number will be processed only if they can be matched to an existing Check Transfer.
+          required:
+          - status
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        name:
+          description: The name you choose for the Account Number.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        status:
+          description: This indicates if transfers can be made to the Account Number.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The account number is active.
+          - The account number is temporarily disabled.
+          - The account number is permanently disabled.
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

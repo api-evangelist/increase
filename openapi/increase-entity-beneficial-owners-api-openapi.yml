@@ -1,0 +1,1314 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Entity Beneficial Owners API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Entity Beneficial Owners
+paths:
+  /entity_beneficial_owners:
+    get:
+      operationId: list_beneficial_owners
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: query
+        name: entity_id
+        required: true
+        schema:
+          description: The identifier of the Entity to list beneficial owners for. Only `corporation` entities have beneficial owners.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_beneficial_owner_list'
+          description: Beneficial Owner List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Beneficial Owners
+      x-sandbox-only: false
+      x-tag: Beneficial Owners
+      tags:
+      - Entity Beneficial Owners
+    post:
+      operationId: create_a_beneficial_owner
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_beneficial_owner_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_beneficial_owner'
+          description: Beneficial Owner
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Beneficial Owner
+      x-sandbox-only: false
+      x-tag: Beneficial Owners
+      tags:
+      - Entity Beneficial Owners
+  /entity_beneficial_owners/{entity_beneficial_owner_id}:
+    get:
+      operationId: retrieve_a_beneficial_owner
+      parameters:
+      - example: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+        in: path
+        name: entity_beneficial_owner_id
+        required: true
+        schema:
+          description: The identifier of the Beneficial Owner to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Beneficial Owners
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_beneficial_owner'
+          description: Beneficial Owner
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Beneficial Owner
+      x-sandbox-only: false
+      x-tag: Beneficial Owners
+      tags:
+      - Entity Beneficial Owners
+    patch:
+      operationId: update_a_beneficial_owner
+      parameters:
+      - example: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+        in: path
+        name: entity_beneficial_owner_id
+        required: true
+        schema:
+          description: The identifier of the Beneficial Owner to update.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Beneficial Owners
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_a_beneficial_owner_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_beneficial_owner'
+          description: Beneficial Owner
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update a Beneficial Owner
+      x-sandbox-only: false
+      x-tag: Beneficial Owners
+      tags:
+      - Entity Beneficial Owners
+  /entity_beneficial_owners/{entity_beneficial_owner_id}/archive:
+    post:
+      operationId: archive_a_beneficial_owner
+      parameters:
+      - example: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+        in: path
+        name: entity_beneficial_owner_id
+        required: true
+        schema:
+          description: The identifier of the Beneficial Owner to archive.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Beneficial Owners
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_beneficial_owner'
+          description: Beneficial Owner
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Archive a Beneficial Owner
+      x-sandbox-only: false
+      x-tag: Beneficial Owners
+      tags:
+      - Entity Beneficial Owners
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    create_a_beneficial_owner_parameters:
+      additionalProperties: true
+      example:
+        company_title: CEO
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        individual:
+          address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            state: NY
+            zip: '10045'
+          date_of_birth: '1970-01-31'
+          identification:
+            method: social_security_number
+            number: 078051120
+          name: Ian Crease
+        prongs:
+        - control
+      properties:
+        company_title:
+          description: This person's role or title within the entity.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The identifier of the Entity to associate with the new Beneficial Owner.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        individual:
+          additionalProperties: false
+          description: Personal details for the beneficial owner.
+          properties:
+            address:
+              additionalProperties: false
+              description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city, district, town, or village of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP or postal code of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            confirmed_no_us_tax_id:
+              description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+              type: boolean
+              x-documentation-priority: default
+            date_of_birth:
+              description: The person's date of birth in YYYY-MM-DD format.
+              format: date
+              type: string
+              x-documentation-priority: default
+            identification:
+              additionalProperties: true
+              description: A means of verifying the person's identity.
+              properties:
+                drivers_license:
+                  additionalProperties: false
+                  description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    expiration_date:
+                      description: The driver's license's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    state:
+                      description: The state that issued the provided driver's license.
+                      maxLength: 2
+                      minLength: 2
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - file_id
+                  - expiration_date
+                  - state
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                method:
+                  description: A method that can be used to verify the individual's identity.
+                  enum:
+                  - social_security_number
+                  - individual_taxpayer_identification_number
+                  - passport
+                  - drivers_license
+                  - other
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - A social security number.
+                  - An individual taxpayer identification number (ITIN).
+                  - A passport number.
+                  - A driver's license number.
+                  - Another identifying document.
+                number:
+                  description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                  maxLength: 200
+                  minLength: 4
+                  type: string
+                  x-documentation-priority: default
+                other:
+                  additionalProperties: false
+                  description: Information about the identification document provided. Required if `method` is equal to `other`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    description:
+                      description: A description of the document submitted.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The document's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the document.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - country
+                  - description
+                  - file_id
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                passport:
+                  additionalProperties: false
+                  description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                  properties:
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The passport's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the passport.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - file_id
+                  - expiration_date
+                  - country
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - method
+              - number
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person's legal name.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          - date_of_birth
+          - address
+          - identification
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        prongs:
+          description: Why this person is considered a beneficial owner of the entity. At least one option is required, if a person is both a control person and owner, submit an array containing both.
+          items:
+            enum:
+            - ownership
+            - control
+            type: string
+            x-enum-descriptions:
+            - A person with 25% or greater direct or indirect ownership of the entity.
+            - A person who manages, directs, or has significant control of the entity.
+          type: array
+          x-documentation-priority: default
+      required:
+      - entity_id
+      - prongs
+      - individual
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    update_a_beneficial_owner_parameters:
+      additionalProperties: false
+      example:
+        address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          line2: Unit 2
+          state: NY
+          zip: '10045'
+      properties:
+        address:
+          additionalProperties: false
+          description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address. This is usually the street number and street.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of the address. This might be the floor or room number.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            zip:
+              description: The ZIP or postal code of the address. Required in certain countries.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          - city
+          - country
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        confirmed_no_us_tax_id:
+          description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+          type: boolean
+          x-documentation-priority: default
+        identification:
+          additionalProperties: true
+          description: A means of verifying the person's identity.
+          properties:
+            drivers_license:
+              additionalProperties: false
+              description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+              properties:
+                back_file_id:
+                  description: The identifier of the File containing the back of the driver's license.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+                expiration_date:
+                  description: The driver's license's expiration date in YYYY-MM-DD format.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                file_id:
+                  description: The identifier of the File containing the front of the driver's license.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+                state:
+                  description: The state that issued the provided driver's license.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - file_id
+              - expiration_date
+              - state
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            method:
+              description: A method that can be used to verify the individual's identity.
+              enum:
+              - social_security_number
+              - individual_taxpayer_identification_number
+              - passport
+              - drivers_license
+              - other
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - A social security number.
+              - An individual taxpayer identification number (ITIN).
+              - A passport number.
+              - A driver's license number.
+              - Another identifying document.
+            number:
+              description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+              maxLength: 200
+              minLength: 4
+              type: string
+              x-documentation-priority: default
+            other:
+              additionalProperties: false
+              description: Information about the identification document provided. Required if `method` is equal to `other`.
+              properties:
+                back_file_id:
+                  description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+                country:
+                  description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                description:
+                  description: A description of the document submitted.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                expiration_date:
+                  description: The document's expiration date in YYYY-MM-DD format.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                file_id:
+                  description: The identifier of the File containing the front of the document.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+              required:
+              - country
+              - description
+              - file_id
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            passport:
+              additionalProperties: false
+              description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+              properties:
+                country:
+                  description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                expiration_date:
+                  description: The passport's expiration date in YYYY-MM-DD format.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                file_id:
+                  description: The identifier of the File containing the passport.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+              required:
+              - file_id
+              - expiration_date
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - method
+          - number
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        name:
+          description: The individual's legal name.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity_beneficial_owner:
+      additionalProperties: false
+      description: Beneficial owners are the individuals who control or own 25% or more of a `corporation` entity. Beneficial owners are always people, and never organizations. Generally, you will need to submit between 1 and 5 beneficial owners for every `corporation` entity. You should update and archive beneficial owners for a corporation entity as their details change.
+      example:
+        company_title: CEO
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+        idempotency_key: null
+        individual:
+          address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            state: NY
+            zip: '10045'
+          date_of_birth: '1970-01-31'
+          identification:
+            method: social_security_number
+            number_last4: '1120'
+          name: Ian Crease
+        prongs:
+        - control
+        - ownership
+        type: entity_beneficial_owner
+      properties:
+        company_title:
+          anyOf:
+          - description: This person's role or title within the entity.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Beneficial Owner was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The identifier of the Entity to which this beneficial owner belongs.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        id:
+          description: The identifier of this beneficial owner.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Beneficial Owners
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        individual:
+          additionalProperties: false
+          description: Personal details for the beneficial owner.
+          properties:
+            address:
+              additionalProperties: false
+              description: The person's address.
+              example:
+                city: New York
+                country: US
+                line1: 33 Liberty Street
+                line2: null
+                state: NY
+                zip: '10045'
+              properties:
+                city:
+                  anyOf:
+                  - description: The city, district, town, or village of the address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address.
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  anyOf:
+                  - description: The second line of the address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                state:
+                  anyOf:
+                  - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                zip:
+                  anyOf:
+                  - description: The ZIP or postal code of the address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+              required:
+              - line1
+              - line2
+              - city
+              - state
+              - zip
+              - country
+              title: Beneficial Owner Individual Address
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: Addresses
+            date_of_birth:
+              description: The person's date of birth in YYYY-MM-DD format.
+              format: date
+              type: string
+              x-documentation-priority: default
+            identification:
+              anyOf:
+              - additionalProperties: true
+                description: A means of verifying the person's identity.
+                properties:
+                  method:
+                    description: A method that can be used to verify the individual's identity.
+                    enum:
+                    - social_security_number
+                    - individual_taxpayer_identification_number
+                    - passport
+                    - drivers_license
+                    - other
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - A social security number.
+                    - An individual taxpayer identification number (ITIN).
+                    - A passport number.
+                    - A driver's license number.
+                    - Another identifying document.
+                  number_last4:
+                    description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - method
+                - number_last4
+                title: Beneficial Owner Individual Identification
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Identifications
+              - type: 'null'
+            name:
+              description: The person's legal name.
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          - date_of_birth
+          - address
+          - identification
+          title: Beneficial Owner Individual
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Individuals
+        prongs:
+          description: Why this person is considered a beneficial owner of the entity.
+          items:
+            enum:
+            - ownership
+            - control
+            type: string
+            x-enum-descriptions:
+            - A person with 25% or greater direct or indirect ownership of the entity.
+            - A person who manages, directs, or has significant control of the entity.
+          type: array
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity_beneficial_owner`.
+          enum:
+          - entity_beneficial_owner
+          type: string
+          x-documentation-priority: default
+      required:
+      - id
+      - entity_id
+      - individual
+      - created_at
+      - company_title
+      - prongs
+      - idempotency_key
+      - type
+      title: Beneficial Owner
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Beneficial Owners
+      x-title-plural: Beneficial Owners
+    entity_beneficial_owner_list:
+      additionalProperties: true
+      description: A list of Beneficial Owner objects.
+      example:
+        data:
+        - company_title: CEO
+          created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+          idempotency_key: null
+          individual:
+            address:
+              city: New York
+              country: US
+              line1: 33 Liberty Street
+              line2: null
+              state: NY
+              zip: '10045'
+            date_of_birth: '1970-01-31'
+            identification:
+              method: social_security_number
+              number_last4: '1120'
+            name: Ian Crease
+          prongs:
+          - control
+          - ownership
+          type: entity_beneficial_owner
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity_beneficial_owner'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Beneficial Owner List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Beneficial Owner Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

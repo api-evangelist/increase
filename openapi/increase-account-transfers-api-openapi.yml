@@ -1,0 +1,994 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Account Transfers API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Account transfers move funds between your own accounts at Increase (accounting systems often refer to these as Book Transfers). Account Transfers are free and synchronous. Upon creation they create two Transactions, one negative on the originating account and one positive on the destination account (unless the transfer requires approval, in which case the Transactions will be created when the transfer is approved).
+  name: Account Transfers
+paths:
+  /account_transfers:
+    get:
+      operationId: list_account_transfers
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Account Transfers to those that originated from the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_transfer_list'
+          description: Account Transfer List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Account Transfers
+      x-sandbox-only: false
+      x-tag: Account Transfers
+      tags:
+      - Account Transfers
+    post:
+      operationId: create_an_account_transfer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_account_transfer_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_transfer'
+          description: Account Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an Account Transfer
+      x-sandbox-only: false
+      x-tag: Account Transfers
+      tags:
+      - Account Transfers
+  /account_transfers/{account_transfer_id}:
+    get:
+      operationId: retrieve_an_account_transfer
+      parameters:
+      - example: account_transfer_7k9qe1ysdgqztnt63l7n
+        in: path
+        name: account_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Account Transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_transfer'
+          description: Account Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Account Transfer
+      x-sandbox-only: false
+      x-tag: Account Transfers
+      tags:
+      - Account Transfers
+  /account_transfers/{account_transfer_id}/approve:
+    post:
+      description: Approves an Account Transfer in status `pending_approval`.
+      operationId: approve_an_account_transfer
+      parameters:
+      - example: account_transfer_7k9qe1ysdgqztnt63l7n
+        in: path
+        name: account_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Account Transfer to approve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_transfer'
+          description: Account Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Approve an Account Transfer
+      x-sandbox-only: false
+      x-tag: Account Transfers
+      tags:
+      - Account Transfers
+  /account_transfers/{account_transfer_id}/cancel:
+    post:
+      description: Cancels an Account Transfer in status `pending_approval`.
+      operationId: cancel_an_account_transfer
+      parameters:
+      - example: account_transfer_7k9qe1ysdgqztnt63l7n
+        in: path
+        name: account_transfer_id
+        required: true
+        schema:
+          description: The identifier of the pending Account Transfer to cancel.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_transfer'
+          description: Account Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Cancel an Account Transfer
+      x-sandbox-only: false
+      x-tag: Account Transfers
+      tags:
+      - Account Transfers
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    account_transfer:
+      additionalProperties: true
+      description: Account transfers move funds between your own accounts at Increase (accounting systems often refer to these as Book Transfers). Account Transfers are free and synchronous. Upon creation they create two Transactions, one negative on the originating account and one positive on the destination account (unless the transfer requires approval, in which case the Transactions will be created when the transfer is approved).
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 100
+        approval:
+          approved_at: '2020-01-31T23:59:59Z'
+          approved_by: null
+        cancellation: null
+        created_at: '2020-01-31T23:59:59Z'
+        created_by:
+          category: user
+          user:
+            email: user@example.com
+        currency: USD
+        description: Move money into savings
+        destination_account_id: account_uf16sut2ct5bevmq3eh
+        destination_transaction_id: transaction_j3itv8dtk5o8pw3p1xj4
+        id: account_transfer_7k9qe1ysdgqztnt63l7n
+        idempotency_key: null
+        pending_transaction_id: null
+        status: complete
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: account_transfer
+      properties:
+        account_id:
+          description: The Account from which the transfer originated.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The transfer amount in cents. This will always be positive and indicates the amount of money leaving the originating account.
+          type: integer
+          x-documentation-priority: default
+        approval:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was approved, this will contain details of the approval.
+            example:
+              approved_at: '2020-01-31T23:59:59Z'
+              approved_by: null
+            properties:
+              approved_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was approved.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              approved_by:
+                anyOf:
+                - description: If the Transfer was approved by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - approved_at
+            - approved_by
+            title: Account Transfer Transfer Approval
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Approvals
+          - type: 'null'
+        cancellation:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was not approved, this will contain details of the cancellation.
+            example:
+              canceled_at: '2020-01-31T23:59:59Z'
+              canceled_by: null
+            properties:
+              canceled_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Transfer was canceled.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              canceled_by:
+                anyOf:
+                - description: If the Transfer was canceled by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - canceled_at
+            - canceled_by
+            title: Account Transfer Transfer Cancellation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Cancellations
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_by:
+          anyOf:
+          - additionalProperties: false
+            description: What object created the transfer, either via the API or the dashboard.
+            example:
+              category: user
+              user:
+                email: user@example.com
+            properties:
+              api_key:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the API key that created the transfer.
+                  properties:
+                    description:
+                      anyOf:
+                      - description: The description set for the API key when it was created.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - description
+                  title: Account Transfer Transfer Creator ApiKey
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: ApiKeys
+                - type: 'null'
+              category:
+                description: The type of object that created this transfer.
+                enum:
+                - api_key
+                - oauth_application
+                - user
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - An API key. Details will be under the `api_key` object.
+                - An OAuth application you connected to Increase. Details will be under the `oauth_application` object.
+                - A User in the Increase dashboard. Details will be under the `user` object.
+              oauth_application:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the OAuth Application that created the transfer.
+                  properties:
+                    name:
+                      description: The name of the OAuth Application.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  title: Account Transfer Transfer Creator OAuthApplication
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: OAuthApplications
+                - type: 'null'
+              user:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the User that created the transfer.
+                  properties:
+                    email:
+                      description: The email address of the User.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - email
+                  title: Account Transfer Transfer Creator User
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Users
+                - type: 'null'
+            required:
+            - category
+            title: Account Transfer Transfer Creator
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Creators
+          - type: 'null'
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transfer's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        description:
+          description: An internal-facing description for the transfer for display in the API and dashboard. This will also show in the description of the created Transactions.
+          type: string
+          x-documentation-priority: default
+        destination_account_id:
+          description: The destination Account's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        destination_transaction_id:
+          anyOf:
+          - description: The identifier of the Transaction on the destination Account representing the received funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        id:
+          description: The Account Transfer's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Transfers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID for the pending transaction representing the transfer. A pending transaction is created when the transfer [requires approval](https://increase.com/documentation/transfer-approvals#transfer-approvals) by someone else in your organization.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        status:
+          description: The lifecycle status of the transfer.
+          enum:
+          - pending_approval
+          - canceled
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The transfer is pending approval from your team.
+          - The transfer was pending approval from your team and has been canceled.
+          - The transfer has been completed.
+        transaction_id:
+          anyOf:
+          - description: The identifier of the Transaction on the originating account representing the transferred funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `account_transfer`.
+          enum:
+          - account_transfer
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - amount
+      - account_id
+      - currency
+      - destination_account_id
+      - destination_transaction_id
+      - created_at
+      - description
+      - status
+      - transaction_id
+      - pending_transaction_id
+      - approval
+      - cancellation
+      - created_by
+      - idempotency_key
+      title: Account Transfer
+      type: object
+      x-event-categories:
+      - account_transfer.created
+      - account_transfer.updated
+      x-stainless-empty-object: false
+      x-tag: Account Transfers
+      x-title-plural: Account Transfers
+    account_transfer_list:
+      additionalProperties: true
+      description: A list of Account Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 100
+          approval:
+            approved_at: '2020-01-31T23:59:59Z'
+            approved_by: null
+          cancellation: null
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          currency: USD
+          description: Move money into savings
+          destination_account_id: account_uf16sut2ct5bevmq3eh
+          destination_transaction_id: transaction_j3itv8dtk5o8pw3p1xj4
+          id: account_transfer_7k9qe1ysdgqztnt63l7n
+          idempotency_key: null
+          pending_transaction_id: null
+          status: complete
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: account_transfer
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/account_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Account Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Account Transfer Lists
+    create_an_account_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 100
+        description: Creating liquidity
+        destination_account_id: account_uf16sut2ct5bevmq3eh
+      properties:
+        account_id:
+          description: The identifier for the originating Account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The transfer amount in the minor unit of the account currency. For dollars, for example, this is cents.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        description:
+          description: An internal-facing description for the transfer for display in the API and dashboard. This will also show in the description of the created Transactions.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        destination_account_id:
+          description: The identifier for the destination Account that will receive the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        require_approval:
+          description: Whether the transfer should require explicit approval via the dashboard or API. For more information, see [Transfer Approvals](/documentation/transfer-approvals).
+          type: boolean
+          x-documentation-priority: default
+      required:
+      - account_id
+      - amount
+      - description
+      - destination_account_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

@@ -1,0 +1,1273 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Real Time Payments Transfers API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Real Time Payments Transfers
+paths:
+  /real_time_payments_transfers:
+    get:
+      operationId: list_real_time_payments_transfers
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Real-Time Payments Transfers to those belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: external_account_id
+        required: false
+        schema:
+          description: Filter Real-Time Payments Transfers to those made to the specified External Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Return results whose value is in the provided list. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_approval
+            - canceled
+            - pending_reviewing
+            - requires_attention
+            - rejected
+            - pending_submission
+            - submitted
+            - complete
+            type: string
+            x-enum-descriptions:
+            - The transfer is pending approval.
+            - The transfer has been canceled.
+            - The transfer is pending review by Increase.
+            - The transfer requires attention from an Increase operator.
+            - The transfer was rejected by the network or the recipient's bank.
+            - The transfer is queued to be submitted to Real-Time Payments.
+            - The transfer has been submitted and is pending a response from Real-Time Payments.
+            - The transfer has been sent successfully and is complete.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/real_time_payments_transfer_list'
+          description: Real-Time Payments Transfer List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Real-Time Payments Transfers
+      x-sandbox-only: false
+      x-tag: Real-Time Payments Transfers
+      tags:
+      - Real Time Payments Transfers
+    post:
+      operationId: create_a_real_time_payments_transfer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_real_time_payments_transfer_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/real_time_payments_transfer'
+          description: Real-Time Payments Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Real-Time Payments Transfer
+      x-sandbox-only: false
+      x-tag: Real-Time Payments Transfers
+      tags:
+      - Real Time Payments Transfers
+  /real_time_payments_transfers/{real_time_payments_transfer_id}:
+    get:
+      operationId: retrieve_a_real_time_payments_transfer
+      parameters:
+      - example: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+        in: path
+        name: real_time_payments_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Real-Time Payments Transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Real-Time Payments Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/real_time_payments_transfer'
+          description: Real-Time Payments Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Real-Time Payments Transfer
+      x-sandbox-only: false
+      x-tag: Real-Time Payments Transfers
+      tags:
+      - Real Time Payments Transfers
+  /real_time_payments_transfers/{real_time_payments_transfer_id}/approve:
+    post:
+      description: Approves a Real-Time Payments Transfer in a pending_approval state.
+      operationId: approve_a_real_time_payments_transfer
+      parameters:
+      - example: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+        in: path
+        name: real_time_payments_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Real-Time Payments Transfer to approve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Real-Time Payments Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/real_time_payments_transfer'
+          description: Real-Time Payments Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Approve a Real-Time Payments Transfer
+      x-sandbox-only: false
+      x-tag: Real-Time Payments Transfers
+      tags:
+      - Real Time Payments Transfers
+  /real_time_payments_transfers/{real_time_payments_transfer_id}/cancel:
+    post:
+      description: Cancels a Real-Time Payments Transfer in a pending_approval state.
+      operationId: cancel_a_pending_real_time_payments_transfer
+      parameters:
+      - example: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+        in: path
+        name: real_time_payments_transfer_id
+        required: true
+        schema:
+          description: The identifier of the pending Real-Time Payments Transfer to cancel.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Real-Time Payments Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/real_time_payments_transfer'
+          description: Real-Time Payments Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Cancel a pending Real-Time Payments Transfer
+      x-sandbox-only: false
+      x-tag: Real-Time Payments Transfers
+      tags:
+      - Real Time Payments Transfers
+components:
+  schemas:
+    create_a_real_time_payments_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_number: '987654321'
+        amount: 100
+        creditor_name: Ian Crease
+        routing_number: '101050001'
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number:
+          description: The destination account number.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The transfer amount in USD cents. For Real-Time Payments transfers, must be positive.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        creditor_name:
+          description: The name of the transfer's recipient.
+          maxLength: 140
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        debtor_name:
+          description: The name of the transfer's sender. If not provided, defaults to the name of the account's entity.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The destination American Bankers' Association (ABA) Routing Transit Number (RTN).
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The identifier of the Account Number from which to send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        ultimate_creditor_name:
+          description: The name of the ultimate recipient of the transfer. Set this if the creditor is an intermediary receiving the payment for someone else.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        ultimate_debtor_name:
+          description: The name of the ultimate sender of the transfer. Set this if the funds are being sent on behalf of someone who is not the account holder at Increase.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        unstructured_remittance_information:
+          description: Unstructured information that will show on the recipient's bank statement.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+      required:
+      - source_account_number_id
+      - amount
+      - creditor_name
+      - unstructured_remittance_information
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    real_time_payments_transfer_list:
+      additionalProperties: true
+      description: A list of Real-Time Payments Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          acknowledgement:
+            acknowledged_at: '2020-01-31T23:59:59Z'
+          amount: 100
+          approval: null
+          cancellation: null
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_name: null
+          external_account_id: null
+          id: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+          idempotency_key: null
+          pending_transaction_id: null
+          rejection: null
+          routing_number: '101050001'
+          source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          status: complete
+          submission:
+            submitted_at: '2020-01-31T23:59:59Z'
+            transaction_identification: 20220501234567891T1BSLZO01745013025
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: real_time_payments_transfer
+          ultimate_creditor_name: null
+          ultimate_debtor_name: null
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/real_time_payments_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Real-Time Payments Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Real-Time Payments Transfer Lists
+    real_time_payments_transfer:
+      additionalProperties: true
+      description: Real-Time Payments transfers move funds, within seconds, between your Increase account and any other account on the Real-Time Payments network.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        acknowledgement:
+          acknowledged_at: '2020-01-31T23:59:59Z'
+        amount: 100
+        approval: null
+        cancellation: null
+        created_at: '2020-01-31T23:59:59Z'
+        created_by:
+          category: user
+          user:
+            email: user@example.com
+        creditor_name: Ian Crease
+        currency: USD
+        debtor_name: null
+        external_account_id: null
+        id: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+        idempotency_key: null
+        pending_transaction_id: null
+        rejection: null
+        routing_number: '101050001'
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        status: complete
+        submission:
+          submitted_at: '2020-01-31T23:59:59Z'
+          transaction_identification: 20220501234567891T1BSLZO01745013025
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: real_time_payments_transfer
+        ultimate_creditor_name: null
+        ultimate_debtor_name: null
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_id:
+          description: The Account from which the transfer was sent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The destination account number.
+          type: string
+          x-documentation-priority: default
+        acknowledgement:
+          anyOf:
+          - additionalProperties: false
+            description: If the transfer is acknowledged by the recipient bank, this will contain supplemental details.
+            example:
+              acknowledged_at: '2020-01-31T23:59:59Z'
+            properties:
+              acknowledged_at:
+                description: When the transfer was acknowledged.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - acknowledged_at
+            title: Real-Time Payments Transfer Real-Time Payments Transfer Acknowledgement
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Real-Time Payments Transfer Acknowledgements
+          - type: 'null'
+        amount:
+          description: The transfer amount in USD cents.
+          type: integer
+          x-documentation-priority: default
+        approval:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was approved, this will contain details of the approval.
+            example:
+              approved_at: '2020-01-31T23:59:59Z'
+              approved_by: null
+            properties:
+              approved_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was approved.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              approved_by:
+                anyOf:
+                - description: If the Transfer was approved by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - approved_at
+            - approved_by
+            title: Real-Time Payments Transfer Transfer Approval
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Approvals
+          - type: 'null'
+        cancellation:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was not approved, this will contain details of the cancellation.
+            example:
+              canceled_at: '2020-01-31T23:59:59Z'
+              canceled_by: null
+            properties:
+              canceled_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Transfer was canceled.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              canceled_by:
+                anyOf:
+                - description: If the Transfer was canceled by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - canceled_at
+            - canceled_by
+            title: Real-Time Payments Transfer Transfer Cancellation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Cancellations
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_by:
+          anyOf:
+          - additionalProperties: false
+            description: What object created the transfer, either via the API or the dashboard.
+            example:
+              category: user
+              user:
+                email: user@example.com
+            properties:
+              api_key:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the API key that created the transfer.
+                  properties:
+                    description:
+                      anyOf:
+                      - description: The description set for the API key when it was created.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - description
+                  title: Real-Time Payments Transfer Transfer Creator ApiKey
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: ApiKeys
+                - type: 'null'
+              category:
+                description: The type of object that created this transfer.
+                enum:
+                - api_key
+                - oauth_application
+                - user
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - An API key. Details will be under the `api_key` object.
+                - An OAuth application you connected to Increase. Details will be under the `oauth_application` object.
+                - A User in the Increase dashboard. Details will be under the `user` object.
+              oauth_application:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the OAuth Application that created the transfer.
+                  properties:
+                    name:
+                      description: The name of the OAuth Application.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  title: Real-Time Payments Transfer Transfer Creator OAuthApplication
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: OAuthApplications
+                - type: 'null'
+              user:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the User that created the transfer.
+                  properties:
+                    email:
+                      description: The email address of the User.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - email
+                  title: Real-Time Payments Transfer Transfer Creator User
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Users
+                - type: 'null'
+            required:
+            - category
+            title: Real-Time Payments Transfer Transfer Creator
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Creators
+          - type: 'null'
+        creditor_name:
+          description: The name of the transfer's recipient. This is set by the sender when creating the transfer.
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transfer's currency. For real-time payments transfers this is always equal to `USD`.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        debtor_name:
+          anyOf:
+          - description: The name of the transfer's sender. If not provided, defaults to the name of the account's entity.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        external_account_id:
+          anyOf:
+          - description: The identifier of the External Account the transfer was made to, if any.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: External Accounts
+          - type: 'null'
+        id:
+          description: The Real-Time Payments Transfer's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Real-Time Payments Transfers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID for the pending transaction representing the transfer. A pending transaction is created when the transfer [requires approval](https://increase.com/documentation/transfer-approvals#transfer-approvals) by someone else in your organization.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        rejection:
+          anyOf:
+          - additionalProperties: false
+            description: If the transfer is rejected by Real-Time Payments or the destination financial institution, this will contain supplemental details.
+            example:
+              reject_reason_additional_information: null
+              reject_reason_code: account_closed
+              rejected_at: '2020-01-31T23:59:59Z'
+            properties:
+              reject_reason_additional_information:
+                anyOf:
+                - description: Additional information about the rejection provided by the recipient bank when the `reject_reason_code` is `NARRATIVE`.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              reject_reason_code:
+                description: The reason the transfer was rejected as provided by the recipient bank or the Real-Time Payments network.
+                enum:
+                - account_closed
+                - account_blocked
+                - invalid_creditor_account_type
+                - invalid_creditor_account_number
+                - invalid_creditor_financial_institution_identifier
+                - end_customer_deceased
+                - narrative
+                - transaction_forbidden
+                - transaction_type_not_supported
+                - unexpected_amount
+                - amount_exceeds_bank_limits
+                - invalid_creditor_address
+                - unknown_end_customer
+                - invalid_debtor_address
+                - timeout
+                - unsupported_message_for_recipient
+                - recipient_connection_not_available
+                - real_time_payments_suspended
+                - instructed_agent_signed_off
+                - processing_error
+                - other
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The destination account is closed. Corresponds to the Real-Time Payments reason code `AC04`.
+                - The destination account is currently blocked from receiving transactions. Corresponds to the Real-Time Payments reason code `AC06`.
+                - The destination account is ineligible to receive Real-Time Payments transfers. Corresponds to the Real-Time Payments reason code `AC14`.
+                - The destination account does not exist. Corresponds to the Real-Time Payments reason code `AC03`.
+                - The destination routing number is invalid. Corresponds to the Real-Time Payments reason code `RC04`.
+                - The destination account holder is deceased. Corresponds to the Real-Time Payments reason code `MD07`.
+                - The reason is provided as narrative information in the additional information field.
+                - Real-Time Payments transfers are not allowed to the destination account. Corresponds to the Real-Time Payments reason code `AG01`.
+                - Real-Time Payments transfers are not enabled for the destination account. Corresponds to the Real-Time Payments reason code `AG03`.
+                - The amount of the transfer is different than expected by the recipient. Corresponds to the Real-Time Payments reason code `AM09`.
+                - The amount is higher than the recipient is authorized to send or receive. Corresponds to the Real-Time Payments reason code `AM14`.
+                - The creditor's address is required, but missing or invalid. Corresponds to the Real-Time Payments reason code `BE04`.
+                - The specified creditor is unknown. Corresponds to the Real-Time Payments reason code `BE06`.
+                - The debtor's address is required, but missing or invalid. Corresponds to the Real-Time Payments reason code `BE07`.
+                - There was a timeout processing the transfer. Corresponds to the Real-Time Payments reason code `DS24`.
+                - Real-Time Payments transfers are not enabled for the destination account. Corresponds to the Real-Time Payments reason code `NOAT`.
+                - The destination financial institution is currently not connected to Real-Time Payments. Corresponds to the Real-Time Payments reason code `9912`.
+                - Real-Time Payments is currently unavailable. Corresponds to the Real-Time Payments reason code `9948`.
+                - The destination financial institution is currently signed off of Real-Time Payments. Corresponds to the Real-Time Payments reason code `9910`.
+                - The transfer was rejected due to an internal Increase issue. We have been notified.
+                - Some other error or issue has occurred.
+              rejected_at:
+                anyOf:
+                - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was rejected.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - rejected_at
+            - reject_reason_code
+            - reject_reason_additional_information
+            title: Real-Time Payments Transfer Real-Time Payments Transfer Rejection
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Real-Time Payments Transfer Rejections
+          - type: 'null'
+        routing_number:
+          description: The destination American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The Account Number the recipient will see as having sent the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        status:
+          description: The lifecycle status of the transfer.
+          enum:
+          - pending_approval
+          - canceled
+          - pending_reviewing
+          - requires_attention
+          - rejected
+          - pending_submission
+          - submitted
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The transfer is pending approval.
+          - The transfer has been canceled.
+          - The transfer is pending review by Increase.
+          - The transfer requires attention from an Increase operator.
+          - The transfer was rejected by the network or the recipient's bank.
+          - The transfer is queued to be submitted to Real-Time Payments.
+          - The transfer has been submitted and is pending a response from Real-Time Payments.
+          - The transfer has been sent successfully and is complete.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the transfer is submitted to Real-Time Payments, this will contain supplemental details.
+            example:
+              submitted_at: '2020-01-31T23:59:59Z'
+              transaction_identification: 20220501234567891T1BSLZO01745013025
+            properties:
+              submitted_at:
+                anyOf:
+                - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was submitted to The Clearing House.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              transaction_identification:
+                description: The Real-Time Payments network identification of the transfer.
+                type: string
+                x-documentation-priority: default
+            required:
+            - submitted_at
+            - transaction_identification
+            title: Real-Time Payments Transfer Real-Time Payments Transfer Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Real-Time Payments Transfer Submissions
+          - type: 'null'
+        transaction_id:
+          anyOf:
+          - description: The Transaction funding the transfer once it is complete.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `real_time_payments_transfer`.
+          enum:
+          - real_time_payments_transfer
+          type: string
+          x-documentation-priority: default
+        ultimate_creditor_name:
+          anyOf:
+          - description: The name of the ultimate recipient of the transfer. Set this if the creditor is an intermediary receiving the payment for someone else.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        ultimate_debtor_name:
+          anyOf:
+          - description: The name of the ultimate sender of the transfer. Set this if the funds are being sent on behalf of someone who is not the account holder at Increase.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        unstructured_remittance_information:
+          description: Unstructured information that will show on the recipient's bank statement.
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - approval
+      - cancellation
+      - status
+      - created_at
+      - account_id
+      - external_account_id
+      - source_account_number_id
+      - debtor_name
+      - creditor_name
+      - ultimate_creditor_name
+      - ultimate_debtor_name
+      - unstructured_remittance_information
+      - amount
+      - currency
+      - account_number
+      - routing_number
+      - transaction_id
+      - pending_transaction_id
+      - submission
+      - rejection
+      - acknowledgement
+      - created_by
+      - idempotency_key
+      title: Real-Time Payments Transfer
+      type: object
+      x-event-categories:
+      - real_time_payments_transfer.created
+      - real_time_payments_transfer.updated
+      x-stainless-empty-object: false
+      x-tag: Real-Time Payments Transfers
+      x-title-plural: Real-Time Payments Transfers
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

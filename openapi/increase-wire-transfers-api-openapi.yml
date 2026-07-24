@@ -1,0 +1,1678 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Wire Transfers API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Wire transfers move funds between your Increase account and any other account accessible by Fedwire.
+  name: Wire Transfers
+paths:
+  /wire_transfers:
+    get:
+      operationId: list_wire_transfers
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Wire Transfers to those belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: external_account_id
+        required: false
+        schema:
+          description: Filter Wire Transfers to those made to the specified External Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Return results whose value is in the provided list. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_approval
+            - canceled
+            - pending_reviewing
+            - rejected
+            - requires_attention
+            - pending_creating
+            - reversed
+            - submitted
+            - complete
+            type: string
+            x-enum-descriptions:
+            - The transfer is pending approval.
+            - The transfer has been canceled.
+            - The transfer is pending review by Increase.
+            - The transfer has been rejected by Increase.
+            - The transfer requires attention from an Increase operator.
+            - The transfer is pending creation.
+            - The transfer has been reversed.
+            - The transfer has been submitted to Fedwire.
+            - The transfer has been acknowledged by Fedwire and can be considered complete.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_transfer_list'
+          description: Wire Transfer List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Wire Transfers
+      x-sandbox-only: false
+      x-tag: Wire Transfers
+      tags:
+      - Wire Transfers
+    post:
+      operationId: create_a_wire_transfer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_wire_transfer_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_transfer'
+          description: Wire Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Wire Transfer
+      x-sandbox-only: false
+      x-tag: Wire Transfers
+      tags:
+      - Wire Transfers
+  /wire_transfers/{wire_transfer_id}:
+    get:
+      operationId: retrieve_a_wire_transfer
+      parameters:
+      - example: wire_transfer_5akynk7dqsq25qwk9q2u
+        in: path
+        name: wire_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Wire Transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_transfer'
+          description: Wire Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Wire Transfer
+      x-sandbox-only: false
+      x-tag: Wire Transfers
+      tags:
+      - Wire Transfers
+  /wire_transfers/{wire_transfer_id}/approve:
+    post:
+      operationId: approve_a_wire_transfer
+      parameters:
+      - example: wire_transfer_5akynk7dqsq25qwk9q2u
+        in: path
+        name: wire_transfer_id
+        required: true
+        schema:
+          description: The identifier of the Wire Transfer to approve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_transfer'
+          description: Wire Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Approve a Wire Transfer
+      x-sandbox-only: false
+      x-tag: Wire Transfers
+      tags:
+      - Wire Transfers
+  /wire_transfers/{wire_transfer_id}/cancel:
+    post:
+      operationId: cancel_a_pending_wire_transfer
+      parameters:
+      - example: wire_transfer_5akynk7dqsq25qwk9q2u
+        in: path
+        name: wire_transfer_id
+        required: true
+        schema:
+          description: The identifier of the pending Wire Transfer to cancel.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wire_transfer'
+          description: Wire Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Cancel a pending Wire Transfer
+      x-sandbox-only: false
+      x-tag: Wire Transfers
+      tags:
+      - Wire Transfers
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    wire_transfer_list:
+      additionalProperties: true
+      description: A list of Wire Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          amount: 100
+          approval:
+            approved_at: '2020-01-31T23:59:59Z'
+            approved_by: null
+          cancellation: null
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          creditor:
+            address:
+              unstructured:
+                line1: 33 Liberty Street
+                line2: null
+                line3: null
+            name: National Phonograph Company
+          currency: USD
+          debtor: null
+          external_account_id: external_account_ukk55lr923a3ac0pp7iv
+          id: wire_transfer_5akynk7dqsq25qwk9q2u
+          idempotency_key: null
+          inbound_wire_drawdown_request_id: null
+          network: wire
+          pending_transaction_id: null
+          remittance:
+            category: unstructured
+            unstructured:
+              message: Invoice 29582
+          reversal: null
+          routing_number: '101050001'
+          source_account_number_id: null
+          status: complete
+          submission: null
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: wire_transfer
+          unique_end_to_end_transaction_reference: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/wire_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Wire Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Wire Transfer Lists
+    wire_transfer:
+      additionalProperties: true
+      description: Wire transfers move funds between your Increase account and any other account accessible by Fedwire.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        approval:
+          approved_at: '2020-01-31T23:59:59Z'
+          approved_by: null
+        cancellation: null
+        created_at: '2020-01-31T23:59:59Z'
+        created_by:
+          category: user
+          user:
+            email: user@example.com
+        creditor:
+          address:
+            unstructured:
+              line1: 33 Liberty Street
+              line2: null
+              line3: null
+          name: National Phonograph Company
+        currency: USD
+        debtor: null
+        external_account_id: external_account_ukk55lr923a3ac0pp7iv
+        id: wire_transfer_5akynk7dqsq25qwk9q2u
+        idempotency_key: null
+        inbound_wire_drawdown_request_id: null
+        network: wire
+        pending_transaction_id: null
+        remittance:
+          category: unstructured
+          unstructured:
+            message: Invoice 29582
+        reversal: null
+        routing_number: '101050001'
+        source_account_number_id: null
+        status: complete
+        submission: null
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: wire_transfer
+        unique_end_to_end_transaction_reference: null
+      properties:
+        account_id:
+          description: The Account to which the transfer belongs.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The destination account number.
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The transfer amount in USD cents.
+          type: integer
+          x-documentation-priority: default
+        approval:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was approved, this will contain details of the approval.
+            example:
+              approved_at: '2020-01-31T23:59:59Z'
+              approved_by: null
+            properties:
+              approved_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was approved.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              approved_by:
+                anyOf:
+                - description: If the Transfer was approved by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - approved_at
+            - approved_by
+            title: Wire Transfer Transfer Approval
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Approvals
+          - type: 'null'
+        cancellation:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was not approved, this will contain details of the cancellation.
+            example:
+              canceled_at: '2020-01-31T23:59:59Z'
+              canceled_by: null
+            properties:
+              canceled_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Transfer was canceled.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              canceled_by:
+                anyOf:
+                - description: If the Transfer was canceled by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - canceled_at
+            - canceled_by
+            title: Wire Transfer Transfer Cancellation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Cancellations
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_by:
+          anyOf:
+          - additionalProperties: false
+            description: What object created the transfer, either via the API or the dashboard.
+            example:
+              category: user
+              user:
+                email: user@example.com
+            properties:
+              api_key:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the API key that created the transfer.
+                  properties:
+                    description:
+                      anyOf:
+                      - description: The description set for the API key when it was created.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - description
+                  title: Wire Transfer Transfer Creator ApiKey
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: ApiKeys
+                - type: 'null'
+              category:
+                description: The type of object that created this transfer.
+                enum:
+                - api_key
+                - oauth_application
+                - user
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - An API key. Details will be under the `api_key` object.
+                - An OAuth application you connected to Increase. Details will be under the `oauth_application` object.
+                - A User in the Increase dashboard. Details will be under the `user` object.
+              oauth_application:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the OAuth Application that created the transfer.
+                  properties:
+                    name:
+                      description: The name of the OAuth Application.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  title: Wire Transfer Transfer Creator OAuthApplication
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: OAuthApplications
+                - type: 'null'
+              user:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the User that created the transfer.
+                  properties:
+                    email:
+                      description: The email address of the User.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - email
+                  title: Wire Transfer Transfer Creator User
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Users
+                - type: 'null'
+            required:
+            - category
+            title: Wire Transfer Transfer Creator
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Creators
+          - type: 'null'
+        creditor:
+          anyOf:
+          - additionalProperties: false
+            description: The person or business that is receiving the funds from the transfer.
+            properties:
+              address:
+                anyOf:
+                - additionalProperties: false
+                  description: The person or business's address.
+                  properties:
+                    unstructured:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Unstructured address lines.
+                        properties:
+                          line1:
+                            anyOf:
+                            - description: The first line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          line2:
+                            anyOf:
+                            - description: The second line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          line3:
+                            anyOf:
+                            - description: The third line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                        required:
+                        - line1
+                        - line2
+                        - line3
+                        title: Wire Transfer Party Address Unstructured
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Unstructureds
+                      - type: 'null'
+                  required:
+                  - unstructured
+                  title: Wire Transfer Party Address
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Addresses
+                - type: 'null'
+              name:
+                anyOf:
+                - description: The person or business's name.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - name
+            - address
+            title: Wire Transfer Party
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Parties
+          - type: 'null'
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transfer's currency. For wire transfers this is always equal to `usd`.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        debtor:
+          anyOf:
+          - additionalProperties: false
+            description: The person or business whose funds are being transferred.
+            properties:
+              address:
+                anyOf:
+                - additionalProperties: false
+                  description: The person or business's address.
+                  properties:
+                    unstructured:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Unstructured address lines.
+                        properties:
+                          line1:
+                            anyOf:
+                            - description: The first line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          line2:
+                            anyOf:
+                            - description: The second line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          line3:
+                            anyOf:
+                            - description: The third line.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                        required:
+                        - line1
+                        - line2
+                        - line3
+                        title: Wire Transfer Party Address Unstructured
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Unstructureds
+                      - type: 'null'
+                  required:
+                  - unstructured
+                  title: Wire Transfer Party Address
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Addresses
+                - type: 'null'
+              name:
+                anyOf:
+                - description: The person or business's name.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - name
+            - address
+            title: Wire Transfer Party
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Parties
+          - type: 'null'
+        external_account_id:
+          anyOf:
+          - description: The identifier of the External Account the transfer was made to, if any.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: External Accounts
+          - type: 'null'
+        id:
+          description: The wire transfer's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Transfers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_wire_drawdown_request_id:
+          anyOf:
+          - description: The ID of an Inbound Wire Drawdown Request in response to which this transfer was sent.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Wire Drawdown Requests
+          - type: 'null'
+        network:
+          description: The transfer's network.
+          enum:
+          - wire
+          type: string
+          x-documentation-priority: default
+        pending_transaction_id:
+          anyOf:
+          - description: The ID for the pending transaction representing the transfer. A pending transaction is created when the transfer [requires approval](https://increase.com/documentation/transfer-approvals#transfer-approvals) by someone else in your organization.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        remittance:
+          anyOf:
+          - additionalProperties: false
+            description: Remittance information sent with the wire transfer.
+            example:
+              category: unstructured
+              unstructured:
+                message: Invoice 29582
+            properties:
+              category:
+                description: The type of remittance information being passed.
+                enum:
+                - unstructured
+                - tax
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The wire transfer contains unstructured remittance information.
+                - The wire transfer is for tax payment purposes to the Internal Revenue Service (IRS).
+              tax:
+                anyOf:
+                - additionalProperties: false
+                  description: Internal Revenue Service (IRS) tax repayment information. Required if `category` is equal to `tax`.
+                  properties:
+                    date:
+                      description: The month and year the tax payment is for, in YYYY-MM-DD format. The day is ignored.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    identification_number:
+                      description: The 9-digit Tax Identification Number (TIN) or Employer Identification Number (EIN).
+                      type: string
+                      x-documentation-priority: default
+                    type_code:
+                      description: The 5-character tax type code.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - date
+                  - type_code
+                  - identification_number
+                  title: Wire Transfer Wire Transfer Remittance information Tax
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Taxes
+                - type: 'null'
+              unstructured:
+                anyOf:
+                - additionalProperties: false
+                  description: Unstructured remittance information. Required if `category` is equal to `unstructured`.
+                  properties:
+                    message:
+                      description: The message to the beneficiary.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - message
+                  title: Wire Transfer Wire Transfer Remittance information Unstructured
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Unstructureds
+                - type: 'null'
+            required:
+            - category
+            title: Wire Transfer Wire Transfer Remittance information
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Wire Transfer Remittance information
+          - type: 'null'
+        reversal:
+          anyOf:
+          - additionalProperties: true
+            description: If your transfer is reversed, this will contain details of the reversal.
+            example:
+              amount: 12345
+              created_at: '2020-01-31T23:59:59Z'
+              debtor_routing_number: '101050001'
+              description: Inbound wire reversal 2022021100335128
+              input_cycle_date: '2022-02-11'
+              input_message_accountability_data: 20220211B6B7HU2R011023
+              input_sequence_number: '11023'
+              input_source: B6B7HU2R
+              instruction_identification: null
+              return_reason_additional_information: null
+              return_reason_code: null
+              return_reason_code_description: null
+              transaction_id: transaction_uyrp7fld2ium70oa7oi
+              wire_transfer_id: wire_transfer_5akynk7dqsq25qwk9q2u
+            properties:
+              amount:
+                description: The amount that was reversed in USD cents.
+                type: integer
+                x-documentation-priority: default
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the reversal was created.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              debtor_routing_number:
+                anyOf:
+                - description: The debtor's routing number.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              description:
+                description: The description on the reversal message from Fedwire, set by the reversing bank.
+                type: string
+                x-documentation-priority: default
+              input_cycle_date:
+                description: The Fedwire cycle date for the wire reversal. The "Fedwire day" begins at 9:00 PM Eastern Time on the evening before the `cycle date`.
+                format: date
+                type: string
+                x-documentation-priority: default
+              input_message_accountability_data:
+                description: The Fedwire transaction identifier.
+                type: string
+                x-documentation-priority: default
+              input_sequence_number:
+                description: The Fedwire sequence number.
+                type: string
+                x-documentation-priority: default
+              input_source:
+                description: The Fedwire input source identifier.
+                type: string
+                x-documentation-priority: default
+              instruction_identification:
+                anyOf:
+                - description: The sending bank's identifier for the reversal.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              return_reason_additional_information:
+                anyOf:
+                - description: Additional information about the reason for the reversal.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              return_reason_code:
+                anyOf:
+                - description: A code provided by the sending bank giving a reason for the reversal. The common return reason codes are [documented here](/documentation/wire-reversals#reversal-reason-codes).
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              return_reason_code_description:
+                anyOf:
+                - description: An Increase-generated description of the `return_reason_code`.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              transaction_id:
+                description: The ID for the Transaction associated with the transfer reversal.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Transactions
+              wire_transfer_id:
+                description: The ID for the Wire Transfer that is being reversed.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Wire Transfers
+            required:
+            - amount
+            - created_at
+            - description
+            - input_cycle_date
+            - input_sequence_number
+            - input_source
+            - input_message_accountability_data
+            - transaction_id
+            - wire_transfer_id
+            - instruction_identification
+            - debtor_routing_number
+            - return_reason_code
+            - return_reason_code_description
+            - return_reason_additional_information
+            title: Wire Transfer Inbound Wire Reversal
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Inbound Wire Reversals
+          - type: 'null'
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          anyOf:
+          - description: The Account Number that was passed to the wire's recipient.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Account Numbers
+          - type: 'null'
+        status:
+          description: The lifecycle status of the transfer.
+          enum:
+          - pending_approval
+          - canceled
+          - pending_reviewing
+          - rejected
+          - requires_attention
+          - pending_creating
+          - reversed
+          - submitted
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The transfer is pending approval.
+          - The transfer has been canceled.
+          - The transfer is pending review by Increase.
+          - The transfer has been rejected by Increase.
+          - The transfer requires attention from an Increase operator.
+          - The transfer is pending creation.
+          - The transfer has been reversed.
+          - The transfer has been submitted to Fedwire.
+          - The transfer has been acknowledged by Fedwire and can be considered complete.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the transfer is submitted to Fedwire, this will contain supplemental details.
+            example:
+              input_message_accountability_data: 20220118MMQFMP0P000002
+              submitted_at: '2020-01-31T23:59:59Z'
+            properties:
+              input_message_accountability_data:
+                description: The accountability data for the submission.
+                type: string
+                x-documentation-priority: default
+              submitted_at:
+                description: When this wire transfer was submitted to Fedwire.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - input_message_accountability_data
+            - submitted_at
+            title: Wire Transfer Wire Transfer Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Wire Transfer Submissions
+          - type: 'null'
+        transaction_id:
+          anyOf:
+          - description: The ID for the transaction funding the transfer.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `wire_transfer`.
+          enum:
+          - wire_transfer
+          type: string
+          x-documentation-priority: default
+        unique_end_to_end_transaction_reference:
+          anyOf:
+          - description: The unique end-to-end transaction reference ([UETR](https://www.swift.com/payments/what-unique-end-end-transaction-reference-uetr)) of the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - type
+      - id
+      - amount
+      - currency
+      - account_number
+      - remittance
+      - creditor
+      - debtor
+      - account_id
+      - source_account_number_id
+      - inbound_wire_drawdown_request_id
+      - external_account_id
+      - routing_number
+      - approval
+      - cancellation
+      - reversal
+      - created_at
+      - network
+      - status
+      - submission
+      - transaction_id
+      - pending_transaction_id
+      - created_by
+      - unique_end_to_end_transaction_reference
+      - idempotency_key
+      title: Wire Transfer
+      type: object
+      x-event-categories:
+      - wire_transfer.created
+      - wire_transfer.updated
+      x-stainless-empty-object: false
+      x-tag: Wire Transfers
+      x-title-plural: Wire Transfers
+    create_a_wire_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        creditor:
+          address:
+            unstructured:
+              line1: 33 Liberty Street
+              line2: New York
+              line3: NY 10045
+          name: Ian Crease
+        remittance:
+          category: unstructured
+          unstructured:
+            message: New account transfer
+        routing_number: '101050001'
+      properties:
+        account_id:
+          description: The identifier for the account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The transfer amount in USD cents.
+          maximum: 999999999999
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        creditor:
+          additionalProperties: false
+          description: The person or business that is receiving the funds from the transfer.
+          properties:
+            address:
+              additionalProperties: false
+              description: The person or business's address.
+              properties:
+                unstructured:
+                  additionalProperties: false
+                  description: Unstructured address lines.
+                  properties:
+                    line1:
+                      description: The address line 1.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line2:
+                      description: The address line 2.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line3:
+                      description: The address line 3.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - line1
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - unstructured
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person or business's name.
+              maxLength: 140
+              minLength: 1
+              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        debtor:
+          additionalProperties: false
+          description: The person or business whose funds are being transferred. This is only necessary if you're transferring from a commingled account. Otherwise, we'll use the associated entity's details.
+          properties:
+            address:
+              additionalProperties: false
+              description: The person or business's address.
+              properties:
+                unstructured:
+                  additionalProperties: false
+                  description: Unstructured address lines.
+                  properties:
+                    line1:
+                      description: The address line 1.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line2:
+                      description: The address line 2.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line3:
+                      description: The address line 3.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - line1
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - unstructured
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person or business's name.
+              maxLength: 140
+              minLength: 1
+              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        inbound_wire_drawdown_request_id:
+          description: The ID of an Inbound Wire Drawdown Request in response to which this transfer is being sent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Drawdown Requests
+        remittance:
+          additionalProperties: false
+          description: Additional remittance information related to the wire transfer.
+          properties:
+            category:
+              description: The type of remittance information being passed.
+              enum:
+              - unstructured
+              - tax
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The wire transfer contains unstructured remittance information.
+              - The wire transfer is for tax payment purposes to the Internal Revenue Service (IRS).
+            tax:
+              additionalProperties: false
+              description: Internal Revenue Service (IRS) tax repayment information. Required if `category` is equal to `tax`.
+              properties:
+                date:
+                  description: The month and year the tax payment is for, in YYYY-MM-DD format. The day is ignored.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                identification_number:
+                  description: The 9-digit Tax Identification Number (TIN) or Employer Identification Number (EIN).
+                  maxLength: 9
+                  minLength: 9
+                  pattern: ^[0-9]*$
+                  type: string
+                  x-documentation-priority: default
+                type_code:
+                  description: The 5-character tax type code.
+                  maxLength: 5
+                  minLength: 5
+                  pattern: ^[a-zA-Z0-9]*$
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - date
+              - type_code
+              - identification_number
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            unstructured:
+              additionalProperties: false
+              description: Unstructured remittance information. Required if `category` is equal to `unstructured`.
+              properties:
+                message:
+                  description: The information.
+                  maxLength: 140
+                  minLength: 1
+                  pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - message
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - category
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The ID of an Account Number that will be passed to the wire's recipient
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+      required:
+      - account_id
+      - amount
+      - remittance
+      - creditor
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

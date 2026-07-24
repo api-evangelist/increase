@@ -1,0 +1,4381 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Entities API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Entities are the legal entities that own accounts. They can be people, corporations, partnerships, government authorities, or trusts. To learn more, see [Entities](/documentation/entities).
+  name: Entities
+paths:
+  /entities:
+    get:
+      operationId: list_entities
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Entities for those with the specified status or statuses. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - active
+            - archived
+            - disabled
+            type: string
+            x-enum-descriptions:
+            - The entity is active.
+            - The entity is archived, and can no longer be used to create accounts.
+            - The entity is temporarily disabled and cannot be used for financial activity.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_list'
+          description: Entity List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Entities
+      x-sandbox-only: false
+      x-tag: Entities
+      tags:
+      - Entities
+    post:
+      operationId: create_an_entity
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_entity_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity'
+          description: Entity
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an Entity
+      x-sandbox-only: false
+      x-tag: Entities
+      tags:
+      - Entities
+  /entities/{entity_id}:
+    get:
+      operationId: retrieve_an_entity
+      parameters:
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: path
+        name: entity_id
+        required: true
+        schema:
+          description: The identifier of the Entity to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity'
+          description: Entity
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Entity
+      x-sandbox-only: false
+      x-tag: Entities
+      tags:
+      - Entities
+    patch:
+      operationId: update_an_entity
+      parameters:
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: path
+        name: entity_id
+        required: true
+        schema:
+          description: The entity identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_an_entity_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity'
+          description: Entity
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update an Entity
+      x-sandbox-only: false
+      x-tag: Entities
+      tags:
+      - Entities
+  /entities/{entity_id}/archive:
+    post:
+      operationId: archive_an_entity
+      parameters:
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: path
+        name: entity_id
+        required: true
+        schema:
+          description: The identifier of the Entity to archive. Any accounts associated with an entity must be closed before the entity can be archived.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity'
+          description: Entity
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Archive an Entity
+      x-sandbox-only: false
+      x-tag: Entities
+      tags:
+      - Entities
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    entity_list:
+      additionalProperties: true
+      description: A list of Entity objects.
+      example:
+        data:
+        - corporation:
+            address:
+              city: New York
+              country: US
+              line1: 33 Liberty Street
+              line2: null
+              state: NY
+              zip: '10045'
+            beneficial_owners:
+            - company_title: CEO
+              id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+              individual:
+                address:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                date_of_birth: '1970-01-31'
+                identification:
+                  method: social_security_number
+                  number_last4: '1120'
+                name: Ian Crease
+              prongs:
+              - control
+              - ownership
+            email: null
+            incorporation_state: NY
+            industry_code: null
+            legal_identifier:
+              category: us_employer_identification_number
+              value: '602214076'
+            name: National Phonograph Company
+            website: https://example.com
+          created_at: '2020-01-31T23:59:59Z'
+          creating_entity_onboarding_session_id: null
+          description: null
+          details_confirmed_at: null
+          government_authority: null
+          id: entity_n8y8tnk2p9339ti393yi
+          idempotency_key: null
+          joint: null
+          natural_person: null
+          risk_rating: null
+          status: active
+          structure: corporation
+          supplemental_documents:
+          - created_at: '2020-01-31T23:59:59Z'
+            entity_id: entity_n8y8tnk2p9339ti393yi
+            file_id: file_makxrc67oh9l6sg7w9yc
+            idempotency_key: null
+            type: entity_supplemental_document
+          terms_agreements:
+          - agreed_at: '2020-01-31T23:59:59Z'
+            ip_address: 128.32.0.1
+            terms_url: https://increase.com/example_terms
+          third_party_verification: null
+          trust: null
+          type: entity
+          validation: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Entity List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Entity Lists
+    update_an_entity_parameters:
+      additionalProperties: false
+      example:
+        corporation:
+          address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: Unit 2
+            state: NY
+            zip: '10045'
+        risk_rating:
+          rated_at: '2020-01-31T23:59:59Z'
+          rating: low
+      properties:
+        corporation:
+          additionalProperties: true
+          description: Details of the corporation entity to update. If you specify this parameter and the entity is not a corporation, the request will fail.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city, district, town, or village of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP or postal code of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            email:
+              description: An email address for the business. Not every program requires an email for submitted Entities.
+              format: email
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            incorporation_state:
+              description: The two-letter United States Postal Service (USPS) abbreviation for the corporation's state of incorporation.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            industry_code:
+              description: The North American Industry Classification System (NAICS) code for the corporation's primary line of business. This is a number, like `5132` for `Software Publishers`. A full list of classification codes is available [here](https://increase.com/documentation/data-dictionary#north-american-industry-classification-system-codes).
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            legal_identifier:
+              additionalProperties: false
+              description: The legal identifier of the corporation. This is usually the Employer Identification Number (EIN).
+              properties:
+                category:
+                  description: The category of the legal identifier.
+                  enum:
+                  - us_employer_identification_number
+                  - other
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The Employer Identification Number (EIN) for the company. The EIN is a 9-digit number assigned by the IRS; submit it as nine digits with no dashes or other separators.
+                  - A legal identifier issued by a foreign government, like a tax identification number or registration number.
+                value:
+                  description: The identifier of the legal identifier. For US Employer Identification Numbers, submit nine digits with no dashes or other separators.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - value
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the corporation.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            website:
+              description: A website for the business. Not every program requires a website for submitted Entities.
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        details_confirmed_at:
+          description: When your user last confirmed the Entity's details. Depending on your program, you may be required to affirmatively confirm details with your users on an annual basis.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+        government_authority:
+          additionalProperties: false
+          description: Details of the government authority entity to update. If you specify this parameter and the entity is not a government authority, the request will fail.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the state of the address.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP code of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - state
+              - zip
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the government authority.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        natural_person:
+          additionalProperties: false
+          description: Details of the natural person entity to update. If you specify this parameter and the entity is not a natural person, the request will fail.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city, district, town, or village of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP or postal code of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            confirmed_no_us_tax_id:
+              description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+              type: boolean
+              x-documentation-priority: default
+            identification:
+              additionalProperties: true
+              description: A means of verifying the person's identity.
+              properties:
+                drivers_license:
+                  additionalProperties: false
+                  description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    expiration_date:
+                      description: The driver's license's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    state:
+                      description: The state that issued the provided driver's license.
+                      maxLength: 2
+                      minLength: 2
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - file_id
+                  - expiration_date
+                  - state
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                method:
+                  description: A method that can be used to verify the individual's identity.
+                  enum:
+                  - social_security_number
+                  - individual_taxpayer_identification_number
+                  - passport
+                  - drivers_license
+                  - other
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - A social security number.
+                  - An individual taxpayer identification number (ITIN).
+                  - A passport number.
+                  - A driver's license number.
+                  - Another identifying document.
+                number:
+                  description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                  maxLength: 200
+                  minLength: 4
+                  type: string
+                  x-documentation-priority: default
+                other:
+                  additionalProperties: false
+                  description: Information about the identification document provided. Required if `method` is equal to `other`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    description:
+                      description: A description of the document submitted.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The document's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the document.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - country
+                  - description
+                  - file_id
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                passport:
+                  additionalProperties: false
+                  description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                  properties:
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The passport's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the passport.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - file_id
+                  - expiration_date
+                  - country
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - method
+              - number
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the natural person.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        risk_rating:
+          additionalProperties: false
+          description: An assessment of the entity’s potential risk of involvement in financial crimes, such as money laundering.
+          properties:
+            rated_at:
+              description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the risk rating was performed.
+              format: date-time
+              type: string
+              x-documentation-priority: default
+            rating:
+              description: The rating given to this entity.
+              enum:
+              - low
+              - medium
+              - high
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Minimal risk of involvement in financial crime.
+              - Moderate risk of involvement in financial crime.
+              - Elevated risk of involvement in financial crime.
+          required:
+          - rating
+          - rated_at
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        terms_agreements:
+          description: New terms that the Entity agreed to. Not all programs are required to submit this data. This will not archive previously submitted terms.
+          items:
+            additionalProperties: false
+            properties:
+              agreed_at:
+                description: The timestamp of when the Entity agreed to the terms.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              ip_address:
+                description: The IP address the Entity accessed reviewed the terms from.
+                maxLength: 200
+                minLength: 1
+                type: string
+                x-documentation-priority: default
+              terms_url:
+                description: The URL of the terms agreement. This link will be provided by your bank partner.
+                maxLength: 200
+                minLength: 1
+                type: string
+                x-documentation-priority: default
+            required:
+            - terms_url
+            - ip_address
+            - agreed_at
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+          type: array
+          x-documentation-priority: low
+        third_party_verification:
+          additionalProperties: false
+          description: If you are using a third-party service for identity verification, you can use this field to associate this Entity with the identifier that represents them in that service.
+          properties:
+            reference:
+              description: The reference identifier for the third party verification.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            vendor:
+              description: The vendor that was used to perform the verification.
+              enum:
+              - alloy
+              - middesk
+              - oscilar
+              - persona
+              - taktile
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Alloy. See https://alloy.com for more information.
+              - Middesk. See https://middesk.com for more information.
+              - Oscilar. See https://oscilar.com for more information.
+              - Persona. See https://withpersona.com for more information.
+              - Taktile. See https://taktile.com for more information.
+          required:
+          - reference
+          - vendor
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        trust:
+          additionalProperties: false
+          description: Details of the trust entity to update. If you specify this parameter and the entity is not a trust, the request will fail.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the state of the address.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP code of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - state
+              - zip
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the trust.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity:
+      additionalProperties: true
+      description: Entities are the legal entities that own accounts. They can be people, corporations, partnerships, government authorities, or trusts. To learn more, see [Entities](/documentation/entities).
+      example:
+        corporation:
+          address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            state: NY
+            zip: '10045'
+          beneficial_owners:
+          - company_title: CEO
+            id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+            individual:
+              address:
+                city: New York
+                country: US
+                line1: 33 Liberty Street
+                line2: null
+                state: NY
+                zip: '10045'
+              date_of_birth: '1970-01-31'
+              identification:
+                method: social_security_number
+                number_last4: '1120'
+              name: Ian Crease
+            prongs:
+            - control
+            - ownership
+          email: null
+          incorporation_state: NY
+          industry_code: null
+          legal_identifier:
+            category: us_employer_identification_number
+            value: '602214076'
+          name: National Phonograph Company
+          website: https://example.com
+        created_at: '2020-01-31T23:59:59Z'
+        creating_entity_onboarding_session_id: null
+        description: null
+        details_confirmed_at: null
+        government_authority: null
+        id: entity_n8y8tnk2p9339ti393yi
+        idempotency_key: null
+        joint: null
+        natural_person: null
+        risk_rating: null
+        status: active
+        structure: corporation
+        supplemental_documents:
+        - created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          file_id: file_makxrc67oh9l6sg7w9yc
+          idempotency_key: null
+          type: entity_supplemental_document
+        terms_agreements:
+        - agreed_at: '2020-01-31T23:59:59Z'
+          ip_address: 128.32.0.1
+          terms_url: https://increase.com/example_terms
+        third_party_verification: null
+        trust: null
+        type: entity
+        validation: null
+      properties:
+        corporation:
+          anyOf:
+          - additionalProperties: true
+            description: Details of the corporation entity. Will be present if `structure` is equal to `corporation`.
+            properties:
+              address:
+                additionalProperties: false
+                description: The corporation's address.
+                example:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                properties:
+                  city:
+                    anyOf:
+                    - description: The city, district, town, or village of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  country:
+                    description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line1:
+                    description: The first line of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line2:
+                    anyOf:
+                    - description: The second line of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  state:
+                    anyOf:
+                    - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  zip:
+                    anyOf:
+                    - description: The ZIP or postal code of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                required:
+                - line1
+                - line2
+                - city
+                - state
+                - zip
+                - country
+                title: Entity Corporation Address
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Addresses
+              beneficial_owners:
+                description: The identifying details of anyone controlling or owning 25% or more of the corporation.
+                items:
+                  additionalProperties: true
+                  example:
+                    company_title: CEO
+                    id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+                    individual:
+                      address:
+                        city: New York
+                        country: US
+                        line1: 33 Liberty Street
+                        line2: null
+                        state: NY
+                        zip: '10045'
+                      date_of_birth: '1970-01-31'
+                      identification:
+                        method: social_security_number
+                        number_last4: '1120'
+                      name: Ian Crease
+                    prongs:
+                    - control
+                    - ownership
+                  properties:
+                    company_title:
+                      anyOf:
+                      - description: This person's role or title within the entity.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    id:
+                      description: The identifier of this beneficial owner.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Beneficial Owners
+                    individual:
+                      additionalProperties: false
+                      description: Personal details for the beneficial owner.
+                      properties:
+                        address:
+                          additionalProperties: false
+                          description: The person's address.
+                          example:
+                            city: New York
+                            country: US
+                            line1: 33 Liberty Street
+                            line2: null
+                            state: NY
+                            zip: '10045'
+                          properties:
+                            city:
+                              anyOf:
+                              - description: The city, district, town, or village of the address.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            country:
+                              description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                              type: string
+                              x-documentation-priority: default
+                            line1:
+                              description: The first line of the address.
+                              type: string
+                              x-documentation-priority: default
+                            line2:
+                              anyOf:
+                              - description: The second line of the address.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            state:
+                              anyOf:
+                              - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            zip:
+                              anyOf:
+                              - description: The ZIP or postal code of the address.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                          required:
+                          - line1
+                          - line2
+                          - city
+                          - state
+                          - zip
+                          - country
+                          title: Entity Corporation Beneficial Owner Reference Individual Address
+                          type: object
+                          x-documentation-priority: default
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: Addresses
+                        date_of_birth:
+                          description: The person's date of birth in YYYY-MM-DD format.
+                          format: date
+                          type: string
+                          x-documentation-priority: default
+                        identification:
+                          anyOf:
+                          - additionalProperties: true
+                            description: A means of verifying the person's identity.
+                            properties:
+                              method:
+                                description: A method that can be used to verify the individual's identity.
+                                enum:
+                                - social_security_number
+                                - individual_taxpayer_identification_number
+                                - passport
+                                - drivers_license
+                                - other
+                                type: string
+                                x-documentation-priority: default
+                                x-enum-descriptions:
+                                - A social security number.
+                                - An individual taxpayer identification number (ITIN).
+                                - A passport number.
+                                - A driver's license number.
+                                - Another identifying document.
+                              number_last4:
+                                description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                                type: string
+                                x-documentation-priority: default
+                            required:
+                            - method
+                            - number_last4
+                            title: Entity Corporation Beneficial Owner Reference Individual Identification
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                            x-title-plural: Identifications
+                          - type: 'null'
+                        name:
+                          description: The person's legal name.
+                          type: string
+                          x-documentation-priority: default
+                      required:
+                      - name
+                      - date_of_birth
+                      - address
+                      - identification
+                      title: Entity Corporation Beneficial Owner Reference Individual
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                      x-title-plural: Individuals
+                    prongs:
+                      description: Why this person is considered a beneficial owner of the entity.
+                      items:
+                        enum:
+                        - ownership
+                        - control
+                        type: string
+                        x-enum-descriptions:
+                        - A person with 25% or greater direct or indirect ownership of the entity.
+                        - A person who manages, directs, or has significant control of the entity.
+                      type: array
+                      x-documentation-priority: default
+                  required:
+                  - id
+                  - individual
+                  - company_title
+                  - prongs
+                  title: Entity Corporation Beneficial Owner Reference
+                  type: object
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Beneficial Owner References
+                type: array
+                x-documentation-priority: default
+              email:
+                anyOf:
+                - description: An email address for the business.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              incorporation_state:
+                anyOf:
+                - description: The two-letter United States Postal Service (USPS) abbreviation for the corporation's state of incorporation.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              industry_code:
+                anyOf:
+                - description: The numeric North American Industry Classification System (NAICS) code submitted for the corporation.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              legal_identifier:
+                anyOf:
+                - additionalProperties: false
+                  description: The legal identifier of the corporation.
+                  properties:
+                    category:
+                      description: The category of the legal identifier.
+                      enum:
+                      - us_employer_identification_number
+                      - other
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - The Employer Identification Number (EIN) for the company. The EIN is a 9-digit number assigned by the IRS; submit it as nine digits with no dashes or other separators.
+                      - A legal identifier issued by a foreign government, like a tax identification number or registration number.
+                    value:
+                      description: The identifier of the legal identifier.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - category
+                  - value
+                  title: Entity Corporation LegalIdentifier
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: LegalIdentifiers
+                - type: 'null'
+              name:
+                description: The legal name of the corporation.
+                type: string
+                x-documentation-priority: default
+              website:
+                anyOf:
+                - description: The website of the corporation.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - name
+            - website
+            - email
+            - legal_identifier
+            - incorporation_state
+            - industry_code
+            - address
+            - beneficial_owners
+            title: Entity Corporation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Corporations
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Entity was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        creating_entity_onboarding_session_id:
+          anyOf:
+          - description: The identifier of the Entity Onboarding Session that was used to create this Entity, if any.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Entity Onboarding Sessions
+          - type: 'null'
+        description:
+          anyOf:
+          - description: The entity's description for display purposes.
+            type: string
+            x-documentation-priority: low
+          - type: 'null'
+        details_confirmed_at:
+          anyOf:
+          - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Entity's details were most recently confirmed.
+            format: date-time
+            type: string
+            x-documentation-priority: low
+          - type: 'null'
+        government_authority:
+          anyOf:
+          - additionalProperties: false
+            description: Details of the government authority entity. Will be present if `structure` is equal to `government_authority`.
+            properties:
+              address:
+                additionalProperties: false
+                description: The government authority's address.
+                example:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                properties:
+                  city:
+                    anyOf:
+                    - description: The city, district, town, or village of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  country:
+                    description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line1:
+                    description: The first line of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line2:
+                    anyOf:
+                    - description: The second line of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  state:
+                    anyOf:
+                    - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  zip:
+                    anyOf:
+                    - description: The ZIP or postal code of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                required:
+                - line1
+                - line2
+                - city
+                - state
+                - zip
+                - country
+                title: Entity GovernmentAuthority Address
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Addresses
+              authorized_persons:
+                description: The identifying details of authorized persons of the government authority.
+                items:
+                  additionalProperties: false
+                  properties:
+                    authorized_person_id:
+                      description: The identifier of this authorized person.
+                      type: string
+                      x-documentation-priority: default
+                    name:
+                      description: The person's legal name.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  - authorized_person_id
+                  title: Entity GovernmentAuthority AuthorizedPersonsElement
+                  type: object
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: AuthorizedPersonsElements
+                type: array
+                x-documentation-priority: default
+              category:
+                description: The category of the government authority.
+                enum:
+                - municipality
+                - state_agency
+                - state_government
+                - federal_agency
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - A municipality.
+                - A state agency.
+                - A state government.
+                - A federal agency.
+              name:
+                description: The government authority's name.
+                type: string
+                x-documentation-priority: default
+              tax_identifier:
+                anyOf:
+                - description: The Employer Identification Number (EIN) of the government authority.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              website:
+                anyOf:
+                - description: The government authority's website.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - name
+            - category
+            - address
+            - website
+            - tax_identifier
+            - authorized_persons
+            title: Entity GovernmentAuthority
+            type: object
+            x-documentation-priority: low
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: GovernmentAuthorities
+          - type: 'null'
+        id:
+          description: The entity's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        joint:
+          anyOf:
+          - additionalProperties: false
+            description: Details of the joint entity. Will be present if `structure` is equal to `joint`.
+            properties:
+              individuals:
+                description: The two individuals that share control of the entity.
+                items:
+                  additionalProperties: false
+                  properties:
+                    address:
+                      additionalProperties: false
+                      description: The person's address.
+                      example:
+                        city: New York
+                        country: US
+                        line1: 33 Liberty Street
+                        line2: null
+                        state: NY
+                        zip: '10045'
+                      properties:
+                        city:
+                          anyOf:
+                          - description: The city, district, town, or village of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        country:
+                          description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                          type: string
+                          x-documentation-priority: default
+                        line1:
+                          description: The first line of the address.
+                          type: string
+                          x-documentation-priority: default
+                        line2:
+                          anyOf:
+                          - description: The second line of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        state:
+                          anyOf:
+                          - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        zip:
+                          anyOf:
+                          - description: The ZIP or postal code of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                      required:
+                      - line1
+                      - line2
+                      - city
+                      - state
+                      - zip
+                      - country
+                      title: Entity Joint Individual Address
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                      x-title-plural: Addresses
+                    date_of_birth:
+                      description: The person's date of birth in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    identification:
+                      anyOf:
+                      - additionalProperties: true
+                        description: A means of verifying the person's identity.
+                        properties:
+                          method:
+                            description: A method that can be used to verify the individual's identity.
+                            enum:
+                            - social_security_number
+                            - individual_taxpayer_identification_number
+                            - passport
+                            - drivers_license
+                            - other
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - A social security number.
+                            - An individual taxpayer identification number (ITIN).
+                            - A passport number.
+                            - A driver's license number.
+                            - Another identifying document.
+                          number_last4:
+                            description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - method
+                        - number_last4
+                        title: Entity Joint Individual Identification
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Identifications
+                      - type: 'null'
+                    name:
+                      description: The person's legal name.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  - date_of_birth
+                  - address
+                  - identification
+                  title: Entity Joint Individual
+                  type: object
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Individuals
+                type: array
+                x-documentation-priority: default
+              name:
+                description: The entity's name.
+                type: string
+                x-documentation-priority: default
+            required:
+            - name
+            - individuals
+            title: Entity Joint
+            type: object
+            x-documentation-priority: low
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Joints
+          - type: 'null'
+        natural_person:
+          anyOf:
+          - additionalProperties: false
+            description: Details of the natural person entity. Will be present if `structure` is equal to `natural_person`.
+            properties:
+              address:
+                additionalProperties: false
+                description: The person's address.
+                example:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                properties:
+                  city:
+                    anyOf:
+                    - description: The city, district, town, or village of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  country:
+                    description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line1:
+                    description: The first line of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line2:
+                    anyOf:
+                    - description: The second line of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  state:
+                    anyOf:
+                    - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  zip:
+                    anyOf:
+                    - description: The ZIP or postal code of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                required:
+                - line1
+                - line2
+                - city
+                - state
+                - zip
+                - country
+                title: Entity Individual Address
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Addresses
+              date_of_birth:
+                description: The person's date of birth in YYYY-MM-DD format.
+                format: date
+                type: string
+                x-documentation-priority: default
+              identification:
+                anyOf:
+                - additionalProperties: true
+                  description: A means of verifying the person's identity.
+                  properties:
+                    method:
+                      description: A method that can be used to verify the individual's identity.
+                      enum:
+                      - social_security_number
+                      - individual_taxpayer_identification_number
+                      - passport
+                      - drivers_license
+                      - other
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - A social security number.
+                      - An individual taxpayer identification number (ITIN).
+                      - A passport number.
+                      - A driver's license number.
+                      - Another identifying document.
+                    number_last4:
+                      description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - method
+                  - number_last4
+                  title: Entity Individual Identification
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Identifications
+                - type: 'null'
+              name:
+                description: The person's legal name.
+                type: string
+                x-documentation-priority: default
+            required:
+            - name
+            - date_of_birth
+            - address
+            - identification
+            title: Entity Individual
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Individuals
+          - type: 'null'
+        risk_rating:
+          anyOf:
+          - additionalProperties: false
+            description: An assessment of the entity’s potential risk of involvement in financial crimes, such as money laundering.
+            properties:
+              rated_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the risk rating was performed.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              rating:
+                description: The rating given to this entity.
+                enum:
+                - low
+                - medium
+                - high
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Minimal risk of involvement in financial crime.
+                - Moderate risk of involvement in financial crime.
+                - Elevated risk of involvement in financial crime.
+            required:
+            - rating
+            - rated_at
+            title: Entity RiskRating
+            type: object
+            x-documentation-priority: low
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: RiskRatings
+          - type: 'null'
+        status:
+          description: The status of the entity.
+          enum:
+          - active
+          - archived
+          - disabled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The entity is active.
+          - The entity is archived, and can no longer be used to create accounts.
+          - The entity is temporarily disabled and cannot be used for financial activity.
+        structure:
+          description: The entity's legal structure.
+          enum:
+          - corporation
+          - natural_person
+          - joint
+          - trust
+          - government_authority
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A corporation.
+          - An individual person.
+          - Multiple individual people.
+          - A trust.
+          - A government authority.
+        supplemental_documents:
+          description: Additional documentation associated with the entity. This is limited to the first 10 documents for an entity. If an entity has more than 10 documents, use the GET /entity_supplemental_documents list endpoint to retrieve them.
+          items:
+            $ref: '#/components/schemas/entity_supplemental_document'
+          type: array
+          x-documentation-priority: low
+        terms_agreements:
+          description: The terms that the Entity agreed to. Not all programs are required to submit this data.
+          items:
+            additionalProperties: false
+            properties:
+              agreed_at:
+                description: The timestamp of when the Entity agreed to the terms.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              ip_address:
+                description: The IP address the Entity accessed reviewed the terms from.
+                type: string
+                x-documentation-priority: default
+              terms_url:
+                description: The URL of the terms agreement. This link will be provided by your bank partner.
+                type: string
+                x-documentation-priority: default
+            required:
+            - terms_url
+            - ip_address
+            - agreed_at
+            title: Entity TermsAgreementsElement
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: TermsAgreementsElements
+          type: array
+          x-documentation-priority: low
+        third_party_verification:
+          anyOf:
+          - additionalProperties: false
+            description: If you are using a third-party service for identity verification, you can use this field to associate this Entity with the identifier that represents them in that service.
+            properties:
+              reference:
+                description: The reference identifier for the third party verification.
+                type: string
+                x-documentation-priority: default
+              vendor:
+                description: The vendor that was used to perform the verification.
+                enum:
+                - alloy
+                - middesk
+                - oscilar
+                - persona
+                - taktile
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Alloy. See https://alloy.com for more information.
+                - Middesk. See https://middesk.com for more information.
+                - Oscilar. See https://oscilar.com for more information.
+                - Persona. See https://withpersona.com for more information.
+                - Taktile. See https://taktile.com for more information.
+            required:
+            - reference
+            - vendor
+            title: Entity ThirdPartyVerification
+            type: object
+            x-documentation-priority: low
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ThirdPartyVerifications
+          - type: 'null'
+        trust:
+          anyOf:
+          - additionalProperties: false
+            description: Details of the trust entity. Will be present if `structure` is equal to `trust`.
+            properties:
+              address:
+                additionalProperties: false
+                description: The trust's address.
+                example:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                properties:
+                  city:
+                    anyOf:
+                    - description: The city, district, town, or village of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  country:
+                    description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line1:
+                    description: The first line of the address.
+                    type: string
+                    x-documentation-priority: default
+                  line2:
+                    anyOf:
+                    - description: The second line of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  state:
+                    anyOf:
+                    - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  zip:
+                    anyOf:
+                    - description: The ZIP or postal code of the address.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                required:
+                - line1
+                - line2
+                - city
+                - state
+                - zip
+                - country
+                title: Entity Trust Address
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Addresses
+              category:
+                description: Whether the trust is `revocable` or `irrevocable`.
+                enum:
+                - revocable
+                - irrevocable
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The trust is revocable by the grantor.
+                - The trust cannot be revoked.
+              formation_document_file_id:
+                anyOf:
+                - description: The ID for the File containing the formation document of the trust.
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+                - type: 'null'
+              formation_state:
+                anyOf:
+                - description: The two-letter United States Postal Service (USPS) abbreviation for the state in which the trust was formed.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              grantor:
+                anyOf:
+                - additionalProperties: false
+                  description: The grantor of the trust. Will be present if the `category` is `revocable`.
+                  properties:
+                    address:
+                      additionalProperties: false
+                      description: The person's address.
+                      example:
+                        city: New York
+                        country: US
+                        line1: 33 Liberty Street
+                        line2: null
+                        state: NY
+                        zip: '10045'
+                      properties:
+                        city:
+                          anyOf:
+                          - description: The city, district, town, or village of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        country:
+                          description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                          type: string
+                          x-documentation-priority: default
+                        line1:
+                          description: The first line of the address.
+                          type: string
+                          x-documentation-priority: default
+                        line2:
+                          anyOf:
+                          - description: The second line of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        state:
+                          anyOf:
+                          - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        zip:
+                          anyOf:
+                          - description: The ZIP or postal code of the address.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                      required:
+                      - line1
+                      - line2
+                      - city
+                      - state
+                      - zip
+                      - country
+                      title: Entity Trust Individual Address
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                      x-title-plural: Addresses
+                    date_of_birth:
+                      description: The person's date of birth in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    identification:
+                      anyOf:
+                      - additionalProperties: true
+                        description: A means of verifying the person's identity.
+                        properties:
+                          method:
+                            description: A method that can be used to verify the individual's identity.
+                            enum:
+                            - social_security_number
+                            - individual_taxpayer_identification_number
+                            - passport
+                            - drivers_license
+                            - other
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - A social security number.
+                            - An individual taxpayer identification number (ITIN).
+                            - A passport number.
+                            - A driver's license number.
+                            - Another identifying document.
+                          number_last4:
+                            description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - method
+                        - number_last4
+                        title: Entity Trust Individual Identification
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Identifications
+                      - type: 'null'
+                    name:
+                      description: The person's legal name.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  - date_of_birth
+                  - address
+                  - identification
+                  title: Entity Trust Individual
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Individuals
+                - type: 'null'
+              name:
+                description: The trust's name.
+                type: string
+                x-documentation-priority: default
+              tax_identifier:
+                anyOf:
+                - description: The Employer Identification Number (EIN) of the trust itself.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              trustees:
+                description: The trustees of the trust.
+                items:
+                  additionalProperties: false
+                  properties:
+                    individual:
+                      anyOf:
+                      - additionalProperties: false
+                        description: The individual trustee of the trust. Will be present if the trustee's `structure` is equal to `individual`.
+                        properties:
+                          address:
+                            additionalProperties: false
+                            description: The person's address.
+                            example:
+                              city: New York
+                              country: US
+                              line1: 33 Liberty Street
+                              line2: null
+                              state: NY
+                              zip: '10045'
+                            properties:
+                              city:
+                                anyOf:
+                                - description: The city, district, town, or village of the address.
+                                  type: string
+                                  x-documentation-priority: default
+                                - type: 'null'
+                              country:
+                                description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                                type: string
+                                x-documentation-priority: default
+                              line1:
+                                description: The first line of the address.
+                                type: string
+                                x-documentation-priority: default
+                              line2:
+                                anyOf:
+                                - description: The second line of the address.
+                                  type: string
+                                  x-documentation-priority: default
+                                - type: 'null'
+                              state:
+                                anyOf:
+                                - description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address.
+                                  type: string
+                                  x-documentation-priority: default
+                                - type: 'null'
+                              zip:
+                                anyOf:
+                                - description: The ZIP or postal code of the address.
+                                  type: string
+                                  x-documentation-priority: default
+                                - type: 'null'
+                            required:
+                            - line1
+                            - line2
+                            - city
+                            - state
+                            - zip
+                            - country
+                            title: Entity Trust TrusteesElement Individual Address
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                            x-title-plural: Addresses
+                          date_of_birth:
+                            description: The person's date of birth in YYYY-MM-DD format.
+                            format: date
+                            type: string
+                            x-documentation-priority: default
+                          identification:
+                            anyOf:
+                            - additionalProperties: true
+                              description: A means of verifying the person's identity.
+                              properties:
+                                method:
+                                  description: A method that can be used to verify the individual's identity.
+                                  enum:
+                                  - social_security_number
+                                  - individual_taxpayer_identification_number
+                                  - passport
+                                  - drivers_license
+                                  - other
+                                  type: string
+                                  x-documentation-priority: default
+                                  x-enum-descriptions:
+                                  - A social security number.
+                                  - An individual taxpayer identification number (ITIN).
+                                  - A passport number.
+                                  - A driver's license number.
+                                  - Another identifying document.
+                                number_last4:
+                                  description: The last 4 digits of the identification number that can be used to verify the individual's identity.
+                                  type: string
+                                  x-documentation-priority: default
+                              required:
+                              - method
+                              - number_last4
+                              title: Entity Trust TrusteesElement Individual Identification
+                              type: object
+                              x-documentation-priority: default
+                              x-event-categories: []
+                              x-stainless-empty-object: false
+                              x-title-plural: Identifications
+                            - type: 'null'
+                          name:
+                            description: The person's legal name.
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - name
+                        - date_of_birth
+                        - address
+                        - identification
+                        title: Entity Trust TrusteesElement Individual
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Individuals
+                      - type: 'null'
+                    structure:
+                      description: The structure of the trustee. Will always be equal to `individual`.
+                      enum:
+                      - individual
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - The trustee is an individual.
+                  required:
+                  - structure
+                  - individual
+                  title: Entity Trust TrusteesElement
+                  type: object
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: TrusteesElements
+                type: array
+                x-documentation-priority: default
+            required:
+            - name
+            - category
+            - address
+            - formation_state
+            - tax_identifier
+            - trustees
+            - grantor
+            - formation_document_file_id
+            title: Entity Trust
+            type: object
+            x-documentation-priority: low
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Trusts
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity`.
+          enum:
+          - entity
+          type: string
+          x-documentation-priority: default
+        validation:
+          anyOf:
+          - additionalProperties: false
+            description: The validation results for the entity. Learn more about [validations](/documentation/entity-validation).
+            properties:
+              issues:
+                description: The list of issues that need to be addressed.
+                items:
+                  additionalProperties: false
+                  properties:
+                    beneficial_owner_address:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Details when the issue is with a beneficial owner's address.
+                        properties:
+                          beneficial_owner_id:
+                            description: The ID of the beneficial owner.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Beneficial Owners
+                          reason:
+                            description: The reason the address is invalid.
+                            enum:
+                            - mailbox_address
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - The address is a mailbox or other non-physical address.
+                        required:
+                        - beneficial_owner_id
+                        - reason
+                        title: Entity EntityValidation IssuesElement BeneficialOwnerAddress
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: BeneficialOwnerAddresses
+                      - type: 'null'
+                    beneficial_owner_identity:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Details when the issue is with a beneficial owner's identity verification.
+                        properties:
+                          beneficial_owner_id:
+                            description: The ID of the beneficial owner.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Beneficial Owners
+                        required:
+                        - beneficial_owner_id
+                        title: Entity EntityValidation IssuesElement BeneficialOwnerIdentity
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: BeneficialOwnerIdentities
+                      - type: 'null'
+                    category:
+                      description: The type of issue. We may add additional possible values for this enum over time; your application should be able to handle such additions gracefully.
+                      enum:
+                      - entity_tax_identifier
+                      - entity_address
+                      - beneficial_owner_identity
+                      - beneficial_owner_address
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - The entity's tax identifier could not be validated. Update the tax ID with the [update an entity API](/documentation/api/entities#update-an-entity.corporation.legal_identifier).
+                      - The entity's address could not be validated. Update the address with the [update an entity API](/documentation/api/entities#update-an-entity.corporation.address).
+                      - A beneficial owner's identity could not be verified. Update the identification with the [update a beneficial owner API](/documentation/api/beneficial-owners#update-a-beneficial-owner).
+                      - A beneficial owner's address could not be validated. Update the address with the [update a beneficial owner API](/documentation/api/beneficial-owners#update-a-beneficial-owner).
+                    entity_address:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Details when the issue is with the entity's address.
+                        properties:
+                          reason:
+                            description: The reason the address is invalid.
+                            enum:
+                            - mailbox_address
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - The address is a mailbox or other non-physical address.
+                        required:
+                        - reason
+                        title: Entity EntityValidation IssuesElement EntityAddress
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: EntityAddresses
+                      - type: 'null'
+                    entity_tax_identifier:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Details when the issue is with the entity's tax ID.
+                        properties: {}
+                        title: Entity EntityValidation IssuesElement EntityTaxIdentifier
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: true
+                        x-title-plural: EntityTaxIdentifiers
+                      - type: 'null'
+                  required:
+                  - category
+                  - entity_tax_identifier
+                  - entity_address
+                  - beneficial_owner_identity
+                  - beneficial_owner_address
+                  title: Entity EntityValidation IssuesElement
+                  type: object
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: IssuesElements
+                type: array
+                x-documentation-priority: default
+              status:
+                description: The validation status for the entity. If the status is `invalid`, the `issues` array will be populated.
+                enum:
+                - pending
+                - valid
+                - invalid
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The submitted data is being validated.
+                - The submitted data is valid.
+                - Additional information is required to validate the data.
+            required:
+            - status
+            - issues
+            title: Entity EntityValidation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: s
+          - type: 'null'
+      required:
+      - type
+      - id
+      - structure
+      - corporation
+      - natural_person
+      - joint
+      - government_authority
+      - trust
+      - idempotency_key
+      - third_party_verification
+      - risk_rating
+      - terms_agreements
+      - description
+      - status
+      - details_confirmed_at
+      - creating_entity_onboarding_session_id
+      - created_at
+      - validation
+      - supplemental_documents
+      title: Entity
+      type: object
+      x-event-categories:
+      - entity.created
+      - entity.updated
+      x-stainless-empty-object: false
+      x-tag: Entities
+      x-title-plural: Entities
+    create_an_entity_parameters:
+      additionalProperties: true
+      example:
+        corporation:
+          address:
+            city: New York
+            line1: 33 Liberty Street
+            state: NY
+            zip: '10045'
+          beneficial_owners:
+          - company_title: CEO
+            individual:
+              address:
+                city: New York
+                line1: 33 Liberty Street
+                state: NY
+                zip: '10045'
+              date_of_birth: '1970-01-31'
+              identification:
+                method: social_security_number
+                number: 078051120
+              name: Ian Crease
+            prongs:
+            - control
+          incorporation_state: NY
+          legal_identifier:
+            category: us_employer_identification_number
+            value: '602214076'
+          name: National Phonograph Company
+          website: https://example.com
+        structure: corporation
+        supplemental_documents:
+        - file_id: file_makxrc67oh9l6sg7w9yc
+      properties:
+        corporation:
+          additionalProperties: true
+          description: Details of the corporation entity to create. Required if `structure` is equal to `corporation`.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city, district, town, or village of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP or postal code of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            beneficial_owners:
+              description: The identifying details of each person who owns 25% or more of the business and one control person, like the CEO, CFO, or other executive. You can submit between 1 and 5 people to this list.
+              items:
+                additionalProperties: true
+                properties:
+                  company_title:
+                    description: This person's role or title within the entity.
+                    maxLength: 200
+                    minLength: 1
+                    type: string
+                    x-documentation-priority: default
+                  individual:
+                    additionalProperties: false
+                    description: Personal details for the beneficial owner.
+                    properties:
+                      address:
+                        additionalProperties: false
+                        description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+                        properties:
+                          city:
+                            description: The city, district, town, or village of the address.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          country:
+                            description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          line1:
+                            description: The first line of the address. This is usually the street number and street.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          line2:
+                            description: The second line of the address. This might be the floor or room number.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          state:
+                            description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          zip:
+                            description: The ZIP or postal code of the address. Required in certain countries.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - line1
+                        - city
+                        - country
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      confirmed_no_us_tax_id:
+                        description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+                        type: boolean
+                        x-documentation-priority: default
+                      date_of_birth:
+                        description: The person's date of birth in YYYY-MM-DD format.
+                        format: date
+                        type: string
+                        x-documentation-priority: default
+                      identification:
+                        additionalProperties: true
+                        description: A means of verifying the person's identity.
+                        properties:
+                          drivers_license:
+                            additionalProperties: false
+                            description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                            properties:
+                              back_file_id:
+                                description: The identifier of the File containing the back of the driver's license.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              expiration_date:
+                                description: The driver's license's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the front of the driver's license.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              state:
+                                description: The state that issued the provided driver's license.
+                                maxLength: 2
+                                minLength: 2
+                                type: string
+                                x-documentation-priority: default
+                            required:
+                            - file_id
+                            - expiration_date
+                            - state
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                          method:
+                            description: A method that can be used to verify the individual's identity.
+                            enum:
+                            - social_security_number
+                            - individual_taxpayer_identification_number
+                            - passport
+                            - drivers_license
+                            - other
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - A social security number.
+                            - An individual taxpayer identification number (ITIN).
+                            - A passport number.
+                            - A driver's license number.
+                            - Another identifying document.
+                          number:
+                            description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                            maxLength: 200
+                            minLength: 4
+                            type: string
+                            x-documentation-priority: default
+                          other:
+                            additionalProperties: false
+                            description: Information about the identification document provided. Required if `method` is equal to `other`.
+                            properties:
+                              back_file_id:
+                                description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              country:
+                                description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              description:
+                                description: A description of the document submitted.
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              expiration_date:
+                                description: The document's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the front of the document.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                            required:
+                            - country
+                            - description
+                            - file_id
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                          passport:
+                            additionalProperties: false
+                            description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                            properties:
+                              country:
+                                description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              expiration_date:
+                                description: The passport's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the passport.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                            required:
+                            - file_id
+                            - expiration_date
+                            - country
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                        required:
+                        - method
+                        - number
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      name:
+                        description: The person's legal name.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - name
+                    - date_of_birth
+                    - address
+                    - identification
+                    type: object
+                    x-documentation-priority: default
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  prongs:
+                    description: Why this person is considered a beneficial owner of the entity. At least one option is required, if a person is both a control person and owner, submit an array containing both.
+                    items:
+                      enum:
+                      - ownership
+                      - control
+                      type: string
+                      x-enum-descriptions:
+                      - A person with 25% or greater direct or indirect ownership of the entity.
+                      - A person who manages, directs, or has significant control of the entity.
+                    type: array
+                    x-documentation-priority: default
+                required:
+                - individual
+                - prongs
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+            beneficial_ownership_exemption_reason:
+              description: If the entity is exempt from the requirement to submit beneficial owners, provide the justification. If a reason is provided, you do not need to submit a list of beneficial owners.
+              enum:
+              - regulated_financial_institution
+              - publicly_traded_company
+              - public_entity
+              - other
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - A regulated financial institution.
+              - A publicly traded company.
+              - A public entity acting on behalf of the federal or a state government.
+              - Any other reason why this entity is exempt from the requirement to submit beneficial owners. You can only use this exemption after approval from your bank partner.
+            email:
+              description: An email address for the business. Not every program requires an email for submitted Entities.
+              format: email
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            incorporation_state:
+              description: The two-letter United States Postal Service (USPS) abbreviation for the corporation's state of incorporation.
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-documentation-priority: default
+            industry_code:
+              description: The North American Industry Classification System (NAICS) code for the corporation's primary line of business. This is a number, like `5132` for `Software Publishers`. A full list of classification codes is available [here](https://increase.com/documentation/data-dictionary#north-american-industry-classification-system-codes).
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            legal_identifier:
+              additionalProperties: false
+              description: The legal identifier of the corporation. This is usually the Employer Identification Number (EIN).
+              properties:
+                category:
+                  description: The category of the legal identifier. If not provided, the default is `us_employer_identification_number`.
+                  enum:
+                  - us_employer_identification_number
+                  - other
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The Employer Identification Number (EIN) for the company. The EIN is a 9-digit number assigned by the IRS; submit it as nine digits with no dashes or other separators.
+                  - A legal identifier issued by a foreign government, like a tax identification number or registration number.
+                value:
+                  description: The legal identifier. For US Employer Identification Numbers, submit nine digits with no dashes or other separators.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - value
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the corporation.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            website:
+              description: A website for the business. Not every program requires a website for submitted Entities.
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          - legal_identifier
+          - address
+          - beneficial_owners
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        description:
+          description: The description you choose to give the entity.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: low
+        government_authority:
+          additionalProperties: false
+          description: Details of the Government Authority entity to create. Required if `structure` is equal to `government_authority`.
+          properties:
+            address:
+              additionalProperties: false
+              description: The entity's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the state of the address.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP code of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - state
+              - zip
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            authorized_persons:
+              description: The identifying details of authorized officials acting on the entity's behalf.
+              items:
+                additionalProperties: false
+                properties:
+                  name:
+                    description: The person's legal name.
+                    maxLength: 200
+                    minLength: 1
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - name
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+            category:
+              description: The category of the government authority.
+              enum:
+              - municipality
+              - state_agency
+              - state_government
+              - federal_agency
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - A municipality.
+              - A state agency.
+              - A state government.
+              - A federal agency.
+            name:
+              description: The legal name of the government authority.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            tax_identifier:
+              description: The Employer Identification Number (EIN) for the government authority. Submit nine digits with no dashes or other separators.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            website:
+              description: A website for the government authority. Not every program requires a website for submitted Entities.
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          - category
+          - tax_identifier
+          - address
+          - authorized_persons
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        joint:
+          additionalProperties: false
+          description: Details of the joint entity to create. Required if `structure` is equal to `joint`.
+          properties:
+            individuals:
+              description: The two individuals that share control of the entity.
+              items:
+                additionalProperties: false
+                properties:
+                  address:
+                    additionalProperties: false
+                    description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+                    properties:
+                      city:
+                        description: The city, district, town, or village of the address.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                      country:
+                        description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                      line1:
+                        description: The first line of the address. This is usually the street number and street.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                      line2:
+                        description: The second line of the address. This might be the floor or room number.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                      state:
+                        description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                      zip:
+                        description: The ZIP or postal code of the address. Required in certain countries.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - line1
+                    - city
+                    - country
+                    type: object
+                    x-documentation-priority: default
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  confirmed_no_us_tax_id:
+                    description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+                    type: boolean
+                    x-documentation-priority: default
+                  date_of_birth:
+                    description: The person's date of birth in YYYY-MM-DD format.
+                    format: date
+                    type: string
+                    x-documentation-priority: default
+                  identification:
+                    additionalProperties: true
+                    description: A means of verifying the person's identity.
+                    properties:
+                      drivers_license:
+                        additionalProperties: false
+                        description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                        properties:
+                          back_file_id:
+                            description: The identifier of the File containing the back of the driver's license.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Files
+                          expiration_date:
+                            description: The driver's license's expiration date in YYYY-MM-DD format.
+                            format: date
+                            type: string
+                            x-documentation-priority: default
+                          file_id:
+                            description: The identifier of the File containing the front of the driver's license.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Files
+                          state:
+                            description: The state that issued the provided driver's license.
+                            maxLength: 2
+                            minLength: 2
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - file_id
+                        - expiration_date
+                        - state
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      method:
+                        description: A method that can be used to verify the individual's identity.
+                        enum:
+                        - social_security_number
+                        - individual_taxpayer_identification_number
+                        - passport
+                        - drivers_license
+                        - other
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - A social security number.
+                        - An individual taxpayer identification number (ITIN).
+                        - A passport number.
+                        - A driver's license number.
+                        - Another identifying document.
+                      number:
+                        description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                        maxLength: 200
+                        minLength: 4
+                        type: string
+                        x-documentation-priority: default
+                      other:
+                        additionalProperties: false
+                        description: Information about the identification document provided. Required if `method` is equal to `other`.
+                        properties:
+                          back_file_id:
+                            description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Files
+                          country:
+                            description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          description:
+                            description: A description of the document submitted.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          expiration_date:
+                            description: The document's expiration date in YYYY-MM-DD format.
+                            format: date
+                            type: string
+                            x-documentation-priority: default
+                          file_id:
+                            description: The identifier of the File containing the front of the document.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Files
+                        required:
+                        - country
+                        - description
+                        - file_id
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      passport:
+                        additionalProperties: false
+                        description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                        properties:
+                          country:
+                            description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          expiration_date:
+                            description: The passport's expiration date in YYYY-MM-DD format.
+                            format: date
+                            type: string
+                            x-documentation-priority: default
+                          file_id:
+                            description: The identifier of the File containing the passport.
+                            type: string
+                            x-documentation-priority: default
+                            x-id-reference-to: Files
+                        required:
+                        - file_id
+                        - expiration_date
+                        - country
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                    required:
+                    - method
+                    - number
+                    type: object
+                    x-documentation-priority: default
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  name:
+                    description: The person's legal name.
+                    maxLength: 200
+                    minLength: 1
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - name
+                - date_of_birth
+                - address
+                - identification
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+          required:
+          - individuals
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        natural_person:
+          additionalProperties: false
+          description: Details of the natural person entity to create. Required if `structure` is equal to `natural_person`. Natural people entities should be submitted with `social_security_number` or `individual_taxpayer_identification_number` identification methods.
+          properties:
+            address:
+              additionalProperties: false
+              description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city, district, town, or village of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP or postal code of the address. Required in certain countries.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - country
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            confirmed_no_us_tax_id:
+              description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+              type: boolean
+              x-documentation-priority: default
+            date_of_birth:
+              description: The person's date of birth in YYYY-MM-DD format.
+              format: date
+              type: string
+              x-documentation-priority: default
+            identification:
+              additionalProperties: true
+              description: A means of verifying the person's identity.
+              properties:
+                drivers_license:
+                  additionalProperties: false
+                  description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    expiration_date:
+                      description: The driver's license's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the driver's license.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    state:
+                      description: The state that issued the provided driver's license.
+                      maxLength: 2
+                      minLength: 2
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - file_id
+                  - expiration_date
+                  - state
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                method:
+                  description: A method that can be used to verify the individual's identity.
+                  enum:
+                  - social_security_number
+                  - individual_taxpayer_identification_number
+                  - passport
+                  - drivers_license
+                  - other
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - A social security number.
+                  - An individual taxpayer identification number (ITIN).
+                  - A passport number.
+                  - A driver's license number.
+                  - Another identifying document.
+                number:
+                  description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                  maxLength: 200
+                  minLength: 4
+                  type: string
+                  x-documentation-priority: default
+                other:
+                  additionalProperties: false
+                  description: Information about the identification document provided. Required if `method` is equal to `other`.
+                  properties:
+                    back_file_id:
+                      description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    description:
+                      description: A description of the document submitted.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The document's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the front of the document.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - country
+                  - description
+                  - file_id
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                passport:
+                  additionalProperties: false
+                  description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                  properties:
+                    country:
+                      description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    expiration_date:
+                      description: The passport's expiration date in YYYY-MM-DD format.
+                      format: date
+                      type: string
+                      x-documentation-priority: default
+                    file_id:
+                      description: The identifier of the File containing the passport.
+                      type: string
+                      x-documentation-priority: default
+                      x-id-reference-to: Files
+                  required:
+                  - file_id
+                  - expiration_date
+                  - country
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - method
+              - number
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person's legal name.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          - date_of_birth
+          - address
+          - identification
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        risk_rating:
+          additionalProperties: false
+          description: An assessment of the entity's potential risk of involvement in financial crimes, such as money laundering.
+          properties:
+            rated_at:
+              description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the risk rating was performed.
+              format: date-time
+              type: string
+              x-documentation-priority: default
+            rating:
+              description: The rating given to this entity.
+              enum:
+              - low
+              - medium
+              - high
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Minimal risk of involvement in financial crime.
+              - Moderate risk of involvement in financial crime.
+              - Elevated risk of involvement in financial crime.
+          required:
+          - rating
+          - rated_at
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        structure:
+          description: The type of Entity to create.
+          enum:
+          - corporation
+          - natural_person
+          - joint
+          - trust
+          - government_authority
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A corporation.
+          - An individual person.
+          - Multiple individual people.
+          - A trust.
+          - A government authority.
+        supplemental_documents:
+          description: Additional documentation associated with the entity.
+          items:
+            additionalProperties: false
+            properties:
+              file_id:
+                description: The identifier of the File containing the document.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Files
+            required:
+            - file_id
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+          type: array
+          x-documentation-priority: low
+        terms_agreements:
+          description: The terms that the Entity agreed to. Not all programs are required to submit this data.
+          items:
+            additionalProperties: false
+            properties:
+              agreed_at:
+                description: The timestamp of when the Entity agreed to the terms.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              ip_address:
+                description: The IP address the Entity accessed reviewed the terms from.
+                maxLength: 200
+                minLength: 1
+                type: string
+                x-documentation-priority: default
+              terms_url:
+                description: The URL of the terms agreement. This link will be provided by your bank partner.
+                maxLength: 200
+                minLength: 1
+                type: string
+                x-documentation-priority: default
+            required:
+            - terms_url
+            - ip_address
+            - agreed_at
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+          type: array
+          x-documentation-priority: low
+        third_party_verification:
+          additionalProperties: false
+          description: If you are using a third-party service for identity verification, you can use this field to associate this Entity with the identifier that represents them in that service.
+          properties:
+            reference:
+              description: The reference identifier for the third party verification.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            vendor:
+              description: The vendor that was used to perform the verification.
+              enum:
+              - alloy
+              - middesk
+              - oscilar
+              - persona
+              - taktile
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Alloy. See https://alloy.com for more information.
+              - Middesk. See https://middesk.com for more information.
+              - Oscilar. See https://oscilar.com for more information.
+              - Persona. See https://withpersona.com for more information.
+              - Taktile. See https://taktile.com for more information.
+          required:
+          - reference
+          - vendor
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+        trust:
+          additionalProperties: false
+          description: Details of the trust entity to create. Required if `structure` is equal to `trust`.
+          properties:
+            address:
+              additionalProperties: false
+              description: The trust's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+              properties:
+                city:
+                  description: The city of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address. This is usually the street number and street.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address. This might be the floor or room number.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The two-letter United States Postal Service (USPS) abbreviation for the state of the address.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+                zip:
+                  description: The ZIP code of the address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - state
+              - zip
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            category:
+              description: Whether the trust is `revocable` or `irrevocable`. Irrevocable trusts require their own Employer Identification Number. Revocable trusts require information about the individual `grantor` who created the trust.
+              enum:
+              - revocable
+              - irrevocable
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The trust is revocable by the grantor.
+              - The trust cannot be revoked.
+            formation_document_file_id:
+              description: The identifier of the File containing the formation document of the trust.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Files
+            formation_state:
+              description: The two-letter United States Postal Service (USPS) abbreviation for the state in which the trust was formed.
+              maxLength: 2
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            grantor:
+              additionalProperties: false
+              description: The grantor of the trust. Required if `category` is equal to `revocable`.
+              properties:
+                address:
+                  additionalProperties: false
+                  description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+                  properties:
+                    city:
+                      description: The city, district, town, or village of the address.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    country:
+                      description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    line1:
+                      description: The first line of the address. This is usually the street number and street.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    line2:
+                      description: The second line of the address. This might be the floor or room number.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    state:
+                      description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                    zip:
+                      description: The ZIP or postal code of the address. Required in certain countries.
+                      maxLength: 200
+                      minLength: 1
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - line1
+                  - city
+                  - country
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                confirmed_no_us_tax_id:
+                  description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+                  type: boolean
+                  x-documentation-priority: default
+                date_of_birth:
+                  description: The person's date of birth in YYYY-MM-DD format.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                identification:
+                  additionalProperties: true
+                  description: A means of verifying the person's identity.
+                  properties:
+                    drivers_license:
+                      additionalProperties: false
+                      description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                      properties:
+                        back_file_id:
+                          description: The identifier of the File containing the back of the driver's license.
+                          type: string
+                          x-documentation-priority: default
+                          x-id-reference-to: Files
+                        expiration_date:
+                          description: The driver's license's expiration date in YYYY-MM-DD format.
+                          format: date
+                          type: string
+                          x-documentation-priority: default
+                        file_id:
+                          description: The identifier of the File containing the front of the driver's license.
+                          type: string
+                          x-documentation-priority: default
+                          x-id-reference-to: Files
+                        state:
+                          description: The state that issued the provided driver's license.
+                          maxLength: 2
+                          minLength: 2
+                          type: string
+                          x-documentation-priority: default
+                      required:
+                      - file_id
+                      - expiration_date
+                      - state
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                    method:
+                      description: A method that can be used to verify the individual's identity.
+                      enum:
+                      - social_security_number
+                      - individual_taxpayer_identification_number
+                      - passport
+                      - drivers_license
+                      - other
+                      type: string
+                      x-documentation-priority: default
+                      x-enum-descriptions:
+                      - A social security number.
+                      - An individual taxpayer identification number (ITIN).
+                      - A passport number.
+                      - A driver's license number.
+                      - Another identifying document.
+                    number:
+                      description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                      maxLength: 200
+                      minLength: 4
+                      type: string
+                      x-documentation-priority: default
+                    other:
+                      additionalProperties: false
+                      description: Information about the identification document provided. Required if `method` is equal to `other`.
+                      properties:
+                        back_file_id:
+                          description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                          type: string
+                          x-documentation-priority: default
+                          x-id-reference-to: Files
+                        country:
+                          description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                          maxLength: 200
+                          minLength: 1
+                          type: string
+                          x-documentation-priority: default
+                        description:
+                          description: A description of the document submitted.
+                          maxLength: 200
+                          minLength: 1
+                          type: string
+                          x-documentation-priority: default
+                        expiration_date:
+                          description: The document's expiration date in YYYY-MM-DD format.
+                          format: date
+                          type: string
+                          x-documentation-priority: default
+                        file_id:
+                          description: The identifier of the File containing the front of the document.
+                          type: string
+                          x-documentation-priority: default
+                          x-id-reference-to: Files
+                      required:
+                      - country
+                      - description
+                      - file_id
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                    passport:
+                      additionalProperties: false
+                      description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                      properties:
+                        country:
+                          description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                          maxLength: 200
+                          minLength: 1
+                          type: string
+                          x-documentation-priority: default
+                        expiration_date:
+                          description: The passport's expiration date in YYYY-MM-DD format.
+                          format: date
+                          type: string
+                          x-documentation-priority: default
+                        file_id:
+                          description: The identifier of the File containing the passport.
+                          type: string
+                          x-documentation-priority: default
+                          x-id-reference-to: Files
+                      required:
+                      - file_id
+                      - expiration_date
+                      - country
+                      type: object
+                      x-documentation-priority: default
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                  required:
+                  - method
+                  - number
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                name:
+                  description: The person's legal name.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - date_of_birth
+              - address
+              - identification
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The legal name of the trust.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            tax_identifier:
+              description: The Employer Identification Number (EIN) for the trust. Submit nine digits with no dashes or other separators. Required if `category` is equal to `irrevocable`.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            trustees:
+              description: The trustees of the trust.
+              items:
+                additionalProperties: false
+                properties:
+                  individual:
+                    additionalProperties: false
+                    description: Details of the individual trustee. Within the trustee object, this is required if `structure` is equal to `individual`.
+                    properties:
+                      address:
+                        additionalProperties: false
+                        description: The individual's physical address. Mail receiving locations like PO Boxes and PMB's are disallowed.
+                        properties:
+                          city:
+                            description: The city, district, town, or village of the address.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          country:
+                            description: The two-letter ISO 3166-1 alpha-2 code for the country of the address.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          line1:
+                            description: The first line of the address. This is usually the street number and street.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          line2:
+                            description: The second line of the address. This might be the floor or room number.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          state:
+                            description: The two-letter United States Postal Service (USPS) abbreviation for the US state, province, or region of the address. Required in certain countries.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                          zip:
+                            description: The ZIP or postal code of the address. Required in certain countries.
+                            maxLength: 200
+                            minLength: 1
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - line1
+                        - city
+                        - country
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      confirmed_no_us_tax_id:
+                        description: The identification method for an individual can only be a passport, driver's license, or other document if you've confirmed the individual does not have a US tax id (either a Social Security Number or Individual Taxpayer Identification Number).
+                        type: boolean
+                        x-documentation-priority: default
+                      date_of_birth:
+                        description: The person's date of birth in YYYY-MM-DD format.
+                        format: date
+                        type: string
+                        x-documentation-priority: default
+                      identification:
+                        additionalProperties: true
+                        description: A means of verifying the person's identity.
+                        properties:
+                          drivers_license:
+                            additionalProperties: false
+                            description: Information about the United States driver's license used for identification. Required if `method` is equal to `drivers_license`.
+                            properties:
+                              back_file_id:
+                                description: The identifier of the File containing the back of the driver's license.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              expiration_date:
+                                description: The driver's license's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the front of the driver's license.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              state:
+                                description: The state that issued the provided driver's license.
+                                maxLength: 2
+                                minLength: 2
+                                type: string
+                                x-documentation-priority: default
+                            required:
+                            - file_id
+                            - expiration_date
+                            - state
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                          method:
+                            description: A method that can be used to verify the individual's identity.
+                            enum:
+                            - social_security_number
+                            - individual_taxpayer_identification_number
+                            - passport
+                            - drivers_license
+                            - other
+                            type: string
+                            x-documentation-priority: default
+                            x-enum-descriptions:
+                            - A social security number.
+                            - An individual taxpayer identification number (ITIN).
+                            - A passport number.
+                            - A driver's license number.
+                            - Another identifying document.
+                          number:
+                            description: An identification number that can be used to verify the individual's identity, such as a social security number. For Social Security Numbers and Individual Taxpayer Identification Numbers, submit nine digits with no dashes or other separators.
+                            maxLength: 200
+                            minLength: 4
+                            type: string
+                            x-documentation-priority: default
+                          other:
+                            additionalProperties: false
+                            description: Information about the identification document provided. Required if `method` is equal to `other`.
+                            properties:
+                              back_file_id:
+                                description: The identifier of the File containing the back of the document. Not every document has a reverse side.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                              country:
+                                description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              description:
+                                description: A description of the document submitted.
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              expiration_date:
+                                description: The document's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the front of the document.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                            required:
+                            - country
+                            - description
+                            - file_id
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                          passport:
+                            additionalProperties: false
+                            description: Information about the passport used for identification. Required if `method` is equal to `passport`.
+                            properties:
+                              country:
+                                description: The two-character ISO 3166-1 code representing the country that issued the document (e.g., `US`).
+                                maxLength: 200
+                                minLength: 1
+                                type: string
+                                x-documentation-priority: default
+                              expiration_date:
+                                description: The passport's expiration date in YYYY-MM-DD format.
+                                format: date
+                                type: string
+                                x-documentation-priority: default
+                              file_id:
+                                description: The identifier of the File containing the passport.
+                                type: string
+                                x-documentation-priority: default
+                                x-id-reference-to: Files
+                            required:
+                            - file_id
+                            - expiration_date
+                            - country
+                            type: object
+                            x-documentation-priority: default
+                            x-event-categories: []
+                            x-stainless-empty-object: false
+                        required:
+                        - method
+                        - number
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                      name:
+                        description: The person's legal name.
+                        maxLength: 200
+                        minLength: 1
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - name
+                    - date_of_birth
+                    - address
+                    - identification
+                    type: object
+                    x-documentation-priority: default
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  structure:
+                    description: The structure of the trustee.
+                    enum:
+                    - individual
+                    type: string
+                    x-documentation-priority: default
+                    x-enum-descriptions:
+                    - The trustee is an individual.
+                required:
+                - structure
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+          required:
+          - name
+          - category
+          - address
+          - trustees
+          type: object
+          x-documentation-priority: low
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - structure
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity_supplemental_document:
+      additionalProperties: false
+      description: Supplemental Documents are uploaded files connected to an Entity during onboarding.
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        file_id: file_makxrc67oh9l6sg7w9yc
+        idempotency_key: null
+        type: entity_supplemental_document
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Supplemental Document was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The Entity the supplemental document is attached to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        file_id:
+          description: The File containing the document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity_supplemental_document`.
+          enum:
+          - entity_supplemental_document
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - entity_id
+      - file_id
+      - created_at
+      - idempotency_key
+      title: Supplemental Document
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Supplemental Documents
+      x-title-plural: Supplemental Documents
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

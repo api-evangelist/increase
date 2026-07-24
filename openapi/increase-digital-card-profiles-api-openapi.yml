@@ -1,0 +1,986 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Digital Card Profiles API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
+  name: Digital Card Profiles
+paths:
+  /digital_card_profiles:
+    get:
+      operationId: list_card_profiles
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Digital Card Profiles for those with the specified digital wallet status or statuses. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending
+            - rejected
+            - active
+            - archived
+            type: string
+            x-enum-descriptions:
+            - The Card Profile is awaiting review from Increase and/or processing by card networks.
+            - There is an issue with the Card Profile preventing it from use.
+            - The Card Profile can be assigned to Cards.
+            - The Card Profile is no longer in use.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/digital_card_profile_list'
+          description: Digital Card Profile List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Card Profiles
+      x-sandbox-only: false
+      x-tag: Digital Card Profiles
+      tags:
+      - Digital Card Profiles
+    post:
+      operationId: create_a_digital_card_profile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_digital_card_profile_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/digital_card_profile'
+          description: Digital Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Digital Card Profile
+      x-sandbox-only: false
+      x-tag: Digital Card Profiles
+      tags:
+      - Digital Card Profiles
+  /digital_card_profiles/{digital_card_profile_id}:
+    get:
+      operationId: retrieve_a_digital_card_profile
+      parameters:
+      - example: digital_card_profile_s3puplu90f04xhcwkiga
+        in: path
+        name: digital_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Digital Card Profile.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Digital Card Profiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/digital_card_profile'
+          description: Digital Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Digital Card Profile
+      x-sandbox-only: false
+      x-tag: Digital Card Profiles
+      tags:
+      - Digital Card Profiles
+  /digital_card_profiles/{digital_card_profile_id}/archive:
+    post:
+      operationId: archive_a_digital_card_profile
+      parameters:
+      - example: digital_card_profile_s3puplu90f04xhcwkiga
+        in: path
+        name: digital_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Digital Card Profile to archive.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Digital Card Profiles
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/digital_card_profile'
+          description: Digital Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Archive a Digital Card Profile
+      x-sandbox-only: false
+      x-tag: Digital Card Profiles
+      tags:
+      - Digital Card Profiles
+  /digital_card_profiles/{digital_card_profile_id}/clone:
+    post:
+      operationId: clones_a_digital_card_profile
+      parameters:
+      - example: digital_card_profile_s3puplu90f04xhcwkiga
+        in: path
+        name: digital_card_profile_id
+        required: true
+        schema:
+          description: The identifier of the Digital Card Profile to clone.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Digital Card Profiles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/clones_a_digital_card_profile_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/digital_card_profile'
+          description: Digital Card Profile
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Clones a Digital Card Profile
+      x-sandbox-only: false
+      x-tag: Digital Card Profiles
+      tags:
+      - Digital Card Profiles
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    digital_card_profile_list:
+      additionalProperties: true
+      description: A list of Digital Card Profile objects.
+      example:
+        data:
+        - app_icon_file_id: file_makxrc67oh9l6sg7w9yc
+          background_image_file_id: file_makxrc67oh9l6sg7w9yc
+          card_description: Black Card
+          contact_email: user@example.com
+          contact_phone: '+18882988865'
+          contact_website: https://example.com
+          created_at: '2020-01-31T23:59:59Z'
+          description: Corporate logo Apple Pay Card
+          id: digital_card_profile_s3puplu90f04xhcwkiga
+          idempotency_key: null
+          issuer_name: National Phonograph Company
+          status: active
+          text_color:
+            blue: 230
+            green: 255
+            red: 189
+          type: digital_card_profile
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/digital_card_profile'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Digital Card Profile List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Digital Card Profile Lists
+    clones_a_digital_card_profile_parameters:
+      additionalProperties: true
+      example:
+        background_image_file_id: file_1ai913suu1zfn1pdetru
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          description: An email address the user can contact to receive support for their card.
+          format: email
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_website:
+          description: A website the user can visit to view and receive support for their card.
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple. The default is white.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    create_a_digital_card_profile_parameters:
+      additionalProperties: true
+      example:
+        app_icon_file_id: file_8zxqkwlh43wo144u8yec
+        background_image_file_id: file_1ai913suu1zfn1pdetru
+        card_description: MyBank Signature Card
+        contact_email: user@example.com
+        contact_phone: '+18885551212'
+        contact_website: https://example.com
+        description: My Card Profile
+        issuer_name: MyBank
+        text_color:
+          blue: 59
+          green: 43
+          red: 26
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          description: An email address the user can contact to receive support for their card.
+          format: email
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_website:
+          description: A website the user can visit to view and receive support for their card.
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple. The default is white.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - description
+      - issuer_name
+      - card_description
+      - background_image_file_id
+      - app_icon_file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    digital_card_profile:
+      additionalProperties: true
+      description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
+      example:
+        app_icon_file_id: file_makxrc67oh9l6sg7w9yc
+        background_image_file_id: file_makxrc67oh9l6sg7w9yc
+        card_description: Black Card
+        contact_email: user@example.com
+        contact_phone: '+18882988865'
+        contact_website: https://example.com
+        created_at: '2020-01-31T23:59:59Z'
+        description: Corporate logo Apple Pay Card
+        id: digital_card_profile_s3puplu90f04xhcwkiga
+        idempotency_key: null
+        issuer_name: National Phonograph Company
+        status: active
+        text_color:
+          blue: 230
+          green: 255
+          red: 189
+        type: digital_card_profile
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          anyOf:
+          - description: An email address the user can contact to receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        contact_phone:
+          anyOf:
+          - description: A phone number the user can contact to receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        contact_website:
+          anyOf:
+          - description: A website the user can visit to view and receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Digital Card Profile was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Card Profile identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Digital Card Profiles
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          type: string
+          x-documentation-priority: default
+        status:
+          description: The status of the Card Profile.
+          enum:
+          - pending
+          - rejected
+          - active
+          - archived
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Card Profile is awaiting review from Increase and/or processing by card networks.
+          - There is an issue with the Card Profile preventing it from use.
+          - The Card Profile can be assigned to Cards.
+          - The Card Profile is no longer in use.
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          title: Digital Card Profile TextColor
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: TextColors
+        type:
+          description: A constant representing the object's type. For this resource it will always be `digital_card_profile`.
+          enum:
+          - digital_card_profile
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - status
+      - description
+      - text_color
+      - issuer_name
+      - card_description
+      - contact_website
+      - contact_email
+      - contact_phone
+      - background_image_file_id
+      - app_icon_file_id
+      - idempotency_key
+      title: Digital Card Profile
+      type: object
+      x-event-categories:
+      - digital_card_profile.created
+      - digital_card_profile.updated
+      x-stainless-empty-object: false
+      x-tag: Digital Card Profiles
+      x-title-plural: Digital Card Profiles
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

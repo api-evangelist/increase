@@ -1,0 +1,1250 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Check Deposits API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Check Deposits allow you to deposit images of paper checks into your account.
+  name: Check Deposits
+paths:
+  /check_deposits:
+    get:
+      operationId: list_check_deposits
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Check Deposits to those belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check_deposit_list'
+          description: Check Deposit List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Check Deposits
+      x-sandbox-only: false
+      x-tag: Check Deposits
+      tags:
+      - Check Deposits
+    post:
+      operationId: create_a_check_deposit
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_check_deposit_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check_deposit'
+          description: Check Deposit
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Check Deposit
+      x-sandbox-only: false
+      x-tag: Check Deposits
+      tags:
+      - Check Deposits
+  /check_deposits/{check_deposit_id}:
+    get:
+      operationId: retrieve_a_check_deposit
+      parameters:
+      - example: check_deposit_f06n9gpg7sxn8t19lfc1
+        in: path
+        name: check_deposit_id
+        required: true
+        schema:
+          description: The identifier of the Check Deposit to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Check Deposits
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/check_deposit'
+          description: Check Deposit
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Check Deposit
+      x-sandbox-only: false
+      x-tag: Check Deposits
+      tags:
+      - Check Deposits
+components:
+  schemas:
+    check_deposit:
+      additionalProperties: true
+      description: Check Deposits allow you to deposit images of paper checks into your account.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 1000
+        back_image_file_id: file_26khfk98mzfz90a11oqx
+        created_at: '2020-01-31T23:59:59Z'
+        deposit_acceptance:
+          account_number: '987654321'
+          amount: 1000
+          auxiliary_on_us: '101'
+          check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+          currency: USD
+          routing_number: '101050001'
+          serial_number: null
+        deposit_adjustments: []
+        deposit_rejection: null
+        deposit_return: null
+        deposit_submission:
+          back_file_id: file_frhw4s443nh7noss55kq
+          front_file_id: file_j7ed9mrve741m6yui9ju
+          submitted_at: '2020-02-01T00:59:59+00:00'
+        description: null
+        front_image_file_id: file_makxrc67oh9l6sg7w9yc
+        id: check_deposit_f06n9gpg7sxn8t19lfc1
+        idempotency_key: null
+        inbound_funds_hold: null
+        inbound_mail_item_id: null
+        lockbox_recipient_id: null
+        status: submitted
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: check_deposit
+      properties:
+        account_id:
+          description: The Account the check was deposited into.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The deposited amount in USD cents.
+          type: integer
+          x-documentation-priority: default
+        back_image_file_id:
+          anyOf:
+          - description: The ID for the File containing the image of the back of the check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        deposit_acceptance:
+          anyOf:
+          - additionalProperties: true
+            description: Once your deposit is successfully parsed and accepted by Increase, this will contain details of the parsed check.
+            example:
+              account_number: '987654321'
+              amount: 1000
+              auxiliary_on_us: '101'
+              check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+              currency: USD
+              routing_number: '101050001'
+              serial_number: null
+            properties:
+              account_number:
+                description: The account number printed on the check. This is an account at the bank that issued the check.
+                type: string
+                x-documentation-priority: default
+              amount:
+                description: The amount to be deposited in the minor unit of the transaction's currency. For dollars, for example, this is cents.
+                type: integer
+                x-documentation-priority: default
+              auxiliary_on_us:
+                anyOf:
+                - description: An additional line of metadata printed on the check. This typically includes the check number for business checks.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              check_deposit_id:
+                description: The ID of the Check Deposit that was accepted.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Check Deposits
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's currency.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+              routing_number:
+                description: The routing number printed on the check. This is a routing number for the bank that issued the check.
+                type: string
+                x-documentation-priority: default
+              serial_number:
+                anyOf:
+                - description: The check serial number, if present, for consumer checks. For business checks, the serial number is usually in the `auxiliary_on_us` field.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - amount
+            - currency
+            - account_number
+            - routing_number
+            - auxiliary_on_us
+            - serial_number
+            - check_deposit_id
+            title: Check Deposit Check Deposit Acceptance
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Check Deposit Acceptances
+          - type: 'null'
+        deposit_adjustments:
+          description: If the deposit or the return was adjusted by the receiving institution, this will contain details of the adjustments.
+          items:
+            additionalProperties: false
+            example:
+              adjusted_at: '2020-01-31T23:59:59Z'
+              amount: 1750
+              reason: late_return
+              transaction_id: transaction_uyrp7fld2ium70oa7oi
+            properties:
+              adjusted_at:
+                description: The time at which the adjustment was received.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              amount:
+                description: The amount of the adjustment.
+                type: integer
+                x-documentation-priority: default
+              reason:
+                description: The reason for the adjustment.
+                enum:
+                - adjusted_amount
+                - non_conforming_item
+                - paid
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The check was deposited with a different amount than what was written on the check.
+                - The recipient was not able to process the check. This usually happens for e.g., low quality images.
+                - The check has already been deposited elsewhere and so this is a duplicate.
+              transaction_id:
+                description: The id of the transaction for the adjustment.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Transactions
+            required:
+            - adjusted_at
+            - transaction_id
+            - reason
+            - amount
+            title: Check Deposit Check Deposit Adjustment
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Check Deposit Adjustments
+          type: array
+          x-documentation-priority: default
+        deposit_rejection:
+          anyOf:
+          - additionalProperties: true
+            description: If your deposit is rejected by Increase, this will contain details as to why it was rejected.
+            example:
+              amount: 1750
+              check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+              currency: USD
+              declined_transaction_id: declined_transaction_17jbn0yyhvkt4v4ooym8
+              reason: incomplete_image
+              rejected_at: '2020-01-31T23:59:59Z'
+            properties:
+              amount:
+                description: The rejected amount in the minor unit of check's currency. For dollars, for example, this is cents.
+                type: integer
+                x-documentation-priority: default
+              check_deposit_id:
+                description: The identifier of the Check Deposit that was rejected.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Check Deposits
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the check's currency.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+              declined_transaction_id:
+                description: The identifier of the associated declined transaction.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Declined Transactions
+              reason:
+                description: Why the check deposit was rejected.
+                enum:
+                - incomplete_image
+                - duplicate
+                - poor_image_quality
+                - incorrect_amount
+                - incorrect_recipient
+                - not_eligible_for_mobile_deposit
+                - missing_required_data_elements
+                - suspected_fraud
+                - deposit_window_expired
+                - requested_by_user
+                - international
+                - unknown
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The check's image is incomplete.
+                - This is a duplicate check submission.
+                - This check has poor image quality.
+                - The check was deposited with the incorrect amount.
+                - The check is made out to someone other than the account holder.
+                - This check was not eligible for mobile deposit.
+                - This check is missing at least one required field.
+                - This check is suspected to be fraudulent.
+                - This check's deposit window has expired.
+                - The check was rejected at the user's request.
+                - The check is not a U.S. domestic check and cannot be processed.
+                - The check was rejected for an unknown reason.
+              rejected_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the check deposit was rejected.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - check_deposit_id
+            - declined_transaction_id
+            - amount
+            - currency
+            - reason
+            - rejected_at
+            title: Check Deposit Check Deposit Rejection
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Check Deposit Rejections
+          - type: 'null'
+        deposit_return:
+          anyOf:
+          - additionalProperties: true
+            description: If your deposit is returned, this will contain details as to why it was returned.
+            example:
+              amount: 100
+              check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+              currency: USD
+              return_reason: insufficient_funds
+              returned_at: '2020-01-31T23:59:59Z'
+              transaction_id: transaction_uyrp7fld2ium70oa7oi
+            properties:
+              amount:
+                description: The returned amount in USD cents.
+                type: integer
+                x-documentation-priority: default
+              check_deposit_id:
+                description: The identifier of the Check Deposit that was returned.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Check Deposits
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's currency.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+              return_reason:
+                description: Why this check was returned by the bank holding the account it was drawn against.
+                enum:
+                - ach_conversion_not_supported
+                - closed_account
+                - duplicate_submission
+                - insufficient_funds
+                - no_account
+                - not_authorized
+                - stale_dated
+                - stop_payment
+                - unknown_reason
+                - unmatched_details
+                - unreadable_image
+                - endorsement_irregular
+                - altered_or_fictitious_item
+                - frozen_or_blocked_account
+                - post_dated
+                - endorsement_missing
+                - signature_missing
+                - stop_payment_suspect
+                - unusable_image
+                - image_fails_security_check
+                - cannot_determine_amount
+                - signature_irregular
+                - non_cash_item
+                - unable_to_process
+                - item_exceeds_dollar_limit
+                - branch_or_account_sold
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The check doesn't allow ACH conversion.
+                - The account is closed. (Check21 return code `D`)
+                - The check has already been deposited. (Check21 return code `Y`)
+                - Insufficient funds (Check21 return code `A`)
+                - No account was found matching the check details. (Check21 return code `E`)
+                - The check was not authorized. (Check21 return code `Q`)
+                - The check is too old. (Check21 return code `G`)
+                - The payment has been stopped by the account holder. (Check21 return code `C`)
+                - The reason for the return is unknown.
+                - The image doesn't match the details submitted.
+                - The image could not be read. (Check21 return code `U`)
+                - The check endorsement was irregular. (Check21 return code `J`)
+                - The check present was either altered or fake. (Check21 return code `N`)
+                - The account this check is drawn on is frozen. (Check21 return code `F`)
+                - The check is post dated. (Check21 return code `H`)
+                - The endorsement was missing. (Check21 return code `I`)
+                - The check signature was missing. (Check21 return code `K`)
+                - The bank suspects a stop payment will be placed. (Check21 return code `T`)
+                - The bank cannot read the image. (Check21 return code `U`)
+                - The check image fails the bank's security check. (Check21 return code `V`)
+                - The bank cannot determine the amount. (Check21 return code `W`)
+                - The signature is inconsistent with prior signatures. (Check21 return code `L`)
+                - The check is a non-cash item and cannot be drawn against the account. (Check21 return code `M`)
+                - The bank is unable to process this check. (Check21 return code `O`)
+                - The check exceeds the bank or customer's limit. (Check21 return code `P`)
+                - The bank sold this account and no longer services this customer. (Check21 return code `R`)
+              returned_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the check deposit was returned.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              transaction_id:
+                description: The identifier of the transaction that reversed the original check deposit transaction.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Transactions
+            required:
+            - amount
+            - returned_at
+            - currency
+            - check_deposit_id
+            - transaction_id
+            - return_reason
+            title: Check Deposit Check Deposit Return
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Check Deposit Returns
+          - type: 'null'
+        deposit_submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the check is parsed, it is submitted to the Check21 network for processing. This will contain details of the submission.
+            example:
+              back_file_id: file_frhw4s443nh7noss55kq
+              front_file_id: file_j7ed9mrve741m6yui9ju
+              submitted_at: '2020-02-01T00:59:59+00:00'
+            properties:
+              back_file_id:
+                description: The ID for the File containing the check back image that was submitted to the Check21 network.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Files
+              front_file_id:
+                description: The ID for the File containing the check front image that was submitted to the Check21 network.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Files
+              submitted_at:
+                description: When the check deposit was submitted to the Check21 network for processing. During business days, this happens within a few hours of the check being accepted by Increase.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - submitted_at
+            - front_file_id
+            - back_file_id
+            title: Check Deposit Check Deposit Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Check Deposit Submissions
+          - type: 'null'
+        description:
+          anyOf:
+          - description: The description of the Check Deposit, for display purposes only.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        front_image_file_id:
+          description: The ID for the File containing the image of the front of the check.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        id:
+          description: The deposit's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Check Deposits
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_funds_hold:
+          anyOf:
+          - $ref: '#/components/schemas/inbound_funds_hold'
+            description: Increase will sometimes hold the funds for Check Deposits. If funds are held, this sub-object will contain details of the hold.
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_mail_item_id:
+          anyOf:
+          - description: If the Check Deposit was the result of an Inbound Mail Item, this will contain the identifier of the Inbound Mail Item.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Mail Items
+          - type: 'null'
+        lockbox_recipient_id:
+          anyOf:
+          - description: If the Check Deposit was the result of an Inbound Mail Item routed to a Lockbox Recipient, this will contain the identifier of the Lockbox Recipient that received it.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Lockbox Recipients
+          - type: 'null'
+        status:
+          description: The status of the Check Deposit.
+          enum:
+          - pending
+          - submitted
+          - rejected
+          - returned
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Check Deposit is pending review.
+          - The Check Deposit has been deposited.
+          - The Check Deposit has been rejected.
+          - The Check Deposit has been returned.
+        transaction_id:
+          anyOf:
+          - description: The ID for the Transaction created by the deposit.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `check_deposit`.
+          enum:
+          - check_deposit
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - amount
+      - description
+      - created_at
+      - status
+      - account_id
+      - front_image_file_id
+      - back_image_file_id
+      - transaction_id
+      - deposit_acceptance
+      - deposit_submission
+      - deposit_rejection
+      - deposit_return
+      - inbound_funds_hold
+      - inbound_mail_item_id
+      - lockbox_recipient_id
+      - deposit_adjustments
+      - idempotency_key
+      title: Check Deposit
+      type: object
+      x-event-categories:
+      - check_deposit.created
+      - check_deposit.updated
+      x-stainless-empty-object: false
+      x-tag: Check Deposits
+      x-title-plural: Check Deposits
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
+    check_deposit_list:
+      additionalProperties: true
+      description: A list of Check Deposit objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 1000
+          back_image_file_id: file_26khfk98mzfz90a11oqx
+          created_at: '2020-01-31T23:59:59Z'
+          deposit_acceptance:
+            account_number: '987654321'
+            amount: 1000
+            auxiliary_on_us: '101'
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            currency: USD
+            routing_number: '101050001'
+            serial_number: null
+          deposit_adjustments: []
+          deposit_rejection: null
+          deposit_return: null
+          deposit_submission:
+            back_file_id: file_frhw4s443nh7noss55kq
+            front_file_id: file_j7ed9mrve741m6yui9ju
+            submitted_at: '2020-02-01T00:59:59+00:00'
+          description: null
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          id: check_deposit_f06n9gpg7sxn8t19lfc1
+          idempotency_key: null
+          inbound_funds_hold: null
+          inbound_mail_item_id: null
+          lockbox_recipient_id: null
+          status: submitted
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: check_deposit
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/check_deposit'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Check Deposit List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Check Deposit Lists
+    create_a_check_deposit_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 1000
+        back_image_file_id: file_26khfk98mzfz90a11oqx
+        description: Vendor payment
+        front_image_file_id: file_hkv175ovmc2tb2v2zbrm
+      properties:
+        account_id:
+          description: The identifier for the Account to deposit the check in.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The deposit amount in USD cents.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        back_image_file_id:
+          description: The File containing the check's back image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        description:
+          description: The description you choose to give the Check Deposit, for display purposes only.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          description: The File containing the check's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+      required:
+      - account_id
+      - amount
+      - front_image_file_id
+      - back_image_file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

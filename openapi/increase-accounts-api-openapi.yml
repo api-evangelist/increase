@@ -1,0 +1,1260 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Accounts API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Accounts are your bank accounts with Increase. They store money, receive transfers, and send payments. They earn interest and have depository insurance.
+  name: Accounts
+paths:
+  /accounts:
+    get:
+      operationId: list_accounts
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: query
+        name: entity_id
+        required: false
+        schema:
+          description: Filter Accounts for those belonging to the specified Entity.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      - in: query
+        name: informational_entity_id
+        required: false
+        schema:
+          description: Filter Accounts for those belonging to the specified Entity as informational.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      - in: query
+        name: program_id
+        required: false
+        schema:
+          description: Filter Accounts for those in a specific Program.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Accounts for those with the specified status. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - closed
+            - open
+            type: string
+            x-enum-descriptions:
+            - Closed Accounts on which no new activity can occur.
+            - Open Accounts that are ready to use.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_list'
+          description: Account List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Accounts
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+    post:
+      operationId: create_an_account
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_account_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: Account
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an Account
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+  /accounts/{account_id}:
+    get:
+      operationId: retrieve_an_account
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: account_id
+        required: true
+        schema:
+          description: The identifier of the Account to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: Account
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Account
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+    patch:
+      operationId: update_an_account
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: account_id
+        required: true
+        schema:
+          description: The identifier of the Account to update.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_an_account_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: Account
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update an Account
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+  /accounts/{account_id}/balance:
+    get:
+      description: Retrieve the current and available balances for an account in minor units of the account's currency. Learn more about [account balances](/documentation/balance).
+      operationId: retrieve_an_account_balance
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: account_id
+        required: true
+        schema:
+          description: The identifier of the Account to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: at_time
+        required: false
+        schema:
+          description: The moment to query the balance at. If not set, returns the current balances.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/balance_lookup'
+          description: Balance Lookup
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Account Balance
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+  /accounts/{account_id}/close:
+    post:
+      operationId: close_an_account
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: account_id
+        required: true
+        schema:
+          description: The identifier of the Account to close. The account must have a zero balance.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: Account
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Close an Account
+      x-sandbox-only: false
+      x-tag: Accounts
+      tags:
+      - Accounts
+  /accounts/{account_id}/intrafi_balance:
+    get:
+      description: Returns the IntraFi balance for the given account. IntraFi may sweep funds to multiple banks. This endpoint will include both the total balance and the amount swept to each institution.
+      operationId: get_intrafi_balance
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: account_id
+        required: true
+        schema:
+          description: The identifier of the Account to get balances for.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_balance'
+          description: IntraFi Balance
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Get IntraFi balance
+      x-sandbox-only: false
+      x-tag: IntraFi Balances
+      tags:
+      - Accounts
+components:
+  schemas:
+    update_an_account_parameters:
+      additionalProperties: true
+      example:
+        name: My renamed account
+      properties:
+        loan:
+          additionalProperties: false
+          description: The loan details for the account.
+          properties:
+            credit_limit:
+              description: The maximum amount of money that can be drawn from the Account.
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - credit_limit
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        name:
+          description: The new name of the Account.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    balance_lookup:
+      additionalProperties: false
+      description: Represents a request to lookup the balance of an Account at a given point in time.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        available_balance: 100
+        current_balance: 100
+        loan: null
+        type: balance_lookup
+      properties:
+        account_id:
+          description: The identifier for the account for which the balance was queried.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        available_balance:
+          description: The Account's available balance, representing the current balance less any open Pending Transactions on the Account.
+          type: integer
+          x-documentation-priority: default
+        current_balance:
+          description: The Account's current balance, representing the sum of all posted Transactions on the Account.
+          type: integer
+          x-documentation-priority: default
+        loan:
+          anyOf:
+          - additionalProperties: false
+            description: The loan balances for the Account.
+            properties:
+              due_at:
+                anyOf:
+                - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the loan payment is due.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              due_balance:
+                description: The total amount due on the loan.
+                type: integer
+                x-documentation-priority: default
+              past_due_balance:
+                description: The amount past due on the loan.
+                type: integer
+                x-documentation-priority: default
+            required:
+            - due_balance
+            - past_due_balance
+            - due_at
+            title: Balance Lookup Loan
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Loans
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `balance_lookup`.
+          enum:
+          - balance_lookup
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - current_balance
+      - available_balance
+      - loan
+      title: Balance Lookup
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Balance Lookups
+    intrafi_balance:
+      additionalProperties: true
+      description: When using IntraFi, each account's balance over the standard FDIC insurance amount is swept to various other institutions. Funds are rebalanced across banks as needed once per business day.
+      example:
+        balances:
+        - balance: 1750
+          bank: Example Bank
+          bank_location:
+            city: New York
+            state: NY
+          fdic_certificate_number: '314159'
+        currency: USD
+        effective_date: '2020-01-31'
+        total_balance: 1750
+        type: intrafi_balance
+      properties:
+        balances:
+          description: Each entry represents a balance held at a different bank. IntraFi separates the total balance across many participating banks in the network.
+          items:
+            additionalProperties: true
+            properties:
+              balance:
+                description: The balance, in minor units of `currency`, held with this bank.
+                type: integer
+                x-documentation-priority: default
+              bank:
+                description: The name of the bank holding these funds.
+                type: string
+                x-documentation-priority: default
+              bank_location:
+                anyOf:
+                - additionalProperties: false
+                  description: The primary location of the bank.
+                  properties:
+                    city:
+                      description: The bank's city.
+                      type: string
+                      x-documentation-priority: default
+                    state:
+                      description: The bank's state.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - city
+                  - state
+                  title: IntraFi Balance BalancesElement BankLocation
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: BankLocations
+                - type: 'null'
+              fdic_certificate_number:
+                description: The Federal Deposit Insurance Corporation (FDIC) certificate number of the bank. Because many banks have the same or similar names, this can be used to uniquely identify the institution.
+                type: string
+                x-documentation-priority: default
+            required:
+            - bank
+            - bank_location
+            - fdic_certificate_number
+            - balance
+            title: IntraFi Balance BalancesElement
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: BalancesElements
+          type: array
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the account currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        effective_date:
+          description: The date this balance reflects.
+          format: date
+          type: string
+          x-documentation-priority: default
+        total_balance:
+          description: The total balance, in minor units of `currency`. Increase reports this balance to IntraFi daily.
+          type: integer
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `intrafi_balance`.
+          enum:
+          - intrafi_balance
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - effective_date
+      - total_balance
+      - currency
+      - balances
+      title: IntraFi Balance
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: IntraFi Balances
+      x-title-plural: IntraFi Balances
+    account:
+      additionalProperties: true
+      description: Accounts are your bank accounts with Increase. They store money, receive transfers, and send payments. They earn interest and have depository insurance.
+      example:
+        account_revenue_rate: null
+        bank: first_internet_bank
+        closed_at: null
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        funding: deposits
+        id: account_in71c4amph0vgo2qllky
+        idempotency_key: null
+        informational_entity_id: null
+        interest_rate: '0.055'
+        loan: null
+        name: My first account!
+        program_id: program_i2v2os4mwza1oetokh9i
+        status: open
+        type: account
+      properties:
+        account_revenue_rate:
+          anyOf:
+          - description: The account revenue rate currently being earned on the account, as a string containing a decimal number. For example, a 1% account revenue rate would be represented as "0.01". Account revenue is a type of non-interest income accrued on the account.
+            pattern: ^-?\d+(\.\d+)?$
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        bank:
+          description: The bank the Account is with.
+          enum:
+          - core_bank
+          - first_internet_bank
+          - grasshopper_bank
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Core Bank
+          - First Internet Bank of Indiana
+          - Grasshopper Bank
+        closed_at:
+          anyOf:
+          - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account was closed.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the Account currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        entity_id:
+          description: The identifier for the Entity the Account belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        funding:
+          description: Whether the Account is funded by a loan or by deposits.
+          enum:
+          - loan
+          - deposits
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - An account funded by a loan. Before opening a loan account, contact support@increase.com to set up a loan program.
+          - An account funded by deposits.
+        id:
+          description: The Account identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        informational_entity_id:
+          anyOf:
+          - description: The identifier of an Entity that, while not owning the Account, is associated with its activity.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Entities
+          - type: 'null'
+        interest_rate:
+          description: The interest rate currently being earned on the account, as a string containing a decimal number. For example, a 1% interest rate would be represented as "0.01".
+          pattern: ^-?\d+(\.\d+)?$
+          type: string
+          x-documentation-priority: default
+        loan:
+          anyOf:
+          - additionalProperties: false
+            description: The Account's loan-related information, if the Account is a loan account.
+            properties:
+              credit_limit:
+                description: The maximum amount of money that can be borrowed on the Account.
+                type: integer
+                x-documentation-priority: default
+              grace_period_days:
+                description: The number of days after the statement date that the Account can be past due before being considered delinquent.
+                type: integer
+                x-documentation-priority: default
+              maturity_date:
+                anyOf:
+                - description: The date on which the loan matures.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              statement_day_of_month:
+                description: The day of the month on which the loan statement is generated.
+                type: integer
+                x-documentation-priority: default
+              statement_payment_type:
+                description: The type of payment for the loan.
+                enum:
+                - balance
+                - interest_until_maturity
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The borrower must pay the full balance of the loan at the end of the statement period.
+                - The borrower must pay the accrued interest at the end of the statement period.
+            required:
+            - credit_limit
+            - grace_period_days
+            - maturity_date
+            - statement_payment_type
+            - statement_day_of_month
+            title: Account Loan
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Loans
+          - type: 'null'
+        name:
+          description: The name you choose for the Account.
+          type: string
+          x-documentation-priority: default
+        program_id:
+          description: The identifier of the Program determining the compliance and commercial terms of this Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        status:
+          description: The status of the Account.
+          enum:
+          - closed
+          - open
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Closed Accounts on which no new activity can occur.
+          - Open Accounts that are ready to use.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `account`.
+          enum:
+          - account
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - bank
+      - created_at
+      - loan
+      - closed_at
+      - currency
+      - entity_id
+      - funding
+      - informational_entity_id
+      - id
+      - program_id
+      - interest_rate
+      - account_revenue_rate
+      - name
+      - status
+      - idempotency_key
+      title: Account
+      type: object
+      x-event-categories:
+      - account.created
+      - account.updated
+      x-stainless-empty-object: false
+      x-tag: Accounts
+      x-title-plural: Accounts
+    create_an_account_parameters:
+      additionalProperties: true
+      example:
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        name: New Account!
+        program_id: program_i2v2os4mwza1oetokh9i
+      properties:
+        entity_id:
+          description: The identifier for the Entity that will own the Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        funding:
+          description: Whether the Account is funded by a loan or by deposits.
+          enum:
+          - loan
+          - deposits
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - An account funded by a loan. Before opening a loan account, contact support@increase.com to set up a loan program.
+          - An account funded by deposits.
+        informational_entity_id:
+          description: The identifier of an Entity that, while not owning the Account, is associated with its activity. This is generally the beneficiary of the funds.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        loan:
+          additionalProperties: false
+          description: The loan details for the account.
+          properties:
+            credit_limit:
+              description: The maximum amount of money that can be drawn from the Account.
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            grace_period_days:
+              description: The number of days after the statement date that the Account can be past due before being considered delinquent.
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            maturity_date:
+              description: The date on which the loan matures.
+              format: date
+              type: string
+              x-documentation-priority: default
+            statement_day_of_month:
+              description: The day of the month on which the loan statement is generated.
+              maximum: 28
+              minimum: 1
+              type: integer
+              x-documentation-priority: default
+            statement_payment_type:
+              description: The type of statement payment for the account.
+              enum:
+              - balance
+              - interest_until_maturity
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The borrower must pay the full balance of the loan at the end of the statement period.
+              - The borrower must pay the accrued interest at the end of the statement period.
+          required:
+          - credit_limit
+          - grace_period_days
+          - statement_day_of_month
+          - statement_payment_type
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        name:
+          description: The name you choose for the Account.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        program_id:
+          description: The identifier for the Program that this Account falls under. Required if you operate more than one Program.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      required:
+      - name
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    account_list:
+      additionalProperties: true
+      description: A list of Account objects.
+      example:
+        data:
+        - account_revenue_rate: null
+          bank: first_internet_bank
+          closed_at: null
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          funding: deposits
+          id: account_in71c4amph0vgo2qllky
+          idempotency_key: null
+          informational_entity_id: null
+          interest_rate: '0.055'
+          loan: null
+          name: My first account!
+          program_id: program_i2v2os4mwza1oetokh9i
+          status: open
+          type: account
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/account'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Account List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Account Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

@@ -1,0 +1,727 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Entity Onboarding Sessions API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms. Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
+  name: Entity Onboarding Sessions
+paths:
+  /entity_onboarding_sessions:
+    get:
+      operationId: list_entity_onboarding_session
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Entity Onboarding Session for those with the specified status or statuses. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - active
+            - expired
+            type: string
+            x-enum-descriptions:
+            - The Entity Onboarding Session is active.
+            - The Entity Onboarding Session has expired.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_onboarding_session_list'
+          description: Entity Onboarding Session List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Entity Onboarding Session
+      x-sandbox-only: false
+      x-tag: Entity Onboarding Sessions
+      tags:
+      - Entity Onboarding Sessions
+    post:
+      operationId: create_an_entity_onboarding_session
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_entity_onboarding_session_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_onboarding_session'
+          description: Entity Onboarding Session
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an Entity Onboarding Session
+      x-sandbox-only: false
+      x-tag: Entity Onboarding Sessions
+      tags:
+      - Entity Onboarding Sessions
+  /entity_onboarding_sessions/{entity_onboarding_session_id}:
+    get:
+      operationId: retrieve_an_entity_onboarding_session
+      parameters:
+      - example: entity_onboarding_session_wid2ug11fsmvh3k9hymd
+        in: path
+        name: entity_onboarding_session_id
+        required: true
+        schema:
+          description: The identifier of the Entity Onboarding Session.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entity Onboarding Sessions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_onboarding_session'
+          description: Entity Onboarding Session
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Entity Onboarding Session
+      x-sandbox-only: false
+      x-tag: Entity Onboarding Sessions
+      tags:
+      - Entity Onboarding Sessions
+  /entity_onboarding_sessions/{entity_onboarding_session_id}/expire:
+    post:
+      operationId: expire_an_entity_onboarding_session
+      parameters:
+      - example: entity_onboarding_session_wid2ug11fsmvh3k9hymd
+        in: path
+        name: entity_onboarding_session_id
+        required: true
+        schema:
+          description: The identifier of the Entity Onboarding Session to expire.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entity Onboarding Sessions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/entity_onboarding_session'
+          description: Entity Onboarding Session
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Expire an Entity Onboarding Session
+      x-sandbox-only: false
+      x-tag: Entity Onboarding Sessions
+      tags:
+      - Entity Onboarding Sessions
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    create_an_entity_onboarding_session_parameters:
+      additionalProperties: true
+      example:
+        program_id: program_i2v2os4mwza1oetokh9i
+        redirect_url: https://example.com/onboarding/session
+      properties:
+        entity_id:
+          description: The identifier of an existing Entity to associate with the onboarding session. If provided, the onboarding form will display any outstanding tasks required to complete the Entity's onboarding.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        program_id:
+          description: The identifier of the Program the Entity will be onboarded to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        redirect_url:
+          description: The URL to redirect the customer to after they complete the onboarding form. The redirect will include `entity_onboarding_session_id` and `entity_id` query parameters.
+          type: string
+          x-documentation-priority: default
+      required:
+      - redirect_url
+      - program_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity_onboarding_session:
+      additionalProperties: false
+      description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms. Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        expires_at: '2020-02-01T05:59:59+00:00'
+        id: entity_onboarding_session_wid2ug11fsmvh3k9hymd
+        idempotency_key: null
+        program_id: program_i2v2os4mwza1oetokh9i
+        redirect_url: https://example.com/onboarding/completed
+        session_url: https://onboarding.increase.com/onboarding/sessions?id=HIrdj46cXyyNqT5RDcIR38dzPqzRBgTdG84XwzOz
+        status: active
+        type: entity_onboarding_session
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Entity Onboarding Session was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          anyOf:
+          - description: The identifier of the Entity associated with this session, if one has been created or was provided when creating the session.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Entities
+          - type: 'null'
+        expires_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Entity Onboarding Session will expire.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Entity Onboarding Session's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entity Onboarding Sessions
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        program_id:
+          description: The identifier of the Program the Entity will be onboarded to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        redirect_url:
+          description: The URL to redirect to after the onboarding session is complete. Increase will include the query parameters `entity_onboarding_session_id` and `entity_id` when redirecting.
+          type: string
+          x-documentation-priority: default
+        session_url:
+          anyOf:
+          - description: The URL containing the onboarding form. You should share this link with your customer. Only present when the session is active.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the onboarding session.
+          enum:
+          - active
+          - expired
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Entity Onboarding Session is active.
+          - The Entity Onboarding Session has expired.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity_onboarding_session`.
+          enum:
+          - entity_onboarding_session
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - entity_id
+      - created_at
+      - status
+      - expires_at
+      - redirect_url
+      - session_url
+      - program_id
+      - idempotency_key
+      title: Entity Onboarding Session
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Entity Onboarding Sessions
+      x-title-plural: Entity Onboarding Sessions
+    entity_onboarding_session_list:
+      additionalProperties: true
+      description: A list of Entity Onboarding Session objects.
+      example:
+        data:
+        - created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          expires_at: '2020-02-01T05:59:59+00:00'
+          id: entity_onboarding_session_wid2ug11fsmvh3k9hymd
+          idempotency_key: null
+          program_id: program_i2v2os4mwza1oetokh9i
+          redirect_url: https://example.com/onboarding/completed
+          session_url: https://onboarding.increase.com/onboarding/sessions?id=HIrdj46cXyyNqT5RDcIR38dzPqzRBgTdG84XwzOz
+          status: active
+          type: entity_onboarding_session
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity_onboarding_session'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Entity Onboarding Session List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Entity Onboarding Session Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

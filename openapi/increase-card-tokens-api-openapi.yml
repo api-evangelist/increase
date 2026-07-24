@@ -1,0 +1,727 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Card Tokens API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Card Tokens represent a tokenized card number that can be used for Card Push Transfers and Card Validations.
+  name: Card Tokens
+paths:
+  /card_tokens:
+    get:
+      operationId: list_card_tokens
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_token_list'
+          description: Card Token List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Card Tokens
+      x-sandbox-only: false
+      x-tag: Card Tokens
+      tags:
+      - Card Tokens
+  /card_tokens/{card_token_id}:
+    get:
+      operationId: retrieve_a_card_token
+      parameters:
+      - example: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        in: path
+        name: card_token_id
+        required: true
+        schema:
+          description: The identifier of the Card Token.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_token'
+          description: Card Token
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Card Token
+      x-sandbox-only: false
+      x-tag: Card Tokens
+      tags:
+      - Card Tokens
+  /card_tokens/{card_token_id}/capabilities:
+    get:
+      description: The capabilities of a Card Token describe whether the card can be used for specific operations, such as Card Push Transfers. The capabilities can change over time based on the issuing bank's configuration of the card range.
+      operationId: retrieve_the_capabilities_of_a_card_token
+      parameters:
+      - example: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        in: path
+        name: card_token_id
+        required: true
+        schema:
+          description: The identifier of the Card Token.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_token_capabilities'
+          description: Card Token Capabilities
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve the capabilities of a Card Token
+      x-sandbox-only: false
+      x-tag: Card Tokens
+      tags:
+      - Card Tokens
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    card_token_list:
+      additionalProperties: true
+      description: A list of Card Token objects.
+      example:
+        data:
+        - created_at: '2020-01-31T23:59:59Z'
+          expiration_date: '2020-01-31'
+          id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+          last4: '1234'
+          length: 16
+          prefix: '46637100'
+          type: card_token
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/card_token'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Card Token List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Token Lists
+    card_token:
+      additionalProperties: false
+      description: Card Tokens represent a tokenized card number that can be used for Card Push Transfers and Card Validations.
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        expiration_date: '2020-01-31'
+        id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        last4: '1234'
+        length: 16
+        prefix: '46637100'
+        type: card_token
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the card token was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        expiration_date:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the card expires.
+          format: date
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Card Token's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        last4:
+          description: The last 4 digits of the card number.
+          type: string
+          x-documentation-priority: default
+        length:
+          description: The length of the card number.
+          type: integer
+          x-documentation-priority: default
+        prefix:
+          description: The prefix of the card number, usually 8 digits.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_token`.
+          enum:
+          - card_token
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - prefix
+      - last4
+      - length
+      - expiration_date
+      title: Card Token
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Card Tokens
+      x-title-plural: Card Tokens
+    card_token_capabilities:
+      additionalProperties: false
+      description: The capabilities of a Card Token describe whether the card can be used for specific operations, such as Card Push Transfers. The capabilities can change over time based on the issuing bank's configuration of the card range.
+      example:
+        routes:
+        - cross_border_push_transfers: not_supported
+          domestic_push_transfers: supported
+          issuer_country: US
+          route: visa
+        type: card_token_capabilities
+      properties:
+        routes:
+          description: Each route represent a path e.g., a push transfer can take.
+          items:
+            additionalProperties: false
+            properties:
+              cross_border_push_transfers:
+                description: Whether you can push funds to the card using cross-border Card Push Transfers.
+                enum:
+                - supported
+                - not_supported
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The capability is supported.
+                - The capability is not supported.
+              domestic_push_transfers:
+                description: Whether you can push funds to the card using domestic Card Push Transfers.
+                enum:
+                - supported
+                - not_supported
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The capability is supported.
+                - The capability is not supported.
+              issuer_country:
+                description: The ISO-3166-1 alpha-2 country code of the card's issuing bank.
+                type: string
+                x-documentation-priority: default
+              route:
+                description: The card network route the capabilities apply to.
+                enum:
+                - visa
+                - mastercard
+                - pulse
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Visa and Interlink
+                - Mastercard and Maestro
+                - Pulse
+            required:
+            - route
+            - issuer_country
+            - domestic_push_transfers
+            - cross_border_push_transfers
+            title: Card Token Capabilities RoutesElement
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: RoutesElements
+          type: array
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_token_capabilities`.
+          enum:
+          - card_token_capabilities
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - routes
+      title: Card Token Capabilities
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Token Capabilities
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

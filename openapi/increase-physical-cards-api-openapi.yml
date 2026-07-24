@@ -1,0 +1,1198 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Physical Cards API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!
+  name: Physical Cards
+paths:
+  /physical_cards:
+    get:
+      operationId: list_physical_cards
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: card_oubs0hwk5rn6knuecxg2
+        in: query
+        name: card_id
+        required: false
+        schema:
+          description: Filter Physical Cards to ones belonging to the specified Card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card_list'
+          description: Physical Card List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Physical Cards
+      x-sandbox-only: false
+      x-tag: Physical Cards
+      tags:
+      - Physical Cards
+    post:
+      operationId: create_a_physical_card
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_physical_card_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card'
+          description: Physical Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Physical Card
+      x-sandbox-only: false
+      x-tag: Physical Cards
+      tags:
+      - Physical Cards
+  /physical_cards/{physical_card_id}:
+    get:
+      operationId: retrieve_a_physical_card
+      parameters:
+      - example: physical_card_ode8duyq5v2ynhjoharl
+        in: path
+        name: physical_card_id
+        required: true
+        schema:
+          description: The identifier of the Physical Card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Cards
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card'
+          description: Physical Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Physical Card
+      x-sandbox-only: false
+      x-tag: Physical Cards
+      tags:
+      - Physical Cards
+    patch:
+      operationId: update_a_physical_card
+      parameters:
+      - example: physical_card_ode8duyq5v2ynhjoharl
+        in: path
+        name: physical_card_id
+        required: true
+        schema:
+          description: The Physical Card identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_a_physical_card_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical_card'
+          description: Physical Card
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Update a Physical Card
+      x-sandbox-only: false
+      x-tag: Physical Cards
+      tags:
+      - Physical Cards
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    create_a_physical_card_parameters:
+      additionalProperties: true
+      example:
+        card_id: card_oubs0hwk5rn6knuecxg2
+        cardholder:
+          first_name: Ian
+          last_name: Crease
+        shipment:
+          address:
+            city: New York
+            line1: 33 Liberty Street
+            line2: Unit 2
+            name: Ian Crease
+            postal_code: '10045'
+            state: NY
+          method: usps
+      properties:
+        card_id:
+          description: The underlying card representing this physical card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        cardholder:
+          additionalProperties: false
+          description: Details about the cardholder, as it will appear on the physical card.
+          properties:
+            first_name:
+              description: The cardholder's first name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+            last_name:
+              description: The cardholder's last name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - first_name
+          - last_name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        physical_card_profile_id:
+          description: The physical card profile to use for this physical card. The latest default physical card profile will be used if not provided.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+        shipment:
+          additionalProperties: false
+          description: The details used to ship this physical card.
+          properties:
+            address:
+              additionalProperties: false
+              description: The address to where the card should be shipped.
+              properties:
+                city:
+                  description: The city of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-character ISO 3166-1 code of the country where the card should be shipped (e.g., `US`). Please reach out to [support@increase.com](mailto:support@increase.com) to ship cards internationally.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line3:
+                  description: The third line of the shipping address.
+                  maxLength: 9
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                name:
+                  description: The name of the recipient.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\w.\-/ ]*$
+                  type: string
+                  x-documentation-priority: default
+                phone_number:
+                  description: The phone number of the recipient.
+                  maxLength: 15
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code of the shipping address.
+                  maxLength: 16
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The state of the shipping address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - line1
+              - city
+              - state
+              - postal_code
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            method:
+              description: The shipping method to use.
+              enum:
+              - usps
+              - fedex_priority_overnight
+              - fedex_2_day
+              - dhl_worldwide_express
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - USPS Post.
+              - FedEx Priority Overnight, no signature.
+              - FedEx 2-day.
+              - DHL Worldwide Express, international shipping only.
+            schedule:
+              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
+              enum:
+              - next_day
+              - same_day
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
+              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
+          required:
+          - method
+          - address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - card_id
+      - cardholder
+      - shipment
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    update_a_physical_card_parameters:
+      additionalProperties: false
+      example:
+        status: disabled
+      properties:
+        status:
+          description: The status to update the Physical Card to.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The physical card is active.
+          - The physical card is temporarily disabled.
+          - The physical card is permanently canceled.
+      required:
+      - status
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    physical_card:
+      additionalProperties: false
+      description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!
+      example:
+        card_id: card_oubs0hwk5rn6knuecxg2
+        cardholder:
+          first_name: Ian
+          last_name: Crease
+        created_at: '2020-01-31T23:59:59Z'
+        id: physical_card_ode8duyq5v2ynhjoharl
+        idempotency_key: null
+        physical_card_profile_id: physical_card_profile_m534d5rn9qyy9ufqxoec
+        shipment:
+          address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: Unit 2
+            line3: null
+            name: Ian Crease
+            postal_code: '10045'
+            state: NY
+          method: usps
+          schedule: next_day
+          status: shipped
+          tracking:
+            number: '9400110200881234567890'
+            return_number: null
+            return_reason: null
+            shipped_at: '2020-01-31T23:59:59Z'
+            updates:
+            - carrier_estimated_delivery_at: null
+              category: delivered
+              city: null
+              created_at: '2020-01-31T23:59:59Z'
+              postal_code: '10001'
+              state: null
+        status: active
+        type: physical_card
+      properties:
+        card_id:
+          description: The identifier for the Card this Physical Card represents.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        cardholder:
+          additionalProperties: false
+          description: Details about the cardholder, as it appears on the printed card.
+          properties:
+            first_name:
+              description: The cardholder's first name.
+              type: string
+              x-documentation-priority: default
+            last_name:
+              description: The cardholder's last name.
+              type: string
+              x-documentation-priority: default
+          required:
+          - first_name
+          - last_name
+          title: Physical Card Cardholder
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Cardholders
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Physical Card was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The physical card identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Cards
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        physical_card_profile_id:
+          anyOf:
+          - description: The Physical Card Profile used for this Physical Card.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Physical Card Profiles
+          - type: 'null'
+        shipment:
+          additionalProperties: false
+          description: The details used to ship this physical card.
+          properties:
+            address:
+              additionalProperties: false
+              description: The location to where the card's packing label is addressed.
+              properties:
+                city:
+                  description: The city of the shipping address.
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The country of the shipping address.
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the shipping address.
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  anyOf:
+                  - description: The second line of the shipping address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                line3:
+                  anyOf:
+                  - description: The third line of the shipping address.
+                    type: string
+                    x-documentation-priority: default
+                  - type: 'null'
+                name:
+                  description: The name of the recipient.
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code of the shipping address.
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The state of the shipping address.
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - line1
+              - line2
+              - line3
+              - city
+              - state
+              - postal_code
+              - country
+              title: Physical Card Shipment Address
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: Addresses
+            method:
+              description: The shipping method.
+              enum:
+              - usps
+              - fedex_priority_overnight
+              - fedex_2_day
+              - dhl_worldwide_express
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - USPS Post.
+              - FedEx Priority Overnight, no signature.
+              - FedEx 2-day.
+              - DHL Worldwide Express, international shipping only.
+            schedule:
+              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
+              enum:
+              - next_day
+              - same_day
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
+              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
+            status:
+              description: The status of this shipment.
+              enum:
+              - pending
+              - canceled
+              - submitted
+              - acknowledged
+              - rejected
+              - shipped
+              - returned
+              - requires_attention
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The physical card has not yet been shipped.
+              - The physical card shipment was canceled prior to submission.
+              - The physical card shipment has been submitted to the card fulfillment provider.
+              - The physical card shipment has been acknowledged by the card fulfillment provider and will be processed in their next batch.
+              - The physical card shipment was rejected by the card printer due to an error.
+              - The physical card has been shipped.
+              - The physical card shipment was returned to the sender and destroyed by the production facility.
+              - The physical card shipment requires attention from Increase before progressing.
+            tracking:
+              anyOf:
+              - additionalProperties: false
+                description: Tracking details for the shipment.
+                properties:
+                  number:
+                    anyOf:
+                    - description: The tracking number. Not available for USPS shipments.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  return_number:
+                    anyOf:
+                    - description: For returned shipments, the tracking number of the return shipment.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  return_reason:
+                    anyOf:
+                    - description: For returned shipments, this describes why the package was returned.
+                      type: string
+                      x-documentation-priority: default
+                    - type: 'null'
+                  shipped_at:
+                    description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the fulfillment provider marked the card as ready for pick-up by the shipment carrier.
+                    format: date-time
+                    type: string
+                    x-documentation-priority: default
+                  updates:
+                    description: Tracking updates relating to the physical card's delivery.
+                    items:
+                      additionalProperties: false
+                      properties:
+                        carrier_estimated_delivery_at:
+                          anyOf:
+                          - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time when the carrier expects the card to be delivered.
+                            format: date-time
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        category:
+                          description: The type of tracking event.
+                          enum:
+                          - in_transit
+                          - processed_for_delivery
+                          - delivered
+                          - delivery_issue
+                          - returned_to_sender
+                          type: string
+                          x-documentation-priority: default
+                          x-enum-descriptions:
+                          - The physical card is in transit.
+                          - The physical card has been processed for delivery.
+                          - The physical card has been delivered.
+                          - There is an issue preventing delivery. The delivery will be attempted again if possible. If the issue cannot be resolved, the physical card will be returned to sender.
+                          - Delivery failed and the physical card was returned to sender.
+                        city:
+                          anyOf:
+                          - description: The city where the event took place.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        created_at:
+                          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the tracking event took place.
+                          format: date-time
+                          type: string
+                          x-documentation-priority: default
+                        postal_code:
+                          anyOf:
+                          - description: The postal code where the event took place.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                        state:
+                          anyOf:
+                          - description: The state where the event took place.
+                            type: string
+                            x-documentation-priority: default
+                          - type: 'null'
+                      required:
+                      - category
+                      - created_at
+                      - carrier_estimated_delivery_at
+                      - postal_code
+                      - city
+                      - state
+                      title: Physical Card Shipment Tracking UpdatesElement
+                      type: object
+                      x-event-categories: []
+                      x-stainless-empty-object: false
+                      x-title-plural: UpdatesElements
+                    type: array
+                    x-documentation-priority: default
+                required:
+                - number
+                - shipped_at
+                - return_reason
+                - return_number
+                - updates
+                title: Physical Card Shipment Tracking
+                type: object
+                x-documentation-priority: default
+                x-event-categories: []
+                x-stainless-empty-object: false
+                x-title-plural: Trackings
+              - type: 'null'
+          required:
+          - method
+          - schedule
+          - status
+          - tracking
+          - address
+          title: Physical Card Shipment
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Shipments
+        status:
+          description: The status of the Physical Card.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The physical card is active.
+          - The physical card is temporarily disabled.
+          - The physical card is permanently canceled.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `physical_card`.
+          enum:
+          - physical_card
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - card_id
+      - physical_card_profile_id
+      - created_at
+      - status
+      - cardholder
+      - shipment
+      - idempotency_key
+      title: Physical Card
+      type: object
+      x-event-categories:
+      - physical_card.created
+      - physical_card.updated
+      x-stainless-empty-object: false
+      x-tag: Physical Cards
+      x-title-plural: Physical Cards
+    physical_card_list:
+      additionalProperties: true
+      description: A list of Physical Card objects.
+      example:
+        data:
+        - card_id: card_oubs0hwk5rn6knuecxg2
+          cardholder:
+            first_name: Ian
+            last_name: Crease
+          created_at: '2020-01-31T23:59:59Z'
+          id: physical_card_ode8duyq5v2ynhjoharl
+          idempotency_key: null
+          physical_card_profile_id: physical_card_profile_m534d5rn9qyy9ufqxoec
+          shipment:
+            address:
+              city: New York
+              country: US
+              line1: 33 Liberty Street
+              line2: Unit 2
+              line3: null
+              name: Ian Crease
+              postal_code: '10045'
+              state: NY
+            method: usps
+            schedule: next_day
+            status: shipped
+            tracking:
+              number: '9400110200881234567890'
+              return_number: null
+              return_reason: null
+              shipped_at: '2020-01-31T23:59:59Z'
+              updates:
+              - carrier_estimated_delivery_at: null
+                category: delivered
+                city: null
+                created_at: '2020-01-31T23:59:59Z'
+                postal_code: '10001'
+                state: null
+          status: active
+          type: physical_card
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/physical_card'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Physical Card List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Physical Card Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

@@ -1,0 +1,2021 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Ach Transfers API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Ach Transfers
+paths:
+  /ach_transfers:
+    get:
+      operationId: list_ach_transfers
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter ACH Transfers to those that originated from the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: external_account_id
+        required: false
+        schema:
+          description: Filter ACH Transfers to those made to the specified External Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Return results whose value is in the provided list. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_approval
+            - pending_transfer_session_confirmation
+            - canceled
+            - pending_submission
+            - pending_reviewing
+            - requires_attention
+            - rejected
+            - submitted
+            - returned
+            type: string
+            x-enum-descriptions:
+            - The transfer is pending approval.
+            - The transfer belongs to a Transfer Session that is pending confirmation.
+            - The transfer has been canceled.
+            - The transfer is pending submission to the Federal Reserve.
+            - The transfer is pending review by Increase.
+            - The transfer requires attention from an Increase operator.
+            - The transfer has been rejected.
+            - The transfer is complete.
+            - The transfer has been returned.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_transfer_list'
+          description: ACH Transfer List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List ACH Transfers
+      x-sandbox-only: false
+      x-tag: ACH Transfers
+      tags:
+      - Ach Transfers
+    post:
+      operationId: create_an_ach_transfer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_ach_transfer_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_transfer'
+          description: ACH Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an ACH Transfer
+      x-sandbox-only: false
+      x-tag: ACH Transfers
+      tags:
+      - Ach Transfers
+  /ach_transfers/{ach_transfer_id}:
+    get:
+      operationId: retrieve_an_ach_transfer
+      parameters:
+      - example: ach_transfer_uoxatyh3lt5evrsdvo7q
+        in: path
+        name: ach_transfer_id
+        required: true
+        schema:
+          description: The identifier of the ACH Transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_transfer'
+          description: ACH Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an ACH Transfer
+      x-sandbox-only: false
+      x-tag: ACH Transfers
+      tags:
+      - Ach Transfers
+  /ach_transfers/{ach_transfer_id}/approve:
+    post:
+      description: Approves an ACH Transfer in a pending_approval state.
+      operationId: approve_an_ach_transfer
+      parameters:
+      - example: ach_transfer_uoxatyh3lt5evrsdvo7q
+        in: path
+        name: ach_transfer_id
+        required: true
+        schema:
+          description: The identifier of the ACH Transfer to approve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_transfer'
+          description: ACH Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Approve an ACH Transfer
+      x-sandbox-only: false
+      x-tag: ACH Transfers
+      tags:
+      - Ach Transfers
+  /ach_transfers/{ach_transfer_id}/cancel:
+    post:
+      description: Cancels an ACH Transfer in a pending_approval state.
+      operationId: cancel_a_pending_ach_transfer
+      parameters:
+      - example: ach_transfer_uoxatyh3lt5evrsdvo7q
+        in: path
+        name: ach_transfer_id
+        required: true
+        schema:
+          description: The identifier of the pending ACH Transfer to cancel.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Transfers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_transfer'
+          description: ACH Transfer
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Cancel a pending ACH Transfer
+      x-sandbox-only: false
+      x-tag: ACH Transfers
+      tags:
+      - Ach Transfers
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
+    ach_transfer:
+      additionalProperties: true
+      description: ACH transfers move funds between your Increase account and any other account accessible by the Automated Clearing House (ACH).
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        acknowledgement:
+          acknowledged_at: '2020-01-31T23:59:59Z'
+        addenda: null
+        amount: 100
+        approval:
+          approved_at: '2020-01-31T23:59:59Z'
+          approved_by: null
+        cancellation: null
+        company_descriptive_date: null
+        company_discretionary_data: null
+        company_entry_description: null
+        company_id: '1234987601'
+        company_name: National Phonograph Company
+        created_at: '2020-01-31T23:59:59Z'
+        created_by:
+          category: user
+          user:
+            email: user@example.com
+        currency: USD
+        destination_account_holder: business
+        external_account_id: external_account_ukk55lr923a3ac0pp7iv
+        funding: checking
+        id: ach_transfer_uoxatyh3lt5evrsdvo7q
+        idempotency_key: null
+        inbound_funds_hold: null
+        individual_id: null
+        individual_name: Ian Crease
+        network: ach
+        notifications_of_change: []
+        pending_transaction_id: null
+        preferred_effective_date:
+          date: null
+          settlement_schedule: same_day
+        return: null
+        routing_number: '101050001'
+        settlement: null
+        standard_entry_class_code: corporate_credit_or_debit
+        statement_descriptor: Statement descriptor
+        status: returned
+        submission:
+          administrative_returns_expected_by: '2020-02-05T11:00:00Z'
+          effective_date: '2020-01-31'
+          expected_funds_settlement_at: '2020-02-03T13:30:00Z'
+          expected_settlement_schedule: future_dated
+          submitted_at: '2020-01-31T23:59:59Z'
+          trace_number: 058349238292834
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: ach_transfer
+      properties:
+        account_id:
+          description: The Account to which the transfer belongs.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The destination account number.
+          type: string
+          x-documentation-priority: default
+        acknowledgement:
+          anyOf:
+          - additionalProperties: false
+            description: After the transfer is acknowledged by FedACH, this will contain supplemental details. The Federal Reserve sends an acknowledgement message for each file that Increase submits.
+            example:
+              acknowledged_at: '2020-01-31T23:59:59Z'
+            properties:
+              acknowledged_at:
+                description: When the Federal Reserve acknowledged the submitted file containing this transfer.
+                type: string
+                x-documentation-priority: default
+            required:
+            - acknowledged_at
+            title: ACH Transfer ACH Transfer Acknowledgement
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Transfer Acknowledgements
+          - type: 'null'
+        addenda:
+          anyOf:
+          - additionalProperties: false
+            description: Additional information that will be sent to the recipient.
+            example:
+              category: freeform
+              freeform:
+                entries:
+                - payment_related_information: addendum
+            properties:
+              category:
+                description: The type of the resource. We may add additional possible values for this enum over time; your application should be able to handle such additions gracefully.
+                enum:
+                - freeform
+                - payment_order_remittance_advice
+                - other
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Unstructured `payment_related_information` passed through with the transfer.
+                - Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information.
+                - Unknown addenda type.
+              freeform:
+                anyOf:
+                - additionalProperties: false
+                  description: Unstructured `payment_related_information` passed through with the transfer.
+                  properties:
+                    entries:
+                      description: Each entry represents an addendum sent with the transfer.
+                      items:
+                        additionalProperties: false
+                        properties:
+                          payment_related_information:
+                            description: The payment related information passed in the addendum.
+                            type: string
+                            x-documentation-priority: default
+                        required:
+                        - payment_related_information
+                        title: ACH Transfer ACH Transfer Addenda Freeform EntriesElement
+                        type: object
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: EntriesElements
+                      type: array
+                      x-documentation-priority: default
+                  required:
+                  - entries
+                  title: ACH Transfer ACH Transfer Addenda Freeform
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Freeforms
+                - type: 'null'
+              payment_order_remittance_advice:
+                anyOf:
+                - additionalProperties: false
+                  description: Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information.
+                  properties:
+                    invoices:
+                      description: ASC X12 RMR records for this specific transfer.
+                      items:
+                        additionalProperties: false
+                        properties:
+                          invoice_number:
+                            description: The invoice number for this reference, determined in advance with the receiver.
+                            type: string
+                            x-documentation-priority: default
+                          paid_amount:
+                            description: The amount that was paid for this invoice in the minor unit of its currency. For dollars, for example, this is cents.
+                            type: integer
+                            x-documentation-priority: default
+                        required:
+                        - invoice_number
+                        - paid_amount
+                        title: ACH Transfer ACH Transfer Addenda PaymentOrderRemittanceAdvice InvoicesElement
+                        type: object
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: InvoicesElements
+                      type: array
+                      x-documentation-priority: default
+                  required:
+                  - invoices
+                  title: ACH Transfer ACH Transfer Addenda PaymentOrderRemittanceAdvice
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: PaymentOrderRemittanceAdvices
+                - type: 'null'
+            required:
+            - category
+            title: ACH Transfer ACH Transfer Addenda
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Transfer Addendas
+          - type: 'null'
+        amount:
+          description: The transfer amount in USD cents. A positive amount indicates a credit transfer pushing funds to the receiving account. A negative amount indicates a debit transfer pulling funds from the receiving account.
+          type: integer
+          x-documentation-priority: default
+        approval:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was approved, this will contain details of the approval.
+            example:
+              approved_at: '2020-01-31T23:59:59Z'
+              approved_by: null
+            properties:
+              approved_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was approved.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              approved_by:
+                anyOf:
+                - description: If the Transfer was approved by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - approved_at
+            - approved_by
+            title: ACH Transfer Transfer Approval
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Approvals
+          - type: 'null'
+        cancellation:
+          anyOf:
+          - additionalProperties: false
+            description: If your account requires approvals for transfers and the transfer was not approved, this will contain details of the cancellation.
+            example:
+              canceled_at: '2020-01-31T23:59:59Z'
+              canceled_by: null
+            properties:
+              canceled_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Transfer was canceled.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              canceled_by:
+                anyOf:
+                - description: If the Transfer was canceled by a user in the dashboard, the email address of that user.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - canceled_at
+            - canceled_by
+            title: ACH Transfer Transfer Cancellation
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Cancellations
+          - type: 'null'
+        company_descriptive_date:
+          anyOf:
+          - description: The description of the date of the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_discretionary_data:
+          anyOf:
+          - description: The data you chose to associate with the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_entry_description:
+          anyOf:
+          - description: The description of the transfer you set to be shown to the recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_id:
+          description: The company ID associated with the transfer.
+          type: string
+          x-documentation-priority: default
+        company_name:
+          anyOf:
+          - description: The name by which the recipient knows you.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_by:
+          anyOf:
+          - additionalProperties: false
+            description: What object created the transfer, either via the API or the dashboard.
+            example:
+              category: user
+              user:
+                email: user@example.com
+            properties:
+              api_key:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the API key that created the transfer.
+                  properties:
+                    description:
+                      anyOf:
+                      - description: The description set for the API key when it was created.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - description
+                  title: ACH Transfer Transfer Creator ApiKey
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: ApiKeys
+                - type: 'null'
+              category:
+                description: The type of object that created this transfer.
+                enum:
+                - api_key
+                - oauth_application
+                - user
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - An API key. Details will be under the `api_key` object.
+                - An OAuth application you connected to Increase. Details will be under the `oauth_application` object.
+                - A User in the Increase dashboard. Details will be under the `user` object.
+              oauth_application:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the OAuth Application that created the transfer.
+                  properties:
+                    name:
+                      description: The name of the OAuth Application.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  title: ACH Transfer Transfer Creator OAuthApplication
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: OAuthApplications
+                - type: 'null'
+              user:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the User that created the transfer.
+                  properties:
+                    email:
+                      description: The email address of the User.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - email
+                  title: ACH Transfer Transfer Creator User
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Users
+                - type: 'null'
+            required:
+            - category
+            title: ACH Transfer Transfer Creator
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Creators
+          - type: 'null'
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transfer's currency. For ACH transfers this is always equal to `usd`.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        destination_account_holder:
+          description: The type of entity that owns the account to which the ACH Transfer is being sent.
+          enum:
+          - business
+          - individual
+          - unknown
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The External Account is owned by a business.
+          - The External Account is owned by an individual.
+          - It's unknown what kind of entity owns the External Account.
+        external_account_id:
+          anyOf:
+          - description: The identifier of the External Account the transfer was made to, if any.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: External Accounts
+          - type: 'null'
+        funding:
+          description: The type of the account to which the transfer will be sent.
+          enum:
+          - checking
+          - savings
+          - general_ledger
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A checking account.
+          - A savings account.
+          - A bank's general ledger. Uncommon.
+        id:
+          description: The ACH transfer's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Transfers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_funds_hold:
+          anyOf:
+          - $ref: '#/components/schemas/inbound_funds_hold'
+            description: Increase will sometimes hold the funds for ACH debit transfers. If funds are held, this sub-object will contain details of the hold.
+            x-documentation-priority: default
+          - type: 'null'
+        individual_id:
+          anyOf:
+          - description: Your identifier for the transfer recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        individual_name:
+          anyOf:
+          - description: The name of the transfer recipient. This value is informational and not verified by the recipient's bank.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        network:
+          description: The transfer's network.
+          enum:
+          - ach
+          type: string
+          x-documentation-priority: default
+        notifications_of_change:
+          description: If the receiving bank accepts the transfer but notifies that future transfers should use different details, this will contain those details.
+          items:
+            additionalProperties: false
+            example:
+              change_code: incorrect_transaction_code
+              corrected_data: '32'
+              created_at: '2020-01-31T23:59:59Z'
+            properties:
+              change_code:
+                description: The required type of change that is being signaled by the receiving financial institution.
+                enum:
+                - incorrect_account_number
+                - incorrect_routing_number
+                - incorrect_routing_number_and_account_number
+                - incorrect_transaction_code
+                - incorrect_account_number_and_transaction_code
+                - incorrect_routing_number_account_number_and_transaction_code
+                - incorrect_receiving_depository_financial_institution_identification
+                - incorrect_individual_identification_number
+                - addenda_format_error
+                - incorrect_standard_entry_class_code_for_outbound_international_payment
+                - misrouted_notification_of_change
+                - incorrect_trace_number
+                - incorrect_company_identification_number
+                - incorrect_identification_number
+                - incorrectly_formatted_corrected_data
+                - incorrect_discretionary_data
+                - routing_number_not_from_original_entry_detail_record
+                - depository_financial_institution_account_number_not_from_original_entry_detail_record
+                - incorrect_transaction_code_by_originating_depository_financial_institution
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The account number was incorrect.
+                - The routing number was incorrect.
+                - Both the routing number and the account number were incorrect.
+                - The transaction code was incorrect. Try changing the `funding` parameter from checking to savings or vice-versa.
+                - The account number and the transaction code were incorrect.
+                - The routing number, account number, and transaction code were incorrect.
+                - The receiving depository financial institution identification was incorrect.
+                - The individual identification number was incorrect.
+                - The addenda had an incorrect format.
+                - The standard entry class code was incorrect for an outbound international payment.
+                - The notification of change was misrouted.
+                - The trace number was incorrect.
+                - The company identification number was incorrect.
+                - The individual identification number or identification number was incorrect.
+                - The corrected data was incorrectly formatted.
+                - The discretionary data was incorrect.
+                - The routing number was not from the original entry detail record.
+                - The depository financial institution account number was not from the original entry detail record.
+                - The transaction code was incorrect, initiated by the originating depository financial institution.
+              corrected_data:
+                description: The corrected data that should be used in future ACHs to this account. This may contain the suggested new account number or routing number. When the `change_code` is `incorrect_transaction_code`, this field contains an integer. Numbers starting with a 2 encourage changing the `funding` parameter to checking; numbers starting with a 3 encourage changing to savings.
+                type: string
+                x-documentation-priority: default
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the notification occurred.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - created_at
+            - change_code
+            - corrected_data
+            title: ACH Transfer ACH Notification of Change
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Notifications of change
+          type: array
+          x-documentation-priority: default
+        pending_transaction_id:
+          anyOf:
+          - description: The ID for the pending transaction representing the transfer. A pending transaction is created when the transfer [requires approval](https://increase.com/documentation/transfer-approvals#transfer-approvals) by someone else in your organization.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        preferred_effective_date:
+          additionalProperties: false
+          description: Configuration for how the effective date of the transfer will be set. This determines same-day vs future-dated settlement timing. If not set, defaults to a `settlement_schedule` of `same_day`. If set, exactly one of the child attributes must be set.
+          properties:
+            date:
+              anyOf:
+              - description: A specific date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format to use as the effective date when submitting this transfer.
+                format: date
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            settlement_schedule:
+              anyOf:
+              - description: A schedule by which Increase will choose an effective date for the transfer.
+                enum:
+                - same_day
+                - future_dated
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - 'The chosen effective date will be the same as the ACH processing date on which the transfer is submitted.
+
+                  This is necessary, but not sufficient for the transfer to be settled same-day:
+
+                  it must also be submitted before the last same-day cutoff
+
+                  and be less than or equal to $1,000.000.00.
+
+                  '
+                - The chosen effective date will be the business day following the ACH processing date on which the transfer is submitted. The transfer will be settled on that future day.
+              - type: 'null'
+          required:
+          - date
+          - settlement_schedule
+          title: ACH Transfer PreferredEffectiveDate
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: PreferredEffectiveDates
+        return:
+          anyOf:
+          - additionalProperties: true
+            description: If your transfer is returned, this will contain details of the return.
+            example:
+              created_at: '2020-01-31T23:59:59Z'
+              raw_return_reason_code: R01
+              return_reason_code: insufficient_fund
+              trace_number: '111122223292834'
+              transaction_id: transaction_uyrp7fld2ium70oa7oi
+              transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+            properties:
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the transfer was created.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              raw_return_reason_code:
+                description: The three character ACH return code, in the range R01 to R85.
+                type: string
+                x-documentation-priority: default
+              return_reason_code:
+                description: Why the ACH Transfer was returned. This reason code is sent by the receiving bank back to Increase.
+                enum:
+                - insufficient_fund
+                - no_account
+                - account_closed
+                - invalid_account_number_structure
+                - account_frozen_entry_returned_per_ofac_instruction
+                - credit_entry_refused_by_receiver
+                - unauthorized_debit_to_consumer_account_using_corporate_sec_code
+                - corporate_customer_advised_not_authorized
+                - payment_stopped
+                - non_transaction_account
+                - uncollected_funds
+                - routing_number_check_digit_error
+                - customer_advised_unauthorized_improper_ineligible_or_incomplete
+                - amount_field_error
+                - authorization_revoked_by_customer
+                - invalid_ach_routing_number
+                - file_record_edit_criteria
+                - enr_invalid_individual_name
+                - returned_per_odfi_request
+                - limited_participation_dfi
+                - incorrectly_coded_outbound_international_payment
+                - account_sold_to_another_dfi
+                - addenda_error
+                - beneficiary_or_account_holder_deceased
+                - customer_advised_not_within_authorization_terms
+                - corrected_return
+                - duplicate_entry
+                - duplicate_return
+                - enr_duplicate_enrollment
+                - enr_invalid_dfi_account_number
+                - enr_invalid_individual_id_number
+                - enr_invalid_representative_payee_indicator
+                - enr_invalid_transaction_code
+                - enr_return_of_enr_entry
+                - enr_routing_number_check_digit_error
+                - entry_not_processed_by_gateway
+                - field_error
+                - foreign_receiving_dfi_unable_to_settle
+                - iat_entry_coding_error
+                - improper_effective_entry_date
+                - improper_source_document_source_document_presented
+                - invalid_company_id
+                - invalid_foreign_receiving_dfi_identification
+                - invalid_individual_id_number
+                - item_and_rck_entry_presented_for_payment
+                - item_related_to_rck_entry_is_ineligible
+                - mandatory_field_error
+                - misrouted_dishonored_return
+                - misrouted_return
+                - no_errors_found
+                - non_acceptance_of_r62_dishonored_return
+                - non_participant_in_iat_program
+                - permissible_return_entry
+                - permissible_return_entry_not_accepted
+                - rdfi_non_settlement
+                - rdfi_participant_in_check_truncation_program
+                - representative_payee_deceased_or_unable_to_continue_in_that_capacity
+                - return_not_a_duplicate
+                - return_of_erroneous_or_reversing_debit
+                - return_of_improper_credit_entry
+                - return_of_improper_debit_entry
+                - return_of_xck_entry
+                - source_document_presented_for_payment
+                - state_law_affecting_rck_acceptance
+                - stop_payment_on_item_related_to_rck_entry
+                - stop_payment_on_source_document
+                - timely_original_return
+                - trace_number_error
+                - untimely_dishonored_return
+                - untimely_return
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Code R01. Insufficient funds in the receiving account. Sometimes abbreviated to "NSF."
+                - Code R03. The account does not exist or the receiving bank was unable to locate it.
+                - Code R02. The account is closed at the receiving bank.
+                - Code R04. The account number is invalid at the receiving bank.
+                - Code R16. This return code has two separate meanings. (1) The receiving bank froze the account or (2) the Office of Foreign Assets Control (OFAC) instructed the receiving bank to return the entry.
+                - Code R23. The receiving bank refused the credit transfer.
+                - Code R05. The receiving bank rejected because of an incorrect Standard Entry Class code. Consumer accounts cannot be debited as `corporate_credit_or_debit` or `corporate_trade_exchange`.
+                - Code R29. The corporate customer at the receiving bank reversed the transfer.
+                - Code R08. The receiving bank stopped payment on this transfer.
+                - Code R20. The account is not eligible for ACH, such as a savings account with transaction limits.
+                - Code R09. The receiving bank account does not have enough available balance for the transfer.
+                - Code R28. The routing number is incorrect.
+                - Code R10. The customer at the receiving bank reversed the transfer.
+                - Code R19. The amount field is incorrect or too large.
+                - Code R07. The customer revoked their authorization for a previously authorized transfer.
+                - Code R13. The routing number is invalid.
+                - Code R17. The receiving bank is unable to process a field in the transfer.
+                - Code R45. A rare return reason. The individual name field was invalid.
+                - Code R06. The originating financial institution asked for this transfer to be returned. The receiving bank is complying with the request.
+                - Code R34. The receiving bank's regulatory supervisor has limited their participation in the ACH network.
+                - Code R85. The outbound international ACH transfer was incorrect.
+                - Code R12. A rare return reason. The account was sold to another bank.
+                - Code R25. The addenda record is incorrect or missing.
+                - Code R15. A rare return reason. The account holder is deceased.
+                - Code R11. A rare return reason. The customer authorized some payment to the sender, but this payment was not in error.
+                - Code R74. A rare return reason. Sent in response to a return that was returned with code `field_error`. The latest return should include the corrected field(s).
+                - Code R24. A rare return reason. The receiving bank received an exact duplicate entry with the same trace number and amount.
+                - Code R67. A rare return reason. The return this message refers to was a duplicate.
+                - Code R47. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R43. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R44. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R46. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R41. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R40. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R42. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R84. A rare return reason. The International ACH Transfer cannot be processed by the gateway.
+                - Code R69. A rare return reason. One or more of the fields in the ACH were malformed.
+                - Code R83. A rare return reason. The Foreign receiving bank was unable to settle this ACH transfer.
+                - Code R80. A rare return reason. The International ACH Transfer is malformed.
+                - Code R18. A rare return reason. The ACH has an improper effective entry date field.
+                - Code R39. A rare return reason. The source document related to this ACH, usually an ACH check conversion, was presented to the bank.
+                - Code R21. A rare return reason. The Company ID field of the ACH was invalid.
+                - Code R82. A rare return reason. The foreign receiving bank identifier for an International ACH Transfer was invalid.
+                - Code R22. A rare return reason. The Individual ID number field of the ACH was invalid.
+                - Code R53. A rare return reason. Both the Represented Check ("RCK") entry and the original check were presented to the bank.
+                - Code R51. A rare return reason. The Represented Check ("RCK") entry is ineligible.
+                - Code R26. A rare return reason. The ACH is missing a required field.
+                - Code R71. A rare return reason. The receiving bank does not recognize the routing number in a dishonored return entry.
+                - Code R61. A rare return reason. The receiving bank does not recognize the routing number in a return entry.
+                - Code R76. A rare return reason. Sent in response to a return, the bank does not find the errors alleged by the returning bank.
+                - Code R77. A rare return reason. The receiving bank does not accept the return of the erroneous debit. The funds are not available at the receiving bank.
+                - Code R81. A rare return reason. The receiving bank does not accept International ACH Transfers.
+                - Code R31. A rare return reason. A return that has been agreed to be accepted by the receiving bank, despite falling outside of the usual return timeframe.
+                - Code R70. A rare return reason. The receiving bank had not approved this return.
+                - Code R32. A rare return reason. The receiving bank could not settle this transaction.
+                - Code R30. A rare return reason. The receiving bank does not accept Check Truncation ACH transfers.
+                - Code R14. A rare return reason. The payee is deceased.
+                - Code R75. A rare return reason. The originating bank disputes that an earlier `duplicate_entry` return was actually a duplicate.
+                - Code R62. A rare return reason. The originating financial institution made a mistake and this return corrects it.
+                - Code R36. A rare return reason. Return of a malformed credit entry.
+                - Code R35. A rare return reason. Return of a malformed debit entry.
+                - Code R33. A rare return reason. Return of a destroyed check ("XCK") entry.
+                - Code R37. A rare return reason. The source document related to this ACH, usually an ACH check conversion, was presented to the bank.
+                - Code R50. A rare return reason. State law prevents the bank from accepting the Represented Check ("RCK") entry.
+                - Code R52. A rare return reason. A stop payment was issued on a Represented Check ("RCK") entry.
+                - Code R38. A rare return reason. The source attached to the ACH, usually an ACH check conversion, includes a stop payment.
+                - Code R73. A rare return reason. The bank receiving an `untimely_return` believes it was on time.
+                - Code R27. A rare return reason. An ACH return's trace number does not match an originated ACH.
+                - Code R72. A rare return reason. The dishonored return was sent too late.
+                - Code R68. A rare return reason. The return was sent too late.
+              trace_number:
+                description: A 15 digit number that was generated by the bank that initiated the return. The trace number of the return is different than that of the original transfer. ACH trace numbers are not unique, but along with the amount and date this number can be used to identify the ACH return at the bank that initiated it.
+                type: string
+                x-documentation-priority: default
+              transaction_id:
+                description: The identifier of the Transaction associated with this return.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Transactions
+              transfer_id:
+                description: The identifier of the ACH Transfer associated with this return.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: ACH Transfers
+            required:
+            - created_at
+            - trace_number
+            - return_reason_code
+            - raw_return_reason_code
+            - transfer_id
+            - transaction_id
+            title: ACH Transfer ACH Transfer Return
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Transfer Returns
+          - type: 'null'
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        settlement:
+          anyOf:
+          - additionalProperties: false
+            description: A subhash containing information about when and how the transfer settled at the Federal Reserve.
+            properties:
+              settled_at:
+                description: When the funds for this transfer have settled at the destination bank at the Federal Reserve.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - settled_at
+            title: ACH Transfer Settlement
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Settlements
+          - type: 'null'
+        standard_entry_class_code:
+          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the transfer.
+          enum:
+          - corporate_credit_or_debit
+          - corporate_trade_exchange
+          - prearranged_payments_and_deposit
+          - internet_initiated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+        statement_descriptor:
+          description: The descriptor that will show on the recipient's bank statement.
+          type: string
+          x-documentation-priority: default
+        status:
+          description: The lifecycle status of the transfer.
+          enum:
+          - pending_approval
+          - pending_transfer_session_confirmation
+          - canceled
+          - pending_submission
+          - pending_reviewing
+          - requires_attention
+          - rejected
+          - submitted
+          - returned
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The transfer is pending approval.
+          - The transfer belongs to a Transfer Session that is pending confirmation.
+          - The transfer has been canceled.
+          - The transfer is pending submission to the Federal Reserve.
+          - The transfer is pending review by Increase.
+          - The transfer requires attention from an Increase operator.
+          - The transfer has been rejected.
+          - The transfer is complete.
+          - The transfer has been returned.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the transfer is submitted to FedACH, this will contain supplemental details. Increase batches transfers and submits a file to the Federal Reserve roughly every 30 minutes. The Federal Reserve processes ACH transfers during weekdays according to their [posted schedule](https://www.frbservices.org/resources/resource-centers/same-day-ach/fedach-processing-schedule.html).
+            example:
+              administrative_returns_expected_by: '2020-02-05T11:00:00Z'
+              effective_date: '2020-01-31'
+              expected_funds_settlement_at: '2020-02-03T13:30:00Z'
+              expected_settlement_schedule: future_dated
+              submitted_at: '2020-01-31T23:59:59Z'
+              trace_number: 058349238292834
+            properties:
+              administrative_returns_expected_by:
+                description: 'The timestamp by which any administrative returns are expected to be received by. This follows the NACHA guidelines for return windows, which are: "In general, return entries must be received by the RDFI’s ACH Operator by its deposit deadline for the return entry to be made available to the ODFI no later than the opening of business on the second banking day following the Settlement Date of the original entry.".'
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              effective_date:
+                description: The ACH transfer's effective date as sent to the Federal Reserve. If a specific date was configured using `preferred_effective_date`, this will match that value. Otherwise, it will be the date selected (following the specified settlement schedule) at the time the transfer was submitted.
+                format: date
+                type: string
+                x-documentation-priority: default
+              expected_funds_settlement_at:
+                description: When the transfer is expected to settle in the recipient's account. Credits may be available sooner, at the receiving bank's discretion. The FedACH schedule is published [here](https://www.frbservices.org/resources/resource-centers/same-day-ach/fedach-processing-schedule.html).
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              expected_settlement_schedule:
+                description: The settlement schedule the transfer is expected to follow. This expectation takes into account the `effective_date`, `submitted_at`, and the amount of the transfer.
+                enum:
+                - same_day
+                - future_dated
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The transfer is expected to settle same-day.
+                - The transfer is expected to settle on a future date.
+              submitted_at:
+                description: When the ACH transfer was sent to FedACH.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              trace_number:
+                description: A 15 digit number recorded in the Nacha file and transmitted to the receiving bank. Along with the amount, date, and originating routing number, this can be used to identify the ACH transfer at the receiving bank. ACH trace numbers are not unique, but are [used to correlate returns](https://increase.com/documentation/ach-returns#ach-returns).
+                type: string
+                x-documentation-priority: default
+            required:
+            - trace_number
+            - submitted_at
+            - expected_funds_settlement_at
+            - effective_date
+            - expected_settlement_schedule
+            - administrative_returns_expected_by
+            title: ACH Transfer ACH Transfer Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Transfer Submissions
+          - type: 'null'
+        transaction_id:
+          anyOf:
+          - description: The ID for the transaction funding the transfer.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `ach_transfer`.
+          enum:
+          - ach_transfer
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - account_number
+      - addenda
+      - amount
+      - currency
+      - approval
+      - cancellation
+      - created_at
+      - destination_account_holder
+      - external_account_id
+      - id
+      - network
+      - notifications_of_change
+      - return
+      - routing_number
+      - statement_descriptor
+      - status
+      - submission
+      - acknowledgement
+      - settlement
+      - inbound_funds_hold
+      - transaction_id
+      - pending_transaction_id
+      - company_descriptive_date
+      - company_discretionary_data
+      - company_entry_description
+      - company_name
+      - company_id
+      - funding
+      - individual_id
+      - individual_name
+      - preferred_effective_date
+      - standard_entry_class_code
+      - created_by
+      - idempotency_key
+      title: ACH Transfer
+      type: object
+      x-event-categories:
+      - ach_transfer.created
+      - ach_transfer.updated
+      x-stainless-empty-object: false
+      x-tag: ACH Transfers
+      x-title-plural: ACH Transfers
+    create_an_ach_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        routing_number: '101050001'
+        statement_descriptor: New ACH transfer
+      properties:
+        account_id:
+          description: The Increase identifier for the account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 17
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        addenda:
+          additionalProperties: false
+          description: Additional information that will be sent to the recipient. This is included in the transfer data sent to the receiving bank.
+          properties:
+            category:
+              description: The type of addenda to pass with the transfer.
+              enum:
+              - freeform
+              - payment_order_remittance_advice
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Unstructured `payment_related_information` passed through with the transfer.
+              - Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information.
+            freeform:
+              additionalProperties: false
+              description: Unstructured `payment_related_information` passed through with the transfer. Required if and only if `category` is `freeform`.
+              properties:
+                entries:
+                  description: Each entry represents an addendum sent with the transfer. Sending more than one addendum is only supported for transfers with `standard_entry_class_code` of `corporate_trade_exchange` (CTX).
+                  items:
+                    additionalProperties: false
+                    properties:
+                      payment_related_information:
+                        description: The payment related information passed in the addendum.
+                        maxLength: 80
+                        minLength: 1
+                        pattern: ^[ -~]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - payment_related_information
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              required:
+              - entries
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            payment_order_remittance_advice:
+              additionalProperties: false
+              description: Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information. Required if and only if `category` is `payment_order_remittance_advice`.
+              properties:
+                invoices:
+                  description: ASC X12 RMR records for this specific transfer.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      invoice_number:
+                        description: The invoice number for this reference, determined in advance with the receiver.
+                        maxLength: 50
+                        minLength: 1
+                        pattern: ^[a-zA-Z0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                      paid_amount:
+                        description: The amount that was paid for this invoice in the minor unit of its currency. For dollars, for example, this is cents.
+                        type: integer
+                        x-documentation-priority: default
+                    required:
+                    - invoice_number
+                    - paid_amount
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              required:
+              - invoices
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - category
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        amount:
+          description: The transfer amount in USD cents. A positive amount originates a credit transfer pushing funds to the receiving account. A negative amount originates a debit transfer pulling funds from the receiving account.
+          maximum: 9999999999
+          minimum: -9999999999
+          type: integer
+          x-documentation-priority: default
+        company_descriptive_date:
+          description: The description of the date of the transfer, usually in the format `YYMMDD`. This is included in the transfer data sent to the receiving bank.
+          maxLength: 6
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_discretionary_data:
+          description: The data you choose to associate with the transfer. This is included in the transfer data sent to the receiving bank.
+          maxLength: 20
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_entry_description:
+          description: A description of the transfer, included in the transfer data sent to the receiving bank. Standardized formatting may be required, for example `PAYROLL` for payroll-related Prearranged Payments and Deposits (PPD) credit transfers.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_name:
+          description: The name by which the recipient knows you. This is included in the transfer data sent to the receiving bank.
+          maxLength: 16
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        destination_account_holder:
+          description: The type of entity that owns the account to which the ACH Transfer is being sent.
+          enum:
+          - business
+          - individual
+          - unknown
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The External Account is owned by a business.
+          - The External Account is owned by an individual.
+          - It's unknown what kind of entity owns the External Account.
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number`, `routing_number`, and `funding` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        funding:
+          description: The type of the account to which the transfer will be sent.
+          enum:
+          - checking
+          - savings
+          - general_ledger
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A checking account.
+          - A savings account.
+          - A bank's general ledger. Uncommon.
+        individual_id:
+          description: Your identifier for the transfer recipient.
+          maxLength: 15
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        individual_name:
+          description: The name of the transfer recipient. This value is informational and not verified by the recipient's bank.
+          maxLength: 22
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        preferred_effective_date:
+          additionalProperties: false
+          description: Configuration for how the effective date of the transfer will be set. This determines same-day vs future-dated settlement timing. If not set, defaults to a `settlement_schedule` of `same_day`. If set, exactly one of the child attributes must be set.
+          properties:
+            date:
+              description: A specific date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format to use as the effective date when submitting this transfer.
+              format: date
+              type: string
+              x-documentation-priority: default
+            settlement_schedule:
+              description: A schedule by which Increase will choose an effective date for the transfer.
+              enum:
+              - same_day
+              - future_dated
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - 'The chosen effective date will be the same as the ACH processing date on which the transfer is submitted. This is necessary, but not sufficient for the transfer to be settled same-day: it must also be submitted before the last same-day cutoff and be less than or equal to $1,000.000.00.'
+              - The chosen effective date will be the business day following the ACH processing date on which the transfer is submitted. The transfer will be settled on that future day.
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        standard_entry_class_code:
+          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the transfer.
+          enum:
+          - corporate_credit_or_debit
+          - corporate_trade_exchange
+          - prearranged_payments_and_deposit
+          - internet_initiated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+        statement_descriptor:
+          description: A description you choose to give the transfer. This will be saved with the transfer details, displayed in the dashboard, and returned by the API. If `individual_name` and `company_name` are not explicitly set by this API, the `statement_descriptor` will be sent in those fields to the receiving bank to help the customer recognize the transfer. You are highly encouraged to pass `individual_name` and `company_name` instead of relying on this fallback.
+          maxLength: 200
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        transaction_timing:
+          description: The timing of the transaction.
+          enum:
+          - synchronous
+          - asynchronous
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A Transaction will be created immediately.
+          - A Transaction will be created when the funds settle at the Federal Reserve.
+      required:
+      - account_id
+      - amount
+      - statement_descriptor
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    ach_transfer_list:
+      additionalProperties: true
+      description: A list of ACH Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          acknowledgement:
+            acknowledged_at: '2020-01-31T23:59:59Z'
+          addenda: null
+          amount: 100
+          approval:
+            approved_at: '2020-01-31T23:59:59Z'
+            approved_by: null
+          cancellation: null
+          company_descriptive_date: null
+          company_discretionary_data: null
+          company_entry_description: null
+          company_id: '1234987601'
+          company_name: National Phonograph Company
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          currency: USD
+          destination_account_holder: business
+          external_account_id: external_account_ukk55lr923a3ac0pp7iv
+          funding: checking
+          id: ach_transfer_uoxatyh3lt5evrsdvo7q
+          idempotency_key: null
+          inbound_funds_hold: null
+          individual_id: null
+          individual_name: Ian Crease
+          network: ach
+          notifications_of_change: []
+          pending_transaction_id: null
+          preferred_effective_date:
+            date: null
+            settlement_schedule: same_day
+          return: null
+          routing_number: '101050001'
+          settlement: null
+          standard_entry_class_code: corporate_credit_or_debit
+          statement_descriptor: Statement descriptor
+          status: returned
+          submission:
+            administrative_returns_expected_by: '2020-02-05T11:00:00Z'
+            effective_date: '2020-01-31'
+            expected_funds_settlement_at: '2020-02-03T13:30:00Z'
+            expected_settlement_schedule: future_dated
+            submitted_at: '2020-01-31T23:59:59Z'
+            trace_number: 058349238292834
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: ach_transfer
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/ach_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: ACH Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: ACH Transfer Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

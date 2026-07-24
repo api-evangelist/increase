@@ -1,0 +1,729 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Intrafi Account Enrollments API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Intrafi Account Enrollments
+paths:
+  /intrafi_account_enrollments:
+    get:
+      operationId: list_intrafi_account_enrollments
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter IntraFi Account Enrollments to the one belonging to an account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter IntraFi Account Enrollments for those with the specified status or statuses. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - pending_enrolling
+            - enrolled
+            - pending_unenrolling
+            - unenrolled
+            - requires_attention
+            type: string
+            x-enum-descriptions:
+            - The account is being added to the IntraFi network.
+            - The account has been enrolled with IntraFi.
+            - The account is being unenrolled from IntraFi's deposit sweep.
+            - The account was once enrolled, but is no longer enrolled at IntraFi.
+            - Something unexpected happened with this account. Contact Increase support.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_account_enrollment_list'
+          description: IntraFi Account Enrollment List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List IntraFi Account Enrollments
+      x-sandbox-only: false
+      x-tag: IntraFi Account Enrollments
+      tags:
+      - Intrafi Account Enrollments
+    post:
+      operationId: enroll_an_account_in_the_intrafi_deposit_sweep_network
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/enroll_an_account_in_the_intrafi_deposit_sweep_network_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_account_enrollment'
+          description: IntraFi Account Enrollment
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Enroll an account in the IntraFi deposit sweep network
+      x-sandbox-only: false
+      x-tag: IntraFi Account Enrollments
+      tags:
+      - Intrafi Account Enrollments
+  /intrafi_account_enrollments/{intrafi_account_enrollment_id}:
+    get:
+      operationId: get_an_intrafi_account_enrollment
+      parameters:
+      - example: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+        in: path
+        name: intrafi_account_enrollment_id
+        required: true
+        schema:
+          description: The identifier of the IntraFi Account Enrollment to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Account Enrollments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_account_enrollment'
+          description: IntraFi Account Enrollment
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Get an IntraFi Account Enrollment
+      x-sandbox-only: false
+      x-tag: IntraFi Account Enrollments
+      tags:
+      - Intrafi Account Enrollments
+  /intrafi_account_enrollments/{intrafi_account_enrollment_id}/unenroll:
+    post:
+      operationId: unenroll_an_account_from_intrafi
+      parameters:
+      - example: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+        in: path
+        name: intrafi_account_enrollment_id
+        required: true
+        schema:
+          description: The Identifier of the IntraFi Account Enrollment to remove from IntraFi.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Account Enrollments
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_account_enrollment'
+          description: IntraFi Account Enrollment
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Unenroll an account from IntraFi
+      x-sandbox-only: false
+      x-tag: IntraFi Account Enrollments
+      tags:
+      - Intrafi Account Enrollments
+components:
+  schemas:
+    enroll_an_account_in_the_intrafi_deposit_sweep_network_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        email_address: user@example.com
+      properties:
+        account_id:
+          description: The identifier for the account to be added to IntraFi.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        email_address:
+          description: The contact email for the account owner, to be shared with IntraFi.
+          format: email
+          maxLength: 50
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - email_address
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    intrafi_account_enrollment_list:
+      additionalProperties: true
+      description: A list of IntraFi Account Enrollment objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          created_at: '2020-01-31T23:59:59Z'
+          email_address: null
+          id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+          idempotency_key: null
+          intrafi_id: 01234abcd
+          status: pending_enrolling
+          type: intrafi_account_enrollment
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_account_enrollment'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Account Enrollment List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Account Enrollment Lists
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    intrafi_account_enrollment:
+      additionalProperties: false
+      description: IntraFi is a [network of financial institutions](https://www.intrafi.com/network-banks) that allows Increase users to sweep funds to multiple banks. This enables accounts to become eligible for additional Federal Deposit Insurance Corporation (FDIC) insurance. An IntraFi Account Enrollment object represents the status of an account in the network. Sweeping an account to IntraFi doesn't affect funds availability.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        created_at: '2020-01-31T23:59:59Z'
+        email_address: null
+        id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+        idempotency_key: null
+        intrafi_id: 01234abcd
+        status: pending_enrolling
+        type: intrafi_account_enrollment
+      properties:
+        account_id:
+          description: The identifier of the Increase Account being swept into the network.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the enrollment was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        email_address:
+          anyOf:
+          - description: The contact email for the account owner, to be shared with IntraFi.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        id:
+          description: The identifier of this enrollment at IntraFi.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Account Enrollments
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        intrafi_id:
+          description: The identifier of the account in IntraFi's system. This identifier will be printed on any IntraFi statements or documents.
+          type: string
+          x-documentation-priority: default
+        status:
+          description: The status of the account in the network. An account takes about one business day to go from `pending_enrolling` to `enrolled`.
+          enum:
+          - pending_enrolling
+          - enrolled
+          - pending_unenrolling
+          - unenrolled
+          - requires_attention
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The account is being added to the IntraFi network.
+          - The account has been enrolled with IntraFi.
+          - The account is being unenrolled from IntraFi's deposit sweep.
+          - The account was once enrolled, but is no longer enrolled at IntraFi.
+          - Something unexpected happened with this account. Contact Increase support.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `intrafi_account_enrollment`.
+          enum:
+          - intrafi_account_enrollment
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - account_id
+      - status
+      - created_at
+      - intrafi_id
+      - email_address
+      - idempotency_key
+      title: IntraFi Account Enrollment
+      type: object
+      x-event-categories:
+      - intrafi_account_enrollment.created
+      - intrafi_account_enrollment.updated
+      x-stainless-empty-object: false
+      x-tag: IntraFi Account Enrollments
+      x-title-plural: IntraFi Account Enrollments
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

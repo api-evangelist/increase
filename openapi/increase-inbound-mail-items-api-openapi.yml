@@ -1,0 +1,846 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Inbound Mail Items API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Inbound Mail Items represent pieces of physical mail delivered to a Lockbox Address.
+  name: Inbound Mail Items
+paths:
+  /inbound_mail_items:
+    get:
+      operationId: list_inbound_mail_items
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: lockbox_recipient_id
+        required: false
+        schema:
+          description: Filter Inbound Mail Items to ones sent to the provided Lockbox Recipient.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Recipients
+      - in: query
+        name: lockbox_address_id
+        required: false
+        schema:
+          description: Filter Inbound Mail Items to ones sent to the provided Lockbox Address.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Addresses
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inbound_mail_item_list'
+          description: Inbound Mail Item List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Inbound Mail Items
+      x-sandbox-only: false
+      x-tag: Inbound Mail Items
+      tags:
+      - Inbound Mail Items
+  /inbound_mail_items/{inbound_mail_item_id}:
+    get:
+      operationId: retrieve_an_inbound_mail_item
+      parameters:
+      - example: inbound_mail_item_q6rrg7mmqpplx80zceev
+        in: path
+        name: inbound_mail_item_id
+        required: true
+        schema:
+          description: The identifier of the Inbound Mail Item to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Mail Items
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inbound_mail_item'
+          description: Inbound Mail Item
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Inbound Mail Item
+      x-sandbox-only: false
+      x-tag: Inbound Mail Items
+      tags:
+      - Inbound Mail Items
+  /inbound_mail_items/{inbound_mail_item_id}/action:
+    post:
+      operationId: action_an_inbound_mail_item
+      parameters:
+      - example: inbound_mail_item_q6rrg7mmqpplx80zceev
+        in: path
+        name: inbound_mail_item_id
+        required: true
+        schema:
+          description: The identifier of the Inbound Mail Item to action.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Mail Items
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/action_an_inbound_mail_item_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inbound_mail_item'
+          description: Inbound Mail Item
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Action an Inbound Mail Item
+      x-sandbox-only: false
+      x-tag: Inbound Mail Items
+      tags:
+      - Inbound Mail Items
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    inbound_mail_item_check:
+      additionalProperties: false
+      description: Inbound Mail Item Checks represent the checks in an Inbound Mail Item.
+      example:
+        amount: 1750
+        back_file_id: file_makxrc67oh9l6sg7w9yc
+        check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+        front_file_id: file_makxrc67oh9l6sg7w9yc
+        status: deposited
+      properties:
+        amount:
+          description: The amount of the check.
+          type: integer
+          x-documentation-priority: default
+        back_file_id:
+          anyOf:
+          - description: The identifier for the File containing the back of the check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        check_deposit_id:
+          anyOf:
+          - description: The identifier of the Check Deposit if this check was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Check Deposits
+          - type: 'null'
+        front_file_id:
+          anyOf:
+          - description: The identifier for the File containing the front of the check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        status:
+          anyOf:
+          - description: The status of the Inbound Mail Item Check.
+            enum:
+            - pending
+            - deposited
+            - ignored
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - The check is pending processing.
+            - The check has been deposited.
+            - The check has been ignored.
+          - type: 'null'
+      required:
+      - amount
+      - status
+      - front_file_id
+      - back_file_id
+      - check_deposit_id
+      title: Inbound Mail Item Check
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Mail Item Checks
+    action_an_inbound_mail_item_parameters:
+      additionalProperties: false
+      example:
+        checks:
+        - account_id: account_in71c4amph0vgo2qllky
+          action: deposit
+        - action: ignore
+      properties:
+        checks:
+          description: The actions to perform on the Inbound Mail Item.
+          items:
+            additionalProperties: false
+            example:
+              account_id: account_in71c4amph0vgo2qllky
+              action: deposit
+            properties:
+              account_id:
+                description: The identifier of the Account to deposit the check into.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Accounts
+              action:
+                description: The action to perform on the Inbound Mail Item.
+                enum:
+                - deposit
+                - ignore
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The check will be deposited.
+                - The check will be ignored.
+            required:
+            - action
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+          type: array
+          x-documentation-priority: default
+      required:
+      - checks
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    inbound_mail_item:
+      additionalProperties: true
+      description: Inbound Mail Items represent pieces of physical mail delivered to a Lockbox Address.
+      example:
+        checks:
+        - amount: 1750
+          back_file_id: file_makxrc67oh9l6sg7w9yc
+          check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+          front_file_id: file_makxrc67oh9l6sg7w9yc
+          status: deposited
+        - amount: 1750
+          back_file_id: file_makxrc67oh9l6sg7w9yc
+          check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+          front_file_id: file_makxrc67oh9l6sg7w9yc
+          status: deposited
+        created_at: '2020-01-31T23:59:59Z'
+        file_id: file_makxrc67oh9l6sg7w9yc
+        id: inbound_mail_item_q6rrg7mmqpplx80zceev
+        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+        lockbox_recipient_id: lockbox_3xt21ok13q19advds4t5
+        recipient_name: Ian Crease
+        rejection_reason: null
+        status: processed
+        type: inbound_mail_item
+      properties:
+        checks:
+          description: The checks in the mail item.
+          items:
+            $ref: '#/components/schemas/inbound_mail_item_check'
+          type: array
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Inbound Mail Item was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        file_id:
+          description: The identifier for the File containing the scanned contents of the mail item.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        id:
+          description: The Inbound Mail Item identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Mail Items
+        lockbox_address_id:
+          description: The identifier for the Lockbox Address that received this mail item.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Addresses
+        lockbox_recipient_id:
+          anyOf:
+          - description: The identifier for the Lockbox Recipient that received this mail item. For mail items that could not be routed to a Lockbox Recipient, this will be null.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Lockbox Recipients
+          - type: 'null'
+        recipient_name:
+          anyOf:
+          - description: The recipient name as written on the mail item.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        rejection_reason:
+          anyOf:
+          - description: If the mail item has been rejected, why it was rejected.
+            enum:
+            - no_matching_lockbox
+            - no_check
+            - lockbox_not_active
+            - lockbox_address_not_active
+            - lockbox_recipient_not_active
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - The mail item does not match any lockbox.
+            - The mail item does not contain a check.
+            - The Lockbox or its associated Account is not active.
+            - The Lockbox Address is not active.
+            - The Lockbox Recipient or its associated Account is not active.
+          - type: 'null'
+        status:
+          description: If the mail item has been processed.
+          enum:
+          - pending
+          - processed
+          - rejected
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The mail item is pending processing.
+          - The mail item has been processed.
+          - The mail item has been rejected.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_mail_item`.
+          enum:
+          - inbound_mail_item
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - recipient_name
+      - status
+      - rejection_reason
+      - file_id
+      - lockbox_recipient_id
+      - lockbox_address_id
+      - checks
+      title: Inbound Mail Item
+      type: object
+      x-event-categories:
+      - inbound_mail_item.created
+      - inbound_mail_item.updated
+      x-stainless-empty-object: false
+      x-tag: Inbound Mail Items
+      x-title-plural: Inbound Mail Items
+    inbound_mail_item_list:
+      additionalProperties: true
+      description: A list of Inbound Mail Item objects.
+      example:
+        data:
+        - checks:
+          - amount: 1750
+            back_file_id: file_makxrc67oh9l6sg7w9yc
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            front_file_id: file_makxrc67oh9l6sg7w9yc
+            status: deposited
+          - amount: 1750
+            back_file_id: file_makxrc67oh9l6sg7w9yc
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            front_file_id: file_makxrc67oh9l6sg7w9yc
+            status: deposited
+          created_at: '2020-01-31T23:59:59Z'
+          file_id: file_makxrc67oh9l6sg7w9yc
+          id: inbound_mail_item_q6rrg7mmqpplx80zceev
+          lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+          lockbox_recipient_id: lockbox_3xt21ok13q19advds4t5
+          recipient_name: Ian Crease
+          rejection_reason: null
+          status: processed
+          type: inbound_mail_item
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_mail_item'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound Mail Item List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Mail Item Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

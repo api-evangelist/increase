@@ -1,0 +1,1373 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Card Validations API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Card Validations are used to validate a card and its cardholder before sending funds to or pulling funds from a card.
+  name: Card Validations
+paths:
+  /card_validations:
+    get:
+      operationId: list_card_validations
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: account_in71c4amph0vgo2qllky
+        in: query
+        name: account_id
+        required: false
+        schema:
+          description: Filter Card Validations to ones belonging to the specified Account.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: status.in
+        required: false
+        schema:
+          description: Filter Card Validations by status. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - requires_attention
+            - pending_submission
+            - submitted
+            - complete
+            - declined
+            type: string
+            x-enum-descriptions:
+            - The validation requires attention from an Increase operator.
+            - The validation is queued to be submitted to the card network.
+            - The validation has been submitted and is pending a response from the card network.
+            - The validation has been sent successfully and is complete.
+            - The validation was declined by the network or the recipient's bank.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_validation_list'
+          description: Card Validation List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Card Validations
+      x-sandbox-only: false
+      x-tag: Card Validations
+      tags:
+      - Card Validations
+    post:
+      operationId: create_a_card_validation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_a_card_validation_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_validation'
+          description: Card Validation
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create a Card Validation
+      x-sandbox-only: false
+      x-tag: Card Validations
+      tags:
+      - Card Validations
+  /card_validations/{card_validation_id}:
+    get:
+      operationId: retrieve_a_card_validation
+      parameters:
+      - example: outbound_card_validation_qqlzagpc6v1x2gcdhe24
+        in: path
+        name: card_validation_id
+        required: true
+        schema:
+          description: The identifier of the Card Validation.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Validations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card_validation'
+          description: Card Validation
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve a Card Validation
+      x-sandbox-only: false
+      x-tag: Card Validations
+      tags:
+      - Card Validations
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    card_validation:
+      additionalProperties: true
+      description: Card Validations are used to validate a card and its cardholder before sending funds to or pulling funds from a card.
+      example:
+        acceptance:
+          accepted_at: '2020-01-31T23:59:59Z'
+          authorization_identification_response: ABCDEF
+          card_verification_value2_result: null
+          cardholder_first_name_result: null
+          cardholder_full_name_result: null
+          cardholder_last_name_result: null
+          cardholder_middle_name_result: null
+          cardholder_postal_code_result: null
+          cardholder_street_address_result: null
+          network_transaction_identifier: '841488484271872'
+        account_id: account_in71c4amph0vgo2qllky
+        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        cardholder_first_name: Dee
+        cardholder_last_name: Hock
+        cardholder_middle_name: Ward
+        cardholder_postal_code: '10045'
+        cardholder_street_address: 33 Liberty Street
+        created_at: '2020-01-31T23:59:59Z'
+        created_by:
+          category: user
+          user:
+            email: user@example.com
+        decline:
+          declined_at: '2020-01-31T23:59:59Z'
+          network_transaction_identifier: '841488484271872'
+          reason: transaction_not_permitted_to_cardholder
+        id: outbound_card_validation_qqlzagpc6v1x2gcdhe24
+        idempotency_key: null
+        merchant_category_code: '1234'
+        merchant_city_name: New York
+        merchant_name: Acme Corp
+        merchant_postal_code: '10045'
+        merchant_state: NY
+        route: visa
+        status: pending_submission
+        submission:
+          retrieval_reference_number: '123456789012'
+          submitted_at: '2020-01-31T23:59:59Z'
+          trace_number: '123456'
+        type: card_validation
+      properties:
+        acceptance:
+          anyOf:
+          - additionalProperties: false
+            description: If the validation is accepted by the recipient bank, this will contain supplemental details.
+            example:
+              accepted_at: '2020-01-31T23:59:59Z'
+              authorization_identification_response: ABCDEF
+              card_verification_value2_result: null
+              cardholder_first_name_result: null
+              cardholder_full_name_result: null
+              cardholder_last_name_result: null
+              cardholder_middle_name_result: null
+              cardholder_postal_code_result: null
+              cardholder_street_address_result: null
+              network_transaction_identifier: '841488484271872'
+            properties:
+              accepted_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the validation was accepted by the issuing bank.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              authorization_identification_response:
+                description: The authorization identification response from the issuing bank.
+                type: string
+                x-documentation-priority: default
+              card_verification_value2_result:
+                anyOf:
+                - description: The result of the Card Verification Value 2 match.
+                  enum:
+                  - match
+                  - no_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The Card Verification Value 2 (CVV2) matches the expected value.
+                  - The Card Verification Value 2 (CVV2) does not match the expected value.
+                - type: 'null'
+              cardholder_first_name_result:
+                anyOf:
+                - description: The result of the cardholder first name match.
+                  enum:
+                  - match
+                  - no_match
+                  - partial_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder name component matches the expected value.
+                  - The cardholder name component does not match the expected value.
+                  - The cardholder name component partially matches the expected value.
+                - type: 'null'
+              cardholder_full_name_result:
+                anyOf:
+                - description: The result of the cardholder full name match.
+                  enum:
+                  - match
+                  - no_match
+                  - partial_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder name component matches the expected value.
+                  - The cardholder name component does not match the expected value.
+                  - The cardholder name component partially matches the expected value.
+                - type: 'null'
+              cardholder_last_name_result:
+                anyOf:
+                - description: The result of the cardholder last name match.
+                  enum:
+                  - match
+                  - no_match
+                  - partial_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder name component matches the expected value.
+                  - The cardholder name component does not match the expected value.
+                  - The cardholder name component partially matches the expected value.
+                - type: 'null'
+              cardholder_middle_name_result:
+                anyOf:
+                - description: The result of the cardholder middle name match.
+                  enum:
+                  - match
+                  - no_match
+                  - partial_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder name component matches the expected value.
+                  - The cardholder name component does not match the expected value.
+                  - The cardholder name component partially matches the expected value.
+                - type: 'null'
+              cardholder_postal_code_result:
+                anyOf:
+                - description: The result of the cardholder postal code match.
+                  enum:
+                  - match
+                  - no_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder address component matches the expected value.
+                  - The cardholder address component does not match the expected value.
+                - type: 'null'
+              cardholder_street_address_result:
+                anyOf:
+                - description: The result of the cardholder street address match.
+                  enum:
+                  - match
+                  - no_match
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - The cardholder address component matches the expected value.
+                  - The cardholder address component does not match the expected value.
+                - type: 'null'
+              network_transaction_identifier:
+                anyOf:
+                - description: A unique identifier for the transaction on the card network.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - accepted_at
+            - authorization_identification_response
+            - network_transaction_identifier
+            - cardholder_full_name_result
+            - cardholder_first_name_result
+            - cardholder_middle_name_result
+            - cardholder_last_name_result
+            - cardholder_street_address_result
+            - cardholder_postal_code_result
+            - card_verification_value2_result
+            title: Card Validation Card Validation Acceptance
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Validation Acceptances
+          - type: 'null'
+        account_id:
+          description: The identifier of the Account from which to send the validation.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        card_token_id:
+          description: The ID of the Card Token that was used to validate the card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        cardholder_first_name:
+          anyOf:
+          - description: The cardholder's first name.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        cardholder_last_name:
+          anyOf:
+          - description: The cardholder's last name.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        cardholder_middle_name:
+          anyOf:
+          - description: The cardholder's middle name.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        cardholder_postal_code:
+          anyOf:
+          - description: The postal code of the cardholder's address.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        cardholder_street_address:
+          anyOf:
+          - description: The cardholder's street address.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the validation was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_by:
+          anyOf:
+          - additionalProperties: false
+            description: What object created the validation, either via the API or the dashboard.
+            example:
+              category: user
+              user:
+                email: user@example.com
+            properties:
+              api_key:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the API key that created the transfer.
+                  properties:
+                    description:
+                      anyOf:
+                      - description: The description set for the API key when it was created.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - description
+                  title: Card Validation Transfer Creator ApiKey
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: ApiKeys
+                - type: 'null'
+              category:
+                description: The type of object that created this transfer.
+                enum:
+                - api_key
+                - oauth_application
+                - user
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - An API key. Details will be under the `api_key` object.
+                - An OAuth application you connected to Increase. Details will be under the `oauth_application` object.
+                - A User in the Increase dashboard. Details will be under the `user` object.
+              oauth_application:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the OAuth Application that created the transfer.
+                  properties:
+                    name:
+                      description: The name of the OAuth Application.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - name
+                  title: Card Validation Transfer Creator OAuthApplication
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: OAuthApplications
+                - type: 'null'
+              user:
+                anyOf:
+                - additionalProperties: false
+                  description: If present, details about the User that created the transfer.
+                  properties:
+                    email:
+                      description: The email address of the User.
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - email
+                  title: Card Validation Transfer Creator User
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Users
+                - type: 'null'
+            required:
+            - category
+            title: Card Validation Transfer Creator
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Transfer Creators
+          - type: 'null'
+        decline:
+          anyOf:
+          - additionalProperties: false
+            description: If the validation is rejected by the card network or the destination financial institution, this will contain supplemental details.
+            example:
+              declined_at: '2020-01-31T23:59:59Z'
+              network_transaction_identifier: '841488484271872'
+              reason: transaction_not_permitted_to_cardholder
+            properties:
+              declined_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the validation was declined.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              network_transaction_identifier:
+                anyOf:
+                - description: A unique identifier for the transaction on the card network.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              reason:
+                description: The reason why the validation was declined.
+                enum:
+                - do_not_honor
+                - activity_count_limit_exceeded
+                - refer_to_card_issuer
+                - refer_to_card_issuer_special_condition
+                - invalid_merchant
+                - pick_up_card
+                - error
+                - pick_up_card_special
+                - invalid_transaction
+                - invalid_amount
+                - invalid_account_number
+                - no_such_issuer
+                - re_enter_transaction
+                - no_credit_account
+                - pick_up_card_lost
+                - pick_up_card_stolen
+                - closed_account
+                - insufficient_funds
+                - no_checking_account
+                - no_savings_account
+                - expired_card
+                - transaction_not_permitted_to_cardholder
+                - transaction_not_allowed_at_terminal
+                - transaction_not_supported_or_blocked_by_issuer
+                - suspected_fraud
+                - activity_amount_limit_exceeded
+                - restricted_card
+                - security_violation
+                - transaction_does_not_fulfill_anti_money_laundering_requirement
+                - blocked_by_cardholder
+                - blocked_first_use
+                - credit_issuer_unavailable
+                - negative_card_verification_value_results
+                - issuer_unavailable
+                - financial_institution_cannot_be_found
+                - transaction_cannot_be_completed
+                - duplicate_transaction
+                - system_malfunction
+                - additional_customer_authentication_required
+                - surcharge_amount_not_permitted
+                - decline_for_cvv2_failure
+                - stop_payment_order
+                - revocation_of_authorization_order
+                - revocation_of_all_authorizations_order
+                - unable_to_locate_record
+                - file_is_temporarily_unavailable
+                - incorrect_pin
+                - allowable_number_of_pin_entry_tries_exceeded
+                - unable_to_locate_previous_message
+                - pin_error_found
+                - cannot_verify_pin
+                - verification_data_failed
+                - surcharge_amount_not_supported_by_debit_network_issuer
+                - cash_service_not_available
+                - cashback_request_exceeds_issuer_limit
+                - transaction_amount_exceeds_pre_authorized_approval_amount
+                - transaction_does_not_qualify_for_visa_pin
+                - offline_declined
+                - unable_to_go_online
+                - valid_account_but_amount_not_supported
+                - invalid_use_of_merchant_category_code_correct_and_reattempt
+                - card_authentication_failed
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The card issuer has declined the transaction without providing a specific reason.
+                - The number of transactions for the card has exceeded the limit set by the issuer.
+                - The card issuer requires the cardholder to contact them for further information regarding the transaction.
+                - The card issuer requires the cardholder to contact them due to a special condition related to the transaction.
+                - The merchant is not valid for this transaction.
+                - The card should be retained by the terminal.
+                - An error occurred during processing of the transaction.
+                - The card should be retained by the terminal due to a special condition.
+                - The transaction is invalid and cannot be processed.
+                - The amount of the transaction is invalid.
+                - The account number provided is invalid.
+                - The issuer of the card could not be found.
+                - The transaction should be re-entered for processing.
+                - There is no credit account associated with the card.
+                - The card should be retained by the terminal because it has been reported lost.
+                - The card should be retained by the terminal because it has been reported stolen.
+                - The account associated with the card has been closed.
+                - There are insufficient funds in the account to complete the transaction.
+                - There is no checking account associated with the card.
+                - There is no savings account associated with the card.
+                - The card has expired and cannot be used for transactions.
+                - The transaction is not permitted for this cardholder.
+                - The transaction is not allowed at this terminal.
+                - The transaction is not supported or has been blocked by the issuer.
+                - The transaction has been flagged as suspected fraud and cannot be processed.
+                - The amount of activity on the card has exceeded the limit set by the issuer.
+                - The card has restrictions that prevent it from being used for this transaction.
+                - A security violation has occurred, preventing the transaction from being processed.
+                - The transaction does not meet the anti-money laundering requirements set by the issuer.
+                - The transaction was blocked by the cardholder.
+                - The first use of the card has been blocked by the issuer.
+                - The credit issuer is currently unavailable to process the transaction.
+                - The card verification value (CVV) results were negative, indicating a potential issue with the card.
+                - The issuer of the card is currently unavailable to process the transaction.
+                - The financial institution associated with the card could not be found.
+                - The transaction cannot be completed due to an unspecified reason.
+                - The transaction is a duplicate of a previous transaction and cannot be processed again.
+                - A system malfunction occurred, preventing the transaction from being processed.
+                - Additional customer authentication is required to complete the transaction.
+                - The surcharge amount applied to the transaction is not permitted by the issuer.
+                - The transaction was declined due to a failure in verifying the CVV2 code.
+                - A stop payment order has been placed on this transaction.
+                - An order has been placed to revoke authorization for this transaction.
+                - An order has been placed to revoke all authorizations for this cardholder.
+                - The record associated with the transaction could not be located.
+                - The file needed for the transaction is temporarily unavailable.
+                - The PIN entered for the transaction is incorrect.
+                - The allowable number of PIN entry tries has been exceeded.
+                - The previous message associated with the transaction could not be located.
+                - An error was found with the PIN associated with the transaction.
+                - The PIN associated with the transaction could not be verified.
+                - The verification data associated with the transaction has failed.
+                - The surcharge amount is not supported by the debit network issuer.
+                - Cash service is not available for this transaction.
+                - The cashback request exceeds the issuer limit.
+                - The transaction amount exceeds the pre-authorized approval amount.
+                - The transaction does not qualify for Visa PIN processing.
+                - The transaction was declined offline.
+                - The terminal was unable to go online to process the transaction.
+                - The account is valid but the transaction amount is not supported.
+                - The merchant category code was used incorrectly; correct it and reattempt the transaction.
+                - The card authentication process has failed.
+            required:
+            - declined_at
+            - reason
+            - network_transaction_identifier
+            title: Card Validation Card Validation Decline
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Validation Declines
+          - type: 'null'
+        id:
+          description: The Card Validation's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Validations
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        merchant_category_code:
+          description: A four-digit code (MCC) identifying the type of business or service provided by the merchant.
+          type: string
+          x-documentation-priority: default
+        merchant_city_name:
+          description: The city where the merchant (typically your business) is located.
+          type: string
+          x-documentation-priority: default
+        merchant_name:
+          description: The merchant name that will appear in the cardholder’s statement descriptor. Typically your business name.
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          description: The postal code for the merchant’s (typically your business’s) location.
+          type: string
+          x-documentation-priority: default
+        merchant_state:
+          description: The U.S. state where the merchant (typically your business) is located.
+          type: string
+          x-documentation-priority: default
+        route:
+          description: The card network route used for the validation.
+          enum:
+          - visa
+          - mastercard
+          - pulse
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Visa and Interlink
+          - Mastercard and Maestro
+          - Pulse
+        status:
+          description: The lifecycle status of the validation.
+          enum:
+          - requires_attention
+          - pending_submission
+          - submitted
+          - complete
+          - declined
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The validation requires attention from an Increase operator.
+          - The validation is queued to be submitted to the card network.
+          - The validation has been submitted and is pending a response from the card network.
+          - The validation has been sent successfully and is complete.
+          - The validation was declined by the network or the recipient's bank.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the validation is submitted to the card network, this will contain supplemental details.
+            example:
+              retrieval_reference_number: '123456789012'
+              submitted_at: '2020-01-31T23:59:59Z'
+              trace_number: '123456'
+            properties:
+              retrieval_reference_number:
+                description: A 12-digit retrieval reference number that identifies the validation. Usually a combination of a timestamp and the trace number.
+                type: string
+                x-documentation-priority: default
+              submitted_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the validation was submitted to the card network.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              trace_number:
+                description: A 6-digit trace number that identifies the validation within a short time window.
+                type: string
+                x-documentation-priority: default
+            required:
+            - submitted_at
+            - trace_number
+            - retrieval_reference_number
+            title: Card Validation Card Validation Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Validation Submissions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_validation`.
+          enum:
+          - card_validation
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - card_token_id
+      - created_at
+      - created_by
+      - status
+      - account_id
+      - merchant_city_name
+      - merchant_state
+      - merchant_postal_code
+      - merchant_category_code
+      - merchant_name
+      - route
+      - cardholder_first_name
+      - cardholder_middle_name
+      - cardholder_last_name
+      - cardholder_street_address
+      - cardholder_postal_code
+      - submission
+      - decline
+      - acceptance
+      - idempotency_key
+      title: Card Validation
+      type: object
+      x-event-categories:
+      - card_validation.created
+      - card_validation.updated
+      x-stainless-empty-object: false
+      x-tag: Card Validations
+      x-title-plural: Card Validations
+    card_validation_list:
+      additionalProperties: true
+      description: A list of Card Validation objects.
+      example:
+        data:
+        - acceptance:
+            accepted_at: '2020-01-31T23:59:59Z'
+            authorization_identification_response: ABCDEF
+            card_verification_value2_result: null
+            cardholder_first_name_result: null
+            cardholder_full_name_result: null
+            cardholder_last_name_result: null
+            cardholder_middle_name_result: null
+            cardholder_postal_code_result: null
+            cardholder_street_address_result: null
+            network_transaction_identifier: '841488484271872'
+          account_id: account_in71c4amph0vgo2qllky
+          card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+          cardholder_first_name: Dee
+          cardholder_last_name: Hock
+          cardholder_middle_name: Ward
+          cardholder_postal_code: '10045'
+          cardholder_street_address: 33 Liberty Street
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          decline:
+            declined_at: '2020-01-31T23:59:59Z'
+            network_transaction_identifier: '841488484271872'
+            reason: transaction_not_permitted_to_cardholder
+          id: outbound_card_validation_qqlzagpc6v1x2gcdhe24
+          idempotency_key: null
+          merchant_category_code: '1234'
+          merchant_city_name: New York
+          merchant_name: Acme Corp
+          merchant_postal_code: '10045'
+          merchant_state: NY
+          route: visa
+          status: pending_submission
+          submission:
+            retrieval_reference_number: '123456789012'
+            submitted_at: '2020-01-31T23:59:59Z'
+            trace_number: '123456'
+          type: card_validation
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/card_validation'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Card Validation List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Validation Lists
+    create_a_card_validation_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        cardholder_first_name: Dee
+        cardholder_last_name: Hock
+        cardholder_middle_name: Ward
+        cardholder_postal_code: '10045'
+        cardholder_street_address: 33 Liberty Street
+        merchant_category_code: '1234'
+        merchant_city_name: New York
+        merchant_name: Acme Corp
+        merchant_postal_code: '10045'
+        merchant_state: NY
+      properties:
+        account_id:
+          description: The identifier of the Account from which to send the validation.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        card_token_id:
+          description: The Increase identifier for the Card Token that represents the card number you're validating.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        cardholder_first_name:
+          description: The cardholder's first name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_last_name:
+          description: The cardholder's last name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_middle_name:
+          description: The cardholder's middle name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_postal_code:
+          description: The postal code of the cardholder's address.
+          maxLength: 9
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_street_address:
+          description: The cardholder's street address.
+          maxLength: 40
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_category_code:
+          description: A four-digit code (MCC) identifying the type of business or service provided by the merchant.
+          maxLength: 4
+          minLength: 4
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        merchant_city_name:
+          description: The city where the merchant (typically your business) is located.
+          maxLength: 13
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_name:
+          description: The merchant name that will appear in the cardholder’s statement descriptor. Typically your business name.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          description: The postal code for the merchant’s (typically your business’s) location.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_state:
+          description: The U.S. state where the merchant (typically your business) is located.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - card_token_id
+      - merchant_city_name
+      - merchant_state
+      - merchant_postal_code
+      - merchant_category_code
+      - merchant_name
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

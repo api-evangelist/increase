@@ -1,0 +1,1134 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Ach Prenotifications API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Ach Prenotifications
+paths:
+  /ach_prenotifications:
+    get:
+      operationId: list_ach_prenotifications
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_prenotification_list'
+          description: ACH Prenotification List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List ACH Prenotifications
+      x-sandbox-only: false
+      x-tag: ACH Prenotifications
+      tags:
+      - Ach Prenotifications
+    post:
+      operationId: create_an_ach_prenotification
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_ach_prenotification_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_prenotification'
+          description: ACH Prenotification
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an ACH Prenotification
+      x-sandbox-only: false
+      x-tag: ACH Prenotifications
+      tags:
+      - Ach Prenotifications
+  /ach_prenotifications/{ach_prenotification_id}:
+    get:
+      operationId: retrieve_an_ach_prenotification
+      parameters:
+      - example: ach_prenotification_ubjf9qqsxl3obbcn1u34
+        in: path
+        name: ach_prenotification_id
+        required: true
+        schema:
+          description: The identifier of the ACH Prenotification to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Prenotifications
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ach_prenotification'
+          description: ACH Prenotification
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an ACH Prenotification
+      x-sandbox-only: false
+      x-tag: ACH Prenotifications
+      tags:
+      - Ach Prenotifications
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    create_an_ach_prenotification_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        routing_number: '101050001'
+      properties:
+        account_id:
+          description: The Increase identifier for the account that will send the ACH Prenotification.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 200
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        addendum:
+          description: Additional information that will be sent to the recipient.
+          maxLength: 80
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_descriptive_date:
+          description: The description of the date of the ACH Prenotification.
+          maxLength: 6
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_discretionary_data:
+          description: The data you choose to associate with the ACH Prenotification.
+          maxLength: 20
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_entry_description:
+          description: The description you wish to be shown to the recipient.
+          maxLength: 10
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_name:
+          description: The name by which the recipient knows you.
+          maxLength: 16
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        credit_debit_indicator:
+          description: Whether the Prenotification is for a future debit or credit.
+          enum:
+          - credit
+          - debit
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Prenotification is for an anticipated credit.
+          - The Prenotification is for an anticipated debit.
+        effective_date:
+          description: The ACH Prenotification effective date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date
+          type: string
+          x-documentation-priority: default
+        individual_id:
+          description: Your identifier for the recipient.
+          maxLength: 22
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        individual_name:
+          description: The name of therecipient. This value is informational and not verified by the recipient's bank.
+          maxLength: 22
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        standard_entry_class_code:
+          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the ACH Prenotification.
+          enum:
+          - corporate_credit_or_debit
+          - corporate_trade_exchange
+          - prearranged_payments_and_deposit
+          - internet_initiated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+      required:
+      - account_id
+      - account_number
+      - routing_number
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    ach_prenotification_list:
+      additionalProperties: true
+      description: A list of ACH Prenotification objects.
+      example:
+        data:
+        - account_id: null
+          account_number: '987654321'
+          addendum: null
+          company_descriptive_date: null
+          company_discretionary_data: null
+          company_entry_description: null
+          company_name: null
+          created_at: '2020-01-31T23:59:59Z'
+          credit_debit_indicator: null
+          effective_date: null
+          id: ach_prenotification_ubjf9qqsxl3obbcn1u34
+          idempotency_key: null
+          individual_id: null
+          individual_name: null
+          notifications_of_change: []
+          prenotification_return: null
+          routing_number: '101050001'
+          standard_entry_class_code: null
+          status: submitted
+          type: ach_prenotification
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/ach_prenotification'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: ACH Prenotification List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: ACH Prenotification Lists
+    ach_prenotification:
+      additionalProperties: false
+      description: ACH Prenotifications are one way you can verify account and routing numbers by Automated Clearing House (ACH).
+      example:
+        account_id: null
+        account_number: '987654321'
+        addendum: null
+        company_descriptive_date: null
+        company_discretionary_data: null
+        company_entry_description: null
+        company_name: null
+        created_at: '2020-01-31T23:59:59Z'
+        credit_debit_indicator: null
+        effective_date: null
+        id: ach_prenotification_ubjf9qqsxl3obbcn1u34
+        idempotency_key: null
+        individual_id: null
+        individual_name: null
+        notifications_of_change: []
+        prenotification_return: null
+        routing_number: '101050001'
+        standard_entry_class_code: null
+        status: submitted
+        type: ach_prenotification
+      properties:
+        account_id:
+          anyOf:
+          - description: The account that sent the ACH Prenotification.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Accounts
+          - type: 'null'
+        account_number:
+          description: The destination account number.
+          type: string
+          x-documentation-priority: default
+        addendum:
+          anyOf:
+          - description: Additional information for the recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_descriptive_date:
+          anyOf:
+          - description: The description of the date of the notification.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_discretionary_data:
+          anyOf:
+          - description: Optional data associated with the notification.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_entry_description:
+          anyOf:
+          - description: The description of the notification.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        company_name:
+          anyOf:
+          - description: The name by which you know the company.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the prenotification was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        credit_debit_indicator:
+          anyOf:
+          - description: If the notification is for a future credit or debit.
+            enum:
+            - credit
+            - debit
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - The Prenotification is for an anticipated credit.
+            - The Prenotification is for an anticipated debit.
+          - type: 'null'
+        effective_date:
+          anyOf:
+          - description: The effective date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        id:
+          description: The ACH Prenotification's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Prenotifications
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        individual_id:
+          anyOf:
+          - description: Your identifier for the recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        individual_name:
+          anyOf:
+          - description: The name of the recipient. This value is informational and not verified by the recipient's bank.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        notifications_of_change:
+          description: If the receiving bank notifies that future transfers should use different details, this will contain those details.
+          items:
+            additionalProperties: false
+            example:
+              change_code: incorrect_transaction_code
+              corrected_data: '32'
+              created_at: '2020-01-31T23:59:59Z'
+            properties:
+              change_code:
+                description: The required type of change that is being signaled by the receiving financial institution.
+                enum:
+                - incorrect_account_number
+                - incorrect_routing_number
+                - incorrect_routing_number_and_account_number
+                - incorrect_transaction_code
+                - incorrect_account_number_and_transaction_code
+                - incorrect_routing_number_account_number_and_transaction_code
+                - incorrect_receiving_depository_financial_institution_identification
+                - incorrect_individual_identification_number
+                - addenda_format_error
+                - incorrect_standard_entry_class_code_for_outbound_international_payment
+                - misrouted_notification_of_change
+                - incorrect_trace_number
+                - incorrect_company_identification_number
+                - incorrect_identification_number
+                - incorrectly_formatted_corrected_data
+                - incorrect_discretionary_data
+                - routing_number_not_from_original_entry_detail_record
+                - depository_financial_institution_account_number_not_from_original_entry_detail_record
+                - incorrect_transaction_code_by_originating_depository_financial_institution
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The account number was incorrect.
+                - The routing number was incorrect.
+                - Both the routing number and the account number were incorrect.
+                - The transaction code was incorrect. Try changing the `funding` parameter from checking to savings or vice-versa.
+                - The account number and the transaction code were incorrect.
+                - The routing number, account number, and transaction code were incorrect.
+                - The receiving depository financial institution identification was incorrect.
+                - The individual identification number was incorrect.
+                - The addenda had an incorrect format.
+                - The standard entry class code was incorrect for an outbound international payment.
+                - The notification of change was misrouted.
+                - The trace number was incorrect.
+                - The company identification number was incorrect.
+                - The individual identification number or identification number was incorrect.
+                - The corrected data was incorrectly formatted.
+                - The discretionary data was incorrect.
+                - The routing number was not from the original entry detail record.
+                - The depository financial institution account number was not from the original entry detail record.
+                - The transaction code was incorrect, initiated by the originating depository financial institution.
+              corrected_data:
+                description: The corrected data that should be used in future ACHs to this account. This may contain the suggested new account number or routing number. When the `change_code` is `incorrect_transaction_code`, this field contains an integer. Numbers starting with a 2 encourage changing the `funding` parameter to checking; numbers starting with a 3 encourage changing to savings.
+                type: string
+                x-documentation-priority: default
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the notification occurred.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+            required:
+            - created_at
+            - change_code
+            - corrected_data
+            title: ACH Prenotification ACH Notification of Change
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Notifications of change
+          type: array
+          x-documentation-priority: default
+        prenotification_return:
+          anyOf:
+          - additionalProperties: false
+            description: If your prenotification is returned, this will contain details of the return.
+            example:
+              created_at: '2020-01-31T23:59:59Z'
+              return_reason_code: corporate_customer_advised_not_authorized
+            properties:
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Prenotification was returned.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              return_reason_code:
+                description: Why the Prenotification was returned.
+                enum:
+                - insufficient_fund
+                - no_account
+                - account_closed
+                - invalid_account_number_structure
+                - account_frozen_entry_returned_per_ofac_instruction
+                - credit_entry_refused_by_receiver
+                - unauthorized_debit_to_consumer_account_using_corporate_sec_code
+                - corporate_customer_advised_not_authorized
+                - payment_stopped
+                - non_transaction_account
+                - uncollected_funds
+                - routing_number_check_digit_error
+                - customer_advised_unauthorized_improper_ineligible_or_incomplete
+                - amount_field_error
+                - authorization_revoked_by_customer
+                - invalid_ach_routing_number
+                - file_record_edit_criteria
+                - enr_invalid_individual_name
+                - returned_per_odfi_request
+                - limited_participation_dfi
+                - incorrectly_coded_outbound_international_payment
+                - account_sold_to_another_dfi
+                - addenda_error
+                - beneficiary_or_account_holder_deceased
+                - customer_advised_not_within_authorization_terms
+                - corrected_return
+                - duplicate_entry
+                - duplicate_return
+                - enr_duplicate_enrollment
+                - enr_invalid_dfi_account_number
+                - enr_invalid_individual_id_number
+                - enr_invalid_representative_payee_indicator
+                - enr_invalid_transaction_code
+                - enr_return_of_enr_entry
+                - enr_routing_number_check_digit_error
+                - entry_not_processed_by_gateway
+                - field_error
+                - foreign_receiving_dfi_unable_to_settle
+                - iat_entry_coding_error
+                - improper_effective_entry_date
+                - improper_source_document_source_document_presented
+                - invalid_company_id
+                - invalid_foreign_receiving_dfi_identification
+                - invalid_individual_id_number
+                - item_and_rck_entry_presented_for_payment
+                - item_related_to_rck_entry_is_ineligible
+                - mandatory_field_error
+                - misrouted_dishonored_return
+                - misrouted_return
+                - no_errors_found
+                - non_acceptance_of_r62_dishonored_return
+                - non_participant_in_iat_program
+                - permissible_return_entry
+                - permissible_return_entry_not_accepted
+                - rdfi_non_settlement
+                - rdfi_participant_in_check_truncation_program
+                - representative_payee_deceased_or_unable_to_continue_in_that_capacity
+                - return_not_a_duplicate
+                - return_of_erroneous_or_reversing_debit
+                - return_of_improper_credit_entry
+                - return_of_improper_debit_entry
+                - return_of_xck_entry
+                - source_document_presented_for_payment
+                - state_law_affecting_rck_acceptance
+                - stop_payment_on_item_related_to_rck_entry
+                - stop_payment_on_source_document
+                - timely_original_return
+                - trace_number_error
+                - untimely_dishonored_return
+                - untimely_return
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - Code R01. Insufficient funds in the receiving account. Sometimes abbreviated to "NSF."
+                - Code R03. The account does not exist or the receiving bank was unable to locate it.
+                - Code R02. The account is closed at the receiving bank.
+                - Code R04. The account number is invalid at the receiving bank.
+                - Code R16. This return code has two separate meanings. (1) The receiving bank froze the account or (2) the Office of Foreign Assets Control (OFAC) instructed the receiving bank to return the entry.
+                - Code R23. The receiving bank refused the credit transfer.
+                - Code R05. The receiving bank rejected because of an incorrect Standard Entry Class code. Consumer accounts cannot be debited as `corporate_credit_or_debit` or `corporate_trade_exchange`.
+                - Code R29. The corporate customer at the receiving bank reversed the transfer.
+                - Code R08. The receiving bank stopped payment on this transfer.
+                - Code R20. The account is not eligible for ACH, such as a savings account with transaction limits.
+                - Code R09. The receiving bank account does not have enough available balance for the transfer.
+                - Code R28. The routing number is incorrect.
+                - Code R10. The customer at the receiving bank reversed the transfer.
+                - Code R19. The amount field is incorrect or too large.
+                - Code R07. The customer revoked their authorization for a previously authorized transfer.
+                - Code R13. The routing number is invalid.
+                - Code R17. The receiving bank is unable to process a field in the transfer.
+                - Code R45. A rare return reason. The individual name field was invalid.
+                - Code R06. The originating financial institution asked for this transfer to be returned. The receiving bank is complying with the request.
+                - Code R34. The receiving bank's regulatory supervisor has limited their participation in the ACH network.
+                - Code R85. The outbound international ACH transfer was incorrect.
+                - Code R12. A rare return reason. The account was sold to another bank.
+                - Code R25. The addenda record is incorrect or missing.
+                - Code R15. A rare return reason. The account holder is deceased.
+                - Code R11. A rare return reason. The customer authorized some payment to the sender, but this payment was not in error.
+                - Code R74. A rare return reason. Sent in response to a return that was returned with code `field_error`. The latest return should include the corrected field(s).
+                - Code R24. A rare return reason. The receiving bank received an exact duplicate entry with the same trace number and amount.
+                - Code R67. A rare return reason. The return this message refers to was a duplicate.
+                - Code R47. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R43. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R44. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R46. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R41. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R40. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R42. A rare return reason. Only used for US Government agency non-monetary automatic enrollment messages.
+                - Code R84. A rare return reason. The International ACH Transfer cannot be processed by the gateway.
+                - Code R69. A rare return reason. One or more of the fields in the ACH were malformed.
+                - Code R83. A rare return reason. The Foreign receiving bank was unable to settle this ACH transfer.
+                - Code R80. A rare return reason. The International ACH Transfer is malformed.
+                - Code R18. A rare return reason. The ACH has an improper effective entry date field.
+                - Code R39. A rare return reason. The source document related to this ACH, usually an ACH check conversion, was presented to the bank.
+                - Code R21. A rare return reason. The Company ID field of the ACH was invalid.
+                - Code R82. A rare return reason. The foreign receiving bank identifier for an International ACH Transfer was invalid.
+                - Code R22. A rare return reason. The Individual ID number field of the ACH was invalid.
+                - Code R53. A rare return reason. Both the Represented Check ("RCK") entry and the original check were presented to the bank.
+                - Code R51. A rare return reason. The Represented Check ("RCK") entry is ineligible.
+                - Code R26. A rare return reason. The ACH is missing a required field.
+                - Code R71. A rare return reason. The receiving bank does not recognize the routing number in a dishonored return entry.
+                - Code R61. A rare return reason. The receiving bank does not recognize the routing number in a return entry.
+                - Code R76. A rare return reason. Sent in response to a return, the bank does not find the errors alleged by the returning bank.
+                - Code R77. A rare return reason. The receiving bank does not accept the return of the erroneous debit. The funds are not available at the receiving bank.
+                - Code R81. A rare return reason. The receiving bank does not accept International ACH Transfers.
+                - Code R31. A rare return reason. A return that has been agreed to be accepted by the receiving bank, despite falling outside of the usual return timeframe.
+                - Code R70. A rare return reason. The receiving bank had not approved this return.
+                - Code R32. A rare return reason. The receiving bank could not settle this transaction.
+                - Code R30. A rare return reason. The receiving bank does not accept Check Truncation ACH transfers.
+                - Code R14. A rare return reason. The payee is deceased.
+                - Code R75. A rare return reason. The originating bank disputes that an earlier `duplicate_entry` return was actually a duplicate.
+                - Code R62. A rare return reason. The originating financial institution made a mistake and this return corrects it.
+                - Code R36. A rare return reason. Return of a malformed credit entry.
+                - Code R35. A rare return reason. Return of a malformed debit entry.
+                - Code R33. A rare return reason. Return of a destroyed check ("XCK") entry.
+                - Code R37. A rare return reason. The source document related to this ACH, usually an ACH check conversion, was presented to the bank.
+                - Code R50. A rare return reason. State law prevents the bank from accepting the Represented Check ("RCK") entry.
+                - Code R52. A rare return reason. A stop payment was issued on a Represented Check ("RCK") entry.
+                - Code R38. A rare return reason. The source attached to the ACH, usually an ACH check conversion, includes a stop payment.
+                - Code R73. A rare return reason. The bank receiving an `untimely_return` believes it was on time.
+                - Code R27. A rare return reason. An ACH return's trace number does not match an originated ACH.
+                - Code R72. A rare return reason. The dishonored return was sent too late.
+                - Code R68. A rare return reason. The return was sent too late.
+            required:
+            - created_at
+            - return_reason_code
+            title: ACH Prenotification ACH Prenotification Return
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: ACH Prenotification Returns
+          - type: 'null'
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        standard_entry_class_code:
+          anyOf:
+          - description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the ACH Prenotification.
+            enum:
+            - corporate_credit_or_debit
+            - corporate_trade_exchange
+            - prearranged_payments_and_deposit
+            - internet_initiated
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+            - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+            - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+            - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+          - type: 'null'
+        status:
+          description: The lifecycle status of the ACH Prenotification.
+          enum:
+          - pending_submitting
+          - requires_attention
+          - returned
+          - submitted
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Prenotification is pending submission.
+          - The Prenotification requires attention.
+          - The Prenotification has been returned.
+          - The Prenotification is complete.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `ach_prenotification`.
+          enum:
+          - ach_prenotification
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - account_id
+      - account_number
+      - addendum
+      - company_descriptive_date
+      - company_discretionary_data
+      - company_entry_description
+      - company_name
+      - credit_debit_indicator
+      - effective_date
+      - routing_number
+      - prenotification_return
+      - notifications_of_change
+      - created_at
+      - status
+      - individual_id
+      - individual_name
+      - standard_entry_class_code
+      - idempotency_key
+      title: ACH Prenotification
+      type: object
+      x-event-categories:
+      - ach_prenotification.created
+      - ach_prenotification.updated
+      x-stainless-empty-object: false
+      x-tag: ACH Prenotifications
+      x-title-plural: ACH Prenotifications
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

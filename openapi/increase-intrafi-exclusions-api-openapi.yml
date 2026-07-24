@@ -1,0 +1,726 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Intrafi Exclusions API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- name: Intrafi Exclusions
+paths:
+  /intrafi_exclusions:
+    get:
+      operationId: list_intrafi_exclusions
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - example: entity_n8y8tnk2p9339ti393yi
+        in: query
+        name: entity_id
+        required: false
+        schema:
+          description: Filter IntraFi Exclusions for those belonging to the specified Entity.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+      - in: query
+        name: idempotency_key
+        required: false
+        schema:
+          description: Filter records to the one with the specified `idempotency_key` you chose for that object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_exclusion_list'
+          description: IntraFi Exclusion List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List IntraFi Exclusions
+      x-sandbox-only: false
+      x-tag: IntraFi Exclusions
+      tags:
+      - Intrafi Exclusions
+    post:
+      operationId: create_an_intrafi_exclusion
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_an_intrafi_exclusion_parameters'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_exclusion'
+          description: IntraFi Exclusion
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Create an IntraFi Exclusion
+      x-sandbox-only: false
+      x-tag: IntraFi Exclusions
+      tags:
+      - Intrafi Exclusions
+  /intrafi_exclusions/{intrafi_exclusion_id}:
+    get:
+      operationId: get_an_intrafi_exclusion
+      parameters:
+      - example: account_in71c4amph0vgo2qllky
+        in: path
+        name: intrafi_exclusion_id
+        required: true
+        schema:
+          description: The identifier of the IntraFi Exclusion to retrieve.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Exclusions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_exclusion'
+          description: IntraFi Exclusion
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Get an IntraFi Exclusion
+      x-sandbox-only: false
+      x-tag: IntraFi Exclusions
+      tags:
+      - Intrafi Exclusions
+  /intrafi_exclusions/{intrafi_exclusion_id}/archive:
+    post:
+      operationId: archive_an_intrafi_exclusion
+      parameters:
+      - example: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+        in: path
+        name: intrafi_exclusion_id
+        required: true
+        schema:
+          description: The identifier of the IntraFi Exclusion request to archive. It may take 5 business days for an exclusion removal to be processed. Removing an exclusion does not guarantee that funds will be swept to the previously-excluded bank.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Exclusions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/intrafi_exclusion'
+          description: IntraFi Exclusion
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Archive an IntraFi Exclusion
+      x-sandbox-only: false
+      x-tag: IntraFi Exclusions
+      tags:
+      - Intrafi Exclusions
+components:
+  schemas:
+    create_an_intrafi_exclusion_parameters:
+      additionalProperties: true
+      example:
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        fdic_certificate_number: '314159'
+      properties:
+        entity_id:
+          description: The identifier of the Entity whose deposits will be excluded.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        fdic_certificate_number:
+          description: The FDIC certificate number of the financial institution to be excluded. An FDIC certificate number uniquely identifies a financial institution, and is different than a routing number. To find one, we recommend searching by Bank Name using the [FDIC's bankfind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - entity_id
+      - fdic_certificate_number
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    intrafi_exclusion_list:
+      additionalProperties: true
+      description: A list of IntraFi Exclusion objects.
+      example:
+        data:
+        - bank_name: Example Bank
+          created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          excluded_at: '2020-02-01T23:59:59+00:00'
+          fdic_certificate_number: '314159'
+          id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+          idempotency_key: null
+          status: completed
+          submitted_at: '2020-02-01T00:59:59+00:00'
+          type: intrafi_exclusion
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_exclusion'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Exclusion List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Exclusion Lists
+    intrafi_exclusion:
+      additionalProperties: false
+      description: Certain institutions may be excluded per Entity when sweeping funds into the IntraFi network. This is useful when an Entity already has deposits at a particular bank, and does not want to sweep additional funds to it. It may take 5 business days for an exclusion to be processed.
+      example:
+        bank_name: Example Bank
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        excluded_at: '2020-02-01T23:59:59+00:00'
+        fdic_certificate_number: '314159'
+        id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+        idempotency_key: null
+        status: completed
+        submitted_at: '2020-02-01T00:59:59+00:00'
+        type: intrafi_exclusion
+      properties:
+        bank_name:
+          anyOf:
+          - description: The name of the excluded institution.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the exclusion was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The entity for which this institution is excluded.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        excluded_at:
+          anyOf:
+          - description: When this was exclusion was confirmed by IntraFi.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        fdic_certificate_number:
+          anyOf:
+          - description: The Federal Deposit Insurance Corporation's certificate number for the institution.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        id:
+          description: The identifier of this exclusion request.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Exclusions
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the exclusion request.
+          enum:
+          - pending
+          - completed
+          - archived
+          - ineligible
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The exclusion is being added to the IntraFi network.
+          - The exclusion has been added to the IntraFi network.
+          - The exclusion has been removed from the IntraFi network.
+          - The exclusion wasn't eligible to be added to the IntraFi network.
+        submitted_at:
+          anyOf:
+          - description: When this was exclusion was submitted to IntraFi by Increase.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `intrafi_exclusion`.
+          enum:
+          - intrafi_exclusion
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - submitted_at
+      - excluded_at
+      - bank_name
+      - fdic_certificate_number
+      - entity_id
+      - status
+      - idempotency_key
+      title: IntraFi Exclusion
+      type: object
+      x-event-categories:
+      - intrafi_exclusion.created
+      - intrafi_exclusion.updated
+      x-stainless-empty-object: false
+      x-tag: IntraFi Exclusions
+      x-title-plural: IntraFi Exclusions
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions

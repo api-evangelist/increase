@@ -1,0 +1,1084 @@
+openapi: 3.1.0
+info:
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  title: Increase Account Numbers Events API
+  version: 0.0.1
+servers:
+- url: https://api.increase.com
+- url: https://sandbox.increase.com
+security:
+- bearerAuth: []
+tags:
+- description: Events are records of things that happened to objects at Increase. Events are accessible via the List Events endpoint and can be delivered to your application via webhooks. For more information, see our [webhooks guide](https://increase.com/documentation/webhooks).
+  name: Events
+paths:
+  /events:
+    get:
+      operationId: list_events
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          description: Return the page of entries after this one.
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: limit
+        required: false
+        schema:
+          description: Limit the size of the list that is returned. The default (and maximum) is 100 objects.
+          minimum: 1
+          type: integer
+          x-documentation-priority: low
+      - in: query
+        name: created_at.after
+        required: false
+        schema:
+          description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.before
+        required: false
+        schema:
+          description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_after
+        required: false
+        schema:
+          description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: created_at.on_or_before
+        required: false
+        schema:
+          description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+          format: date-time
+          type: string
+          x-documentation-priority: low
+      - in: query
+        name: category.in
+        required: false
+        schema:
+          description: Filter Events for those with the specified category or categories. For GET requests, this should be encoded as a comma-delimited string, such as `?in=one,two,three`.
+          items:
+            enum:
+            - account.created
+            - account.updated
+            - account_number.created
+            - account_number.updated
+            - account_statement.created
+            - account_transfer.created
+            - account_transfer.updated
+            - ach_prenotification.created
+            - ach_prenotification.updated
+            - ach_transfer.created
+            - ach_transfer.updated
+            - blockchain_address.created
+            - blockchain_address.updated
+            - blockchain_offramp_transfer.created
+            - blockchain_offramp_transfer.updated
+            - blockchain_onramp_transfer.created
+            - blockchain_onramp_transfer.updated
+            - bookkeeping_account.created
+            - bookkeeping_account.updated
+            - bookkeeping_entry_set.updated
+            - card.created
+            - card.updated
+            - card_payment.created
+            - card_payment.updated
+            - card_purchase_supplement.created
+            - card_profile.created
+            - card_profile.updated
+            - card_dispute.created
+            - card_dispute.updated
+            - check_deposit.created
+            - check_deposit.updated
+            - check_transfer.created
+            - check_transfer.updated
+            - declined_transaction.created
+            - digital_card_profile.created
+            - digital_card_profile.updated
+            - digital_wallet_token.created
+            - digital_wallet_token.updated
+            - entity.created
+            - entity.updated
+            - event_subscription.created
+            - event_subscription.updated
+            - export.created
+            - export.updated
+            - external_account.created
+            - external_account.updated
+            - fednow_transfer.created
+            - fednow_transfer.updated
+            - file.created
+            - group.updated
+            - group.heartbeat
+            - inbound_ach_transfer.created
+            - inbound_ach_transfer.updated
+            - inbound_ach_transfer_return.created
+            - inbound_ach_transfer_return.updated
+            - inbound_check_deposit.created
+            - inbound_check_deposit.updated
+            - inbound_fednow_transfer.created
+            - inbound_fednow_transfer.updated
+            - inbound_mail_item.created
+            - inbound_mail_item.updated
+            - inbound_real_time_payments_transfer.created
+            - inbound_real_time_payments_transfer.updated
+            - inbound_wire_drawdown_request.created
+            - inbound_wire_transfer.created
+            - inbound_wire_transfer.updated
+            - intrafi_account_enrollment.created
+            - intrafi_account_enrollment.updated
+            - intrafi_exclusion.created
+            - intrafi_exclusion.updated
+            - lockbox.created
+            - lockbox.updated
+            - oauth_connection.created
+            - oauth_connection.deactivated
+            - card_push_transfer.created
+            - card_push_transfer.updated
+            - card_validation.created
+            - card_validation.updated
+            - pending_transaction.created
+            - pending_transaction.updated
+            - physical_card.created
+            - physical_card.updated
+            - physical_card_profile.created
+            - physical_card_profile.updated
+            - physical_check.created
+            - physical_check.updated
+            - program.created
+            - program.updated
+            - proof_of_authorization_request.created
+            - proof_of_authorization_request.updated
+            - real_time_decision.card_authorization_requested
+            - real_time_decision.card_balance_inquiry_requested
+            - real_time_decision.digital_wallet_token_requested
+            - real_time_decision.digital_wallet_authentication_requested
+            - real_time_decision.card_authentication_requested
+            - real_time_decision.card_authentication_challenge_requested
+            - real_time_payments_transfer.created
+            - real_time_payments_transfer.updated
+            - real_time_payments_request_for_payment.created
+            - real_time_payments_request_for_payment.updated
+            - swift_transfer.created
+            - swift_transfer.updated
+            - transaction.created
+            - wire_drawdown_request.created
+            - wire_drawdown_request.updated
+            - wire_transfer.created
+            - wire_transfer.updated
+            type: string
+            x-enum-descriptions:
+            - Occurs whenever an Account is created.
+            - Occurs whenever an Account is updated.
+            - Occurs whenever an Account Number is created.
+            - Occurs whenever an Account Number is updated.
+            - Occurs whenever an Account Statement is created.
+            - Occurs whenever an Account Transfer is created.
+            - Occurs whenever an Account Transfer is updated.
+            - Occurs whenever an ACH Prenotification is created.
+            - Occurs whenever an ACH Prenotification is updated.
+            - Occurs whenever an ACH Transfer is created.
+            - Occurs whenever an ACH Transfer is updated.
+            - Occurs whenever a Blockchain Address is created.
+            - Occurs whenever a Blockchain Address is updated.
+            - Occurs whenever a Blockchain Off-Ramp Transfer is created.
+            - Occurs whenever a Blockchain Off-Ramp Transfer is updated.
+            - Occurs whenever a Blockchain On-Ramp Transfer is created.
+            - Occurs whenever a Blockchain On-Ramp Transfer is updated.
+            - Occurs whenever a Bookkeeping Account is created.
+            - Occurs whenever a Bookkeeping Account is updated.
+            - Occurs whenever a Bookkeeping Entry Set is created.
+            - Occurs whenever a Card is created.
+            - Occurs whenever a Card is updated.
+            - Occurs whenever a Card Payment is created.
+            - Occurs whenever a Card Payment is updated.
+            - Occurs whenever a Card Purchase Supplement is created.
+            - Occurs whenever a Card Profile is created.
+            - Occurs whenever a Card Profile is updated.
+            - Occurs whenever a Card Dispute is created.
+            - Occurs whenever a Card Dispute is updated.
+            - Occurs whenever a Check Deposit is created.
+            - Occurs whenever a Check Deposit is updated.
+            - Occurs whenever a Check Transfer is created.
+            - Occurs whenever a Check Transfer is updated.
+            - Occurs whenever a Declined Transaction is created.
+            - Occurs whenever a Digital Card Profile is created.
+            - Occurs whenever a Digital Card Profile is updated.
+            - Occurs whenever a Digital Wallet Token is created.
+            - Occurs whenever a Digital Wallet Token is updated.
+            - Occurs whenever an Entity is created.
+            - Occurs whenever an Entity is updated.
+            - Occurs whenever an Event Subscription is created.
+            - Occurs whenever an Event Subscription is updated.
+            - Occurs whenever an Export is created.
+            - Occurs whenever an Export is updated.
+            - Occurs whenever an External Account is created.
+            - Occurs whenever an External Account is updated.
+            - Occurs whenever a FedNow Transfer is created.
+            - Occurs whenever a FedNow Transfer is updated.
+            - Occurs whenever a File is created.
+            - Occurs whenever a Group is updated.
+            - Increase may send webhooks with this category to see if a webhook endpoint is working properly.
+            - Occurs whenever an Inbound ACH Transfer is created.
+            - Occurs whenever an Inbound ACH Transfer is updated.
+            - Occurs whenever an Inbound ACH Transfer Return is created.
+            - Occurs whenever an Inbound ACH Transfer Return is updated.
+            - Occurs whenever an Inbound Check Deposit is created.
+            - Occurs whenever an Inbound Check Deposit is updated.
+            - Occurs whenever an Inbound FedNow Transfer is created.
+            - Occurs whenever an Inbound FedNow Transfer is updated.
+            - Occurs whenever an Inbound Mail Item is created.
+            - Occurs whenever an Inbound Mail Item is updated.
+            - Occurs whenever an Inbound Real-Time Payments Transfer is created.
+            - Occurs whenever an Inbound Real-Time Payments Transfer is updated.
+            - Occurs whenever an Inbound Wire Drawdown Request is created.
+            - Occurs whenever an Inbound Wire Transfer is created.
+            - Occurs whenever an Inbound Wire Transfer is updated.
+            - Occurs whenever an IntraFi Account Enrollment is created.
+            - Occurs whenever an IntraFi Account Enrollment is updated.
+            - Occurs whenever an IntraFi Exclusion is created.
+            - Occurs whenever an IntraFi Exclusion is updated.
+            - Occurs whenever a Lockbox is created.
+            - Occurs whenever a Lockbox is updated.
+            - Occurs whenever an OAuth Connection is created.
+            - Occurs whenever an OAuth Connection is deactivated.
+            - Occurs whenever a Card Push Transfer is created.
+            - Occurs whenever a Card Push Transfer is updated.
+            - Occurs whenever a Card Validation is created.
+            - Occurs whenever a Card Validation is updated.
+            - Occurs whenever a Pending Transaction is created.
+            - Occurs whenever a Pending Transaction is updated.
+            - Occurs whenever a Physical Card is created.
+            - Occurs whenever a Physical Card is updated.
+            - Occurs whenever a Physical Card Profile is created.
+            - Occurs whenever a Physical Card Profile is updated.
+            - Occurs whenever a Physical Check is created.
+            - Occurs whenever a Physical Check is updated.
+            - Occurs whenever a Program is created.
+            - Occurs whenever a Program is updated.
+            - Occurs whenever a Proof of Authorization Request is created.
+            - Occurs whenever a Proof of Authorization Request is updated.
+            - Occurs whenever a Real-Time Decision is created in response to a card authorization.
+            - Occurs whenever a Real-Time Decision is created in response to a card balance inquiry.
+            - Occurs whenever a Real-Time Decision is created in response to a digital wallet provisioning attempt.
+            - Occurs whenever a Real-Time Decision is created in response to a digital wallet requiring two-factor authentication.
+            - Occurs whenever a Real-Time Decision is created in response to 3DS authentication.
+            - Occurs whenever a Real-Time Decision is created in response to 3DS authentication challenges.
+            - Occurs whenever a Real-Time Payments Transfer is created.
+            - Occurs whenever a Real-Time Payments Transfer is updated.
+            - Occurs whenever a Real-Time Payments Request for Payment is created.
+            - Occurs whenever a Real-Time Payments Request for Payment is updated.
+            - Occurs whenever a Swift Transfer is created.
+            - Occurs whenever a Swift Transfer is updated.
+            - Occurs whenever a Transaction is created.
+            - Occurs whenever a Wire Drawdown Request is created.
+            - Occurs whenever a Wire Drawdown Request is updated.
+            - Occurs whenever a Wire Transfer is created.
+            - Occurs whenever a Wire Transfer is updated.
+          type: array
+          x-documentation-priority: default
+        explode: false
+      - in: query
+        name: associated_object_id
+        required: false
+        schema:
+          description: Filter Events to those belonging to the object with the provided identifier.
+          type: string
+          x-documentation-priority: default
+      - in: query
+        name: order_by.direction
+        required: false
+        schema:
+          description: The direction to order in.
+          enum:
+          - ascending
+          - descending
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Ascending in value.
+          - Descending in value.
+      - in: query
+        name: order_by.field
+        required: false
+        schema:
+          description: The field to order by.
+          enum:
+          - created_at
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The time the Event was created.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event_list'
+          description: Event List
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: List Events
+      x-sandbox-only: false
+      x-tag: Events
+      tags:
+      - Events
+  /events/{event_id}:
+    get:
+      operationId: retrieve_an_event
+      parameters:
+      - example: event_001dzz0r20rzr4zrhrr1364hy80
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: The identifier of the Event.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Events
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/event'
+          description: Event
+        4XX:
+          $ref: '#/components/responses/errorResponse'
+        5XX:
+          $ref: '#/components/responses/errorResponse'
+      summary: Retrieve an Event
+      x-sandbox-only: false
+      x-tag: Events
+      tags:
+      - Events
+components:
+  schemas:
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    event:
+      additionalProperties: false
+      description: Events are records of things that happened to objects at Increase. Events are accessible via the List Events endpoint and can be delivered to your application via webhooks. For more information, see our [webhooks guide](https://increase.com/documentation/webhooks).
+      example:
+        associated_object_id: account_in71c4amph0vgo2qllky
+        associated_object_type: account
+        category: account.created
+        created_at: '2020-01-31T23:59:59Z'
+        id: event_001dzz0r20rzr4zrhrr1364hy80
+        type: event
+      properties:
+        associated_object_id:
+          description: The identifier of the object that generated this Event.
+          type: string
+          x-documentation-priority: default
+        associated_object_type:
+          description: The type of the object that generated this Event.
+          type: string
+          x-documentation-priority: default
+        category:
+          description: The category of the Event. We may add additional possible values for this enum over time; your application should be able to handle such additions gracefully.
+          enum:
+          - account.created
+          - account.updated
+          - account_number.created
+          - account_number.updated
+          - account_statement.created
+          - account_transfer.created
+          - account_transfer.updated
+          - ach_prenotification.created
+          - ach_prenotification.updated
+          - ach_transfer.created
+          - ach_transfer.updated
+          - blockchain_address.created
+          - blockchain_address.updated
+          - blockchain_offramp_transfer.created
+          - blockchain_offramp_transfer.updated
+          - blockchain_onramp_transfer.created
+          - blockchain_onramp_transfer.updated
+          - bookkeeping_account.created
+          - bookkeeping_account.updated
+          - bookkeeping_entry_set.updated
+          - card.created
+          - card.updated
+          - card_payment.created
+          - card_payment.updated
+          - card_purchase_supplement.created
+          - card_profile.created
+          - card_profile.updated
+          - card_dispute.created
+          - card_dispute.updated
+          - check_deposit.created
+          - check_deposit.updated
+          - check_transfer.created
+          - check_transfer.updated
+          - declined_transaction.created
+          - digital_card_profile.created
+          - digital_card_profile.updated
+          - digital_wallet_token.created
+          - digital_wallet_token.updated
+          - entity.created
+          - entity.updated
+          - event_subscription.created
+          - event_subscription.updated
+          - export.created
+          - export.updated
+          - external_account.created
+          - external_account.updated
+          - fednow_transfer.created
+          - fednow_transfer.updated
+          - file.created
+          - group.updated
+          - group.heartbeat
+          - inbound_ach_transfer.created
+          - inbound_ach_transfer.updated
+          - inbound_ach_transfer_return.created
+          - inbound_ach_transfer_return.updated
+          - inbound_check_deposit.created
+          - inbound_check_deposit.updated
+          - inbound_fednow_transfer.created
+          - inbound_fednow_transfer.updated
+          - inbound_mail_item.created
+          - inbound_mail_item.updated
+          - inbound_real_time_payments_transfer.created
+          - inbound_real_time_payments_transfer.updated
+          - inbound_wire_drawdown_request.created
+          - inbound_wire_transfer.created
+          - inbound_wire_transfer.updated
+          - intrafi_account_enrollment.created
+          - intrafi_account_enrollment.updated
+          - intrafi_exclusion.created
+          - intrafi_exclusion.updated
+          - lockbox.created
+          - lockbox.updated
+          - oauth_connection.created
+          - oauth_connection.deactivated
+          - card_push_transfer.created
+          - card_push_transfer.updated
+          - card_validation.created
+          - card_validation.updated
+          - pending_transaction.created
+          - pending_transaction.updated
+          - physical_card.created
+          - physical_card.updated
+          - physical_card_profile.created
+          - physical_card_profile.updated
+          - physical_check.created
+          - physical_check.updated
+          - program.created
+          - program.updated
+          - proof_of_authorization_request.created
+          - proof_of_authorization_request.updated
+          - real_time_decision.card_authorization_requested
+          - real_time_decision.card_balance_inquiry_requested
+          - real_time_decision.digital_wallet_token_requested
+          - real_time_decision.digital_wallet_authentication_requested
+          - real_time_decision.card_authentication_requested
+          - real_time_decision.card_authentication_challenge_requested
+          - real_time_payments_transfer.created
+          - real_time_payments_transfer.updated
+          - real_time_payments_request_for_payment.created
+          - real_time_payments_request_for_payment.updated
+          - swift_transfer.created
+          - swift_transfer.updated
+          - transaction.created
+          - wire_drawdown_request.created
+          - wire_drawdown_request.updated
+          - wire_transfer.created
+          - wire_transfer.updated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Occurs whenever an Account is created.
+          - Occurs whenever an Account is updated.
+          - Occurs whenever an Account Number is created.
+          - Occurs whenever an Account Number is updated.
+          - Occurs whenever an Account Statement is created.
+          - Occurs whenever an Account Transfer is created.
+          - Occurs whenever an Account Transfer is updated.
+          - Occurs whenever an ACH Prenotification is created.
+          - Occurs whenever an ACH Prenotification is updated.
+          - Occurs whenever an ACH Transfer is created.
+          - Occurs whenever an ACH Transfer is updated.
+          - Occurs whenever a Blockchain Address is created.
+          - Occurs whenever a Blockchain Address is updated.
+          - Occurs whenever a Blockchain Off-Ramp Transfer is created.
+          - Occurs whenever a Blockchain Off-Ramp Transfer is updated.
+          - Occurs whenever a Blockchain On-Ramp Transfer is created.
+          - Occurs whenever a Blockchain On-Ramp Transfer is updated.
+          - Occurs whenever a Bookkeeping Account is created.
+          - Occurs whenever a Bookkeeping Account is updated.
+          - Occurs whenever a Bookkeeping Entry Set is created.
+          - Occurs whenever a Card is created.
+          - Occurs whenever a Card is updated.
+          - Occurs whenever a Card Payment is created.
+          - Occurs whenever a Card Payment is updated.
+          - Occurs whenever a Card Purchase Supplement is created.
+          - Occurs whenever a Card Profile is created.
+          - Occurs whenever a Card Profile is updated.
+          - Occurs whenever a Card Dispute is created.
+          - Occurs whenever a Card Dispute is updated.
+          - Occurs whenever a Check Deposit is created.
+          - Occurs whenever a Check Deposit is updated.
+          - Occurs whenever a Check Transfer is created.
+          - Occurs whenever a Check Transfer is updated.
+          - Occurs whenever a Declined Transaction is created.
+          - Occurs whenever a Digital Card Profile is created.
+          - Occurs whenever a Digital Card Profile is updated.
+          - Occurs whenever a Digital Wallet Token is created.
+          - Occurs whenever a Digital Wallet Token is updated.
+          - Occurs whenever an Entity is created.
+          - Occurs whenever an Entity is updated.
+          - Occurs whenever an Event Subscription is created.
+          - Occurs whenever an Event Subscription is updated.
+          - Occurs whenever an Export is created.
+          - Occurs whenever an Export is updated.
+          - Occurs whenever an External Account is created.
+          - Occurs whenever an External Account is updated.
+          - Occurs whenever a FedNow Transfer is created.
+          - Occurs whenever a FedNow Transfer is updated.
+          - Occurs whenever a File is created.
+          - Occurs whenever a Group is updated.
+          - Increase may send webhooks with this category to see if a webhook endpoint is working properly.
+          - Occurs whenever an Inbound ACH Transfer is created.
+          - Occurs whenever an Inbound ACH Transfer is updated.
+          - Occurs whenever an Inbound ACH Transfer Return is created.
+          - Occurs whenever an Inbound ACH Transfer Return is updated.
+          - Occurs whenever an Inbound Check Deposit is created.
+          - Occurs whenever an Inbound Check Deposit is updated.
+          - Occurs whenever an Inbound FedNow Transfer is created.
+          - Occurs whenever an Inbound FedNow Transfer is updated.
+          - Occurs whenever an Inbound Mail Item is created.
+          - Occurs whenever an Inbound Mail Item is updated.
+          - Occurs whenever an Inbound Real-Time Payments Transfer is created.
+          - Occurs whenever an Inbound Real-Time Payments Transfer is updated.
+          - Occurs whenever an Inbound Wire Drawdown Request is created.
+          - Occurs whenever an Inbound Wire Transfer is created.
+          - Occurs whenever an Inbound Wire Transfer is updated.
+          - Occurs whenever an IntraFi Account Enrollment is created.
+          - Occurs whenever an IntraFi Account Enrollment is updated.
+          - Occurs whenever an IntraFi Exclusion is created.
+          - Occurs whenever an IntraFi Exclusion is updated.
+          - Occurs whenever a Lockbox is created.
+          - Occurs whenever a Lockbox is updated.
+          - Occurs whenever an OAuth Connection is created.
+          - Occurs whenever an OAuth Connection is deactivated.
+          - Occurs whenever a Card Push Transfer is created.
+          - Occurs whenever a Card Push Transfer is updated.
+          - Occurs whenever a Card Validation is created.
+          - Occurs whenever a Card Validation is updated.
+          - Occurs whenever a Pending Transaction is created.
+          - Occurs whenever a Pending Transaction is updated.
+          - Occurs whenever a Physical Card is created.
+          - Occurs whenever a Physical Card is updated.
+          - Occurs whenever a Physical Card Profile is created.
+          - Occurs whenever a Physical Card Profile is updated.
+          - Occurs whenever a Physical Check is created.
+          - Occurs whenever a Physical Check is updated.
+          - Occurs whenever a Program is created.
+          - Occurs whenever a Program is updated.
+          - Occurs whenever a Proof of Authorization Request is created.
+          - Occurs whenever a Proof of Authorization Request is updated.
+          - Occurs whenever a Real-Time Decision is created in response to a card authorization.
+          - Occurs whenever a Real-Time Decision is created in response to a card balance inquiry.
+          - Occurs whenever a Real-Time Decision is created in response to a digital wallet provisioning attempt.
+          - Occurs whenever a Real-Time Decision is created in response to a digital wallet requiring two-factor authentication.
+          - Occurs whenever a Real-Time Decision is created in response to 3DS authentication.
+          - Occurs whenever a Real-Time Decision is created in response to 3DS authentication challenges.
+          - Occurs whenever a Real-Time Payments Transfer is created.
+          - Occurs whenever a Real-Time Payments Transfer is updated.
+          - Occurs whenever a Real-Time Payments Request for Payment is created.
+          - Occurs whenever a Real-Time Payments Request for Payment is updated.
+          - Occurs whenever a Swift Transfer is created.
+          - Occurs whenever a Swift Transfer is updated.
+          - Occurs whenever a Transaction is created.
+          - Occurs whenever a Wire Drawdown Request is created.
+          - Occurs whenever a Wire Drawdown Request is updated.
+          - Occurs whenever a Wire Transfer is created.
+          - Occurs whenever a Wire Transfer is updated.
+        created_at:
+          description: The time the Event was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Event identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Events
+        type:
+          description: A constant representing the object's type. For this resource it will always be `event`.
+          enum:
+          - event
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - associated_object_id
+      - associated_object_type
+      - category
+      - created_at
+      - id
+      title: Event
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Events
+      x-title-plural: Events
+    event_list:
+      additionalProperties: true
+      description: A list of Event objects.
+      example:
+        data:
+        - associated_object_id: account_in71c4amph0vgo2qllky
+          associated_object_type: account
+          category: account.created
+          created_at: '2020-01-31T23:59:59Z'
+          id: event_001dzz0r20rzr4zrhrr1364hy80
+          type: event
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/event'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Event List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Event Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+x-tagGroups:
+- name: Accounts
+  tags:
+  - Accounts
+  - Account Numbers
+  - Account Transfers
+- name: Transactions
+  tags:
+  - Transactions
+  - Pending Transactions
+  - Declined Transactions
+- name: Ach Transfers
+  tags:
+  - ACH Transfers
+  - Inbound ACH Transfers
+  - ACH Prenotifications
+- name: Check Transfers
+  tags:
+  - Check Transfers
+  - Inbound Check Deposits
+- name: Real Time Payments Transfers
+  tags:
+  - Real-Time Payments Transfers
+  - Inbound Real-Time Payments Transfers
+- name: Fednow Transfers
+  tags:
+  - FedNow Transfers
+  - Inbound FedNow Transfers
+- name: Swift Transfers
+  tags:
+  - Swift Transfers
+- name: Wire Transfers
+  tags:
+  - Wire Transfers
+  - Inbound Wire Transfers
+  - Wire Drawdown Requests
+  - Inbound Wire Drawdown Requests
+- name: Card Transfers
+  tags:
+  - Card Tokens
+  - Card Push Transfers
+  - Card Validations
+- name: Check Deposits
+  tags:
+  - Check Deposits
+  - Lockbox Addresses
+  - Lockbox Recipients
+  - Inbound Mail Items
+- name: Cards
+  tags:
+  - Cards
+  - Card Payments
+  - Card Purchase Supplements
+  - Card Disputes
+  - Physical Cards
+  - Digital Card Profiles
+  - Physical Card Profiles
+  - Digital Wallet Tokens
+- name: Compliance
+  tags:
+  - Entities
+  - Beneficial Owners
+  - Supplemental Documents
+  - Entity Onboarding Sessions
+  - Programs
+- name: Events and Webhooks
+  tags:
+  - Events
+  - Event Subscriptions
+  - Real-Time Decisions
+- name: External Accounts
+  tags:
+  - Routing Numbers
+  - External Accounts
+- name: Files and Exports
+  tags:
+  - Account Statements
+  - Files
+  - File Links
+  - Exports
+- name: OAuth
+  tags:
+  - Groups
+  - OAuth Applications
+  - OAuth Connections
+  - OAuth Tokens
+- name: Intrafi
+  tags:
+  - IntraFi Account Enrollments
+  - IntraFi Balances
+  - IntraFi Exclusions
