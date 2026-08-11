@@ -791,6 +791,20 @@ apis:
   - type: Documentation
     url: https://increase.com/documentation/api
 common:
+  - type: Sandbox
+    url: https://increase.com/documentation/sandbox
+  - type: APIReference
+    url: https://increase.com/documentation/api/overview
+  - type: Security
+    url: https://increase.com/security
+  - type: Compliance
+    url: https://increase.com/documentation/compliance-overview
+  - type: StatusPage
+    url: https://status.increase.com
+  - type: PrivacyPolicy
+    url: https://increase.com/privacy
+  - type: TermsOfService
+    url: https://increase.com/terms
   - type: AgenticAccess
     url: agentic-access/increase-agentic-access.yml
   - type: VulnerabilityDisclosure
