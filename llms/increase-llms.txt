@@ -1,0 +1,40 @@
+# Increase
+
+> Increase builds modern banking APIs that enable technology companies to programmatically store, move, and reconcile money.
+
+Key features and benefits:
+- Bare Metal APIs directly from the Federal Reserve. Major financial networks like Visa and FedACH have evolved over decades. Often, technology companies try to hide or abstract away their complexity, which limits what you can build. We take a different approach and strive to expose the full power. We connect you directly to the Federal Reserve, Visa, and other networks so you can get unfiltered access, more stability, and a flexible implementation.
+- Move money faster and more reliably. Programmatically send and receive ACH, wires, real-time payments, and even physical checks.
+- Store and reconcile funds with flexibility. All the building blocks you need to support whatever your unique funds flows require.
+- Create a robust card program. ​​Increase integrates directly with Visa as an issuer processor, offering direct access to underlying network data.
+- Instantly provision unlimited accounts, account numbers, and cards.
+
+## Resources
+- [Documentation](https://increase.com/documentation.md): Increase's documentation site. For LLMs, any URL starting with `https://increase.com/documentation` works with a `.md` suffix.
+- [Updates](https://increase.com/updates.md): Changelog of all product releases, feature improvements, and bug fixes.
+
+## Features
+- [Accounts](https://increase.com/documentation/accounts-and-account-numbers.md): Instantly provision bank accounts ia our API.
+- [ACH Transfers](https://increase.com/documentation/sending-ach-transfers.md): Send and receive ACH Transfers via API. Increase hits every same-day ACH window.
+- [Check Transfers](https://increase.com/documentation/originating-checks.md): Send checks via API. Increase supports positive pay, prints and mails customizeable checks (with USPS and Fedex), and supports tracking and stopping payment on checks.
+- [Wire Transfers](https://increase.com/documentation/sending-wire-transfers.md): Send and receive Wire Transfers programatically via API.
+- [Real-Time Payments](https://increase.com/documentation/sending-real-time-payments.md): Send and receive transfers over the Real-Time Payments network via API.
+- [Card Issuing](https://increase.com/documentation/programmatic-card-processing.md): Issue physical and virtual cards backed by real bank accounts. Control spend on them with our APIs.
+
+## Customers
+- [Ramp](https://increase.com/customers/ramp): How Ramp scaled a successful bill pay product with Increase
+- [Ascend](https://increase.com/customers/ascend): How Ascend facilitates payments and automates insurance AR/AP workflows with Increase
+- [CapitalOS](https://increase.com/customers/capitalos): How CapitalOS built their spend management platform on Increase
+
+## Getting started
+- [Signup](https://dashboard.increase.com): Sign up for an Increase account and start moving money today.
+- [Pricing](https://increase.com/pricing): Increase pricing plans
+flexibility.
+
+## Solutions
+- [Bill Pay](https://increase.com/solutions/bill-pay): Scalable bill pay infrastructure. Manage payments with unmatched flexibility and control. Programmatically fund, disburse, and reconcile your payment flows effortlessly.
+- [Wallets](https://increase.com/solutions/wallets): A complete platform for money storage. Instantly open Accounts with a full suite of capabilities—from moving money to issuing cards.
+- [Fund Administration](https://increase.com/solutions/fund-administration): Simplified fund administration. Dependable, transparent, and secure tools for managing funds, capital calls, and distributions with ease.
+- [Payroll](https://increase.com/solutions/payroll): Build reliable payroll solutions. Move high volumes of critical payments with confidence. Originate and track payments with unmatched control and flexibility.
+- [Embedded Lending](https://increase.com/solutions/embedded-lending): Provide capital to your customers with embedded lending. Give your customers instant access to capital through virtual cards, physical cards or disbursements via bank transfers.
+- [Vertical SaaS](https://increase.com/solutions/vertical-saas): Payments and financial services for vertical SaaS platforms.
