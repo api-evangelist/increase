@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "eae66b8f-5f15-4e2c-81dc-ce4be24114ae",
+      "name": "Account Statements",
+      "description": {
+        "content": "Account Statements are generated monthly for every active Account. You can access the statement's data via the API or retrieve a PDF with its details via its associated File.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5aed65d7-f46d-4d38-9ee1-a8743297fb21",
+          "name": "List Account Statements",
+          "request": {
+            "name": "List Account Statements",
+            "description": {},
+            "url": {
+              "path": [
+                "account_statements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statement_period_start.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statement_period_start.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statement_period_start.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statement_period_start.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd96ffb7-51f2-4057-9cc4-2ec2ce60978a",
+              "name": "Account Statement List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "statement_period_start.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"account_statement\",\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"created_at\": \"1993-12-25T04:01:23.878Z\",\n      \"file_id\": \"string\",\n      \"statement_period_start\": \"2007-09-19T12:53:33.681Z\",\n      \"statement_period_end\": \"1953-06-23T04:35:07.120Z\",\n      \"starting_balance\": 515,\n      \"ending_balance\": 3163,\n      \"loan\": {\n        \"due_balance\": 5981,\n        \"past_due_balance\": 6901,\n        \"due_at\": \"2015-12-23T06:41:41.192Z\"\n      }\n    },\n    {\n      \"type\": \"account_statement\",\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"created_at\": \"1951-08-02T15:22:27.615Z\",\n      \"file_id\": \"string\",\n      \"statement_period_start\": \"1968-05-20T20:29:39.150Z\",\n      \"statement_period_end\": \"2012-02-21T02:00:12.663Z\",\n      \"starting_balance\": 7087,\n      \"ending_balance\": 412,\n      \"loan\": {\n        \"due_balance\": 8108,\n        \"past_due_balance\": 6469,\n        \"due_at\": \"1966-08-01T10:23:39.162Z\"\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d426a11f-14d4-4c1e-89e5-d88d7e255a5f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "statement_period_start.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eff1a34b-2fb7-48f1-8728-49969ea3079f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "statement_period_start.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "statement_period_start.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7e5026f-91a7-4d69-b958-17b653e8b019",
+          "name": "Retrieve an Account Statement",
+          "request": {
+            "name": "Retrieve an Account Statement",
+            "description": {},
+            "url": {
+              "path": [
+                "account_statements",
+                ":account_statement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_statement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40f5d68a-baf2-42e9-b5bf-cae7cb5594e1",
+              "name": "Account Statement",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements",
+                    ":account_statement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"account_statement\",\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"created_at\": \"1986-10-30T11:48:01.703Z\",\n  \"file_id\": \"string\",\n  \"statement_period_start\": \"1976-08-28T09:48:51.456Z\",\n  \"statement_period_end\": \"2021-02-02T07:05:03.792Z\",\n  \"starting_balance\": 8561,\n  \"ending_balance\": 161,\n  \"loan\": {\n    \"due_balance\": 4379,\n    \"past_due_balance\": 2930,\n    \"due_at\": \"2021-09-05T00:59:57.187Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edbdf39e-f522-4c2c-b20a-dd945deaba27",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements",
+                    ":account_statement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a53903e4-ae3a-4f88-bd5a-72f560287fac",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_statements",
+                    ":account_statement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_statement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4fdf7f15-8f2a-421e-8549-046502f1c9e0",
+    "name": "Increase Account Numbers Account Statements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

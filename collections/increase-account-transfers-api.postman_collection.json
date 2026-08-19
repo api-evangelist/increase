@@ -1,0 +1,1145 @@
+{
+  "item": [
+    {
+      "id": "9b604c94-157e-4460-9057-33327fa8f48d",
+      "name": "Account Transfers",
+      "description": {
+        "content": "Account transfers move funds between your own accounts at Increase (accounting systems often refer to these as Book Transfers). Account Transfers are free and synchronous. Upon creation they create two Transactions, one negative on the originating account and one positive on the destination account (unless the transfer requires approval, in which case the Transactions will be created when the transfer is approved).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef700a45-2ced-42a7-84ee-8b083f5f0ed4",
+          "name": "List Account Transfers",
+          "request": {
+            "name": "List Account Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "account_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ff1e49b-7d5f-4307-9a55-c9564fd3af3a",
+              "name": "Account Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"account_transfer\",\n      \"id\": \"string\",\n      \"amount\": 2877,\n      \"account_id\": \"string\",\n      \"currency\": \"USD\",\n      \"destination_account_id\": \"string\",\n      \"destination_transaction_id\": \"string\",\n      \"created_at\": \"2001-09-27T09:58:53.791Z\",\n      \"description\": \"string\",\n      \"status\": \"canceled\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"approval\": {\n        \"approved_at\": \"1951-06-13T14:23:28.127Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1963-12-06T06:08:56.170Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"account_transfer\",\n      \"id\": \"string\",\n      \"amount\": 3578,\n      \"account_id\": \"string\",\n      \"currency\": \"USD\",\n      \"destination_account_id\": \"string\",\n      \"destination_transaction_id\": \"string\",\n      \"created_at\": \"1961-03-17T07:19:50.438Z\",\n      \"description\": \"string\",\n      \"status\": \"canceled\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"approval\": {\n        \"approved_at\": \"2022-06-22T23:01:53.688Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1971-05-06T18:06:00.437Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dd27503-5996-4fc2-9569-1c8fcbf886ed",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d05e4dca-76b3-4eb6-a006-6fa3fbdd2d71",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bec6eea5-9123-458d-91bc-f691d7be2ee0",
+          "name": "Create an Account Transfer",
+          "request": {
+            "name": "Create an Account Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "account_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"destination_account_id\": \"<string>\",\n  \"require_approval\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18a9fbd2-a12e-4314-80fe-daea4fc48458",
+              "name": "Account Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 100,\n  \"description\": \"Creating liquidity\",\n  \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"account_transfer\",\n  \"id\": \"string\",\n  \"amount\": 4325,\n  \"account_id\": \"string\",\n  \"currency\": \"USD\",\n  \"destination_account_id\": \"string\",\n  \"destination_transaction_id\": \"string\",\n  \"created_at\": \"2025-02-13T04:13:11.658Z\",\n  \"description\": \"string\",\n  \"status\": \"complete\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2010-05-21T16:57:08.453Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2026-06-10T16:34:31.910Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ebec8cc-2d82-4aad-acb5-b5bda82e185e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 100,\n  \"description\": \"Creating liquidity\",\n  \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f6fd5e4-4da1-44c2-8573-2024344312ea",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 100,\n  \"description\": \"Creating liquidity\",\n  \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01511b25-fd5e-4dbb-92fe-051a83bcf029",
+          "name": "Retrieve an Account Transfer",
+          "request": {
+            "name": "Retrieve an Account Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "account_transfers",
+                ":account_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7dc37bcd-405a-4f00-8a43-72e294855677",
+              "name": "Account Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"account_transfer\",\n  \"id\": \"string\",\n  \"amount\": 4325,\n  \"account_id\": \"string\",\n  \"currency\": \"USD\",\n  \"destination_account_id\": \"string\",\n  \"destination_transaction_id\": \"string\",\n  \"created_at\": \"2025-02-13T04:13:11.658Z\",\n  \"description\": \"string\",\n  \"status\": \"complete\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2010-05-21T16:57:08.453Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2026-06-10T16:34:31.910Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ae59020-4b7c-4dda-9a44-56afc04df16b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4227550d-86f8-419a-9bee-97a55c58cffb",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4936cd9b-ff05-4ef6-a3b0-f3b65235b9fa",
+          "name": "Approve an Account Transfer",
+          "request": {
+            "name": "Approve an Account Transfer",
+            "description": {
+              "content": "Approves an Account Transfer in status `pending_approval`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "account_transfers",
+                ":account_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cafb3871-f9d4-4a77-9845-3e5ac76cf9e9",
+              "name": "Account Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"account_transfer\",\n  \"id\": \"string\",\n  \"amount\": 4325,\n  \"account_id\": \"string\",\n  \"currency\": \"USD\",\n  \"destination_account_id\": \"string\",\n  \"destination_transaction_id\": \"string\",\n  \"created_at\": \"2025-02-13T04:13:11.658Z\",\n  \"description\": \"string\",\n  \"status\": \"complete\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2010-05-21T16:57:08.453Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2026-06-10T16:34:31.910Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "174285c3-dca4-4ac9-b321-54e7f713d7a2",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e47b9327-fb8b-4632-b9b4-117cb169f114",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3c64c4a-f496-4d35-9051-540daf6e4f1f",
+          "name": "Cancel an Account Transfer",
+          "request": {
+            "name": "Cancel an Account Transfer",
+            "description": {
+              "content": "Cancels an Account Transfer in status `pending_approval`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "account_transfers",
+                ":account_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86bbd795-84a0-4b84-886d-4555ed5a0843",
+              "name": "Account Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"account_transfer\",\n  \"id\": \"string\",\n  \"amount\": 4325,\n  \"account_id\": \"string\",\n  \"currency\": \"USD\",\n  \"destination_account_id\": \"string\",\n  \"destination_transaction_id\": \"string\",\n  \"created_at\": \"2025-02-13T04:13:11.658Z\",\n  \"description\": \"string\",\n  \"status\": \"complete\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2010-05-21T16:57:08.453Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2026-06-10T16:34:31.910Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df73097-e13d-4be1-b0be-98cc943d0e94",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6339ded-01af-493a-bf02-67dc8a277329",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "account_transfers",
+                    ":account_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "844662da-893c-4565-8cf7-e980e8677b3c",
+    "name": "Increase Account Numbers Account Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Check Deposits API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Check Deposits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Check Deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/check_deposits",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Check Deposits"
+        },
+        {
+          "info": {
+            "name": "Create a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/check_deposits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Check Deposit"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/check_deposits/:check_deposit_id",
+            "params": [
+              {
+                "name": "check_deposit_id",
+                "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Check Deposit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

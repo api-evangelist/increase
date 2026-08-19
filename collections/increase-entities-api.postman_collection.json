@@ -1,0 +1,1172 @@
+{
+  "item": [
+    {
+      "id": "c72de4e7-c5e6-4c1f-929c-5bed2cfb92d6",
+      "name": "Entities",
+      "description": {
+        "content": "Entities are the legal entities that own accounts. They can be people, corporations, partnerships, government authorities, or trusts. To learn more, see [Entities](/documentation/entities).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4288bda-94ef-4f62-9cd2-a037ce1c2004",
+          "name": "List Entities",
+          "request": {
+            "name": "List Entities",
+            "description": {},
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32e844ee-8f62-4efd-8c91-3c19a282f6a9",
+              "name": "Entity List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"entity\",\n      \"id\": \"string\",\n      \"structure\": \"joint\",\n      \"corporation\": {\n        \"name\": \"string\",\n        \"website\": \"string\",\n        \"email\": \"string\",\n        \"legal_identifier\": {\n          \"category\": \"other\",\n          \"value\": \"string\"\n        },\n        \"incorporation_state\": \"string\",\n        \"industry_code\": \"string\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"beneficial_owners\": [\n          {\n            \"id\": \"string\",\n            \"individual\": {\n              \"name\": \"string\",\n              \"date_of_birth\": \"1979-07-17\",\n              \"address\": {\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"line1\": \"33 Liberty Street\",\n                \"line2\": null,\n                \"state\": \"NY\",\n                \"zip\": \"10045\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"company_title\": \"string\",\n            \"prongs\": [\n              \"control\",\n              \"ownership\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"individual\": {\n              \"name\": \"string\",\n              \"date_of_birth\": \"1970-07-14\",\n              \"address\": {\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"line1\": \"33 Liberty Street\",\n                \"line2\": null,\n                \"state\": \"NY\",\n                \"zip\": \"10045\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"company_title\": \"string\",\n            \"prongs\": [\n              \"control\",\n              \"ownership\"\n            ]\n          }\n        ]\n      },\n      \"natural_person\": {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1963-11-02\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"drivers_license\",\n          \"number_last4\": \"string\"\n        }\n      },\n      \"joint\": {\n        \"name\": \"string\",\n        \"individuals\": [\n          {\n            \"name\": \"string\",\n            \"date_of_birth\": \"1995-04-27\",\n            \"address\": {\n              \"city\": \"New York\",\n              \"country\": \"US\",\n              \"line1\": \"33 Liberty Street\",\n              \"line2\": null,\n              \"state\": \"NY\",\n              \"zip\": \"10045\"\n            },\n            \"identification\": {\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"number_last4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"date_of_birth\": \"1987-04-10\",\n            \"address\": {\n              \"city\": \"New York\",\n              \"country\": \"US\",\n              \"line1\": \"33 Liberty Street\",\n              \"line2\": null,\n              \"state\": \"NY\",\n              \"zip\": \"10045\"\n            },\n            \"identification\": {\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"number_last4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ]\n      },\n      \"government_authority\": {\n        \"name\": \"string\",\n        \"category\": \"municipality\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"website\": \"string\",\n        \"tax_identifier\": \"string\",\n        \"authorized_persons\": [\n          {\n            \"name\": \"string\",\n            \"authorized_person_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"authorized_person_id\": \"string\"\n          }\n        ]\n      },\n      \"trust\": {\n        \"name\": \"string\",\n        \"category\": \"irrevocable\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"formation_state\": \"string\",\n        \"tax_identifier\": \"string\",\n        \"trustees\": [\n          {\n            \"structure\": \"individual\",\n            \"individual\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_of_birth\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"structure\": \"individual\",\n            \"individual\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_of_birth\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"grantor\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1976-01-30\",\n          \"address\": {\n            \"city\": \"New York\",\n            \"country\": \"US\",\n            \"line1\": \"33 Liberty Street\",\n            \"line2\": null,\n            \"state\": \"NY\",\n            \"zip\": \"10045\"\n          },\n          \"identification\": {\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number_last4\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"formation_document_file_id\": \"string\"\n      },\n      \"idempotency_key\": \"string\",\n      \"third_party_verification\": {\n        \"reference\": \"string\",\n        \"vendor\": \"taktile\"\n      },\n      \"risk_rating\": {\n        \"rating\": \"high\",\n        \"rated_at\": \"1977-09-24T14:00:12.632Z\"\n      },\n      \"terms_agreements\": [\n        {\n          \"terms_url\": \"string\",\n          \"ip_address\": \"string\",\n          \"agreed_at\": \"1965-04-20T16:19:00.932Z\"\n        },\n        {\n          \"terms_url\": \"string\",\n          \"ip_address\": \"string\",\n          \"agreed_at\": \"2006-09-08T03:48:39.885Z\"\n        }\n      ],\n      \"description\": \"string\",\n      \"status\": \"disabled\",\n      \"details_confirmed_at\": \"1995-05-05T04:32:41.304Z\",\n      \"creating_entity_onboarding_session_id\": \"string\",\n      \"created_at\": \"1949-12-19T12:42:08.934Z\",\n      \"validation\": {\n        \"status\": \"valid\",\n        \"issues\": [\n          {\n            \"category\": \"entity_tax_identifier\",\n            \"entity_tax_identifier\": {},\n            \"entity_address\": {\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_identity\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_address\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"category\": \"beneficial_owner_identity\",\n            \"entity_tax_identifier\": {},\n            \"entity_address\": {\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_identity\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_address\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ]\n      },\n      \"supplemental_documents\": [\n        {\n          \"type\": \"entity_supplemental_document\",\n          \"entity_id\": \"string\",\n          \"file_id\": \"string\",\n          \"created_at\": \"1996-03-14T01:31:48.084Z\",\n          \"idempotency_key\": \"string\"\n        },\n        {\n          \"type\": \"entity_supplemental_document\",\n          \"entity_id\": \"string\",\n          \"file_id\": \"string\",\n          \"created_at\": \"1971-07-29T20:52:02.369Z\",\n          \"idempotency_key\": \"string\"\n        }\n      ]\n    },\n    {\n      \"type\": \"entity\",\n      \"id\": \"string\",\n      \"structure\": \"corporation\",\n      \"corporation\": {\n        \"name\": \"string\",\n        \"website\": \"string\",\n        \"email\": \"string\",\n        \"legal_identifier\": {\n          \"category\": \"us_employer_identification_number\",\n          \"value\": \"string\"\n        },\n        \"incorporation_state\": \"string\",\n        \"industry_code\": \"string\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"beneficial_owners\": [\n          {\n            \"id\": \"string\",\n            \"individual\": {\n              \"name\": \"string\",\n              \"date_of_birth\": \"1947-11-25\",\n              \"address\": {\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"line1\": \"33 Liberty Street\",\n                \"line2\": null,\n                \"state\": \"NY\",\n                \"zip\": \"10045\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"company_title\": \"string\",\n            \"prongs\": [\n              \"ownership\",\n              \"ownership\"\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"individual\": {\n              \"name\": \"string\",\n              \"date_of_birth\": \"2007-03-24\",\n              \"address\": {\n                \"city\": \"New York\",\n                \"country\": \"US\",\n                \"line1\": \"33 Liberty Street\",\n                \"line2\": null,\n                \"state\": \"NY\",\n                \"zip\": \"10045\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"company_title\": \"string\",\n            \"prongs\": [\n              \"control\",\n              \"ownership\"\n            ]\n          }\n        ]\n      },\n      \"natural_person\": {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1951-02-08\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"drivers_license\",\n          \"number_last4\": \"string\"\n        }\n      },\n      \"joint\": {\n        \"name\": \"string\",\n        \"individuals\": [\n          {\n            \"name\": \"string\",\n            \"date_of_birth\": \"1961-07-26\",\n            \"address\": {\n              \"city\": \"New York\",\n              \"country\": \"US\",\n              \"line1\": \"33 Liberty Street\",\n              \"line2\": null,\n              \"state\": \"NY\",\n              \"zip\": \"10045\"\n            },\n            \"identification\": {\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"number_last4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"name\": \"string\",\n            \"date_of_birth\": \"2022-02-21\",\n            \"address\": {\n              \"city\": \"New York\",\n              \"country\": \"US\",\n              \"line1\": \"33 Liberty Street\",\n              \"line2\": null,\n              \"state\": \"NY\",\n              \"zip\": \"10045\"\n            },\n            \"identification\": {\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"number_last4\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ]\n      },\n      \"government_authority\": {\n        \"name\": \"string\",\n        \"category\": \"federal_agency\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"website\": \"string\",\n        \"tax_identifier\": \"string\",\n        \"authorized_persons\": [\n          {\n            \"name\": \"string\",\n            \"authorized_person_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"authorized_person_id\": \"string\"\n          }\n        ]\n      },\n      \"trust\": {\n        \"name\": \"string\",\n        \"category\": \"irrevocable\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"formation_state\": \"string\",\n        \"tax_identifier\": \"string\",\n        \"trustees\": [\n          {\n            \"structure\": \"individual\",\n            \"individual\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_of_birth\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"structure\": \"individual\",\n            \"individual\": {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"date_of_birth\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"address\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"identification\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"grantor\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1974-07-18\",\n          \"address\": {\n            \"city\": \"New York\",\n            \"country\": \"US\",\n            \"line1\": \"33 Liberty Street\",\n            \"line2\": null,\n            \"state\": \"NY\",\n            \"zip\": \"10045\"\n          },\n          \"identification\": {\n            \"method\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"number_last4\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"formation_document_file_id\": \"string\"\n      },\n      \"idempotency_key\": \"string\",\n      \"third_party_verification\": {\n        \"reference\": \"string\",\n        \"vendor\": \"persona\"\n      },\n      \"risk_rating\": {\n        \"rating\": \"low\",\n        \"rated_at\": \"1952-12-22T12:53:30.841Z\"\n      },\n      \"terms_agreements\": [\n        {\n          \"terms_url\": \"string\",\n          \"ip_address\": \"string\",\n          \"agreed_at\": \"1987-12-23T12:12:30.577Z\"\n        },\n        {\n          \"terms_url\": \"string\",\n          \"ip_address\": \"string\",\n          \"agreed_at\": \"2022-04-21T10:54:05.331Z\"\n        }\n      ],\n      \"description\": \"string\",\n      \"status\": \"active\",\n      \"details_confirmed_at\": \"2007-04-18T12:55:47.704Z\",\n      \"creating_entity_onboarding_session_id\": \"string\",\n      \"created_at\": \"1971-07-04T01:43:02.095Z\",\n      \"validation\": {\n        \"status\": \"invalid\",\n        \"issues\": [\n          {\n            \"category\": \"entity_tax_identifier\",\n            \"entity_tax_identifier\": {},\n            \"entity_address\": {\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_identity\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_address\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"category\": \"entity_address\",\n            \"entity_tax_identifier\": {},\n            \"entity_address\": {\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_identity\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"beneficial_owner_address\": {\n              \"beneficial_owner_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ]\n      },\n      \"supplemental_documents\": [\n        {\n          \"type\": \"entity_supplemental_document\",\n          \"entity_id\": \"string\",\n          \"file_id\": \"string\",\n          \"created_at\": \"1969-10-23T22:25:31.571Z\",\n          \"idempotency_key\": \"string\"\n        },\n        {\n          \"type\": \"entity_supplemental_document\",\n          \"entity_id\": \"string\",\n          \"file_id\": \"string\",\n          \"created_at\": \"2014-11-06T20:44:25.145Z\",\n          \"idempotency_key\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d8f9b4-e157-49e6-8959-183bad1267ad",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc84e3f8-49c3-4f42-91b9-60c242af3f1d",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16562695-0038-464f-a8ae-2a58503b63f5",
+          "name": "Create an Entity",
+          "request": {
+            "name": "Create an Entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"structure\": \"<string>\",\n  \"corporation\": {\n    \"name\": \"<string>\",\n    \"legal_identifier\": {\n      \"value\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      },\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      }\n    ],\n    \"beneficial_ownership_exemption_reason\": \"<string>\",\n    \"email\": \"<email>\",\n    \"incorporation_state\": \"<string>\",\n    \"industry_code\": \"<string>\",\n    \"website\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"government_authority\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"tax_identifier\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"authorized_persons\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"website\": \"<string>\"\n  },\n  \"joint\": {\n    \"individuals\": [\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"<string>\",\n    \"rated_at\": \"<dateTime>\"\n  },\n  \"supplemental_documents\": [\n    {\n      \"file_id\": \"<string>\"\n    },\n    {\n      \"file_id\": \"<string>\"\n    }\n  ],\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    },\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    }\n  ],\n  \"third_party_verification\": {\n    \"reference\": \"<string>\",\n    \"vendor\": \"<string>\"\n  },\n  \"trust\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"trustees\": [\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      },\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      }\n    ],\n    \"formation_document_file_id\": \"<string>\",\n    \"formation_state\": \"<string>\",\n    \"grantor\": {\n      \"name\": \"<string>\",\n      \"date_of_birth\": \"<date>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"identification\": {\n        \"method\": \"<string>\",\n        \"number\": \"<string>\",\n        \"drivers_license\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"state\": \"<string>\",\n          \"back_file_id\": \"<string>\"\n        },\n        \"other\": {\n          \"country\": \"<string>\",\n          \"description\": \"<string>\",\n          \"file_id\": \"<string>\",\n          \"back_file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\"\n        },\n        \"passport\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"country\": \"<string>\"\n        }\n      },\n      \"confirmed_no_us_tax_id\": \"<boolean>\"\n    },\n    \"tax_identifier\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52a7f7b5-e202-4c1c-b1e9-f9bcba7674eb",
+              "name": "Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"corporation\": {\n    \"name\": \"<string>\",\n    \"legal_identifier\": {\n      \"value\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      },\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      }\n    ],\n    \"beneficial_ownership_exemption_reason\": \"<string>\",\n    \"email\": \"<email>\",\n    \"incorporation_state\": \"<string>\",\n    \"industry_code\": \"<string>\",\n    \"website\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"government_authority\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"tax_identifier\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"authorized_persons\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"website\": \"<string>\"\n  },\n  \"joint\": {\n    \"individuals\": [\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"<string>\",\n    \"rated_at\": \"<dateTime>\"\n  },\n  \"supplemental_documents\": [\n    {\n      \"file_id\": \"<string>\"\n    },\n    {\n      \"file_id\": \"<string>\"\n    }\n  ],\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    },\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    }\n  ],\n  \"third_party_verification\": {\n    \"reference\": \"<string>\",\n    \"vendor\": \"<string>\"\n  },\n  \"trust\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"trustees\": [\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      },\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      }\n    ],\n    \"formation_document_file_id\": \"<string>\",\n    \"formation_state\": \"<string>\",\n    \"grantor\": {\n      \"name\": \"<string>\",\n      \"date_of_birth\": \"<date>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"identification\": {\n        \"method\": \"<string>\",\n        \"number\": \"<string>\",\n        \"drivers_license\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"state\": \"<string>\",\n          \"back_file_id\": \"<string>\"\n        },\n        \"other\": {\n          \"country\": \"<string>\",\n          \"description\": \"<string>\",\n          \"file_id\": \"<string>\",\n          \"back_file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\"\n        },\n        \"passport\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"country\": \"<string>\"\n        }\n      },\n      \"confirmed_no_us_tax_id\": \"<boolean>\"\n    },\n    \"tax_identifier\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"entity\",\n  \"id\": \"string\",\n  \"structure\": \"joint\",\n  \"corporation\": {\n    \"name\": \"string\",\n    \"website\": \"string\",\n    \"email\": \"string\",\n    \"legal_identifier\": {\n      \"category\": \"us_employer_identification_number\",\n      \"value\": \"string\"\n    },\n    \"incorporation_state\": \"string\",\n    \"industry_code\": \"string\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1953-04-22\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"control\",\n          \"control\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"2015-07-21\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"other\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"ownership\",\n          \"ownership\"\n        ]\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1957-08-15\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"individual_taxpayer_identification_number\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"joint\": {\n    \"name\": \"string\",\n    \"individuals\": [\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1991-02-26\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"2015-05-23\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      }\n    ]\n  },\n  \"government_authority\": {\n    \"name\": \"string\",\n    \"category\": \"federal_agency\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"website\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"authorized_persons\": [\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      }\n    ]\n  },\n  \"trust\": {\n    \"name\": \"string\",\n    \"category\": \"irrevocable\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"formation_state\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"trustees\": [\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1964-04-30\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"social_security_number\",\n            \"number_last4\": \"string\"\n          }\n        }\n      },\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1987-08-19\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        }\n      }\n    ],\n    \"grantor\": {\n      \"name\": \"string\",\n      \"date_of_birth\": \"2007-03-12\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\"\n      },\n      \"identification\": {\n        \"method\": \"individual_taxpayer_identification_number\",\n        \"number_last4\": \"string\"\n      }\n    },\n    \"formation_document_file_id\": \"string\"\n  },\n  \"idempotency_key\": \"string\",\n  \"third_party_verification\": {\n    \"reference\": \"string\",\n    \"vendor\": \"persona\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"high\",\n    \"rated_at\": \"2022-09-16T13:36:14.984Z\"\n  },\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1987-04-24T22:52:50.011Z\"\n    },\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1999-03-05T09:53:57.387Z\"\n    }\n  ],\n  \"description\": \"string\",\n  \"status\": \"active\",\n  \"details_confirmed_at\": \"1959-12-02T11:23:11.858Z\",\n  \"creating_entity_onboarding_session_id\": \"string\",\n  \"created_at\": \"2010-06-22T20:20:27.790Z\",\n  \"validation\": {\n    \"status\": \"invalid\",\n    \"issues\": [\n      {\n        \"category\": \"beneficial_owner_identity\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      },\n      {\n        \"category\": \"entity_tax_identifier\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      }\n    ]\n  },\n  \"supplemental_documents\": [\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1960-03-22T05:25:37.990Z\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1954-05-16T18:54:54.644Z\",\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24a587e9-86ed-442a-9cc5-fcf7c5b06bfd",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"corporation\": {\n    \"name\": \"<string>\",\n    \"legal_identifier\": {\n      \"value\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      },\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      }\n    ],\n    \"beneficial_ownership_exemption_reason\": \"<string>\",\n    \"email\": \"<email>\",\n    \"incorporation_state\": \"<string>\",\n    \"industry_code\": \"<string>\",\n    \"website\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"government_authority\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"tax_identifier\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"authorized_persons\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"website\": \"<string>\"\n  },\n  \"joint\": {\n    \"individuals\": [\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"<string>\",\n    \"rated_at\": \"<dateTime>\"\n  },\n  \"supplemental_documents\": [\n    {\n      \"file_id\": \"<string>\"\n    },\n    {\n      \"file_id\": \"<string>\"\n    }\n  ],\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    },\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    }\n  ],\n  \"third_party_verification\": {\n    \"reference\": \"<string>\",\n    \"vendor\": \"<string>\"\n  },\n  \"trust\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"trustees\": [\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      },\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      }\n    ],\n    \"formation_document_file_id\": \"<string>\",\n    \"formation_state\": \"<string>\",\n    \"grantor\": {\n      \"name\": \"<string>\",\n      \"date_of_birth\": \"<date>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"identification\": {\n        \"method\": \"<string>\",\n        \"number\": \"<string>\",\n        \"drivers_license\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"state\": \"<string>\",\n          \"back_file_id\": \"<string>\"\n        },\n        \"other\": {\n          \"country\": \"<string>\",\n          \"description\": \"<string>\",\n          \"file_id\": \"<string>\",\n          \"back_file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\"\n        },\n        \"passport\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"country\": \"<string>\"\n        }\n      },\n      \"confirmed_no_us_tax_id\": \"<boolean>\"\n    },\n    \"tax_identifier\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d8ff2c4-2c33-4113-bedd-f63503111108",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"structure\": \"<string>\",\n  \"corporation\": {\n    \"name\": \"<string>\",\n    \"legal_identifier\": {\n      \"value\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      },\n      {\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        },\n        \"prongs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"company_title\": \"<string>\"\n      }\n    ],\n    \"beneficial_ownership_exemption_reason\": \"<string>\",\n    \"email\": \"<email>\",\n    \"incorporation_state\": \"<string>\",\n    \"industry_code\": \"<string>\",\n    \"website\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"government_authority\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"tax_identifier\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"authorized_persons\": [\n      {\n        \"name\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\"\n      }\n    ],\n    \"website\": \"<string>\"\n  },\n  \"joint\": {\n    \"individuals\": [\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"date_of_birth\": \"<date>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"city\": \"<string>\",\n          \"country\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"state\": \"<string>\",\n          \"zip\": \"<string>\"\n        },\n        \"identification\": {\n          \"method\": \"<string>\",\n          \"number\": \"<string>\",\n          \"drivers_license\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"state\": \"<string>\",\n            \"back_file_id\": \"<string>\"\n          },\n          \"other\": {\n            \"country\": \"<string>\",\n            \"description\": \"<string>\",\n            \"file_id\": \"<string>\",\n            \"back_file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\"\n          },\n          \"passport\": {\n            \"file_id\": \"<string>\",\n            \"expiration_date\": \"<date>\",\n            \"country\": \"<string>\"\n          }\n        },\n        \"confirmed_no_us_tax_id\": \"<boolean>\"\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"<string>\",\n    \"rated_at\": \"<dateTime>\"\n  },\n  \"supplemental_documents\": [\n    {\n      \"file_id\": \"<string>\"\n    },\n    {\n      \"file_id\": \"<string>\"\n    }\n  ],\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    },\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    }\n  ],\n  \"third_party_verification\": {\n    \"reference\": \"<string>\",\n    \"vendor\": \"<string>\"\n  },\n  \"trust\": {\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"trustees\": [\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      },\n      {\n        \"structure\": \"<string>\",\n        \"individual\": {\n          \"name\": \"<string>\",\n          \"date_of_birth\": \"<date>\",\n          \"address\": {\n            \"line1\": \"<string>\",\n            \"city\": \"<string>\",\n            \"country\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"state\": \"<string>\",\n            \"zip\": \"<string>\"\n          },\n          \"identification\": {\n            \"method\": \"<string>\",\n            \"number\": \"<string>\",\n            \"drivers_license\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"state\": \"<string>\",\n              \"back_file_id\": \"<string>\"\n            },\n            \"other\": {\n              \"country\": \"<string>\",\n              \"description\": \"<string>\",\n              \"file_id\": \"<string>\",\n              \"back_file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\"\n            },\n            \"passport\": {\n              \"file_id\": \"<string>\",\n              \"expiration_date\": \"<date>\",\n              \"country\": \"<string>\"\n            }\n          },\n          \"confirmed_no_us_tax_id\": \"<boolean>\"\n        }\n      }\n    ],\n    \"formation_document_file_id\": \"<string>\",\n    \"formation_state\": \"<string>\",\n    \"grantor\": {\n      \"name\": \"<string>\",\n      \"date_of_birth\": \"<date>\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"state\": \"<string>\",\n        \"zip\": \"<string>\"\n      },\n      \"identification\": {\n        \"method\": \"<string>\",\n        \"number\": \"<string>\",\n        \"drivers_license\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"state\": \"<string>\",\n          \"back_file_id\": \"<string>\"\n        },\n        \"other\": {\n          \"country\": \"<string>\",\n          \"description\": \"<string>\",\n          \"file_id\": \"<string>\",\n          \"back_file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\"\n        },\n        \"passport\": {\n          \"file_id\": \"<string>\",\n          \"expiration_date\": \"<date>\",\n          \"country\": \"<string>\"\n        }\n      },\n      \"confirmed_no_us_tax_id\": \"<boolean>\"\n    },\n    \"tax_identifier\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38d285ba-6df7-4b80-8093-4e3323ba8a5b",
+          "name": "Retrieve an Entity",
+          "request": {
+            "name": "Retrieve an Entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entities",
+                ":entity_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dbaeb7b8-c580-4c91-bded-89c4989530a6",
+              "name": "Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"entity\",\n  \"id\": \"string\",\n  \"structure\": \"joint\",\n  \"corporation\": {\n    \"name\": \"string\",\n    \"website\": \"string\",\n    \"email\": \"string\",\n    \"legal_identifier\": {\n      \"category\": \"us_employer_identification_number\",\n      \"value\": \"string\"\n    },\n    \"incorporation_state\": \"string\",\n    \"industry_code\": \"string\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1953-04-22\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"control\",\n          \"control\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"2015-07-21\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"other\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"ownership\",\n          \"ownership\"\n        ]\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1957-08-15\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"individual_taxpayer_identification_number\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"joint\": {\n    \"name\": \"string\",\n    \"individuals\": [\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1991-02-26\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"2015-05-23\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      }\n    ]\n  },\n  \"government_authority\": {\n    \"name\": \"string\",\n    \"category\": \"federal_agency\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"website\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"authorized_persons\": [\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      }\n    ]\n  },\n  \"trust\": {\n    \"name\": \"string\",\n    \"category\": \"irrevocable\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"formation_state\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"trustees\": [\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1964-04-30\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"social_security_number\",\n            \"number_last4\": \"string\"\n          }\n        }\n      },\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1987-08-19\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        }\n      }\n    ],\n    \"grantor\": {\n      \"name\": \"string\",\n      \"date_of_birth\": \"2007-03-12\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\"\n      },\n      \"identification\": {\n        \"method\": \"individual_taxpayer_identification_number\",\n        \"number_last4\": \"string\"\n      }\n    },\n    \"formation_document_file_id\": \"string\"\n  },\n  \"idempotency_key\": \"string\",\n  \"third_party_verification\": {\n    \"reference\": \"string\",\n    \"vendor\": \"persona\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"high\",\n    \"rated_at\": \"2022-09-16T13:36:14.984Z\"\n  },\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1987-04-24T22:52:50.011Z\"\n    },\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1999-03-05T09:53:57.387Z\"\n    }\n  ],\n  \"description\": \"string\",\n  \"status\": \"active\",\n  \"details_confirmed_at\": \"1959-12-02T11:23:11.858Z\",\n  \"creating_entity_onboarding_session_id\": \"string\",\n  \"created_at\": \"2010-06-22T20:20:27.790Z\",\n  \"validation\": {\n    \"status\": \"invalid\",\n    \"issues\": [\n      {\n        \"category\": \"beneficial_owner_identity\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      },\n      {\n        \"category\": \"entity_tax_identifier\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      }\n    ]\n  },\n  \"supplemental_documents\": [\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1960-03-22T05:25:37.990Z\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1954-05-16T18:54:54.644Z\",\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a14345b2-913f-4005-871b-5aff40e43d3f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "683c06c3-42f1-4cad-b3b9-9372c0681740",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88ea31b2-ba72-4019-b8f2-acb0be1321d6",
+          "name": "Update an Entity",
+          "request": {
+            "name": "Update an Entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entities",
+                ":entity_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"corporation\": {\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"email\": \"<email>\",\n    \"incorporation_state\": \"<string>\",\n    \"industry_code\": \"<string>\",\n    \"legal_identifier\": {\n      \"value\": \"<string>\",\n      \"category\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"website\": \"<string>\"\n  },\n  \"details_confirmed_at\": \"<dateTime>\",\n  \"government_authority\": {\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"natural_person\": {\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\",\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"name\": \"<string>\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"<string>\",\n    \"rated_at\": \"<dateTime>\"\n  },\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    },\n    {\n      \"terms_url\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"agreed_at\": \"<dateTime>\"\n    }\n  ],\n  \"third_party_verification\": {\n    \"reference\": \"<string>\",\n    \"vendor\": \"<string>\"\n  },\n  \"trust\": {\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"line2\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3501ac32-7e33-4c94-8dad-1c657acd5159",
+              "name": "Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"corporation\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"state\": \"NY\",\n      \"zip\": \"10045\"\n    }\n  },\n  \"risk_rating\": {\n    \"rated_at\": \"2020-01-31T23:59:59Z\",\n    \"rating\": \"low\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"entity\",\n  \"id\": \"string\",\n  \"structure\": \"joint\",\n  \"corporation\": {\n    \"name\": \"string\",\n    \"website\": \"string\",\n    \"email\": \"string\",\n    \"legal_identifier\": {\n      \"category\": \"us_employer_identification_number\",\n      \"value\": \"string\"\n    },\n    \"incorporation_state\": \"string\",\n    \"industry_code\": \"string\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1953-04-22\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"control\",\n          \"control\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"2015-07-21\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"other\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"ownership\",\n          \"ownership\"\n        ]\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1957-08-15\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"individual_taxpayer_identification_number\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"joint\": {\n    \"name\": \"string\",\n    \"individuals\": [\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1991-02-26\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"2015-05-23\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      }\n    ]\n  },\n  \"government_authority\": {\n    \"name\": \"string\",\n    \"category\": \"federal_agency\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"website\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"authorized_persons\": [\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      }\n    ]\n  },\n  \"trust\": {\n    \"name\": \"string\",\n    \"category\": \"irrevocable\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"formation_state\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"trustees\": [\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1964-04-30\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"social_security_number\",\n            \"number_last4\": \"string\"\n          }\n        }\n      },\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1987-08-19\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        }\n      }\n    ],\n    \"grantor\": {\n      \"name\": \"string\",\n      \"date_of_birth\": \"2007-03-12\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\"\n      },\n      \"identification\": {\n        \"method\": \"individual_taxpayer_identification_number\",\n        \"number_last4\": \"string\"\n      }\n    },\n    \"formation_document_file_id\": \"string\"\n  },\n  \"idempotency_key\": \"string\",\n  \"third_party_verification\": {\n    \"reference\": \"string\",\n    \"vendor\": \"persona\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"high\",\n    \"rated_at\": \"2022-09-16T13:36:14.984Z\"\n  },\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1987-04-24T22:52:50.011Z\"\n    },\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1999-03-05T09:53:57.387Z\"\n    }\n  ],\n  \"description\": \"string\",\n  \"status\": \"active\",\n  \"details_confirmed_at\": \"1959-12-02T11:23:11.858Z\",\n  \"creating_entity_onboarding_session_id\": \"string\",\n  \"created_at\": \"2010-06-22T20:20:27.790Z\",\n  \"validation\": {\n    \"status\": \"invalid\",\n    \"issues\": [\n      {\n        \"category\": \"beneficial_owner_identity\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      },\n      {\n        \"category\": \"entity_tax_identifier\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      }\n    ]\n  },\n  \"supplemental_documents\": [\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1960-03-22T05:25:37.990Z\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1954-05-16T18:54:54.644Z\",\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29cf97f8-6350-4eb1-b5d6-6a57ff9babc3",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"corporation\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"state\": \"NY\",\n      \"zip\": \"10045\"\n    }\n  },\n  \"risk_rating\": {\n    \"rated_at\": \"2020-01-31T23:59:59Z\",\n    \"rating\": \"low\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53f4f029-f80e-4701-b7b8-3023d689a3b7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"corporation\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"country\": \"US\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"state\": \"NY\",\n      \"zip\": \"10045\"\n    }\n  },\n  \"risk_rating\": {\n    \"rated_at\": \"2020-01-31T23:59:59Z\",\n    \"rating\": \"low\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce8fd644-8730-45d7-b84b-e4278cae1eff",
+          "name": "Archive an Entity",
+          "request": {
+            "name": "Archive an Entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entities",
+                ":entity_id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc4f436a-f53f-4a17-a760-cd6bc6c2d00f",
+              "name": "Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"entity\",\n  \"id\": \"string\",\n  \"structure\": \"joint\",\n  \"corporation\": {\n    \"name\": \"string\",\n    \"website\": \"string\",\n    \"email\": \"string\",\n    \"legal_identifier\": {\n      \"category\": \"us_employer_identification_number\",\n      \"value\": \"string\"\n    },\n    \"incorporation_state\": \"string\",\n    \"industry_code\": \"string\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"beneficial_owners\": [\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1953-04-22\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"control\",\n          \"control\"\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"2015-07-21\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"other\",\n            \"number_last4\": \"string\"\n          }\n        },\n        \"company_title\": \"string\",\n        \"prongs\": [\n          \"ownership\",\n          \"ownership\"\n        ]\n      }\n    ]\n  },\n  \"natural_person\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1957-08-15\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"individual_taxpayer_identification_number\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"joint\": {\n    \"name\": \"string\",\n    \"individuals\": [\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1991-02-26\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      },\n      {\n        \"name\": \"string\",\n        \"date_of_birth\": \"2015-05-23\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"passport\",\n          \"number_last4\": \"string\"\n        }\n      }\n    ]\n  },\n  \"government_authority\": {\n    \"name\": \"string\",\n    \"category\": \"federal_agency\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"website\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"authorized_persons\": [\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"authorized_person_id\": \"string\"\n      }\n    ]\n  },\n  \"trust\": {\n    \"name\": \"string\",\n    \"category\": \"irrevocable\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"formation_state\": \"string\",\n    \"tax_identifier\": \"string\",\n    \"trustees\": [\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1964-04-30\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"social_security_number\",\n            \"number_last4\": \"string\"\n          }\n        }\n      },\n      {\n        \"structure\": \"individual\",\n        \"individual\": {\n          \"name\": \"string\",\n          \"date_of_birth\": \"1987-08-19\",\n          \"address\": {\n            \"line1\": \"string\",\n            \"line2\": \"string\",\n            \"city\": \"string\",\n            \"state\": \"string\",\n            \"zip\": \"string\",\n            \"country\": \"string\"\n          },\n          \"identification\": {\n            \"method\": \"drivers_license\",\n            \"number_last4\": \"string\"\n          }\n        }\n      }\n    ],\n    \"grantor\": {\n      \"name\": \"string\",\n      \"date_of_birth\": \"2007-03-12\",\n      \"address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\"\n      },\n      \"identification\": {\n        \"method\": \"individual_taxpayer_identification_number\",\n        \"number_last4\": \"string\"\n      }\n    },\n    \"formation_document_file_id\": \"string\"\n  },\n  \"idempotency_key\": \"string\",\n  \"third_party_verification\": {\n    \"reference\": \"string\",\n    \"vendor\": \"persona\"\n  },\n  \"risk_rating\": {\n    \"rating\": \"high\",\n    \"rated_at\": \"2022-09-16T13:36:14.984Z\"\n  },\n  \"terms_agreements\": [\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1987-04-24T22:52:50.011Z\"\n    },\n    {\n      \"terms_url\": \"string\",\n      \"ip_address\": \"string\",\n      \"agreed_at\": \"1999-03-05T09:53:57.387Z\"\n    }\n  ],\n  \"description\": \"string\",\n  \"status\": \"active\",\n  \"details_confirmed_at\": \"1959-12-02T11:23:11.858Z\",\n  \"creating_entity_onboarding_session_id\": \"string\",\n  \"created_at\": \"2010-06-22T20:20:27.790Z\",\n  \"validation\": {\n    \"status\": \"invalid\",\n    \"issues\": [\n      {\n        \"category\": \"beneficial_owner_identity\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      },\n      {\n        \"category\": \"entity_tax_identifier\",\n        \"entity_tax_identifier\": {},\n        \"entity_address\": {\n          \"reason\": \"mailbox_address\"\n        },\n        \"beneficial_owner_identity\": {\n          \"beneficial_owner_id\": \"string\"\n        },\n        \"beneficial_owner_address\": {\n          \"beneficial_owner_id\": \"string\",\n          \"reason\": \"mailbox_address\"\n        }\n      }\n    ]\n  },\n  \"supplemental_documents\": [\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1960-03-22T05:25:37.990Z\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"entity_supplemental_document\",\n      \"entity_id\": \"string\",\n      \"file_id\": \"string\",\n      \"created_at\": \"1954-05-16T18:54:54.644Z\",\n      \"idempotency_key\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c09147e-8310-4d5e-9969-face88a05975",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "711e1b79-cc6c-43a6-8d78-7c14b5053234",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entity_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b56b9ecd-bf2b-4247-831e-75065952ea21",
+    "name": "Increase Account Numbers Entities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

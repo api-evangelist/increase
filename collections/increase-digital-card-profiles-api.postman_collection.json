@@ -1,0 +1,1108 @@
+{
+  "item": [
+    {
+      "id": "c82322a2-579a-4170-9538-ec1da1ce4b46",
+      "name": "Digital Card Profiles",
+      "description": {
+        "content": "This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a25eb7f7-866b-4752-b831-7b5722527624",
+          "name": "List Card Profiles",
+          "request": {
+            "name": "List Card Profiles",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_card_profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1e1e0298-d27e-4d38-9b38-99ba879af952",
+              "name": "Digital Card Profile List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"digital_card_profile\",\n      \"id\": \"string\",\n      \"created_at\": \"1985-01-16T04:08:25.666Z\",\n      \"status\": \"pending\",\n      \"description\": \"string\",\n      \"text_color\": {\n        \"red\": 7974,\n        \"green\": 9957,\n        \"blue\": 3220\n      },\n      \"issuer_name\": \"string\",\n      \"card_description\": \"string\",\n      \"contact_website\": \"string\",\n      \"contact_email\": \"string\",\n      \"contact_phone\": \"string\",\n      \"background_image_file_id\": \"string\",\n      \"app_icon_file_id\": \"string\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"digital_card_profile\",\n      \"id\": \"string\",\n      \"created_at\": \"1994-10-19T10:53:45.447Z\",\n      \"status\": \"active\",\n      \"description\": \"string\",\n      \"text_color\": {\n        \"red\": 5273,\n        \"green\": 6024,\n        \"blue\": 3270\n      },\n      \"issuer_name\": \"string\",\n      \"card_description\": \"string\",\n      \"contact_website\": \"string\",\n      \"contact_email\": \"string\",\n      \"contact_phone\": \"string\",\n      \"background_image_file_id\": \"string\",\n      \"app_icon_file_id\": \"string\",\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7aa1977-ad94-440a-9d78-49e341a4823f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c833b5b1-29ad-421c-8595-737ae84966ca",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e54ca6cf-654e-4d4e-a48f-02d158481fa5",
+          "name": "Create a Digital Card Profile",
+          "request": {
+            "name": "Create a Digital Card Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_card_profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"issuer_name\": \"<string>\",\n  \"card_description\": \"<string>\",\n  \"background_image_file_id\": \"<string>\",\n  \"app_icon_file_id\": \"<string>\",\n  \"contact_email\": \"<email>\",\n  \"contact_phone\": \"<string>\",\n  \"contact_website\": \"<string>\",\n  \"text_color\": {\n    \"red\": \"<integer>\",\n    \"green\": \"<integer>\",\n    \"blue\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "549bd2fe-e763-4270-998c-6e66b4b8c56e",
+              "name": "Digital Card Profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"app_icon_file_id\": \"file_8zxqkwlh43wo144u8yec\",\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\",\n  \"card_description\": \"MyBank Signature Card\",\n  \"contact_email\": \"user@example.com\",\n  \"contact_phone\": \"+18885551212\",\n  \"contact_website\": \"https://example.com\",\n  \"description\": \"My Card Profile\",\n  \"issuer_name\": \"MyBank\",\n  \"text_color\": {\n    \"blue\": 59,\n    \"green\": 43,\n    \"red\": 26\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"digital_card_profile\",\n  \"id\": \"string\",\n  \"created_at\": \"1983-04-16T12:44:08.128Z\",\n  \"status\": \"active\",\n  \"description\": \"string\",\n  \"text_color\": {\n    \"red\": 1284,\n    \"green\": 8558,\n    \"blue\": 1552\n  },\n  \"issuer_name\": \"string\",\n  \"card_description\": \"string\",\n  \"contact_website\": \"string\",\n  \"contact_email\": \"string\",\n  \"contact_phone\": \"string\",\n  \"background_image_file_id\": \"string\",\n  \"app_icon_file_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe1d4646-1bf2-4244-9211-6095b2073893",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"app_icon_file_id\": \"file_8zxqkwlh43wo144u8yec\",\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\",\n  \"card_description\": \"MyBank Signature Card\",\n  \"contact_email\": \"user@example.com\",\n  \"contact_phone\": \"+18885551212\",\n  \"contact_website\": \"https://example.com\",\n  \"description\": \"My Card Profile\",\n  \"issuer_name\": \"MyBank\",\n  \"text_color\": {\n    \"blue\": 59,\n    \"green\": 43,\n    \"red\": 26\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e6a10b-fbc6-4f19-80a5-f82afdc5d26f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"app_icon_file_id\": \"file_8zxqkwlh43wo144u8yec\",\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\",\n  \"card_description\": \"MyBank Signature Card\",\n  \"contact_email\": \"user@example.com\",\n  \"contact_phone\": \"+18885551212\",\n  \"contact_website\": \"https://example.com\",\n  \"description\": \"My Card Profile\",\n  \"issuer_name\": \"MyBank\",\n  \"text_color\": {\n    \"blue\": 59,\n    \"green\": 43,\n    \"red\": 26\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27524a0e-457b-449c-9266-b53a1d81055e",
+          "name": "Retrieve a Digital Card Profile",
+          "request": {
+            "name": "Retrieve a Digital Card Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_card_profiles",
+                ":digital_card_profile_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digital_card_profile_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1763a35-d248-407e-91b3-4db2c387e252",
+              "name": "Digital Card Profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"digital_card_profile\",\n  \"id\": \"string\",\n  \"created_at\": \"1983-04-16T12:44:08.128Z\",\n  \"status\": \"active\",\n  \"description\": \"string\",\n  \"text_color\": {\n    \"red\": 1284,\n    \"green\": 8558,\n    \"blue\": 1552\n  },\n  \"issuer_name\": \"string\",\n  \"card_description\": \"string\",\n  \"contact_website\": \"string\",\n  \"contact_email\": \"string\",\n  \"contact_phone\": \"string\",\n  \"background_image_file_id\": \"string\",\n  \"app_icon_file_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bd8eca5-bc14-4ed6-8654-f925741d8698",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36406eb5-e0b3-478f-9813-173623d4bf3c",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3906072-a8ba-48a1-889a-11fbfc50fd22",
+          "name": "Archive a Digital Card Profile",
+          "request": {
+            "name": "Archive a Digital Card Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_card_profiles",
+                ":digital_card_profile_id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digital_card_profile_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48cbd140-40d1-4b10-8f53-d8d199db514d",
+              "name": "Digital Card Profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"digital_card_profile\",\n  \"id\": \"string\",\n  \"created_at\": \"1983-04-16T12:44:08.128Z\",\n  \"status\": \"active\",\n  \"description\": \"string\",\n  \"text_color\": {\n    \"red\": 1284,\n    \"green\": 8558,\n    \"blue\": 1552\n  },\n  \"issuer_name\": \"string\",\n  \"card_description\": \"string\",\n  \"contact_website\": \"string\",\n  \"contact_email\": \"string\",\n  \"contact_phone\": \"string\",\n  \"background_image_file_id\": \"string\",\n  \"app_icon_file_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a41b205b-7c21-481d-bff7-647dd1da855f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22290f88-54b1-4388-8c31-c0272ced2c21",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09dd2aae-1e21-41d0-81bb-8413dd024912",
+          "name": "Clones a Digital Card Profile",
+          "request": {
+            "name": "Clones a Digital Card Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_card_profiles",
+                ":digital_card_profile_id",
+                "clone"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digital_card_profile_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"app_icon_file_id\": \"<string>\",\n  \"background_image_file_id\": \"<string>\",\n  \"card_description\": \"<string>\",\n  \"contact_email\": \"<email>\",\n  \"contact_phone\": \"<string>\",\n  \"contact_website\": \"<string>\",\n  \"description\": \"<string>\",\n  \"issuer_name\": \"<string>\",\n  \"text_color\": {\n    \"red\": \"<integer>\",\n    \"green\": \"<integer>\",\n    \"blue\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4e44f93-883d-419d-a468-4a3f1c984ac9",
+              "name": "Digital Card Profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"digital_card_profile\",\n  \"id\": \"string\",\n  \"created_at\": \"1983-04-16T12:44:08.128Z\",\n  \"status\": \"active\",\n  \"description\": \"string\",\n  \"text_color\": {\n    \"red\": 1284,\n    \"green\": 8558,\n    \"blue\": 1552\n  },\n  \"issuer_name\": \"string\",\n  \"card_description\": \"string\",\n  \"contact_website\": \"string\",\n  \"contact_email\": \"string\",\n  \"contact_phone\": \"string\",\n  \"background_image_file_id\": \"string\",\n  \"app_icon_file_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fbd6121-a4aa-418e-938b-ad3268a1ba96",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a89b3c9f-7ffa-464f-822b-027e29f5f8d7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_card_profiles",
+                    ":digital_card_profile_id",
+                    "clone"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_card_profile_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"background_image_file_id\": \"file_1ai913suu1zfn1pdetru\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd349f5c-46d5-49b5-b47e-88b54a38ef29",
+    "name": "Increase Account Numbers Digital Card Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Ach Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Ach Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound ACH Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_ach_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "account_number_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound ACH Transfers"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id",
+            "params": [
+              {
+                "name": "inbound_ach_transfer_id",
+                "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound ACH Transfer"
+        },
+        {
+          "info": {
+            "name": "Create a notification of change for an Inbound ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/create_notification_of_change",
+            "params": [
+              {
+                "name": "inbound_ach_transfer_id",
+                "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a notification of change for an Inbound ACH Transfer"
+        },
+        {
+          "info": {
+            "name": "Decline an Inbound ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/decline",
+            "params": [
+              {
+                "name": "inbound_ach_transfer_id",
+                "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline an Inbound ACH Transfer"
+        },
+        {
+          "info": {
+            "name": "Return an Inbound ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_ach_transfers/:inbound_ach_transfer_id/transfer_return",
+            "params": [
+              {
+                "name": "inbound_ach_transfer_id",
+                "value": "inbound_ach_transfer_tdrwqr3fq9gnnq49odev",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return an Inbound ACH Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

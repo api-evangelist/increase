@@ -1,0 +1,1179 @@
+{
+  "item": [
+    {
+      "id": "bf3c2ae4-1190-4c30-b1ce-0ed19226dad3",
+      "name": "Real Time Payments Transfers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29bd3e5c-c226-46c8-a05c-f011ff667323",
+          "name": "List Real-Time Payments Transfers",
+          "request": {
+            "name": "List Real-Time Payments Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "real_time_payments_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18900fd9-0f40-42dc-ab54-9107f263b8a5",
+              "name": "Real-Time Payments Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"real_time_payments_transfer\",\n      \"id\": \"string\",\n      \"approval\": {\n        \"approved_at\": \"1960-09-01T09:39:36.625Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1989-05-16T16:08:00.346Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"status\": \"pending_submission\",\n      \"created_at\": \"2021-12-06T02:38:10.933Z\",\n      \"account_id\": \"string\",\n      \"external_account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"debtor_name\": \"string\",\n      \"creditor_name\": \"string\",\n      \"ultimate_creditor_name\": \"string\",\n      \"ultimate_debtor_name\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"amount\": 3583,\n      \"currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"submission\": {\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n      },\n      \"rejection\": {\n        \"rejected_at\": \"1953-11-30T19:23:36.661Z\",\n        \"reject_reason_code\": \"instructed_agent_signed_off\",\n        \"reject_reason_additional_information\": \"string\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"real_time_payments_transfer\",\n      \"id\": \"string\",\n      \"approval\": {\n        \"approved_at\": \"1967-05-15T17:32:52.823Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1991-09-26T05:41:04.633Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"status\": \"pending_submission\",\n      \"created_at\": \"2004-03-04T12:10:20.963Z\",\n      \"account_id\": \"string\",\n      \"external_account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"debtor_name\": \"string\",\n      \"creditor_name\": \"string\",\n      \"ultimate_creditor_name\": \"string\",\n      \"ultimate_debtor_name\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"amount\": 8505,\n      \"currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"submission\": {\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n      },\n      \"rejection\": {\n        \"rejected_at\": \"2017-03-23T01:28:43.127Z\",\n        \"reject_reason_code\": \"unsupported_message_for_recipient\",\n        \"reject_reason_additional_information\": \"string\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e2b06ce-04e4-4779-8b53-1bbd39952921",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ee439c0-c451-4272-ae21-f9ef21dc678b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4571f25a-6a51-4a2b-a898-67ba295bb7b3",
+          "name": "Create a Real-Time Payments Transfer",
+          "request": {
+            "name": "Create a Real-Time Payments Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "real_time_payments_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_account_number_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"creditor_name\": \"<string>\",\n  \"unstructured_remittance_information\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"debtor_name\": \"<string>\",\n  \"external_account_id\": \"<string>\",\n  \"require_approval\": \"<boolean>\",\n  \"routing_number\": \"<string>\",\n  \"ultimate_creditor_name\": \"<string>\",\n  \"ultimate_debtor_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ba9aff5-16bd-4194-81ec-c2c81a77f585",
+              "name": "Real-Time Payments Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_name\": \"Ian Crease\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_payments_transfer\",\n  \"id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2000-08-14T03:13:54.786Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2020-12-26T08:10:15.861Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"status\": \"pending_submission\",\n  \"created_at\": \"1953-03-29T19:01:31.047Z\",\n  \"account_id\": \"string\",\n  \"external_account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"ultimate_creditor_name\": \"string\",\n  \"ultimate_debtor_name\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"amount\": 7223,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"1968-07-10T15:34:41.871Z\",\n    \"reject_reason_code\": \"timeout\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5b9c52f-80ee-42f1-bf1b-e387ff557368",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_name\": \"Ian Crease\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed42f5d0-2388-41f8-9f94-3b8b807dc1b2",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_name\": \"Ian Crease\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "547726d6-8825-44a6-ac17-d9741d60da26",
+          "name": "Retrieve a Real-Time Payments Transfer",
+          "request": {
+            "name": "Retrieve a Real-Time Payments Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "real_time_payments_transfers",
+                ":real_time_payments_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_time_payments_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0377d02-d975-4cff-8f81-55a3af162570",
+              "name": "Real-Time Payments Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_payments_transfer\",\n  \"id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2000-08-14T03:13:54.786Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2020-12-26T08:10:15.861Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"status\": \"pending_submission\",\n  \"created_at\": \"1953-03-29T19:01:31.047Z\",\n  \"account_id\": \"string\",\n  \"external_account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"ultimate_creditor_name\": \"string\",\n  \"ultimate_debtor_name\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"amount\": 7223,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"1968-07-10T15:34:41.871Z\",\n    \"reject_reason_code\": \"timeout\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7b0731c-eef7-41f9-a3ad-77dc75e7e689",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0995a43-301d-42c6-9b56-3abc9f9306e9",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2cd2a8d-db0d-4730-abb2-6b18375672d8",
+          "name": "Approve a Real-Time Payments Transfer",
+          "request": {
+            "name": "Approve a Real-Time Payments Transfer",
+            "description": {
+              "content": "Approves a Real-Time Payments Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "real_time_payments_transfers",
+                ":real_time_payments_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_time_payments_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a96f6afd-6fe0-4a58-99e4-677371d803ae",
+              "name": "Real-Time Payments Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_payments_transfer\",\n  \"id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2000-08-14T03:13:54.786Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2020-12-26T08:10:15.861Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"status\": \"pending_submission\",\n  \"created_at\": \"1953-03-29T19:01:31.047Z\",\n  \"account_id\": \"string\",\n  \"external_account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"ultimate_creditor_name\": \"string\",\n  \"ultimate_debtor_name\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"amount\": 7223,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"1968-07-10T15:34:41.871Z\",\n    \"reject_reason_code\": \"timeout\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cbd578f-fbbf-4c0c-91a1-6f886625ecbf",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db937182-ff52-46b5-b241-cd16e2e5f430",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcd57128-bde5-4fec-bffa-eb8c6441ec1d",
+          "name": "Cancel a pending Real-Time Payments Transfer",
+          "request": {
+            "name": "Cancel a pending Real-Time Payments Transfer",
+            "description": {
+              "content": "Cancels a Real-Time Payments Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "real_time_payments_transfers",
+                ":real_time_payments_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_time_payments_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9dc0ced5-61d3-4763-856f-a55bc059d13b",
+              "name": "Real-Time Payments Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_payments_transfer\",\n  \"id\": \"string\",\n  \"approval\": {\n    \"approved_at\": \"2000-08-14T03:13:54.786Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"2020-12-26T08:10:15.861Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"status\": \"pending_submission\",\n  \"created_at\": \"1953-03-29T19:01:31.047Z\",\n  \"account_id\": \"string\",\n  \"external_account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"ultimate_creditor_name\": \"string\",\n  \"ultimate_debtor_name\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"amount\": 7223,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"1968-07-10T15:34:41.871Z\",\n    \"reject_reason_code\": \"timeout\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d0502f9-f28b-4162-9445-890a4a325180",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f696572b-db5e-47bc-a731-d231e59d7dd3",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_payments_transfers",
+                    ":real_time_payments_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_payments_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "caed7b71-cb0b-4d23-ab4a-1f435097be18",
+    "name": "Increase Account Numbers Real Time Payments Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

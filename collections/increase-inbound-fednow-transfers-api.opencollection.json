@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Fednow Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Fednow Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound FedNow Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_fednow_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "account_number_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound FedNow Transfers"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_fednow_transfers/:inbound_fednow_transfer_id",
+            "params": [
+              {
+                "name": "inbound_fednow_transfer_id",
+                "value": "inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound FedNow Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

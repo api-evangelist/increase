@@ -1,0 +1,669 @@
+{
+  "item": [
+    {
+      "id": "24327f3b-9a78-42cb-8440-9b30482592ec",
+      "name": "Wire Drawdown Requests",
+      "description": {
+        "content": "Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9708718-d59a-4653-ae7c-f818b87d7fb7",
+          "name": "List Wire Drawdown Requests",
+          "request": {
+            "name": "List Wire Drawdown Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "wire_drawdown_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f0add54-7ad8-43d1-98f3-7a6e80d70022",
+              "name": "Wire Drawdown Request List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"wire_drawdown_request\",\n      \"id\": \"string\",\n      \"created_at\": \"2025-05-22T22:07:23.156Z\",\n      \"account_number_id\": \"string\",\n      \"debtor_account_number\": \"string\",\n      \"debtor_routing_number\": \"string\",\n      \"debtor_external_account_id\": \"string\",\n      \"amount\": 3947,\n      \"currency\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"debtor_name\": \"string\",\n      \"debtor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"submission\": {\n        \"input_message_accountability_data\": \"20220118MMQFMP0P000003\"\n      },\n      \"fulfillment_inbound_wire_transfer_id\": \"string\",\n      \"status\": \"fulfilled\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"wire_drawdown_request\",\n      \"id\": \"string\",\n      \"created_at\": \"1972-12-07T21:09:50.116Z\",\n      \"account_number_id\": \"string\",\n      \"debtor_account_number\": \"string\",\n      \"debtor_routing_number\": \"string\",\n      \"debtor_external_account_id\": \"string\",\n      \"amount\": 6155,\n      \"currency\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"debtor_name\": \"string\",\n      \"debtor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"submission\": {\n        \"input_message_accountability_data\": \"20220118MMQFMP0P000003\"\n      },\n      \"fulfillment_inbound_wire_transfer_id\": \"string\",\n      \"status\": \"pending_submission\",\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69e5b110-9f35-4bbf-ad0e-0d94686e2634",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9c6b942-abc6-4b5c-9067-7543b299f27f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e06d762-abb1-4a55-8610-60f36368081e",
+          "name": "Create a Wire Drawdown Request",
+          "request": {
+            "name": "Create a Wire Drawdown Request",
+            "description": {},
+            "url": {
+              "path": [
+                "wire_drawdown_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_number_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"unstructured_remittance_information\": \"<string>\",\n  \"debtor_name\": \"<string>\",\n  \"debtor_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"creditor_name\": \"<string>\",\n  \"creditor_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"charge_bearer\": \"<string>\",\n  \"debtor_account_number\": \"<string>\",\n  \"debtor_external_account_id\": \"<string>\",\n  \"debtor_routing_number\": \"<string>\",\n  \"end_to_end_identification\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f90de77d-bdb1-4e46-ac2b-e063b08146ab",
+              "name": "Wire Drawdown Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"amount\": 10000,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"National Phonograph Company\",\n  \"debtor_account_number\": \"987654321\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"Ian Crease\",\n  \"debtor_routing_number\": \"101050001\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"wire_drawdown_request\",\n  \"id\": \"string\",\n  \"created_at\": \"2002-06-30T14:25:04.753Z\",\n  \"account_number_id\": \"string\",\n  \"debtor_account_number\": \"string\",\n  \"debtor_routing_number\": \"string\",\n  \"debtor_external_account_id\": \"string\",\n  \"amount\": 5794,\n  \"currency\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"submission\": {\n    \"input_message_accountability_data\": \"20220118MMQFMP0P000003\"\n  },\n  \"fulfillment_inbound_wire_transfer_id\": \"string\",\n  \"status\": \"pending_submission\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb8f2c94-1547-4c8c-9b77-ba657a151d34",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"amount\": 10000,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"National Phonograph Company\",\n  \"debtor_account_number\": \"987654321\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"Ian Crease\",\n  \"debtor_routing_number\": \"101050001\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c342514-85fe-438b-9fd1-75420b582cdc",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"amount\": 10000,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"National Phonograph Company\",\n  \"debtor_account_number\": \"987654321\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"Ian Crease\",\n  \"debtor_routing_number\": \"101050001\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78b95d18-3dff-480a-aeb2-31485d7df497",
+          "name": "Retrieve a Wire Drawdown Request",
+          "request": {
+            "name": "Retrieve a Wire Drawdown Request",
+            "description": {},
+            "url": {
+              "path": [
+                "wire_drawdown_requests",
+                ":wire_drawdown_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "wire_drawdown_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9825901d-506f-4261-abe9-a53a898667f3",
+              "name": "Wire Drawdown Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests",
+                    ":wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"wire_drawdown_request\",\n  \"id\": \"string\",\n  \"created_at\": \"2002-06-30T14:25:04.753Z\",\n  \"account_number_id\": \"string\",\n  \"debtor_account_number\": \"string\",\n  \"debtor_routing_number\": \"string\",\n  \"debtor_external_account_id\": \"string\",\n  \"amount\": 5794,\n  \"currency\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"submission\": {\n    \"input_message_accountability_data\": \"20220118MMQFMP0P000003\"\n  },\n  \"fulfillment_inbound_wire_transfer_id\": \"string\",\n  \"status\": \"pending_submission\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad5df677-6169-42fd-8d39-e10a5999d04a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests",
+                    ":wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52784e64-2348-463b-b7ab-7a057b129106",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "wire_drawdown_requests",
+                    ":wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "31c0c4e2-d6a4-45e5-b43e-331c4a50b351",
+    "name": "Increase Account Numbers Wire Drawdown Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

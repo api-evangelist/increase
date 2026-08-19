@@ -1,0 +1,476 @@
+{
+  "item": [
+    {
+      "id": "a28f173b-de0e-4d7c-8ab8-75218ad24549",
+      "name": "Real Time Decisions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe8d72db-15c3-42e5-904c-1ffde4e3eddc",
+          "name": "Retrieve a Real-Time Decision",
+          "request": {
+            "name": "Retrieve a Real-Time Decision",
+            "description": {},
+            "url": {
+              "path": [
+                "real_time_decisions",
+                ":real_time_decision_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_time_decision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d3ea93e-091d-46ec-8bf4-6e90d4fad123",
+              "name": "Real-Time Decision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_decision\",\n  \"id\": \"string\",\n  \"created_at\": \"1990-10-08T00:06:41.559Z\",\n  \"timeout_at\": \"1971-12-19T00:17:54.851Z\",\n  \"status\": \"responded\",\n  \"category\": \"card_authentication_challenge_requested\",\n  \"card_authorization\": {\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_descriptor\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"terminal_id\": \"string\",\n    \"merchant_city\": \"string\",\n    \"merchant_state\": \"string\",\n    \"merchant_postal_code\": \"string\",\n    \"merchant_country\": \"string\",\n    \"digital_wallet_token_id\": \"string\",\n    \"physical_card_id\": \"string\",\n    \"verification\": {\n      \"cardholder_address\": {\n        \"provided_postal_code\": \"string\",\n        \"provided_line1\": \"string\",\n        \"actual_postal_code\": \"string\",\n        \"actual_line1\": \"string\",\n        \"result\": \"postal_code_match_address_not_checked\"\n      },\n      \"cardholder_name\": {\n        \"provided_first_name\": \"string\",\n        \"provided_middle_name\": \"string\",\n        \"provided_last_name\": \"string\"\n      },\n      \"card_verification_code\": {\n        \"result\": \"no_match\"\n      }\n    },\n    \"additional_amounts\": {\n      \"total_healthcare\": {\n        \"amount\": 9052,\n        \"currency\": \"string\"\n      },\n      \"total_cumulative\": {\n        \"amount\": 5679,\n        \"currency\": \"string\"\n      },\n      \"surcharge\": {\n        \"amount\": 4559,\n        \"currency\": \"string\"\n      },\n      \"transit\": {\n        \"amount\": 883,\n        \"currency\": \"string\"\n      },\n      \"vision\": {\n        \"amount\": 2821,\n        \"currency\": \"string\"\n      },\n      \"clinic\": {\n        \"amount\": 2727,\n        \"currency\": \"string\"\n      },\n      \"dental\": {\n        \"amount\": 17,\n        \"currency\": \"string\"\n      },\n      \"prescription\": {\n        \"amount\": 7960,\n        \"currency\": \"string\"\n      },\n      \"original\": {\n        \"amount\": 1941,\n        \"currency\": \"string\"\n      },\n      \"unknown\": {\n        \"amount\": 2420,\n        \"currency\": \"string\"\n      }\n    },\n    \"network_identifiers\": {\n      \"transaction_id\": \"string\",\n      \"trace_number\": \"string\",\n      \"retrieval_reference_number\": \"string\",\n      \"authorization_identification_response\": \"string\"\n    },\n    \"network_risk_score\": 1022,\n    \"network_details\": {\n      \"category\": \"visa\",\n      \"visa\": {\n        \"electronic_commerce_indicator\": \"unknown_mail_phone_order\",\n        \"point_of_service_entry_mode\": \"integrated_circuit_card\",\n        \"stand_in_processing_reason\": \"payment_fraud_disruption_acquirer_block\",\n        \"terminal_entry_capability\": \"contactless_only\"\n      },\n      \"pulse\": {}\n    },\n    \"decision\": \"approve\",\n    \"approval\": {\n      \"partial_amount\": 1797\n    },\n    \"decline\": {\n      \"reason\": \"card_temporarily_disabled\"\n    },\n    \"card_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"account_id\": \"string\",\n    \"presentment_amount\": 4393,\n    \"presentment_currency\": \"string\",\n    \"settlement_amount\": 2188,\n    \"settlement_currency\": \"string\",\n    \"processing_category\": \"bill_payment\",\n    \"direction\": \"refund\",\n    \"partial_approval_capability\": \"not_supported\",\n    \"request_details\": {\n      \"category\": \"incremental_authorization\",\n      \"initial_authorization\": {},\n      \"incremental_authorization\": {\n        \"card_payment_id\": \"string\",\n        \"original_card_authorization_id\": \"string\"\n      }\n    }\n  },\n  \"card_balance_inquiry\": {\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_descriptor\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"terminal_id\": \"string\",\n    \"merchant_city\": \"string\",\n    \"merchant_state\": \"string\",\n    \"merchant_postal_code\": \"string\",\n    \"merchant_country\": \"string\",\n    \"digital_wallet_token_id\": \"string\",\n    \"physical_card_id\": \"string\",\n    \"verification\": {\n      \"cardholder_address\": {\n        \"provided_postal_code\": \"string\",\n        \"provided_line1\": \"string\",\n        \"actual_postal_code\": \"string\",\n        \"actual_line1\": \"string\",\n        \"result\": \"postal_code_match_address_no_match\"\n      },\n      \"cardholder_name\": {\n        \"provided_first_name\": \"string\",\n        \"provided_middle_name\": \"string\",\n        \"provided_last_name\": \"string\"\n      },\n      \"card_verification_code\": {\n        \"result\": \"not_checked\"\n      }\n    },\n    \"additional_amounts\": {\n      \"total_healthcare\": {\n        \"amount\": 1623,\n        \"currency\": \"string\"\n      },\n      \"total_cumulative\": {\n        \"amount\": 2242,\n        \"currency\": \"string\"\n      },\n      \"surcharge\": {\n        \"amount\": 5835,\n        \"currency\": \"string\"\n      },\n      \"transit\": {\n        \"amount\": 6641,\n        \"currency\": \"string\"\n      },\n      \"vision\": {\n        \"amount\": 7800,\n        \"currency\": \"string\"\n      },\n      \"clinic\": {\n        \"amount\": 7578,\n        \"currency\": \"string\"\n      },\n      \"dental\": {\n        \"amount\": 8230,\n        \"currency\": \"string\"\n      },\n      \"prescription\": {\n        \"amount\": 4015,\n        \"currency\": \"string\"\n      },\n      \"original\": {\n        \"amount\": 7288,\n        \"currency\": \"string\"\n      },\n      \"unknown\": {\n        \"amount\": 8027,\n        \"currency\": \"string\"\n      }\n    },\n    \"network_identifiers\": {\n      \"transaction_id\": \"string\",\n      \"trace_number\": \"string\",\n      \"retrieval_reference_number\": \"string\",\n      \"authorization_identification_response\": \"string\"\n    },\n    \"network_risk_score\": 9894,\n    \"network_details\": {\n      \"category\": \"visa\",\n      \"visa\": {\n        \"electronic_commerce_indicator\": \"non_authenticated_security_transaction_at_3ds_capable_merchant\",\n        \"point_of_service_entry_mode\": \"contactless\",\n        \"stand_in_processing_reason\": \"issuer_error\",\n        \"terminal_entry_capability\": \"unknown\"\n      },\n      \"pulse\": {}\n    },\n    \"decision\": \"approve\",\n    \"approval\": {\n      \"balance\": 2223\n    },\n    \"card_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"account_id\": \"string\"\n  },\n  \"card_authentication\": {\n    \"card_id\": \"string\",\n    \"prior_authenticated_card_payment_id\": \"string\",\n    \"message_category\": {\n      \"category\": \"payment_authentication\",\n      \"payment\": {\n        \"purchase_amount\": 529,\n        \"purchase_currency\": \"string\",\n        \"purchase_amount_cardholder_estimated\": 5382,\n        \"transaction_type\": \"goods_service_purchase\"\n      },\n      \"non_payment\": {}\n    },\n    \"access_control_server_transaction_identifier\": \"string\",\n    \"three_d_secure_server_transaction_identifier\": \"string\",\n    \"directory_server_transaction_identifier\": \"string\",\n    \"device_channel\": {\n      \"category\": \"three_ds_requestor_initiated\",\n      \"merchant_initiated\": {\n        \"indicator\": \"installment_transaction\"\n      },\n      \"browser\": {\n        \"accept_header\": \"string\",\n        \"ip_address\": \"string\",\n        \"javascript_enabled\": \"disabled\",\n        \"language\": \"string\",\n        \"user_agent\": \"string\"\n      }\n    },\n    \"cardholder_name\": \"string\",\n    \"cardholder_email\": \"string\",\n    \"requestor_authentication_indicator\": \"maintain_card\",\n    \"requestor_challenge_indicator\": \"challenge_requested_whitelist_prompt_requested_if_challenge_required\",\n    \"requestor_name\": \"string\",\n    \"requestor_url\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_name\": \"string\",\n    \"merchant_country\": \"string\",\n    \"billing_address_line1\": \"string\",\n    \"billing_address_line2\": \"string\",\n    \"billing_address_line3\": \"string\",\n    \"billing_address_city\": \"string\",\n    \"billing_address_state\": \"string\",\n    \"billing_address_postal_code\": \"string\",\n    \"billing_address_country\": \"string\",\n    \"shipping_address_line1\": \"string\",\n    \"shipping_address_line2\": \"string\",\n    \"shipping_address_line3\": \"string\",\n    \"shipping_address_city\": \"string\",\n    \"shipping_address_state\": \"string\",\n    \"shipping_address_postal_code\": \"string\",\n    \"shipping_address_country\": \"string\",\n    \"account_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"decision\": \"challenge\"\n  },\n  \"card_authentication_challenge\": {\n    \"card_id\": \"string\",\n    \"account_id\": \"string\",\n    \"card_payment_id\": \"string\",\n    \"one_time_code\": \"string\",\n    \"result\": \"success\"\n  },\n  \"digital_wallet_token\": {\n    \"decision\": \"decline\",\n    \"card_id\": \"string\",\n    \"digital_wallet\": \"samsung_pay\",\n    \"device\": {\n      \"identifier\": \"string\"\n    }\n  },\n  \"digital_wallet_authentication\": {\n    \"result\": \"failure\",\n    \"card_id\": \"string\",\n    \"digital_wallet\": \"samsung_pay\",\n    \"channel\": \"sms\",\n    \"one_time_passcode\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb85a31-e3fd-4b1c-a2f8-53b1f635b3d7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22f81a53-1cf8-4582-9ff8-a773ae851902",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90276c7b-229a-4fc3-9cd7-aadb78506b8a",
+          "name": "Action a Real-Time Decision",
+          "request": {
+            "name": "Action a Real-Time Decision",
+            "description": {},
+            "url": {
+              "path": [
+                "real_time_decisions",
+                ":real_time_decision_id",
+                "action"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "real_time_decision_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_authentication\": {\n    \"decision\": \"<string>\"\n  },\n  \"card_authentication_challenge\": {\n    \"result\": \"<string>\",\n    \"success\": {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\"\n    }\n  },\n  \"card_authorization\": {\n    \"decision\": \"<string>\",\n    \"approval\": {\n      \"cardholder_address_verification_result\": {\n        \"line1\": \"<string>\",\n        \"postal_code\": \"<string>\"\n      },\n      \"partial_amount\": \"<integer>\"\n    },\n    \"decline\": {\n      \"reason\": \"<string>\"\n    }\n  },\n  \"card_balance_inquiry\": {\n    \"decision\": \"<string>\",\n    \"approval\": {\n      \"balance\": \"<integer>\"\n    }\n  },\n  \"digital_wallet_authentication\": {\n    \"result\": \"<string>\",\n    \"success\": {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\"\n    }\n  },\n  \"digital_wallet_token\": {\n    \"approval\": {\n      \"email\": \"<email>\",\n      \"phone\": \"<string>\"\n    },\n    \"decline\": {\n      \"reason\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bbd7e721-3bb4-4149-b097-ca016238ee15",
+              "name": "Real-Time Decision",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_authorization\": {\n    \"approval\": {\n      \"cardholder_address_verification_result\": {\n        \"line1\": \"match\",\n        \"postal_code\": \"no_match\"\n      }\n    },\n    \"decision\": \"approve\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"real_time_decision\",\n  \"id\": \"string\",\n  \"created_at\": \"1990-10-08T00:06:41.559Z\",\n  \"timeout_at\": \"1971-12-19T00:17:54.851Z\",\n  \"status\": \"responded\",\n  \"category\": \"card_authentication_challenge_requested\",\n  \"card_authorization\": {\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_descriptor\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"terminal_id\": \"string\",\n    \"merchant_city\": \"string\",\n    \"merchant_state\": \"string\",\n    \"merchant_postal_code\": \"string\",\n    \"merchant_country\": \"string\",\n    \"digital_wallet_token_id\": \"string\",\n    \"physical_card_id\": \"string\",\n    \"verification\": {\n      \"cardholder_address\": {\n        \"provided_postal_code\": \"string\",\n        \"provided_line1\": \"string\",\n        \"actual_postal_code\": \"string\",\n        \"actual_line1\": \"string\",\n        \"result\": \"postal_code_match_address_not_checked\"\n      },\n      \"cardholder_name\": {\n        \"provided_first_name\": \"string\",\n        \"provided_middle_name\": \"string\",\n        \"provided_last_name\": \"string\"\n      },\n      \"card_verification_code\": {\n        \"result\": \"no_match\"\n      }\n    },\n    \"additional_amounts\": {\n      \"total_healthcare\": {\n        \"amount\": 9052,\n        \"currency\": \"string\"\n      },\n      \"total_cumulative\": {\n        \"amount\": 5679,\n        \"currency\": \"string\"\n      },\n      \"surcharge\": {\n        \"amount\": 4559,\n        \"currency\": \"string\"\n      },\n      \"transit\": {\n        \"amount\": 883,\n        \"currency\": \"string\"\n      },\n      \"vision\": {\n        \"amount\": 2821,\n        \"currency\": \"string\"\n      },\n      \"clinic\": {\n        \"amount\": 2727,\n        \"currency\": \"string\"\n      },\n      \"dental\": {\n        \"amount\": 17,\n        \"currency\": \"string\"\n      },\n      \"prescription\": {\n        \"amount\": 7960,\n        \"currency\": \"string\"\n      },\n      \"original\": {\n        \"amount\": 1941,\n        \"currency\": \"string\"\n      },\n      \"unknown\": {\n        \"amount\": 2420,\n        \"currency\": \"string\"\n      }\n    },\n    \"network_identifiers\": {\n      \"transaction_id\": \"string\",\n      \"trace_number\": \"string\",\n      \"retrieval_reference_number\": \"string\",\n      \"authorization_identification_response\": \"string\"\n    },\n    \"network_risk_score\": 1022,\n    \"network_details\": {\n      \"category\": \"visa\",\n      \"visa\": {\n        \"electronic_commerce_indicator\": \"unknown_mail_phone_order\",\n        \"point_of_service_entry_mode\": \"integrated_circuit_card\",\n        \"stand_in_processing_reason\": \"payment_fraud_disruption_acquirer_block\",\n        \"terminal_entry_capability\": \"contactless_only\"\n      },\n      \"pulse\": {}\n    },\n    \"decision\": \"approve\",\n    \"approval\": {\n      \"partial_amount\": 1797\n    },\n    \"decline\": {\n      \"reason\": \"card_temporarily_disabled\"\n    },\n    \"card_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"account_id\": \"string\",\n    \"presentment_amount\": 4393,\n    \"presentment_currency\": \"string\",\n    \"settlement_amount\": 2188,\n    \"settlement_currency\": \"string\",\n    \"processing_category\": \"bill_payment\",\n    \"direction\": \"refund\",\n    \"partial_approval_capability\": \"not_supported\",\n    \"request_details\": {\n      \"category\": \"incremental_authorization\",\n      \"initial_authorization\": {},\n      \"incremental_authorization\": {\n        \"card_payment_id\": \"string\",\n        \"original_card_authorization_id\": \"string\"\n      }\n    }\n  },\n  \"card_balance_inquiry\": {\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_descriptor\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"terminal_id\": \"string\",\n    \"merchant_city\": \"string\",\n    \"merchant_state\": \"string\",\n    \"merchant_postal_code\": \"string\",\n    \"merchant_country\": \"string\",\n    \"digital_wallet_token_id\": \"string\",\n    \"physical_card_id\": \"string\",\n    \"verification\": {\n      \"cardholder_address\": {\n        \"provided_postal_code\": \"string\",\n        \"provided_line1\": \"string\",\n        \"actual_postal_code\": \"string\",\n        \"actual_line1\": \"string\",\n        \"result\": \"postal_code_match_address_no_match\"\n      },\n      \"cardholder_name\": {\n        \"provided_first_name\": \"string\",\n        \"provided_middle_name\": \"string\",\n        \"provided_last_name\": \"string\"\n      },\n      \"card_verification_code\": {\n        \"result\": \"not_checked\"\n      }\n    },\n    \"additional_amounts\": {\n      \"total_healthcare\": {\n        \"amount\": 1623,\n        \"currency\": \"string\"\n      },\n      \"total_cumulative\": {\n        \"amount\": 2242,\n        \"currency\": \"string\"\n      },\n      \"surcharge\": {\n        \"amount\": 5835,\n        \"currency\": \"string\"\n      },\n      \"transit\": {\n        \"amount\": 6641,\n        \"currency\": \"string\"\n      },\n      \"vision\": {\n        \"amount\": 7800,\n        \"currency\": \"string\"\n      },\n      \"clinic\": {\n        \"amount\": 7578,\n        \"currency\": \"string\"\n      },\n      \"dental\": {\n        \"amount\": 8230,\n        \"currency\": \"string\"\n      },\n      \"prescription\": {\n        \"amount\": 4015,\n        \"currency\": \"string\"\n      },\n      \"original\": {\n        \"amount\": 7288,\n        \"currency\": \"string\"\n      },\n      \"unknown\": {\n        \"amount\": 8027,\n        \"currency\": \"string\"\n      }\n    },\n    \"network_identifiers\": {\n      \"transaction_id\": \"string\",\n      \"trace_number\": \"string\",\n      \"retrieval_reference_number\": \"string\",\n      \"authorization_identification_response\": \"string\"\n    },\n    \"network_risk_score\": 9894,\n    \"network_details\": {\n      \"category\": \"visa\",\n      \"visa\": {\n        \"electronic_commerce_indicator\": \"non_authenticated_security_transaction_at_3ds_capable_merchant\",\n        \"point_of_service_entry_mode\": \"contactless\",\n        \"stand_in_processing_reason\": \"issuer_error\",\n        \"terminal_entry_capability\": \"unknown\"\n      },\n      \"pulse\": {}\n    },\n    \"decision\": \"approve\",\n    \"approval\": {\n      \"balance\": 2223\n    },\n    \"card_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"account_id\": \"string\"\n  },\n  \"card_authentication\": {\n    \"card_id\": \"string\",\n    \"prior_authenticated_card_payment_id\": \"string\",\n    \"message_category\": {\n      \"category\": \"payment_authentication\",\n      \"payment\": {\n        \"purchase_amount\": 529,\n        \"purchase_currency\": \"string\",\n        \"purchase_amount_cardholder_estimated\": 5382,\n        \"transaction_type\": \"goods_service_purchase\"\n      },\n      \"non_payment\": {}\n    },\n    \"access_control_server_transaction_identifier\": \"string\",\n    \"three_d_secure_server_transaction_identifier\": \"string\",\n    \"directory_server_transaction_identifier\": \"string\",\n    \"device_channel\": {\n      \"category\": \"three_ds_requestor_initiated\",\n      \"merchant_initiated\": {\n        \"indicator\": \"installment_transaction\"\n      },\n      \"browser\": {\n        \"accept_header\": \"string\",\n        \"ip_address\": \"string\",\n        \"javascript_enabled\": \"disabled\",\n        \"language\": \"string\",\n        \"user_agent\": \"string\"\n      }\n    },\n    \"cardholder_name\": \"string\",\n    \"cardholder_email\": \"string\",\n    \"requestor_authentication_indicator\": \"maintain_card\",\n    \"requestor_challenge_indicator\": \"challenge_requested_whitelist_prompt_requested_if_challenge_required\",\n    \"requestor_name\": \"string\",\n    \"requestor_url\": \"string\",\n    \"merchant_category_code\": \"string\",\n    \"merchant_acceptor_id\": \"string\",\n    \"merchant_name\": \"string\",\n    \"merchant_country\": \"string\",\n    \"billing_address_line1\": \"string\",\n    \"billing_address_line2\": \"string\",\n    \"billing_address_line3\": \"string\",\n    \"billing_address_city\": \"string\",\n    \"billing_address_state\": \"string\",\n    \"billing_address_postal_code\": \"string\",\n    \"billing_address_country\": \"string\",\n    \"shipping_address_line1\": \"string\",\n    \"shipping_address_line2\": \"string\",\n    \"shipping_address_line3\": \"string\",\n    \"shipping_address_city\": \"string\",\n    \"shipping_address_state\": \"string\",\n    \"shipping_address_postal_code\": \"string\",\n    \"shipping_address_country\": \"string\",\n    \"account_id\": \"string\",\n    \"upcoming_card_payment_id\": \"string\",\n    \"decision\": \"challenge\"\n  },\n  \"card_authentication_challenge\": {\n    \"card_id\": \"string\",\n    \"account_id\": \"string\",\n    \"card_payment_id\": \"string\",\n    \"one_time_code\": \"string\",\n    \"result\": \"success\"\n  },\n  \"digital_wallet_token\": {\n    \"decision\": \"decline\",\n    \"card_id\": \"string\",\n    \"digital_wallet\": \"samsung_pay\",\n    \"device\": {\n      \"identifier\": \"string\"\n    }\n  },\n  \"digital_wallet_authentication\": {\n    \"result\": \"failure\",\n    \"card_id\": \"string\",\n    \"digital_wallet\": \"samsung_pay\",\n    \"channel\": \"sms\",\n    \"one_time_passcode\": \"string\",\n    \"phone\": \"string\",\n    \"email\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32199b22-15e1-47c4-8959-6eaf24780a24",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_authorization\": {\n    \"approval\": {\n      \"cardholder_address_verification_result\": {\n        \"line1\": \"match\",\n        \"postal_code\": \"no_match\"\n      }\n    },\n    \"decision\": \"approve\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84bf6e6a-a1d2-4919-b612-069f1f6ffe72",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "real_time_decisions",
+                    ":real_time_decision_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "real_time_decision_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_authorization\": {\n    \"approval\": {\n      \"cardholder_address_verification_result\": {\n        \"line1\": \"match\",\n        \"postal_code\": \"no_match\"\n      }\n    },\n    \"decision\": \"approve\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "361121a4-5800-497b-b471-225ba8b61843",
+    "name": "Increase Account Numbers Real Time Decisions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

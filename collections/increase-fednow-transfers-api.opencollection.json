@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Fednow Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fednow Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List FedNow Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/fednow_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "external_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List FedNow Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/fednow_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a FedNow Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id",
+            "params": [
+              {
+                "name": "fednow_transfer_id",
+                "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a FedNow Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id/approve",
+            "params": [
+              {
+                "name": "fednow_transfer_id",
+                "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a FedNow Transfer"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/fednow_transfers/:fednow_transfer_id/cancel",
+            "params": [
+              {
+                "name": "fednow_transfer_id",
+                "value": "fednow_transfer_4i0mptrdu1mueg1196bg",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending FedNow Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

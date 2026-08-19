@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Physical Cards API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Physical Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Physical Cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/physical_cards",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "card_id",
+                "value": "card_oubs0hwk5rn6knuecxg2",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Physical Cards"
+        },
+        {
+          "info": {
+            "name": "Create a Physical Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/physical_cards",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Physical Card"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Physical Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/physical_cards/:physical_card_id",
+            "params": [
+              {
+                "name": "physical_card_id",
+                "value": "physical_card_ode8duyq5v2ynhjoharl",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Physical Card"
+        },
+        {
+          "info": {
+            "name": "Update a Physical Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/physical_cards/:physical_card_id",
+            "params": [
+              {
+                "name": "physical_card_id",
+                "value": "physical_card_ode8duyq5v2ynhjoharl",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Physical Card"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,864 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Simulations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Simulations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sandbox: Create an account revenue payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/account_revenue_payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an account revenue payment to your account. In production, this happens automatically on the first of each month."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Account Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/account_statements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an [Account Statement](#account-statements) being created for an account. In production, Account Statements are generated once per month."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Acknowledge an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/acknowledge",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the acknowledgement of an [ACH Transfer](#ach-transfers) by the Federal Reserve. This transfer must first have a `status` of `submitted`. In production, the Federal Reserve generally acknowledges submitted ACH files within 30 minutes. Since sandbox ACH Transfers are not submitted to the Federal Reserve, this endpoint allows you to skip that delay and add the acknowledgement subresource to the ACH Transfer."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Notification of Change for an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/create_notification_of_change",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates receiving a Notification of Change for an [ACH Transfer](#ach-transfers)."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Return an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/return",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the return of an [ACH Transfer](#ach-transfers) by the Federal Reserve due to an error condition. This will also create a Transaction to account for the returned funds. This transfer must first have a `status` of `submitted`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Settle an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/settle",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the settlement of an [ACH Transfer](#ach-transfers) by the Federal Reserve. This transfer must first have a `status` of `pending_submission` or `submitted`. For convenience, if the transfer is in `status`: `pending_submission`, the simulation will also submit the transfer. Without this simulation the transfer will eventually settle on its own following the same Federal Reserve timeline as in production. Additionally, you can specify the behavior of the inbound funds hold that is create"
+        },
+        {
+          "info": {
+            "name": "Sandbox: Submit an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/ach_transfers/:ach_transfer_id/submit",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the submission of an [ACH Transfer](#ach-transfers) to the Federal Reserve. This transfer must first have a `status` of `pending_approval` or `pending_submission`. In production, Increase submits ACH Transfers to the Federal Reserve three times per day on weekdays. Since sandbox ACH Transfers are not submitted to the Federal Reserve, this endpoint allows you to skip that delay and transition the ACH Transfer to a status of `submitted`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Authentication attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_authentications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates a Card Authentication attempt on a [Card](#cards). The attempt always results in a [Card Payment](#card_payments) being created, either with a status that allows further action or a terminal failed status."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Authentication Challenge attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_authentications/:card_payment_id/challenge_attempts",
+            "params": [
+              {
+                "name": "card_payment_id",
+                "value": "card_payment_nd3k2kacrqjli8482ave",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an attempt at a Card Authentication Challenge. This updates the `card_authentications` object under the [Card Payment](#card_payments). You can also attempt the challenge by navigating to https://dashboard.increase.com/card_authentication_simulation/:card_payment_id."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an initial Card Authentication Challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_authentications/:card_payment_id/challenges",
+            "params": [
+              {
+                "name": "card_payment_id",
+                "value": "card_payment_nd3k2kacrqjli8482ave",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates starting a Card Authentication Challenge for an existing Card Authentication. This updates the `card_authentications` object under the [Card Payment](#card_payments). To attempt the challenge, use the `/simulations/card_authentications/:card_payment_id/challenge_attempts` endpoint or navigate to https://dashboard.increase.com/card_authentication_simulation/:card_payment_id."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Expire a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_authorization_expirations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates expiring a Card Authorization immediately."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_authorizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates a purchase authorization on a [Card](#cards). Depending on the balance available to the card and the `amount` submitted, the authorization activity will result in a [Pending Transaction](#pending-transactions) of type `card_authorization` or a [Declined Transaction](#declined-transactions) of type `card_decline`. You can pass either a Card id or a [Digital Wallet Token](#digital-wallet-tokens) id to simulate the two different ways purchases can be made."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Balance Inquiry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_balance_inquiries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates a balance inquiry on a [Card](#cards)."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Advance the state of a Card Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_disputes/:card_dispute_id/action",
+            "params": [
+              {
+                "name": "card_dispute_id",
+                "value": "card_dispute_h9sc95nbl1cgltpp7men",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "After a [Card Dispute](#card-disputes) is created in production, the dispute will initially be in a `pending_user_submission_reviewing` state. Since no review or further action happens in sandbox, this endpoint simulates moving a Card Dispute through its various states."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Confirm the fuel pump amount for a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_fuel_confirmations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the fuel confirmation of an authorization by a card acquirer. This happens asynchronously right after a fuel pump transaction is completed. A fuel confirmation can only happen once per authorization."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Increment a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_increments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the increment of an authorization by a card acquirer. An authorization can be incremented multiple times."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Purchase Supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_purchase_supplements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the creation of a Card Purchase Supplement (Level 3 data) for a card settlement. This happens asynchronously in production when Visa sends enhanced transaction data about a purchase."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Refund a card transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_refunds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates refunding a card transaction. The full value of the original sandbox transaction is refunded."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Reverse a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_reversals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the reversal of an authorization by a card acquirer. An authorization can be partially reversed multiple times, up until the total authorized amount. Marks the pending transaction as complete if the authorization is fully reversed."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Settle a Card Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_settlements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the settlement of an authorization by a card acquirer. After a card authorization is created, the merchant will eventually send a settlement. This simulates that event, which may occur many days after the purchase in production. The amount settled can be different from the amount originally authorized, for example, when adding a tip to a restaurant bill."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Card Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/card_tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates tokenizing a card in the sandbox environment."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Adjust a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/adjustment",
+            "params": [
+              {
+                "name": "check_deposit_id",
+                "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the creation of a [Check Deposit Adjustment](#check-deposit-adjustments) on a [Check Deposit](#check-deposits). This Check Deposit must first have a `status` of `submitted`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Reject a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/reject",
+            "params": [
+              {
+                "name": "check_deposit_id",
+                "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the rejection of a [Check Deposit](#check-deposits) by Increase due to factors like poor image quality. This Check Deposit must first have a `status` of `pending`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Return a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/return",
+            "params": [
+              {
+                "name": "check_deposit_id",
+                "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the return of a [Check Deposit](#check-deposits). This Check Deposit must first have a `status` of `submitted`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Submit a Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/check_deposits/:check_deposit_id/submit",
+            "params": [
+              {
+                "name": "check_deposit_id",
+                "value": "check_deposit_f06n9gpg7sxn8t19lfc1",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates the submission of a [Check Deposit](#check-deposits) to the Federal Reserve. This Check Deposit must first have a `status` of `pending`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Mail a Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/check_transfers/:check_transfer_id/mail",
+            "params": [
+              {
+                "name": "check_transfer_id",
+                "value": "check_transfer_30b43acfu9vw8fyc4f5",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the mailing of a [Check Transfer](#check-transfers), which happens periodically throughout the day in production but can be sped up in sandbox. This transfer must first have a `status` of `pending_approval` or `pending_submission`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a digital wallet token request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/digital_wallet_token_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates a user attempting to add a [Card](#cards) to a digital wallet such as Apple Pay."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Simulate validation of an Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/entities/:entity_id/update_validation",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulate updates to an [Entity's validation](/documentation/api/entities#entity-object.validation). In production, Know Your Customer validations [run automatically](/documentation/entity-validation#entity-validation) for eligible programs. While developing, use this API to simulate issues with information submissions."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Submit an Entity Onboarding Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/entity_onboarding_sessions/:entity_onboarding_session_id/submit",
+            "params": [
+              {
+                "name": "entity_onboarding_session_id",
+                "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the submission of an [Entity Onboarding Session](#entity-onboarding-sessions). This session must have a `status` of `active`. After submission, the session will transition to `expired` and a new Entity will be created."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Generate a Tax Form Export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/exports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Many exports are created by you via POST /exports or in the Dashboard. Some exports are created automatically by Increase. For example, tax documents are published once a year. In sandbox, you can trigger the arrival of an export that would normally only be created automatically via this simulation."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_ach_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an inbound ACH transfer to your account. This imitates initiating a transfer to an Increase account from a different financial institution. The transfer may be either a credit or a debit depending on if the `amount` is positive or negative. The result of calling this API will contain the created transfer. You can pass a `resolve_at` parameter to allow for a window to [action on the Inbound ACH Transfer](https://increase.com/documentation/receiving-ach-transfers). Alternatively, if you "
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_check_deposits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an Inbound Check Deposit against your account. This imitates someone depositing a check at their bank that was issued from your account. It may or may not be associated with a Check Transfer. Increase will evaluate the Inbound Check Deposit as we would in production and either create a Transaction or a Declined Transaction as a result. You can inspect the resulting Inbound Check Deposit object to see the result."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Check Deposit Adjustment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_check_deposits/:inbound_check_deposit_id/adjustment",
+            "params": [
+              {
+                "name": "inbound_check_deposit_id",
+                "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an adjustment on an Inbound Check Deposit. The Inbound Check Deposit must have a `status` of `accepted`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound FedNow Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_fednow_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an [Inbound FedNow Transfer](#inbound-fednow-transfers) to your account."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Mail Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_mail_items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an Inbound Mail Item to one of your Lockbox Addresses or Lockbox Recipients, as if someone had mailed a physical check."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_real_time_payments_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an [Inbound Real-Time Payments Transfer](#inbound-real-time-payments-transfers) to your account. Real-Time Payments are a beta feature."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Wire Drawdown request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_wire_drawdown_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates receiving an [Inbound Wire Drawdown Request](#inbound-wire-drawdown-requests)."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an Inbound Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/inbound_wire_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an [Inbound Wire Transfer](#inbound-wire-transfers) to your account."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create an interest payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/interest_payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates an interest payment to your account. In production, this happens automatically on the first of each month."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Release an Inbound Funds Hold",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/pending_transactions/:pending_transaction_id/release_inbound_funds_hold",
+            "params": [
+              {
+                "name": "pending_transaction_id",
+                "value": "pending_transaction_k1sfetcau2qbvjbzgju4",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint simulates immediately releasing an Inbound Funds Hold, which might be created as a result of, for example, an ACH debit."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Advance the shipment status of a Physical Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/physical_cards/:physical_card_id/advance_shipment",
+            "params": [
+              {
+                "name": "physical_card_id",
+                "value": "physical_card_ode8duyq5v2ynhjoharl",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows you to simulate advancing the shipment status of a Physical Card, to simulate e.g., that a physical card was attempted shipped but then failed delivery."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Physical Card Shipment Tracking Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/physical_cards/:physical_card_id/tracking_updates",
+            "params": [
+              {
+                "name": "physical_card_id",
+                "value": "physical_card_ode8duyq5v2ynhjoharl",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows you to simulate receiving a tracking update for a Physical Card, to simulate the progress of a shipment."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Create a Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/programs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates a [Program](#programs) being created in your group. By default, your group has one program called Commercial Banking. Note that when your group operates more than one program, `program_id` is a required field when creating accounts."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Complete a Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/real_time_payments_transfers/:real_time_payments_transfer_id/complete",
+            "params": [
+              {
+                "name": "real_time_payments_transfer_id",
+                "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates submission of a [Real-Time Payments Transfer](#real-time-payments-transfers) and handling the response from the destination financial institution. This transfer must first have a `status` of `pending_submission`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Refuse a Wire Drawdown Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/wire_drawdown_requests/:wire_drawdown_request_id/refuse",
+            "params": [
+              {
+                "name": "wire_drawdown_request_id",
+                "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates a Wire Drawdown Request being refused by the debtor."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Submit a Wire Drawdown Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/wire_drawdown_requests/:wire_drawdown_request_id/submit",
+            "params": [
+              {
+                "name": "wire_drawdown_request_id",
+                "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates a Wire Drawdown Request being submitted to Fedwire."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Reverse a Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/wire_transfers/:wire_transfer_id/reverse",
+            "params": [
+              {
+                "name": "wire_transfer_id",
+                "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the reversal of a [Wire Transfer](#wire-transfers) by the Federal Reserve due to error conditions. This will also create a [Transaction](#transaction) to account for the returned funds. This Wire Transfer must first have a `status` of `complete`."
+        },
+        {
+          "info": {
+            "name": "Sandbox: Submit a Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/simulations/wire_transfers/:wire_transfer_id/submit",
+            "params": [
+              {
+                "name": "wire_transfer_id",
+                "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Simulates the submission of a [Wire Transfer](#wire-transfers) to the Federal Reserve. This transfer must first have a `status` of `pending_approval` or `pending_creating`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

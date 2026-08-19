@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Account Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_numbers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ach_debit_status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Account Numbers"
+        },
+        {
+          "info": {
+            "name": "Create an Account Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/account_numbers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Account Number"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Account Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_numbers/:account_number_id",
+            "params": [
+              {
+                "name": "account_number_id",
+                "value": "account_number_v18nkfqm6afpsrvy82b2",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Account Number"
+        },
+        {
+          "info": {
+            "name": "Update an Account Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/account_numbers/:account_number_id",
+            "params": [
+              {
+                "name": "account_number_id",
+                "value": "account_number_v18nkfqm6afpsrvy82b2",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Account Number"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

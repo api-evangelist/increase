@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Check Deposits API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Check Deposits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound Check Deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_check_deposits",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "check_transfer_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound Check Deposits"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id",
+            "params": [
+              {
+                "name": "inbound_check_deposit_id",
+                "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound Check Deposit"
+        },
+        {
+          "info": {
+            "name": "Decline an Inbound Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id/decline",
+            "params": [
+              {
+                "name": "inbound_check_deposit_id",
+                "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Decline an Inbound Check Deposit"
+        },
+        {
+          "info": {
+            "name": "Return an Inbound Check Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_check_deposits/:inbound_check_deposit_id/return",
+            "params": [
+              {
+                "name": "inbound_check_deposit_id",
+                "value": "inbound_check_deposit_zoshvqybq0cjjm31mra",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return an Inbound Check Deposit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

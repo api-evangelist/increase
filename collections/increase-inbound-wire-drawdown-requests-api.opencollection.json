@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Wire Drawdown Requests API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Wire Drawdown Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound Wire Drawdown Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_wire_drawdown_requests",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound Wire Drawdown Requests"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound Wire Drawdown Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_wire_drawdown_requests/:inbound_wire_drawdown_request_id",
+            "params": [
+              {
+                "name": "inbound_wire_drawdown_request_id",
+                "value": "inbound_wire_drawdown_request_u5a92ikqhz1ytphn799e",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound Wire Drawdown Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

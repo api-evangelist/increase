@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Events API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/events",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "associated_object_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by.direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_by.field",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Events"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/events/:event_id",
+            "params": [
+              {
+                "name": "event_id",
+                "value": "event_001dzz0r20rzr4zrhrr1364hy80",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Ach Prenotifications API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ach Prenotifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ACH Prenotifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/ach_prenotifications",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List ACH Prenotifications"
+        },
+        {
+          "info": {
+            "name": "Create an ACH Prenotification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/ach_prenotifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an ACH Prenotification"
+        },
+        {
+          "info": {
+            "name": "Retrieve an ACH Prenotification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/ach_prenotifications/:ach_prenotification_id",
+            "params": [
+              {
+                "name": "ach_prenotification_id",
+                "value": "ach_prenotification_ubjf9qqsxl3obbcn1u34",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an ACH Prenotification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

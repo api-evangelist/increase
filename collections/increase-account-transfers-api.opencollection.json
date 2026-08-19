@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Account Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Account Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Account Transfers"
+        },
+        {
+          "info": {
+            "name": "Create an Account Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/account_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Account Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Account Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_transfers/:account_transfer_id",
+            "params": [
+              {
+                "name": "account_transfer_id",
+                "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Account Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve an Account Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/account_transfers/:account_transfer_id/approve",
+            "params": [
+              {
+                "name": "account_transfer_id",
+                "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approves an Account Transfer in status `pending_approval`."
+        },
+        {
+          "info": {
+            "name": "Cancel an Account Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/account_transfers/:account_transfer_id/cancel",
+            "params": [
+              {
+                "name": "account_transfer_id",
+                "value": "account_transfer_7k9qe1ysdgqztnt63l7n",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels an Account Transfer in status `pending_approval`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

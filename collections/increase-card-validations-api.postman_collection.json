@@ -1,0 +1,754 @@
+{
+  "item": [
+    {
+      "id": "cc6a030f-5790-4e43-b705-bb8c812cc6fd",
+      "name": "Card Validations",
+      "description": {
+        "content": "Card Validations are used to validate a card and its cardholder before sending funds to or pulling funds from a card.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "df9ec632-ae28-4cd3-bb64-7d80c53a8165",
+          "name": "List Card Validations",
+          "request": {
+            "name": "List Card Validations",
+            "description": {},
+            "url": {
+              "path": [
+                "card_validations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ad8009c9-625f-47a4-99a9-1325c5e61dde",
+              "name": "Card Validation List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"card_validation\",\n      \"id\": \"string\",\n      \"card_token_id\": \"string\",\n      \"created_at\": \"1979-04-12T04:18:34.138Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"status\": \"declined\",\n      \"account_id\": \"string\",\n      \"merchant_city_name\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"merchant_name\": \"string\",\n      \"route\": \"mastercard\",\n      \"cardholder_first_name\": \"string\",\n      \"cardholder_middle_name\": \"string\",\n      \"cardholder_last_name\": \"string\",\n      \"cardholder_street_address\": \"string\",\n      \"cardholder_postal_code\": \"string\",\n      \"submission\": {\n        \"retrieval_reference_number\": \"123456789012\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"trace_number\": \"123456\"\n      },\n      \"decline\": {\n        \"declined_at\": \"2020-01-31T23:59:59Z\",\n        \"network_transaction_identifier\": \"841488484271872\",\n        \"reason\": \"transaction_not_permitted_to_cardholder\"\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"1996-09-11T17:11:44.623Z\",\n        \"authorization_identification_response\": \"string\",\n        \"network_transaction_identifier\": \"string\",\n        \"cardholder_full_name_result\": \"partial_match\",\n        \"cardholder_first_name_result\": \"no_match\",\n        \"cardholder_middle_name_result\": \"partial_match\",\n        \"cardholder_last_name_result\": \"no_match\",\n        \"cardholder_street_address_result\": \"no_match\",\n        \"cardholder_postal_code_result\": \"no_match\",\n        \"card_verification_value2_result\": \"no_match\"\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"card_validation\",\n      \"id\": \"string\",\n      \"card_token_id\": \"string\",\n      \"created_at\": \"2015-01-12T13:22:10.792Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"status\": \"pending_submission\",\n      \"account_id\": \"string\",\n      \"merchant_city_name\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"merchant_name\": \"string\",\n      \"route\": \"visa\",\n      \"cardholder_first_name\": \"string\",\n      \"cardholder_middle_name\": \"string\",\n      \"cardholder_last_name\": \"string\",\n      \"cardholder_street_address\": \"string\",\n      \"cardholder_postal_code\": \"string\",\n      \"submission\": {\n        \"retrieval_reference_number\": \"123456789012\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"trace_number\": \"123456\"\n      },\n      \"decline\": {\n        \"declined_at\": \"2020-01-31T23:59:59Z\",\n        \"network_transaction_identifier\": \"841488484271872\",\n        \"reason\": \"transaction_not_permitted_to_cardholder\"\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"1995-02-22T15:07:11.274Z\",\n        \"authorization_identification_response\": \"string\",\n        \"network_transaction_identifier\": \"string\",\n        \"cardholder_full_name_result\": \"match\",\n        \"cardholder_first_name_result\": \"match\",\n        \"cardholder_middle_name_result\": \"partial_match\",\n        \"cardholder_last_name_result\": \"match\",\n        \"cardholder_street_address_result\": \"no_match\",\n        \"cardholder_postal_code_result\": \"no_match\",\n        \"card_verification_value2_result\": \"match\"\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf6ea0d6-ac97-49ed-8564-ffb6dafd9ae6",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2259d6fb-e1d4-49bc-8479-be8ecc866838",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54d0b39c-d279-4c19-98e0-c3bea1a27f62",
+          "name": "Create a Card Validation",
+          "request": {
+            "name": "Create a Card Validation",
+            "description": {},
+            "url": {
+              "path": [
+                "card_validations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"card_token_id\": \"<string>\",\n  \"merchant_city_name\": \"<string>\",\n  \"merchant_state\": \"<string>\",\n  \"merchant_postal_code\": \"<string>\",\n  \"merchant_category_code\": \"<string>\",\n  \"merchant_name\": \"<string>\",\n  \"cardholder_first_name\": \"<string>\",\n  \"cardholder_last_name\": \"<string>\",\n  \"cardholder_middle_name\": \"<string>\",\n  \"cardholder_postal_code\": \"<string>\",\n  \"cardholder_street_address\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0149e5f0-238e-4d1c-9bdf-1ac868a7639f",
+              "name": "Card Validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"cardholder_first_name\": \"Dee\",\n  \"cardholder_last_name\": \"Hock\",\n  \"cardholder_middle_name\": \"Ward\",\n  \"cardholder_postal_code\": \"10045\",\n  \"cardholder_street_address\": \"33 Liberty Street\",\n  \"merchant_category_code\": \"1234\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_validation\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2011-11-11T18:53:17.064Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"status\": \"submitted\",\n  \"account_id\": \"string\",\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"route\": \"pulse\",\n  \"cardholder_first_name\": \"string\",\n  \"cardholder_middle_name\": \"string\",\n  \"cardholder_last_name\": \"string\",\n  \"cardholder_street_address\": \"string\",\n  \"cardholder_postal_code\": \"string\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"1982-09-27T14:52:57.755Z\",\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"cardholder_full_name_result\": \"no_match\",\n    \"cardholder_first_name_result\": \"match\",\n    \"cardholder_middle_name_result\": \"no_match\",\n    \"cardholder_last_name_result\": \"no_match\",\n    \"cardholder_street_address_result\": \"match\",\n    \"cardholder_postal_code_result\": \"no_match\",\n    \"card_verification_value2_result\": \"match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a66a190c-8437-43e9-a7b5-0470566f1a2b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"cardholder_first_name\": \"Dee\",\n  \"cardholder_last_name\": \"Hock\",\n  \"cardholder_middle_name\": \"Ward\",\n  \"cardholder_postal_code\": \"10045\",\n  \"cardholder_street_address\": \"33 Liberty Street\",\n  \"merchant_category_code\": \"1234\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a617c554-3db4-4487-993f-69981e2d7d84",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"cardholder_first_name\": \"Dee\",\n  \"cardholder_last_name\": \"Hock\",\n  \"cardholder_middle_name\": \"Ward\",\n  \"cardholder_postal_code\": \"10045\",\n  \"cardholder_street_address\": \"33 Liberty Street\",\n  \"merchant_category_code\": \"1234\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4143d64-5a4c-4a11-b766-2b264fe42894",
+          "name": "Retrieve a Card Validation",
+          "request": {
+            "name": "Retrieve a Card Validation",
+            "description": {},
+            "url": {
+              "path": [
+                "card_validations",
+                ":card_validation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_validation_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c15465a-dec4-4a19-90e2-d491a1b1b8bf",
+              "name": "Card Validation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations",
+                    ":card_validation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_validation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_validation\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2011-11-11T18:53:17.064Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"status\": \"submitted\",\n  \"account_id\": \"string\",\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"route\": \"pulse\",\n  \"cardholder_first_name\": \"string\",\n  \"cardholder_middle_name\": \"string\",\n  \"cardholder_last_name\": \"string\",\n  \"cardholder_street_address\": \"string\",\n  \"cardholder_postal_code\": \"string\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"1982-09-27T14:52:57.755Z\",\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"cardholder_full_name_result\": \"no_match\",\n    \"cardholder_first_name_result\": \"match\",\n    \"cardholder_middle_name_result\": \"no_match\",\n    \"cardholder_last_name_result\": \"no_match\",\n    \"cardholder_street_address_result\": \"match\",\n    \"cardholder_postal_code_result\": \"no_match\",\n    \"card_verification_value2_result\": \"match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2db387ec-f912-44f5-8ba5-ea6442cc7653",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations",
+                    ":card_validation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_validation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b015b340-8c63-4c5a-8a61-7c3eb9175b3a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_validations",
+                    ":card_validation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_validation_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8ad8fdca-2bd7-435e-bc6f-20c2362e0b72",
+    "name": "Increase Account Numbers Card Validations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

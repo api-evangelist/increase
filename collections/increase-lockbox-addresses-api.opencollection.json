@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Lockbox Addresses API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lockbox Addresses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Lockbox Addresses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/lockbox_addresses",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Lockbox Addresses"
+        },
+        {
+          "info": {
+            "name": "Create a Lockbox Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/lockbox_addresses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Lockbox Address"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Lockbox Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/lockbox_addresses/:lockbox_address_id",
+            "params": [
+              {
+                "name": "lockbox_address_id",
+                "value": "lockbox_address_lw6sbzl9ol5dfd8hdml6",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Lockbox Address"
+        },
+        {
+          "info": {
+            "name": "Update a Lockbox Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/lockbox_addresses/:lockbox_address_id",
+            "params": [
+              {
+                "name": "lockbox_address_id",
+                "value": "lockbox_address_lw6sbzl9ol5dfd8hdml6",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Lockbox Address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

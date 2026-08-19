@@ -1,0 +1,811 @@
+{
+  "item": [
+    {
+      "id": "b31516f3-a541-4f57-ab3d-0a21c6e84d42",
+      "name": "Inbound Wire Transfers",
+      "description": {
+        "content": "An Inbound Wire Transfer is a wire transfer initiated outside of Increase to your account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0660e976-c805-4923-9e89-5ac7b60e4080",
+          "name": "List Inbound Wire Transfers",
+          "request": {
+            "name": "List Inbound Wire Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_wire_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_number_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "wire_drawdown_request_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3587746-b02b-4925-9b18-216ec0345ae2",
+              "name": "Inbound Wire Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "wire_drawdown_request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inbound_wire_transfer\",\n      \"id\": \"string\",\n      \"amount\": 7657,\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"status\": \"accepted\",\n      \"created_at\": \"1999-06-17T12:23:37.948Z\",\n      \"description\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"creditor_address_line1\": \"string\",\n      \"creditor_address_line2\": \"string\",\n      \"creditor_address_line3\": \"string\",\n      \"creditor_name\": \"string\",\n      \"end_to_end_identification\": \"string\",\n      \"debtor_address_line1\": \"string\",\n      \"debtor_address_line2\": \"string\",\n      \"debtor_address_line3\": \"string\",\n      \"debtor_name\": \"string\",\n      \"instructing_agent_routing_number\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"wire_drawdown_request_id\": \"string\",\n      \"acceptance\": {\n        \"accepted_at\": \"2026-05-16T04:45:53.753Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"reversal\": {\n        \"reason\": \"creditor_request\",\n        \"reversed_at\": \"1969-02-05T04:01:16.944Z\"\n      }\n    },\n    {\n      \"type\": \"inbound_wire_transfer\",\n      \"id\": \"string\",\n      \"amount\": 440,\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"status\": \"reversed\",\n      \"created_at\": \"2022-04-13T16:43:43.026Z\",\n      \"description\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"creditor_address_line1\": \"string\",\n      \"creditor_address_line2\": \"string\",\n      \"creditor_address_line3\": \"string\",\n      \"creditor_name\": \"string\",\n      \"end_to_end_identification\": \"string\",\n      \"debtor_address_line1\": \"string\",\n      \"debtor_address_line2\": \"string\",\n      \"debtor_address_line3\": \"string\",\n      \"debtor_name\": \"string\",\n      \"instructing_agent_routing_number\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"wire_drawdown_request_id\": \"string\",\n      \"acceptance\": {\n        \"accepted_at\": \"2006-07-05T16:27:06.821Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"reversal\": {\n        \"reason\": \"transaction_forbidden\",\n        \"reversed_at\": \"1999-02-06T00:07:25.144Z\"\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bae4e778-c342-4d78-9e9b-88eb61cd3121",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "wire_drawdown_request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "427e34f0-1c40-4046-90e3-cf6483078619",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "wire_drawdown_request_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2b38629-abbf-4270-9edf-0464da994cc5",
+          "name": "Retrieve an Inbound Wire Transfer",
+          "request": {
+            "name": "Retrieve an Inbound Wire Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_wire_transfers",
+                ":inbound_wire_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_wire_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b10086c-ab83-4e9d-9d45-d896ecc9f265",
+              "name": "Inbound Wire Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_wire_transfer\",\n  \"id\": \"string\",\n  \"amount\": 8470,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"status\": \"reversed\",\n  \"created_at\": \"1980-02-10T08:28:34.715Z\",\n  \"description\": \"string\",\n  \"input_message_accountability_data\": \"string\",\n  \"creditor_address_line1\": \"string\",\n  \"creditor_address_line2\": \"string\",\n  \"creditor_address_line3\": \"string\",\n  \"creditor_name\": \"string\",\n  \"end_to_end_identification\": \"string\",\n  \"debtor_address_line1\": \"string\",\n  \"debtor_address_line2\": \"string\",\n  \"debtor_address_line3\": \"string\",\n  \"debtor_name\": \"string\",\n  \"instructing_agent_routing_number\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"instruction_identification\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"wire_drawdown_request_id\": \"string\",\n  \"acceptance\": {\n    \"accepted_at\": \"1992-07-29T19:54:17.777Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"reversal\": {\n    \"reason\": \"duplicate\",\n    \"reversed_at\": \"1991-09-07T19:49:43.178Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61316842-e91f-47e6-8c9d-a13e837bb94b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baad20e1-2796-4706-8d85-d4cf23c68c2d",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f6f97c9-707d-49de-a4e4-1c39bb30b2ca",
+          "name": "Reverse an Inbound Wire Transfer",
+          "request": {
+            "name": "Reverse an Inbound Wire Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_wire_transfers",
+                ":inbound_wire_transfer_id",
+                "reverse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_wire_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ff65a2f-bf8c-4eec-8195-522692a52ec5",
+              "name": "Inbound Wire Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"creditor_request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_wire_transfer\",\n  \"id\": \"string\",\n  \"amount\": 8470,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"status\": \"reversed\",\n  \"created_at\": \"1980-02-10T08:28:34.715Z\",\n  \"description\": \"string\",\n  \"input_message_accountability_data\": \"string\",\n  \"creditor_address_line1\": \"string\",\n  \"creditor_address_line2\": \"string\",\n  \"creditor_address_line3\": \"string\",\n  \"creditor_name\": \"string\",\n  \"end_to_end_identification\": \"string\",\n  \"debtor_address_line1\": \"string\",\n  \"debtor_address_line2\": \"string\",\n  \"debtor_address_line3\": \"string\",\n  \"debtor_name\": \"string\",\n  \"instructing_agent_routing_number\": \"string\",\n  \"unstructured_remittance_information\": \"string\",\n  \"instruction_identification\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"wire_drawdown_request_id\": \"string\",\n  \"acceptance\": {\n    \"accepted_at\": \"1992-07-29T19:54:17.777Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"reversal\": {\n    \"reason\": \"duplicate\",\n    \"reversed_at\": \"1991-09-07T19:49:43.178Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26764d25-7015-41ab-ad43-daab8b90beda",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"creditor_request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eda4bb7f-6e81-46cd-9fb0-3eb0d7665335",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_transfers",
+                    ":inbound_wire_transfer_id",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"creditor_request\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7771abc2-ec27-4a36-bea7-ab7c0dbdfa2e",
+    "name": "Increase Account Numbers Inbound Wire Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

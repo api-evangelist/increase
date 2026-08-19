@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Entities API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entities",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Entities"
+        },
+        {
+          "info": {
+            "name": "Create an Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Entity"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entities/:entity_id",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Entity"
+        },
+        {
+          "info": {
+            "name": "Update an Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/entities/:entity_id",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Entity"
+        },
+        {
+          "info": {
+            "name": "Archive an Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entities/:entity_id/archive",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive an Entity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

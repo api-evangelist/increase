@@ -1,0 +1,1397 @@
+{
+  "item": [
+    {
+      "id": "1cd73b15-6764-46f3-a498-ab3cb6b1a6ef",
+      "name": "Check Transfers",
+      "description": {
+        "content": "Check Transfers move funds from your Increase account by mailing a physical check.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77a5c24e-63d0-4ad6-ae80-f26e512b8bf0",
+          "name": "List Check Transfers",
+          "request": {
+            "name": "List Check Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "check_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f5559b1-911c-404f-bb09-169332447003",
+              "name": "Check Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"check_transfer\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"check_number\": \"string\",\n      \"valid_until_date\": \"2023-01-03\",\n      \"balance_check\": \"none\",\n      \"fulfillment_method\": \"third_party\",\n      \"physical_check\": {\n        \"memo\": \"string\",\n        \"note\": \"string\",\n        \"recipient_name\": \"string\",\n        \"signature\": {\n          \"text\": \"string\",\n          \"image_file_id\": \"string\"\n        },\n        \"shipping_method\": \"usps_first_class\",\n        \"attachment_file_id\": \"string\",\n        \"check_voucher_image_file_id\": \"string\",\n        \"mailing_address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"phone\": \"string\"\n        },\n        \"return_address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"phone\": \"string\"\n        },\n        \"payer\": [\n          {\n            \"contents\": \"string\"\n          },\n          {\n            \"contents\": \"string\"\n          }\n        ],\n        \"tracking_updates\": [\n          {\n            \"category\": \"returned_to_sender\",\n            \"created_at\": \"1948-03-09T08:23:28.991Z\",\n            \"postal_code\": \"string\",\n            \"country\": \"string\"\n          },\n          {\n            \"category\": \"delivered\",\n            \"created_at\": \"2004-04-26T16:38:57.960Z\",\n            \"postal_code\": \"string\",\n            \"country\": \"string\"\n          }\n        ]\n      },\n      \"third_party\": {\n        \"recipient_name\": \"string\"\n      },\n      \"amount\": 4684,\n      \"created_at\": \"1976-10-09T23:30:38.695Z\",\n      \"currency\": \"USD\",\n      \"approval\": {\n        \"approved_at\": \"1997-07-14T15:08:51.685Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1969-02-09T09:46:50.678Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"id\": \"string\",\n      \"mailing\": {\n        \"mailed_at\": \"1951-08-17T23:23:01.845Z\"\n      },\n      \"pending_transaction_id\": \"string\",\n      \"status\": \"mailed\",\n      \"submission\": {\n        \"submitted_at\": \"2004-10-26T03:49:01.204Z\",\n        \"tracking_number\": \"string\",\n        \"preview_file_id\": \"string\",\n        \"submitted_address\": {\n          \"recipient_name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        }\n      },\n      \"stop_payment_request\": {\n        \"reason\": \"mail_delivery_failed\",\n        \"requested_at\": \"2020-01-31T23:59:59Z\",\n        \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n        \"type\": \"check_transfer_stop_payment_request\"\n      },\n      \"approved_inbound_check_deposit_id\": \"string\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"check_transfer\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"check_number\": \"string\",\n      \"valid_until_date\": \"2007-04-18\",\n      \"balance_check\": \"full\",\n      \"fulfillment_method\": \"third_party\",\n      \"physical_check\": {\n        \"memo\": \"string\",\n        \"note\": \"string\",\n        \"recipient_name\": \"string\",\n        \"signature\": {\n          \"text\": \"string\",\n          \"image_file_id\": \"string\"\n        },\n        \"shipping_method\": \"usps_first_class\",\n        \"attachment_file_id\": \"string\",\n        \"check_voucher_image_file_id\": \"string\",\n        \"mailing_address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"phone\": \"string\"\n        },\n        \"return_address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"phone\": \"string\"\n        },\n        \"payer\": [\n          {\n            \"contents\": \"string\"\n          },\n          {\n            \"contents\": \"string\"\n          }\n        ],\n        \"tracking_updates\": [\n          {\n            \"category\": \"delivered\",\n            \"created_at\": \"1959-10-22T02:36:55.145Z\",\n            \"postal_code\": \"string\",\n            \"country\": \"string\"\n          },\n          {\n            \"category\": \"processed_for_delivery\",\n            \"created_at\": \"2015-01-11T20:56:52.619Z\",\n            \"postal_code\": \"string\",\n            \"country\": \"string\"\n          }\n        ]\n      },\n      \"third_party\": {\n        \"recipient_name\": \"string\"\n      },\n      \"amount\": 6057,\n      \"created_at\": \"1971-10-07T12:07:11.206Z\",\n      \"currency\": \"USD\",\n      \"approval\": {\n        \"approved_at\": \"1972-02-06T09:35:16.096Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"2018-10-06T18:22:09.121Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"id\": \"string\",\n      \"mailing\": {\n        \"mailed_at\": \"1974-07-12T15:49:34.402Z\"\n      },\n      \"pending_transaction_id\": \"string\",\n      \"status\": \"pending_mailing\",\n      \"submission\": {\n        \"submitted_at\": \"1968-11-24T03:09:48.751Z\",\n        \"tracking_number\": \"string\",\n        \"preview_file_id\": \"string\",\n        \"submitted_address\": {\n          \"recipient_name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\"\n        }\n      },\n      \"stop_payment_request\": {\n        \"reason\": \"mail_delivery_failed\",\n        \"requested_at\": \"2020-01-31T23:59:59Z\",\n        \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n        \"type\": \"check_transfer_stop_payment_request\"\n      },\n      \"approved_inbound_check_deposit_id\": \"string\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac0da801-aacb-4231-ac53-ae8622b25706",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e11f89e-6b88-46db-84d1-c47f3b34d97e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ee55ba1-1087-4d1f-be11-058de858757f",
+          "name": "Create a Check Transfer",
+          "request": {
+            "name": "Create a Check Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "check_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"source_account_number_id\": \"<string>\",\n  \"fulfillment_method\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"balance_check\": \"<string>\",\n  \"check_number\": \"<string>\",\n  \"physical_check\": {\n    \"memo\": \"<string>\",\n    \"recipient_name\": \"<string>\",\n    \"mailing_address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"attachment_file_id\": \"<string>\",\n    \"check_voucher_image_file_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"payer\": [\n      {\n        \"contents\": \"<string>\"\n      },\n      {\n        \"contents\": \"<string>\"\n      }\n    ],\n    \"return_address\": {\n      \"name\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"shipping_method\": \"<string>\",\n    \"signature\": {\n      \"image_file_id\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  },\n  \"require_approval\": \"<boolean>\",\n  \"third_party\": {\n    \"recipient_name\": \"<string>\"\n  },\n  \"valid_until_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b4ae743-6c22-4f83-a30e-7422aed83ac5",
+              "name": "Check Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"source_account_number_id\": \"<string>\",\n  \"fulfillment_method\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"balance_check\": \"<string>\",\n  \"check_number\": \"<string>\",\n  \"physical_check\": {\n    \"memo\": \"<string>\",\n    \"recipient_name\": \"<string>\",\n    \"mailing_address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"attachment_file_id\": \"<string>\",\n    \"check_voucher_image_file_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"payer\": [\n      {\n        \"contents\": \"<string>\"\n      },\n      {\n        \"contents\": \"<string>\"\n      }\n    ],\n    \"return_address\": {\n      \"name\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"shipping_method\": \"<string>\",\n    \"signature\": {\n      \"image_file_id\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  },\n  \"require_approval\": \"<boolean>\",\n  \"third_party\": {\n    \"recipient_name\": \"<string>\",\n    \"key_0\": \"string\",\n    \"key_1\": 6426\n  },\n  \"valid_until_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_transfer\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"valid_until_date\": \"1988-08-03\",\n  \"balance_check\": \"full\",\n  \"fulfillment_method\": \"physical_check\",\n  \"physical_check\": {\n    \"memo\": \"string\",\n    \"note\": \"string\",\n    \"recipient_name\": \"string\",\n    \"signature\": {\n      \"text\": \"string\",\n      \"image_file_id\": \"string\"\n    },\n    \"shipping_method\": \"usps_first_class\",\n    \"attachment_file_id\": \"string\",\n    \"check_voucher_image_file_id\": \"string\",\n    \"mailing_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"return_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"payer\": [\n      {\n        \"contents\": \"string\"\n      },\n      {\n        \"contents\": \"string\"\n      }\n    ],\n    \"tracking_updates\": [\n      {\n        \"category\": \"delivery_issue\",\n        \"created_at\": \"1971-02-28T09:18:52.303Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      {\n        \"category\": \"in_transit\",\n        \"created_at\": \"1988-05-12T12:27:41.394Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    ]\n  },\n  \"third_party\": {\n    \"recipient_name\": \"string\"\n  },\n  \"amount\": 7849,\n  \"created_at\": \"1962-02-01T06:11:59.697Z\",\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"2017-05-31T05:58:38.036Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1955-10-07T14:24:15.927Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"id\": \"string\",\n  \"mailing\": {\n    \"mailed_at\": \"1970-01-29T15:17:34.409Z\"\n  },\n  \"pending_transaction_id\": \"string\",\n  \"status\": \"stopped\",\n  \"submission\": {\n    \"submitted_at\": \"1991-02-02T22:25:50.464Z\",\n    \"tracking_number\": \"string\",\n    \"preview_file_id\": \"string\",\n    \"submitted_address\": {\n      \"recipient_name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  },\n  \"stop_payment_request\": {\n    \"reason\": \"mail_delivery_failed\",\n    \"requested_at\": \"2020-01-31T23:59:59Z\",\n    \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n    \"type\": \"check_transfer_stop_payment_request\"\n  },\n  \"approved_inbound_check_deposit_id\": \"string\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a79670e-f9fe-41a1-912e-0b651f4db6d9",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"source_account_number_id\": \"<string>\",\n  \"fulfillment_method\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"balance_check\": \"<string>\",\n  \"check_number\": \"<string>\",\n  \"physical_check\": {\n    \"memo\": \"<string>\",\n    \"recipient_name\": \"<string>\",\n    \"mailing_address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"attachment_file_id\": \"<string>\",\n    \"check_voucher_image_file_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"payer\": [\n      {\n        \"contents\": \"<string>\"\n      },\n      {\n        \"contents\": \"<string>\"\n      }\n    ],\n    \"return_address\": {\n      \"name\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"shipping_method\": \"<string>\",\n    \"signature\": {\n      \"image_file_id\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  },\n  \"require_approval\": \"<boolean>\",\n  \"third_party\": {\n    \"recipient_name\": \"<string>\",\n    \"key_0\": \"string\",\n    \"key_1\": 6426\n  },\n  \"valid_until_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9891f1d-f316-4279-ac54-899ae2cecd65",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"source_account_number_id\": \"<string>\",\n  \"fulfillment_method\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"balance_check\": \"<string>\",\n  \"check_number\": \"<string>\",\n  \"physical_check\": {\n    \"memo\": \"<string>\",\n    \"recipient_name\": \"<string>\",\n    \"mailing_address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"name\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"attachment_file_id\": \"<string>\",\n    \"check_voucher_image_file_id\": \"<string>\",\n    \"note\": \"<string>\",\n    \"payer\": [\n      {\n        \"contents\": \"<string>\"\n      },\n      {\n        \"contents\": \"<string>\"\n      }\n    ],\n    \"return_address\": {\n      \"name\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"phone\": \"<string>\"\n    },\n    \"shipping_method\": \"<string>\",\n    \"signature\": {\n      \"image_file_id\": \"<string>\",\n      \"text\": \"<string>\"\n    }\n  },\n  \"require_approval\": \"<boolean>\",\n  \"third_party\": {\n    \"recipient_name\": \"<string>\",\n    \"key_0\": \"string\",\n    \"key_1\": 6426\n  },\n  \"valid_until_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26028683-e03c-439f-b072-6da9a6ebd43b",
+          "name": "Retrieve a Check Transfer",
+          "request": {
+            "name": "Retrieve a Check Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "check_transfers",
+                ":check_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "check_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f37e595-7d76-441c-95f2-fb8653c44986",
+              "name": "Check Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_transfer\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"valid_until_date\": \"1988-08-03\",\n  \"balance_check\": \"full\",\n  \"fulfillment_method\": \"physical_check\",\n  \"physical_check\": {\n    \"memo\": \"string\",\n    \"note\": \"string\",\n    \"recipient_name\": \"string\",\n    \"signature\": {\n      \"text\": \"string\",\n      \"image_file_id\": \"string\"\n    },\n    \"shipping_method\": \"usps_first_class\",\n    \"attachment_file_id\": \"string\",\n    \"check_voucher_image_file_id\": \"string\",\n    \"mailing_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"return_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"payer\": [\n      {\n        \"contents\": \"string\"\n      },\n      {\n        \"contents\": \"string\"\n      }\n    ],\n    \"tracking_updates\": [\n      {\n        \"category\": \"delivery_issue\",\n        \"created_at\": \"1971-02-28T09:18:52.303Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      {\n        \"category\": \"in_transit\",\n        \"created_at\": \"1988-05-12T12:27:41.394Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    ]\n  },\n  \"third_party\": {\n    \"recipient_name\": \"string\"\n  },\n  \"amount\": 7849,\n  \"created_at\": \"1962-02-01T06:11:59.697Z\",\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"2017-05-31T05:58:38.036Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1955-10-07T14:24:15.927Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"id\": \"string\",\n  \"mailing\": {\n    \"mailed_at\": \"1970-01-29T15:17:34.409Z\"\n  },\n  \"pending_transaction_id\": \"string\",\n  \"status\": \"stopped\",\n  \"submission\": {\n    \"submitted_at\": \"1991-02-02T22:25:50.464Z\",\n    \"tracking_number\": \"string\",\n    \"preview_file_id\": \"string\",\n    \"submitted_address\": {\n      \"recipient_name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  },\n  \"stop_payment_request\": {\n    \"reason\": \"mail_delivery_failed\",\n    \"requested_at\": \"2020-01-31T23:59:59Z\",\n    \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n    \"type\": \"check_transfer_stop_payment_request\"\n  },\n  \"approved_inbound_check_deposit_id\": \"string\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d3eed75-d9d7-477f-b746-af7186779c0b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9827772-26a2-4a55-a7bd-6c5c7b798426",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3efeba8-ef63-442d-8e5f-2d63a0c675c0",
+          "name": "Approve a Check Transfer",
+          "request": {
+            "name": "Approve a Check Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "check_transfers",
+                ":check_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "check_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42eb8226-da7f-454b-9b2c-973cacee16d6",
+              "name": "Check Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_transfer\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"valid_until_date\": \"1988-08-03\",\n  \"balance_check\": \"full\",\n  \"fulfillment_method\": \"physical_check\",\n  \"physical_check\": {\n    \"memo\": \"string\",\n    \"note\": \"string\",\n    \"recipient_name\": \"string\",\n    \"signature\": {\n      \"text\": \"string\",\n      \"image_file_id\": \"string\"\n    },\n    \"shipping_method\": \"usps_first_class\",\n    \"attachment_file_id\": \"string\",\n    \"check_voucher_image_file_id\": \"string\",\n    \"mailing_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"return_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"payer\": [\n      {\n        \"contents\": \"string\"\n      },\n      {\n        \"contents\": \"string\"\n      }\n    ],\n    \"tracking_updates\": [\n      {\n        \"category\": \"delivery_issue\",\n        \"created_at\": \"1971-02-28T09:18:52.303Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      {\n        \"category\": \"in_transit\",\n        \"created_at\": \"1988-05-12T12:27:41.394Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    ]\n  },\n  \"third_party\": {\n    \"recipient_name\": \"string\"\n  },\n  \"amount\": 7849,\n  \"created_at\": \"1962-02-01T06:11:59.697Z\",\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"2017-05-31T05:58:38.036Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1955-10-07T14:24:15.927Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"id\": \"string\",\n  \"mailing\": {\n    \"mailed_at\": \"1970-01-29T15:17:34.409Z\"\n  },\n  \"pending_transaction_id\": \"string\",\n  \"status\": \"stopped\",\n  \"submission\": {\n    \"submitted_at\": \"1991-02-02T22:25:50.464Z\",\n    \"tracking_number\": \"string\",\n    \"preview_file_id\": \"string\",\n    \"submitted_address\": {\n      \"recipient_name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  },\n  \"stop_payment_request\": {\n    \"reason\": \"mail_delivery_failed\",\n    \"requested_at\": \"2020-01-31T23:59:59Z\",\n    \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n    \"type\": \"check_transfer_stop_payment_request\"\n  },\n  \"approved_inbound_check_deposit_id\": \"string\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0f1c23d-359a-41ff-9969-c3e50b4ece54",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d9b5ee0-568b-4b2b-ae8c-3f1b7dfd3ab7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aaca98a5-e610-4301-a5a5-f19733c14e2a",
+          "name": "Cancel a pending Check Transfer",
+          "request": {
+            "name": "Cancel a pending Check Transfer",
+            "description": {
+              "content": "Cancel a Check Transfer with the `pending_approval` status. See [Transfer Approvals](/documentation/transfer-approvals) for more information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "check_transfers",
+                ":check_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "check_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "51844f9f-c074-4924-a8f7-7941efb82a60",
+              "name": "Check Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_transfer\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"valid_until_date\": \"1988-08-03\",\n  \"balance_check\": \"full\",\n  \"fulfillment_method\": \"physical_check\",\n  \"physical_check\": {\n    \"memo\": \"string\",\n    \"note\": \"string\",\n    \"recipient_name\": \"string\",\n    \"signature\": {\n      \"text\": \"string\",\n      \"image_file_id\": \"string\"\n    },\n    \"shipping_method\": \"usps_first_class\",\n    \"attachment_file_id\": \"string\",\n    \"check_voucher_image_file_id\": \"string\",\n    \"mailing_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"return_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"payer\": [\n      {\n        \"contents\": \"string\"\n      },\n      {\n        \"contents\": \"string\"\n      }\n    ],\n    \"tracking_updates\": [\n      {\n        \"category\": \"delivery_issue\",\n        \"created_at\": \"1971-02-28T09:18:52.303Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      {\n        \"category\": \"in_transit\",\n        \"created_at\": \"1988-05-12T12:27:41.394Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    ]\n  },\n  \"third_party\": {\n    \"recipient_name\": \"string\"\n  },\n  \"amount\": 7849,\n  \"created_at\": \"1962-02-01T06:11:59.697Z\",\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"2017-05-31T05:58:38.036Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1955-10-07T14:24:15.927Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"id\": \"string\",\n  \"mailing\": {\n    \"mailed_at\": \"1970-01-29T15:17:34.409Z\"\n  },\n  \"pending_transaction_id\": \"string\",\n  \"status\": \"stopped\",\n  \"submission\": {\n    \"submitted_at\": \"1991-02-02T22:25:50.464Z\",\n    \"tracking_number\": \"string\",\n    \"preview_file_id\": \"string\",\n    \"submitted_address\": {\n      \"recipient_name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  },\n  \"stop_payment_request\": {\n    \"reason\": \"mail_delivery_failed\",\n    \"requested_at\": \"2020-01-31T23:59:59Z\",\n    \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n    \"type\": \"check_transfer_stop_payment_request\"\n  },\n  \"approved_inbound_check_deposit_id\": \"string\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80da125c-e437-4d43-992d-61bd59b3eb6f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86074718-f2d0-4748-846b-f99f2075d729",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "272725c8-3541-49f5-a4c6-4444c72d4412",
+          "name": "Stop payment on a Check Transfer",
+          "request": {
+            "name": "Stop payment on a Check Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "check_transfers",
+                ":check_transfer_id",
+                "stop_payment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "check_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be79215a-72e1-4334-8f95-a90d270153d1",
+              "name": "Check Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "stop_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"mail_delivery_failed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_transfer\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"valid_until_date\": \"1988-08-03\",\n  \"balance_check\": \"full\",\n  \"fulfillment_method\": \"physical_check\",\n  \"physical_check\": {\n    \"memo\": \"string\",\n    \"note\": \"string\",\n    \"recipient_name\": \"string\",\n    \"signature\": {\n      \"text\": \"string\",\n      \"image_file_id\": \"string\"\n    },\n    \"shipping_method\": \"usps_first_class\",\n    \"attachment_file_id\": \"string\",\n    \"check_voucher_image_file_id\": \"string\",\n    \"mailing_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"return_address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"phone\": \"string\"\n    },\n    \"payer\": [\n      {\n        \"contents\": \"string\"\n      },\n      {\n        \"contents\": \"string\"\n      }\n    ],\n    \"tracking_updates\": [\n      {\n        \"category\": \"delivery_issue\",\n        \"created_at\": \"1971-02-28T09:18:52.303Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      {\n        \"category\": \"in_transit\",\n        \"created_at\": \"1988-05-12T12:27:41.394Z\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      }\n    ]\n  },\n  \"third_party\": {\n    \"recipient_name\": \"string\"\n  },\n  \"amount\": 7849,\n  \"created_at\": \"1962-02-01T06:11:59.697Z\",\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"2017-05-31T05:58:38.036Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1955-10-07T14:24:15.927Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"id\": \"string\",\n  \"mailing\": {\n    \"mailed_at\": \"1970-01-29T15:17:34.409Z\"\n  },\n  \"pending_transaction_id\": \"string\",\n  \"status\": \"stopped\",\n  \"submission\": {\n    \"submitted_at\": \"1991-02-02T22:25:50.464Z\",\n    \"tracking_number\": \"string\",\n    \"preview_file_id\": \"string\",\n    \"submitted_address\": {\n      \"recipient_name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\"\n    }\n  },\n  \"stop_payment_request\": {\n    \"reason\": \"mail_delivery_failed\",\n    \"requested_at\": \"2020-01-31T23:59:59Z\",\n    \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\",\n    \"type\": \"check_transfer_stop_payment_request\"\n  },\n  \"approved_inbound_check_deposit_id\": \"string\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6add4f31-4820-4fc6-8ee2-17a33d262660",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "stop_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"mail_delivery_failed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f796ff6a-ce34-4cd2-aa26-bb2b97c76000",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_transfers",
+                    ":check_transfer_id",
+                    "stop_payment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"mail_delivery_failed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3793e3b-bd25-4ec8-9462-b581db79a38a",
+    "name": "Increase Account Numbers Check Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

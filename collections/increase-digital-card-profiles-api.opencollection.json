@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Digital Card Profiles API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Digital Card Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Card Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/digital_card_profiles",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Card Profiles"
+        },
+        {
+          "info": {
+            "name": "Create a Digital Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/digital_card_profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Digital Card Profile"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Digital Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id",
+            "params": [
+              {
+                "name": "digital_card_profile_id",
+                "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Digital Card Profile"
+        },
+        {
+          "info": {
+            "name": "Archive a Digital Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id/archive",
+            "params": [
+              {
+                "name": "digital_card_profile_id",
+                "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive a Digital Card Profile"
+        },
+        {
+          "info": {
+            "name": "Clones a Digital Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/digital_card_profiles/:digital_card_profile_id/clone",
+            "params": [
+              {
+                "name": "digital_card_profile_id",
+                "value": "digital_card_profile_s3puplu90f04xhcwkiga",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clones a Digital Card Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

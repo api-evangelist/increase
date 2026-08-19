@@ -1,0 +1,556 @@
+{
+  "item": [
+    {
+      "id": "697b56a2-4249-4c0b-82ff-ba0171ae6b1f",
+      "name": "Transactions",
+      "description": {
+        "content": "Transactions are the immutable additions and removals of money from your bank account. They're the equivalent of line items on your bank statement. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9f15fa56-9fd9-4668-b8a2-351c8ea066ce",
+          "name": "List Transactions",
+          "request": {
+            "name": "List Transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "route_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e408e12c-2b7e-4a3a-8be1-8dc67fa46314",
+              "name": "Transaction List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"account_id\": \"string\",\n      \"amount\": 539,\n      \"currency\": \"USD\",\n      \"created_at\": \"2013-08-17T16:46:33.474Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"route_id\": \"string\",\n      \"route_type\": \"account_number\",\n      \"source\": {\n        \"category\": \"interest_payment\",\n        \"account_revenue_payment\": {\n          \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"account_transfer_intention\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"description\": \"INVOICE 2468\",\n          \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\",\n          \"source_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_intention\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"routing_number\": \"101050001\",\n          \"statement_descriptor\": \"INVOICE 2468\",\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_rejection\": {\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_return\": {\n          \"created_at\": \"2020-01-31T23:59:59Z\",\n          \"raw_return_reason_code\": \"R01\",\n          \"return_reason_code\": \"insufficient_fund\",\n          \"trace_number\": \"111122223292834\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n        },\n        \"blockchain_offramp_transfer_settlement\": {\n          \"source_blockchain_address_id\": \"blockchain_address_tijjpqp9t5d358ehydqi\",\n          \"transfer_id\": \"blockchain_offramp_transfer_sqd2x3ti6u2sy91v696m\"\n        },\n        \"blockchain_onramp_transfer_intention\": {\n          \"destination_blockchain_address\": \"0xaabbccdd\",\n          \"transfer_id\": \"blockchain_onramp_transfer_sg8nzy569rk0dnfk28bv\"\n        },\n        \"card_dispute_acceptance\": {\n          \"accepted_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"card_dispute_financial\": {\n          \"amount\": 1000,\n          \"network\": \"visa\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"visa\": {\n            \"event_type\": \"chargeback_submitted\"\n          }\n        },\n        \"card_dispute_loss\": {\n          \"explanation\": \"The card dispute was lost.\",\n          \"lost_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"card_financial\": {\n          \"type\": \"card_financial\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_descriptor\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"terminal_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"digital_wallet_token_id\": \"string\",\n          \"physical_card_id\": \"string\",\n          \"verification\": {\n            \"cardholder_address\": {\n              \"provided_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"result\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"cardholder_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_verification_code\": {\n              \"result\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"additional_amounts\": {\n            \"total_healthcare\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total_cumulative\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surcharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vision\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"clinic\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dental\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network_identifiers\": {\n            \"authorization_identification_response\": null,\n            \"retrieval_reference_number\": \"785867080153\",\n            \"trace_number\": \"487941\",\n            \"transaction_id\": \"627199945183184\"\n          },\n          \"network_risk_score\": 1645,\n          \"network_details\": {\n            \"category\": \"visa\",\n            \"visa\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pulse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"amount\": 5081,\n          \"presentment_amount\": 3435,\n          \"presentment_currency\": \"string\",\n          \"currency\": \"USD\",\n          \"direction\": \"refund\",\n          \"actioner\": \"user\",\n          \"processing_category\": \"balance_inquiry\",\n          \"real_time_decision_id\": \"string\",\n          \"transaction_id\": \"string\",\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ]\n        },\n        \"card_push_transfer_acceptance\": {\n          \"settlement_amount\": 100,\n          \"transfer_id\": \"outbound_card_push_transfer_e0z9rdpamraczh4tvwye\"\n        },\n        \"card_refund\": {\n          \"type\": \"card_refund\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"amount\": 6109,\n          \"currency\": \"USD\",\n          \"presentment_amount\": 5642,\n          \"presentment_currency\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"merchant_name\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"interchange\": {\n            \"amount\": \"0.137465\",\n            \"code\": \"271\",\n            \"currency\": \"USD\"\n          },\n          \"cashback\": {\n            \"amount\": \"0.137465\",\n            \"currency\": \"USD\"\n          },\n          \"purchase_details\": {\n            \"car_rental\": null,\n            \"customer_reference_identifier\": \"51201\",\n            \"local_tax_amount\": null,\n            \"local_tax_currency\": \"usd\",\n            \"lodging\": {\n              \"check_in_date\": \"2023-07-20\",\n              \"daily_room_rate_amount\": 1000,\n              \"daily_room_rate_currency\": \"usd\",\n              \"extra_charges\": \"restaurant\",\n              \"folio_cash_advances_amount\": 0,\n              \"folio_cash_advances_currency\": \"usd\",\n              \"food_beverage_charges_amount\": 0,\n              \"food_beverage_charges_currency\": \"usd\",\n              \"no_show_indicator\": \"no_show\",\n              \"prepaid_expenses_amount\": 0,\n              \"prepaid_expenses_currency\": \"usd\",\n              \"room_nights\": 1,\n              \"total_room_tax_amount\": 100,\n              \"total_room_tax_currency\": \"usd\",\n              \"total_tax_amount\": 100,\n              \"total_tax_currency\": \"usd\"\n            },\n            \"national_tax_amount\": null,\n            \"national_tax_currency\": \"usd\",\n            \"purchase_identifier\": \"10203\",\n            \"purchase_identifier_format\": \"order_number\",\n            \"travel\": null\n          },\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"transaction_id\": \"string\",\n          \"network_identifiers\": {\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"acquirer_reference_number\": \"string\",\n            \"acquirer_business_id\": \"string\",\n            \"authorization_identification_response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"card_revenue_payment\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\",\n          \"transacted_on_account_id\": \"account_in71c4amph0vgo2qllky\"\n        },\n        \"card_settlement\": {\n          \"type\": \"card_settlement\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"card_authorization\": \"string\",\n          \"amount\": 6390,\n          \"currency\": \"USD\",\n          \"presentment_amount\": 5722,\n          \"presentment_currency\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_country\": \"string\",\n          \"merchant_name\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"transaction_id\": \"string\",\n          \"pending_transaction_id\": \"string\",\n          \"interchange\": {\n            \"amount\": \"0.137465\",\n            \"code\": \"271\",\n            \"currency\": \"USD\"\n          },\n          \"cashback\": {\n            \"amount\": \"0.137465\",\n            \"currency\": \"USD\"\n          },\n          \"purchase_details\": {\n            \"car_rental\": null,\n            \"customer_reference_identifier\": \"51201\",\n            \"local_tax_amount\": null,\n            \"local_tax_currency\": \"usd\",\n            \"lodging\": {\n              \"check_in_date\": \"2023-07-20\",\n              \"daily_room_rate_amount\": 1000,\n              \"daily_room_rate_currency\": \"usd\",\n              \"extra_charges\": \"restaurant\",\n              \"folio_cash_advances_amount\": 0,\n              \"folio_cash_advances_currency\": \"usd\",\n              \"food_beverage_charges_amount\": 0,\n              \"food_beverage_charges_currency\": \"usd\",\n              \"no_show_indicator\": \"no_show\",\n              \"prepaid_expenses_amount\": 0,\n              \"prepaid_expenses_currency\": \"usd\",\n              \"room_nights\": 1,\n              \"total_room_tax_amount\": 100,\n              \"total_room_tax_currency\": \"usd\",\n              \"total_tax_amount\": 100,\n              \"total_tax_currency\": \"usd\"\n            },\n            \"national_tax_amount\": null,\n            \"national_tax_currency\": \"usd\",\n            \"purchase_identifier\": \"10203\",\n            \"purchase_identifier_format\": \"order_number\",\n            \"travel\": null\n          },\n          \"surcharge\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"presentment_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"network\": \"pulse\",\n          \"network_identifiers\": {\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"acquirer_reference_number\": \"string\",\n            \"acquirer_business_id\": \"string\",\n            \"authorization_identification_response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"cashback_payment\": {\n          \"accrued_on_card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"check_deposit_acceptance\": {\n          \"amount\": 4283,\n          \"currency\": \"USD\",\n          \"account_number\": \"string\",\n          \"routing_number\": \"string\",\n          \"auxiliary_on_us\": \"string\",\n          \"serial_number\": \"string\",\n          \"check_deposit_id\": \"string\"\n        },\n        \"check_deposit_return\": {\n          \"amount\": 100,\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"currency\": \"USD\",\n          \"return_reason\": \"insufficient_funds\",\n          \"returned_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"check_transfer_deposit\": {\n          \"type\": \"check_transfer_deposit\",\n          \"deposited_at\": \"1999-01-29T10:04:09.731Z\",\n          \"transaction_id\": \"string\",\n          \"front_image_file_id\": \"string\",\n          \"back_image_file_id\": \"string\",\n          \"bank_of_first_deposit_routing_number\": \"string\",\n          \"inbound_check_deposit_id\": \"string\",\n          \"transfer_id\": \"string\"\n        },\n        \"fednow_transfer_acknowledgement\": {\n          \"transfer_id\": \"fednow_transfer_4i0mptrdu1mueg1196bg\"\n        },\n        \"fee_payment\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"fee_period_start\": \"2023-05-01\",\n          \"fee_statement_id\": \"fee_statement_lz33v0d7pnxwkptrdwq4\",\n          \"program_id\": \"program_i2v2os4mwza1oetokh9i\"\n        },\n        \"inbound_ach_transfer\": {\n          \"amount\": 4630,\n          \"originator_company_name\": \"string\",\n          \"originator_company_descriptive_date\": \"string\",\n          \"originator_company_discretionary_data\": \"string\",\n          \"originator_company_entry_description\": \"string\",\n          \"originator_company_id\": \"string\",\n          \"receiver_id_number\": \"string\",\n          \"receiver_name\": \"string\",\n          \"trace_number\": \"string\",\n          \"transfer_id\": \"string\",\n          \"addenda\": {\n            \"category\": \"freeform\",\n            \"freeform\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"inbound_ach_transfer_return_intention\": {\n          \"inbound_ach_transfer_id\": \"inbound_ach_transfer_tdrwqr3fq9gnnq49odev\"\n        },\n        \"inbound_check_adjustment\": {\n          \"adjusted_transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"amount\": 1750,\n          \"reason\": \"late_return\"\n        },\n        \"inbound_check_deposit_return_intention\": {\n          \"inbound_check_deposit_id\": \"inbound_check_deposit_zoshvqybq0cjjm31mra\",\n          \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\"\n        },\n        \"inbound_fednow_transfer_confirmation\": {\n          \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n        },\n        \"inbound_real_time_payments_transfer_confirmation\": {\n          \"amount\": 100,\n          \"creditor_name\": \"Ian Crease\",\n          \"currency\": \"USD\",\n          \"debtor_account_number\": \"987654321\",\n          \"debtor_name\": \"National Phonograph Company\",\n          \"debtor_routing_number\": \"101050001\",\n          \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n          \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"inbound_wire_reversal\": {\n          \"amount\": 3281,\n          \"created_at\": \"1952-06-24T21:30:21.886Z\",\n          \"description\": \"string\",\n          \"input_cycle_date\": \"2004-07-10\",\n          \"input_sequence_number\": \"string\",\n          \"input_source\": \"string\",\n          \"input_message_accountability_data\": \"string\",\n          \"transaction_id\": \"string\",\n          \"wire_transfer_id\": \"string\",\n          \"instruction_identification\": \"string\",\n          \"debtor_routing_number\": \"string\",\n          \"return_reason_code\": \"string\",\n          \"return_reason_code_description\": \"string\",\n          \"return_reason_additional_information\": \"string\"\n        },\n        \"inbound_wire_transfer\": {\n          \"amount\": 8949,\n          \"description\": \"string\",\n          \"input_message_accountability_data\": \"string\",\n          \"transfer_id\": \"string\",\n          \"creditor_address_line1\": \"string\",\n          \"creditor_address_line2\": \"string\",\n          \"creditor_address_line3\": \"string\",\n          \"creditor_name\": \"string\",\n          \"end_to_end_identification\": \"string\",\n          \"debtor_address_line1\": \"string\",\n          \"debtor_address_line2\": \"string\",\n          \"debtor_address_line3\": \"string\",\n          \"debtor_name\": \"string\",\n          \"instructing_agent_routing_number\": \"string\",\n          \"unstructured_remittance_information\": \"string\",\n          \"instruction_identification\": \"string\",\n          \"unique_end_to_end_transaction_reference\": \"string\"\n        },\n        \"inbound_wire_transfer_reversal\": {\n          \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\"\n        },\n        \"interest_payment\": {\n          \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"internal_source\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"reason\": \"sample_funds\"\n        },\n        \"other\": {},\n        \"real_time_payments_transfer_acknowledgement\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"routing_number\": \"101050001\",\n          \"transfer_id\": \"real_time_payments_transfer_iyuhl5kdn7ssmup83mvq\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"sample_funds\": {\n          \"originator\": \"dashboard\"\n        },\n        \"swift_transfer_intention\": {\n          \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n        },\n        \"swift_transfer_return\": {\n          \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n        },\n        \"wire_transfer_intention\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"message_to_recipient\": \"HELLO\",\n          \"routing_number\": \"101050001\",\n          \"transfer_id\": \"wire_transfer_5akynk7dqsq25qwk9q2u\"\n        }\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"account_id\": \"string\",\n      \"amount\": 2953,\n      \"currency\": \"USD\",\n      \"created_at\": \"1977-04-07T18:40:03.834Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"route_id\": \"string\",\n      \"route_type\": \"account_number\",\n      \"source\": {\n        \"category\": \"wire_transfer_intention\",\n        \"account_revenue_payment\": {\n          \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"account_transfer_intention\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"description\": \"INVOICE 2468\",\n          \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\",\n          \"source_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_intention\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"routing_number\": \"101050001\",\n          \"statement_descriptor\": \"INVOICE 2468\",\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_rejection\": {\n          \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n        },\n        \"ach_transfer_return\": {\n          \"created_at\": \"2020-01-31T23:59:59Z\",\n          \"raw_return_reason_code\": \"R01\",\n          \"return_reason_code\": \"insufficient_fund\",\n          \"trace_number\": \"111122223292834\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n        },\n        \"blockchain_offramp_transfer_settlement\": {\n          \"source_blockchain_address_id\": \"blockchain_address_tijjpqp9t5d358ehydqi\",\n          \"transfer_id\": \"blockchain_offramp_transfer_sqd2x3ti6u2sy91v696m\"\n        },\n        \"blockchain_onramp_transfer_intention\": {\n          \"destination_blockchain_address\": \"0xaabbccdd\",\n          \"transfer_id\": \"blockchain_onramp_transfer_sg8nzy569rk0dnfk28bv\"\n        },\n        \"card_dispute_acceptance\": {\n          \"accepted_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"card_dispute_financial\": {\n          \"amount\": 1000,\n          \"network\": \"visa\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"visa\": {\n            \"event_type\": \"chargeback_submitted\"\n          }\n        },\n        \"card_dispute_loss\": {\n          \"explanation\": \"The card dispute was lost.\",\n          \"lost_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"card_financial\": {\n          \"type\": \"card_financial\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_descriptor\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"terminal_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"digital_wallet_token_id\": \"string\",\n          \"physical_card_id\": \"string\",\n          \"verification\": {\n            \"cardholder_address\": {\n              \"provided_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"result\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"cardholder_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"card_verification_code\": {\n              \"result\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"additional_amounts\": {\n            \"total_healthcare\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total_cumulative\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"surcharge\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"transit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"vision\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"clinic\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dental\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prescription\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"original\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unknown\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"network_identifiers\": {\n            \"authorization_identification_response\": null,\n            \"retrieval_reference_number\": \"785867080153\",\n            \"trace_number\": \"487941\",\n            \"transaction_id\": \"627199945183184\"\n          },\n          \"network_risk_score\": 7536,\n          \"network_details\": {\n            \"category\": \"pulse\",\n            \"visa\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pulse\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"amount\": 703,\n          \"presentment_amount\": 640,\n          \"presentment_currency\": \"string\",\n          \"currency\": \"USD\",\n          \"direction\": \"settlement\",\n          \"actioner\": \"increase\",\n          \"processing_category\": \"quasi_cash\",\n          \"real_time_decision_id\": \"string\",\n          \"transaction_id\": \"string\",\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ]\n        },\n        \"card_push_transfer_acceptance\": {\n          \"settlement_amount\": 100,\n          \"transfer_id\": \"outbound_card_push_transfer_e0z9rdpamraczh4tvwye\"\n        },\n        \"card_refund\": {\n          \"type\": \"card_refund\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"amount\": 227,\n          \"currency\": \"USD\",\n          \"presentment_amount\": 5144,\n          \"presentment_currency\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"merchant_name\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"interchange\": {\n            \"amount\": \"0.137465\",\n            \"code\": \"271\",\n            \"currency\": \"USD\"\n          },\n          \"cashback\": {\n            \"amount\": \"0.137465\",\n            \"currency\": \"USD\"\n          },\n          \"purchase_details\": {\n            \"car_rental\": null,\n            \"customer_reference_identifier\": \"51201\",\n            \"local_tax_amount\": null,\n            \"local_tax_currency\": \"usd\",\n            \"lodging\": {\n              \"check_in_date\": \"2023-07-20\",\n              \"daily_room_rate_amount\": 1000,\n              \"daily_room_rate_currency\": \"usd\",\n              \"extra_charges\": \"restaurant\",\n              \"folio_cash_advances_amount\": 0,\n              \"folio_cash_advances_currency\": \"usd\",\n              \"food_beverage_charges_amount\": 0,\n              \"food_beverage_charges_currency\": \"usd\",\n              \"no_show_indicator\": \"no_show\",\n              \"prepaid_expenses_amount\": 0,\n              \"prepaid_expenses_currency\": \"usd\",\n              \"room_nights\": 1,\n              \"total_room_tax_amount\": 100,\n              \"total_room_tax_currency\": \"usd\",\n              \"total_tax_amount\": 100,\n              \"total_tax_currency\": \"usd\"\n            },\n            \"national_tax_amount\": null,\n            \"national_tax_currency\": \"usd\",\n            \"purchase_identifier\": \"10203\",\n            \"purchase_identifier_format\": \"order_number\",\n            \"travel\": null\n          },\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"transaction_id\": \"string\",\n          \"network_identifiers\": {\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"acquirer_reference_number\": \"string\",\n            \"acquirer_business_id\": \"string\",\n            \"authorization_identification_response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"card_revenue_payment\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\",\n          \"transacted_on_account_id\": \"account_in71c4amph0vgo2qllky\"\n        },\n        \"card_settlement\": {\n          \"type\": \"card_settlement\",\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"card_authorization\": \"string\",\n          \"amount\": 3602,\n          \"currency\": \"USD\",\n          \"presentment_amount\": 8320,\n          \"presentment_currency\": \"string\",\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_country\": \"string\",\n          \"merchant_name\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"transaction_id\": \"string\",\n          \"pending_transaction_id\": \"string\",\n          \"interchange\": {\n            \"amount\": \"0.137465\",\n            \"code\": \"271\",\n            \"currency\": \"USD\"\n          },\n          \"cashback\": {\n            \"amount\": \"0.137465\",\n            \"currency\": \"USD\"\n          },\n          \"purchase_details\": {\n            \"car_rental\": null,\n            \"customer_reference_identifier\": \"51201\",\n            \"local_tax_amount\": null,\n            \"local_tax_currency\": \"usd\",\n            \"lodging\": {\n              \"check_in_date\": \"2023-07-20\",\n              \"daily_room_rate_amount\": 1000,\n              \"daily_room_rate_currency\": \"usd\",\n              \"extra_charges\": \"restaurant\",\n              \"folio_cash_advances_amount\": 0,\n              \"folio_cash_advances_currency\": \"usd\",\n              \"food_beverage_charges_amount\": 0,\n              \"food_beverage_charges_currency\": \"usd\",\n              \"no_show_indicator\": \"no_show\",\n              \"prepaid_expenses_amount\": 0,\n              \"prepaid_expenses_currency\": \"usd\",\n              \"room_nights\": 1,\n              \"total_room_tax_amount\": 100,\n              \"total_room_tax_currency\": \"usd\",\n              \"total_tax_amount\": 100,\n              \"total_tax_currency\": \"usd\"\n            },\n            \"national_tax_amount\": null,\n            \"national_tax_currency\": \"usd\",\n            \"purchase_identifier\": \"10203\",\n            \"purchase_identifier_format\": \"order_number\",\n            \"travel\": null\n          },\n          \"surcharge\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"presentment_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"network\": \"pulse\",\n          \"network_identifiers\": {\n            \"transaction_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"acquirer_reference_number\": \"string\",\n            \"acquirer_business_id\": \"string\",\n            \"authorization_identification_response\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"cashback_payment\": {\n          \"accrued_on_card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"check_deposit_acceptance\": {\n          \"amount\": 8113,\n          \"currency\": \"USD\",\n          \"account_number\": \"string\",\n          \"routing_number\": \"string\",\n          \"auxiliary_on_us\": \"string\",\n          \"serial_number\": \"string\",\n          \"check_deposit_id\": \"string\"\n        },\n        \"check_deposit_return\": {\n          \"amount\": 100,\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"currency\": \"USD\",\n          \"return_reason\": \"insufficient_funds\",\n          \"returned_at\": \"2020-01-31T23:59:59Z\",\n          \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n        },\n        \"check_transfer_deposit\": {\n          \"type\": \"check_transfer_deposit\",\n          \"deposited_at\": \"1964-11-10T08:52:40.485Z\",\n          \"transaction_id\": \"string\",\n          \"front_image_file_id\": \"string\",\n          \"back_image_file_id\": \"string\",\n          \"bank_of_first_deposit_routing_number\": \"string\",\n          \"inbound_check_deposit_id\": \"string\",\n          \"transfer_id\": \"string\"\n        },\n        \"fednow_transfer_acknowledgement\": {\n          \"transfer_id\": \"fednow_transfer_4i0mptrdu1mueg1196bg\"\n        },\n        \"fee_payment\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"fee_period_start\": \"2023-05-01\",\n          \"fee_statement_id\": \"fee_statement_lz33v0d7pnxwkptrdwq4\",\n          \"program_id\": \"program_i2v2os4mwza1oetokh9i\"\n        },\n        \"inbound_ach_transfer\": {\n          \"amount\": 9060,\n          \"originator_company_name\": \"string\",\n          \"originator_company_descriptive_date\": \"string\",\n          \"originator_company_discretionary_data\": \"string\",\n          \"originator_company_entry_description\": \"string\",\n          \"originator_company_id\": \"string\",\n          \"receiver_id_number\": \"string\",\n          \"receiver_name\": \"string\",\n          \"trace_number\": \"string\",\n          \"transfer_id\": \"string\",\n          \"addenda\": {\n            \"category\": \"freeform\",\n            \"freeform\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"inbound_ach_transfer_return_intention\": {\n          \"inbound_ach_transfer_id\": \"inbound_ach_transfer_tdrwqr3fq9gnnq49odev\"\n        },\n        \"inbound_check_adjustment\": {\n          \"adjusted_transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n          \"amount\": 1750,\n          \"reason\": \"late_return\"\n        },\n        \"inbound_check_deposit_return_intention\": {\n          \"inbound_check_deposit_id\": \"inbound_check_deposit_zoshvqybq0cjjm31mra\",\n          \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\"\n        },\n        \"inbound_fednow_transfer_confirmation\": {\n          \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n        },\n        \"inbound_real_time_payments_transfer_confirmation\": {\n          \"amount\": 100,\n          \"creditor_name\": \"Ian Crease\",\n          \"currency\": \"USD\",\n          \"debtor_account_number\": \"987654321\",\n          \"debtor_name\": \"National Phonograph Company\",\n          \"debtor_routing_number\": \"101050001\",\n          \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n          \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"inbound_wire_reversal\": {\n          \"amount\": 8442,\n          \"created_at\": \"1987-07-20T14:40:45.504Z\",\n          \"description\": \"string\",\n          \"input_cycle_date\": \"1967-03-23\",\n          \"input_sequence_number\": \"string\",\n          \"input_source\": \"string\",\n          \"input_message_accountability_data\": \"string\",\n          \"transaction_id\": \"string\",\n          \"wire_transfer_id\": \"string\",\n          \"instruction_identification\": \"string\",\n          \"debtor_routing_number\": \"string\",\n          \"return_reason_code\": \"string\",\n          \"return_reason_code_description\": \"string\",\n          \"return_reason_additional_information\": \"string\"\n        },\n        \"inbound_wire_transfer\": {\n          \"amount\": 6900,\n          \"description\": \"string\",\n          \"input_message_accountability_data\": \"string\",\n          \"transfer_id\": \"string\",\n          \"creditor_address_line1\": \"string\",\n          \"creditor_address_line2\": \"string\",\n          \"creditor_address_line3\": \"string\",\n          \"creditor_name\": \"string\",\n          \"end_to_end_identification\": \"string\",\n          \"debtor_address_line1\": \"string\",\n          \"debtor_address_line2\": \"string\",\n          \"debtor_address_line3\": \"string\",\n          \"debtor_name\": \"string\",\n          \"instructing_agent_routing_number\": \"string\",\n          \"unstructured_remittance_information\": \"string\",\n          \"instruction_identification\": \"string\",\n          \"unique_end_to_end_transaction_reference\": \"string\"\n        },\n        \"inbound_wire_transfer_reversal\": {\n          \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\"\n        },\n        \"interest_payment\": {\n          \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"period_end\": \"2025-06-30T23:59:59+00:00\",\n          \"period_start\": \"2025-06-01T00:00:00+00:00\"\n        },\n        \"internal_source\": {\n          \"amount\": 100,\n          \"currency\": \"USD\",\n          \"reason\": \"sample_funds\"\n        },\n        \"other\": {},\n        \"real_time_payments_transfer_acknowledgement\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"routing_number\": \"101050001\",\n          \"transfer_id\": \"real_time_payments_transfer_iyuhl5kdn7ssmup83mvq\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"sample_funds\": {\n          \"originator\": \"dashboard\"\n        },\n        \"swift_transfer_intention\": {\n          \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n        },\n        \"swift_transfer_return\": {\n          \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n        },\n        \"wire_transfer_intention\": {\n          \"account_number\": \"987654321\",\n          \"amount\": 100,\n          \"message_to_recipient\": \"HELLO\",\n          \"routing_number\": \"101050001\",\n          \"transfer_id\": \"wire_transfer_5akynk7dqsq25qwk9q2u\"\n        }\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25ffa73a-d805-4c7a-817d-f70409642607",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19b90404-5de6-4213-9130-e89aaccaf5c5",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cff4dea-a51c-4223-9879-f14a92adf269",
+          "name": "Retrieve a Transaction",
+          "request": {
+            "name": "Retrieve a Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0ccfc22-91d5-44aa-ab0f-fbd67279e82e",
+              "name": "Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"transaction\",\n  \"account_id\": \"string\",\n  \"amount\": 2455,\n  \"currency\": \"USD\",\n  \"created_at\": \"2015-05-15T05:42:51.764Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"route_id\": \"string\",\n  \"route_type\": \"lockbox\",\n  \"source\": {\n    \"category\": \"interest_payment\",\n    \"account_revenue_payment\": {\n      \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"period_end\": \"2025-06-30T23:59:59+00:00\",\n      \"period_start\": \"2025-06-01T00:00:00+00:00\"\n    },\n    \"account_transfer_intention\": {\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"description\": \"INVOICE 2468\",\n      \"destination_account_id\": \"account_uf16sut2ct5bevmq3eh\",\n      \"source_account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n    },\n    \"ach_transfer_intention\": {\n      \"account_number\": \"987654321\",\n      \"amount\": 100,\n      \"routing_number\": \"101050001\",\n      \"statement_descriptor\": \"INVOICE 2468\",\n      \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n    },\n    \"ach_transfer_rejection\": {\n      \"transfer_id\": \"account_transfer_7k9qe1ysdgqztnt63l7n\"\n    },\n    \"ach_transfer_return\": {\n      \"created_at\": \"2020-01-31T23:59:59Z\",\n      \"raw_return_reason_code\": \"R01\",\n      \"return_reason_code\": \"insufficient_fund\",\n      \"trace_number\": \"111122223292834\",\n      \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n      \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n    },\n    \"blockchain_offramp_transfer_settlement\": {\n      \"source_blockchain_address_id\": \"blockchain_address_tijjpqp9t5d358ehydqi\",\n      \"transfer_id\": \"blockchain_offramp_transfer_sqd2x3ti6u2sy91v696m\"\n    },\n    \"blockchain_onramp_transfer_intention\": {\n      \"destination_blockchain_address\": \"0xaabbccdd\",\n      \"transfer_id\": \"blockchain_onramp_transfer_sg8nzy569rk0dnfk28bv\"\n    },\n    \"card_dispute_acceptance\": {\n      \"accepted_at\": \"2020-01-31T23:59:59Z\",\n      \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n    },\n    \"card_dispute_financial\": {\n      \"amount\": 1000,\n      \"network\": \"visa\",\n      \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n      \"visa\": {\n        \"event_type\": \"chargeback_submitted\"\n      }\n    },\n    \"card_dispute_loss\": {\n      \"explanation\": \"The card dispute was lost.\",\n      \"lost_at\": \"2020-01-31T23:59:59Z\",\n      \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n    },\n    \"card_financial\": {\n      \"type\": \"card_financial\",\n      \"id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"merchant_acceptor_id\": \"string\",\n      \"merchant_descriptor\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"terminal_id\": \"string\",\n      \"merchant_city\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_country\": \"string\",\n      \"digital_wallet_token_id\": \"string\",\n      \"physical_card_id\": \"string\",\n      \"verification\": {\n        \"cardholder_address\": {\n          \"provided_postal_code\": \"string\",\n          \"provided_line1\": \"string\",\n          \"actual_postal_code\": \"string\",\n          \"actual_line1\": \"string\",\n          \"result\": \"match\"\n        },\n        \"cardholder_name\": {\n          \"provided_first_name\": \"string\",\n          \"provided_middle_name\": \"string\",\n          \"provided_last_name\": \"string\"\n        },\n        \"card_verification_code\": {\n          \"result\": \"no_match\"\n        }\n      },\n      \"additional_amounts\": {\n        \"total_healthcare\": {\n          \"amount\": 6860,\n          \"currency\": \"string\"\n        },\n        \"total_cumulative\": {\n          \"amount\": 6209,\n          \"currency\": \"string\"\n        },\n        \"surcharge\": {\n          \"amount\": 9425,\n          \"currency\": \"string\"\n        },\n        \"transit\": {\n          \"amount\": 2506,\n          \"currency\": \"string\"\n        },\n        \"vision\": {\n          \"amount\": 7074,\n          \"currency\": \"string\"\n        },\n        \"clinic\": {\n          \"amount\": 5761,\n          \"currency\": \"string\"\n        },\n        \"dental\": {\n          \"amount\": 5814,\n          \"currency\": \"string\"\n        },\n        \"prescription\": {\n          \"amount\": 5353,\n          \"currency\": \"string\"\n        },\n        \"original\": {\n          \"amount\": 1323,\n          \"currency\": \"string\"\n        },\n        \"unknown\": {\n          \"amount\": 4604,\n          \"currency\": \"string\"\n        }\n      },\n      \"network_identifiers\": {\n        \"transaction_id\": \"string\",\n        \"trace_number\": \"string\",\n        \"retrieval_reference_number\": \"string\",\n        \"authorization_identification_response\": \"string\"\n      },\n      \"network_risk_score\": 8041,\n      \"network_details\": {\n        \"category\": \"pulse\",\n        \"visa\": {\n          \"electronic_commerce_indicator\": \"mail_phone_order\",\n          \"point_of_service_entry_mode\": \"credential_on_file\",\n          \"stand_in_processing_reason\": \"invalid_cardholder_authentication_verification_value\",\n          \"terminal_entry_capability\": \"magnetic_stripe\"\n        },\n        \"pulse\": {}\n      },\n      \"amount\": 2119,\n      \"presentment_amount\": 1029,\n      \"presentment_currency\": \"string\",\n      \"currency\": \"USD\",\n      \"direction\": \"refund\",\n      \"actioner\": \"network\",\n      \"processing_category\": \"account_funding\",\n      \"real_time_decision_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"scheme_fees\": [\n        {\n          \"created_at\": \"1957-04-16T16:01:08.667Z\",\n          \"amount\": \"6476018.540\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_account_verification_canada\",\n          \"variable_rate\": \"31890.302508252\",\n          \"fixed_component\": \"902272811.33632\"\n        },\n        {\n          \"created_at\": \"1994-08-01T15:00:32.213Z\",\n          \"amount\": \"46104\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_account_verification_international\",\n          \"variable_rate\": \"-2643790374.31875523093\",\n          \"fixed_component\": \"-031.2719\"\n        }\n      ]\n    },\n    \"card_push_transfer_acceptance\": {\n      \"settlement_amount\": 100,\n      \"transfer_id\": \"outbound_card_push_transfer_e0z9rdpamraczh4tvwye\"\n    },\n    \"card_refund\": {\n      \"type\": \"card_refund\",\n      \"id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"amount\": 3495,\n      \"currency\": \"USD\",\n      \"presentment_amount\": 317,\n      \"presentment_currency\": \"string\",\n      \"merchant_acceptor_id\": \"string\",\n      \"merchant_city\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_country\": \"string\",\n      \"merchant_name\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"interchange\": {\n        \"amount\": \"0.137465\",\n        \"code\": \"271\",\n        \"currency\": \"USD\"\n      },\n      \"cashback\": {\n        \"amount\": \"0.137465\",\n        \"currency\": \"USD\"\n      },\n      \"purchase_details\": {\n        \"purchase_identifier\": \"string\",\n        \"purchase_identifier_format\": \"hotel_folio_number\",\n        \"customer_reference_identifier\": \"string\",\n        \"local_tax_amount\": 8759,\n        \"local_tax_currency\": \"string\",\n        \"national_tax_amount\": 8972,\n        \"national_tax_currency\": \"string\",\n        \"car_rental\": {\n          \"extra_charges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"days_rented\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"no_show_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"checkout_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_rental_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_rental_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weekly_rental_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weekly_rental_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"insurance_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"insurance_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fuel_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fuel_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"one_way_drop_off_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"one_way_drop_off_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"car_class_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"renter_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lodging\": {\n          \"no_show_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"extra_charges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"check_in_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_room_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_room_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_tax_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_tax_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prepaid_expenses_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prepaid_expenses_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"food_beverage_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"food_beverage_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"folio_cash_advances_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"folio_cash_advances_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"room_nights\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_room_tax_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_room_tax_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"travel\": {\n          \"ticket_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"passenger_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"departure_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"origination_city_airport_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"travel_agency_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"travel_agency_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"restricted_ticket_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"computerized_reservation_system\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credit_reason_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ticket_change_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trip_legs\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ancillary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"scheme_fees\": [\n        {\n          \"created_at\": \"1955-08-02T10:43:29.667Z\",\n          \"amount\": \"1360.333\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_authorization_address_verification_service\",\n          \"variable_rate\": \"73\",\n          \"fixed_component\": \"-802575\"\n        },\n        {\n          \"created_at\": \"1980-11-21T06:00:35.305Z\",\n          \"amount\": \"-27298687\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_advertising_service_commercial_credit\",\n          \"variable_rate\": \"2760865773\",\n          \"fixed_component\": \"-79.953\"\n        }\n      ],\n      \"transaction_id\": \"string\",\n      \"network_identifiers\": {\n        \"transaction_id\": \"string\",\n        \"acquirer_reference_number\": \"string\",\n        \"acquirer_business_id\": \"string\",\n        \"authorization_identification_response\": \"string\"\n      }\n    },\n    \"card_revenue_payment\": {\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"period_end\": \"2025-06-30T23:59:59+00:00\",\n      \"period_start\": \"2025-06-01T00:00:00+00:00\",\n      \"transacted_on_account_id\": \"account_in71c4amph0vgo2qllky\"\n    },\n    \"card_settlement\": {\n      \"type\": \"card_settlement\",\n      \"id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"card_authorization\": \"string\",\n      \"amount\": 1317,\n      \"currency\": \"USD\",\n      \"presentment_amount\": 3289,\n      \"presentment_currency\": \"string\",\n      \"merchant_acceptor_id\": \"string\",\n      \"merchant_city\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_country\": \"string\",\n      \"merchant_name\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"interchange\": {\n        \"amount\": \"0.137465\",\n        \"code\": \"271\",\n        \"currency\": \"USD\"\n      },\n      \"cashback\": {\n        \"amount\": \"0.137465\",\n        \"currency\": \"USD\"\n      },\n      \"purchase_details\": {\n        \"purchase_identifier\": \"string\",\n        \"purchase_identifier_format\": \"invoice_number\",\n        \"customer_reference_identifier\": \"string\",\n        \"local_tax_amount\": 8143,\n        \"local_tax_currency\": \"string\",\n        \"national_tax_amount\": 6116,\n        \"national_tax_currency\": \"string\",\n        \"car_rental\": {\n          \"extra_charges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"days_rented\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"no_show_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"checkout_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_rental_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_rental_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weekly_rental_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"weekly_rental_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"insurance_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"insurance_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fuel_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fuel_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"one_way_drop_off_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"one_way_drop_off_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"car_class_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"renter_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"lodging\": {\n          \"no_show_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"extra_charges\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"check_in_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_room_rate_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"daily_room_rate_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_tax_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_tax_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prepaid_expenses_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prepaid_expenses_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"food_beverage_charges_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"food_beverage_charges_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"folio_cash_advances_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"folio_cash_advances_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"room_nights\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_room_tax_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total_room_tax_currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"travel\": {\n          \"ticket_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"passenger_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"departure_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"origination_city_airport_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"travel_agency_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"travel_agency_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"restricted_ticket_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"computerized_reservation_system\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credit_reason_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ticket_change_indicator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"trip_legs\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ancillary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"surcharge\": {\n        \"amount\": 9605,\n        \"presentment_amount\": 3204\n      },\n      \"scheme_fees\": [\n        {\n          \"created_at\": \"1973-01-14T14:42:02.407Z\",\n          \"amount\": \"99664428239.2919146041\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_authorization_reversal_point_of_sale\",\n          \"variable_rate\": \"-6\",\n          \"fixed_component\": \"96856.1\"\n        },\n        {\n          \"created_at\": \"2012-02-07T06:13:35.847Z\",\n          \"amount\": \"5795190705\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_business_debit_acceptance_fee\",\n          \"variable_rate\": \"-8290495.70681\",\n          \"fixed_component\": \"-50972926.10772903\"\n        }\n      ],\n      \"network\": \"pulse\",\n      \"network_identifiers\": {\n        \"transaction_id\": \"string\",\n        \"acquirer_reference_number\": \"string\",\n        \"acquirer_business_id\": \"string\",\n        \"authorization_identification_response\": \"string\"\n      }\n    },\n    \"cashback_payment\": {\n      \"accrued_on_card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"period_end\": \"2025-06-30T23:59:59+00:00\",\n      \"period_start\": \"2025-06-01T00:00:00+00:00\"\n    },\n    \"check_deposit_acceptance\": {\n      \"amount\": 994,\n      \"currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"auxiliary_on_us\": \"string\",\n      \"serial_number\": \"string\",\n      \"check_deposit_id\": \"string\"\n    },\n    \"check_deposit_return\": {\n      \"amount\": 100,\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"currency\": \"USD\",\n      \"return_reason\": \"insufficient_funds\",\n      \"returned_at\": \"2020-01-31T23:59:59Z\",\n      \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n    },\n    \"check_transfer_deposit\": {\n      \"type\": \"check_transfer_deposit\",\n      \"deposited_at\": \"1954-09-24T06:00:03.294Z\",\n      \"transaction_id\": \"string\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"bank_of_first_deposit_routing_number\": \"string\",\n      \"inbound_check_deposit_id\": \"string\",\n      \"transfer_id\": \"string\"\n    },\n    \"fednow_transfer_acknowledgement\": {\n      \"transfer_id\": \"fednow_transfer_4i0mptrdu1mueg1196bg\"\n    },\n    \"fee_payment\": {\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"fee_period_start\": \"2023-05-01\",\n      \"fee_statement_id\": \"fee_statement_lz33v0d7pnxwkptrdwq4\",\n      \"program_id\": \"program_i2v2os4mwza1oetokh9i\"\n    },\n    \"inbound_ach_transfer\": {\n      \"amount\": 8203,\n      \"originator_company_name\": \"string\",\n      \"originator_company_descriptive_date\": \"string\",\n      \"originator_company_discretionary_data\": \"string\",\n      \"originator_company_entry_description\": \"string\",\n      \"originator_company_id\": \"string\",\n      \"receiver_id_number\": \"string\",\n      \"receiver_name\": \"string\",\n      \"trace_number\": \"string\",\n      \"transfer_id\": \"string\",\n      \"addenda\": {\n        \"category\": \"freeform\",\n        \"freeform\": {\n          \"entries\": [\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    },\n    \"inbound_ach_transfer_return_intention\": {\n      \"inbound_ach_transfer_id\": \"inbound_ach_transfer_tdrwqr3fq9gnnq49odev\"\n    },\n    \"inbound_check_adjustment\": {\n      \"adjusted_transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n      \"amount\": 1750,\n      \"reason\": \"late_return\"\n    },\n    \"inbound_check_deposit_return_intention\": {\n      \"inbound_check_deposit_id\": \"inbound_check_deposit_zoshvqybq0cjjm31mra\",\n      \"transfer_id\": \"check_transfer_30b43acfu9vw8fyc4f5\"\n    },\n    \"inbound_fednow_transfer_confirmation\": {\n      \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n    },\n    \"inbound_real_time_payments_transfer_confirmation\": {\n      \"amount\": 100,\n      \"creditor_name\": \"Ian Crease\",\n      \"currency\": \"USD\",\n      \"debtor_account_number\": \"987654321\",\n      \"debtor_name\": \"National Phonograph Company\",\n      \"debtor_routing_number\": \"101050001\",\n      \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n      \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n      \"unstructured_remittance_information\": \"Invoice 29582\"\n    },\n    \"inbound_wire_reversal\": {\n      \"amount\": 3107,\n      \"created_at\": \"1948-06-08T22:47:51.185Z\",\n      \"description\": \"string\",\n      \"input_cycle_date\": \"2013-02-19\",\n      \"input_sequence_number\": \"string\",\n      \"input_source\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"transaction_id\": \"string\",\n      \"wire_transfer_id\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"debtor_routing_number\": \"string\",\n      \"return_reason_code\": \"string\",\n      \"return_reason_code_description\": \"string\",\n      \"return_reason_additional_information\": \"string\"\n    },\n    \"inbound_wire_transfer\": {\n      \"amount\": 1753,\n      \"description\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"transfer_id\": \"string\",\n      \"creditor_address_line1\": \"string\",\n      \"creditor_address_line2\": \"string\",\n      \"creditor_address_line3\": \"string\",\n      \"creditor_name\": \"string\",\n      \"end_to_end_identification\": \"string\",\n      \"debtor_address_line1\": \"string\",\n      \"debtor_address_line2\": \"string\",\n      \"debtor_address_line3\": \"string\",\n      \"debtor_name\": \"string\",\n      \"instructing_agent_routing_number\": \"string\",\n      \"unstructured_remittance_information\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\"\n    },\n    \"inbound_wire_transfer_reversal\": {\n      \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\"\n    },\n    \"interest_payment\": {\n      \"accrued_on_account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"period_end\": \"2025-06-30T23:59:59+00:00\",\n      \"period_start\": \"2025-06-01T00:00:00+00:00\"\n    },\n    \"internal_source\": {\n      \"amount\": 100,\n      \"currency\": \"USD\",\n      \"reason\": \"sample_funds\"\n    },\n    \"other\": {},\n    \"real_time_payments_transfer_acknowledgement\": {\n      \"account_number\": \"987654321\",\n      \"amount\": 100,\n      \"routing_number\": \"101050001\",\n      \"transfer_id\": \"real_time_payments_transfer_iyuhl5kdn7ssmup83mvq\",\n      \"unstructured_remittance_information\": \"Invoice 29582\"\n    },\n    \"sample_funds\": {\n      \"originator\": \"dashboard\"\n    },\n    \"swift_transfer_intention\": {\n      \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n    },\n    \"swift_transfer_return\": {\n      \"transfer_id\": \"swift_transfer_29h21xkng03788zwd3fh\"\n    },\n    \"wire_transfer_intention\": {\n      \"account_number\": \"987654321\",\n      \"amount\": 100,\n      \"message_to_recipient\": \"HELLO\",\n      \"routing_number\": \"101050001\",\n      \"transfer_id\": \"wire_transfer_5akynk7dqsq25qwk9q2u\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7a0a18-d611-4e71-a1de-8acf18f0a722",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d2eaada-eaf0-4fd6-ab3e-92221e5dc758",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b5f47d24-459e-406a-8902-e8468529390d",
+    "name": "Increase Account Numbers Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

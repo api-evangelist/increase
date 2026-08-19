@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers External Accounts API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List External Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/external_accounts",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "routing_number",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List External Accounts"
+        },
+        {
+          "info": {
+            "name": "Create an External Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/external_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an External Account"
+        },
+        {
+          "info": {
+            "name": "Retrieve an External Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/external_accounts/:external_account_id",
+            "params": [
+              {
+                "name": "external_account_id",
+                "value": "external_account_ukk55lr923a3ac0pp7iv",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an External Account"
+        },
+        {
+          "info": {
+            "name": "Update an External Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/external_accounts/:external_account_id",
+            "params": [
+              {
+                "name": "external_account_id",
+                "value": "external_account_ukk55lr923a3ac0pp7iv",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an External Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

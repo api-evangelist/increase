@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Mail Items API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Mail Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound Mail Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_mail_items",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lockbox_recipient_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lockbox_address_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound Mail Items"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound Mail Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_mail_items/:inbound_mail_item_id",
+            "params": [
+              {
+                "name": "inbound_mail_item_id",
+                "value": "inbound_mail_item_q6rrg7mmqpplx80zceev",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound Mail Item"
+        },
+        {
+          "info": {
+            "name": "Action an Inbound Mail Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_mail_items/:inbound_mail_item_id/action",
+            "params": [
+              {
+                "name": "inbound_mail_item_id",
+                "value": "inbound_mail_item_q6rrg7mmqpplx80zceev",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Action an Inbound Mail Item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

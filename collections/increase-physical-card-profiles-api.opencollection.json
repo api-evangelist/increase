@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Physical Card Profiles API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Physical Card Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Physical Card Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/physical_card_profiles",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Physical Card Profiles"
+        },
+        {
+          "info": {
+            "name": "Create a Physical Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/physical_card_profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Physical Card Profile"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id",
+            "params": [
+              {
+                "name": "physical_card_profile_id",
+                "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Card Profile"
+        },
+        {
+          "info": {
+            "name": "Archive a Physical Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id/archive",
+            "params": [
+              {
+                "name": "physical_card_profile_id",
+                "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive a Physical Card Profile"
+        },
+        {
+          "info": {
+            "name": "Clone a Physical Card Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/physical_card_profiles/:physical_card_profile_id/clone",
+            "params": [
+              {
+                "name": "physical_card_profile_id",
+                "value": "physical_card_profile_m534d5rn9qyy9ufqxoec",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Clone a Physical Card Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Inbound Wire Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inbound Wire Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inbound Wire Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_wire_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "account_number_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "wire_drawdown_request_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inbound Wire Transfers"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Inbound Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/inbound_wire_transfers/:inbound_wire_transfer_id",
+            "params": [
+              {
+                "name": "inbound_wire_transfer_id",
+                "value": "inbound_wire_transfer_f228m6bmhtcxjco9pwp0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Inbound Wire Transfer"
+        },
+        {
+          "info": {
+            "name": "Reverse an Inbound Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/inbound_wire_transfers/:inbound_wire_transfer_id/reverse",
+            "params": [
+              {
+                "name": "inbound_wire_transfer_id",
+                "value": "inbound_wire_transfer_f228m6bmhtcxjco9pwp0",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reverse an Inbound Wire Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

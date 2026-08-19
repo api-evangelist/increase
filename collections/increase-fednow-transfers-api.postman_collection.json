@@ -1,0 +1,1173 @@
+{
+  "item": [
+    {
+      "id": "1bbeba28-99bc-4d07-a773-8b7f31d233a2",
+      "name": "Fednow Transfers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d8e4c15-e318-4e4e-b0ce-74bc0fc055bf",
+          "name": "List FedNow Transfers",
+          "request": {
+            "name": "List FedNow Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "fednow_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83ad50bb-d370-4c45-80a0-1ab1df51bd83",
+              "name": "FedNow Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"fednow_transfer\",\n      \"id\": \"string\",\n      \"status\": \"pending_approval\",\n      \"created_at\": \"2018-09-23T18:20:37.123Z\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"debtor_name\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\"\n      },\n      \"unstructured_remittance_information\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"amount\": 8874,\n      \"currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"external_account_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"submission\": {\n        \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"rejection\": {\n        \"rejected_at\": \"1962-03-05T14:27:31.218Z\",\n        \"reject_reason_code\": \"invalid_debtor_address\",\n        \"reject_reason_additional_information\": \"string\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"fednow_transfer\",\n      \"id\": \"string\",\n      \"status\": \"reviewing_rejected\",\n      \"created_at\": \"2019-01-20T23:55:32.591Z\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"debtor_name\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\"\n      },\n      \"unstructured_remittance_information\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"amount\": 8011,\n      \"currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"routing_number\": \"string\",\n      \"external_account_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"submission\": {\n        \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"rejection\": {\n        \"rejected_at\": \"1973-11-20T10:24:19.786Z\",\n        \"reject_reason_code\": \"transaction_forbidden\",\n        \"reject_reason_additional_information\": \"string\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "775b48bb-1605-4124-b532-a18a55fdd4e7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9c4fd2a-d3a4-4a38-a702-14868445d718",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7379a02c-b0ab-45ea-a0cb-8ad10bd8db87",
+          "name": "Create a FedNow Transfer",
+          "request": {
+            "name": "Create a FedNow Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "fednow_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_account_number_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"unstructured_remittance_information\": \"<string>\",\n  \"creditor_name\": \"<string>\",\n  \"debtor_name\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"creditor_address\": {\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"line1\": \"<string>\"\n  },\n  \"debtor_address\": {\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"line1\": \"<string>\"\n  },\n  \"external_account_id\": \"<string>\",\n  \"require_approval\": \"<boolean>\",\n  \"routing_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5840a891-622f-47e2-843c-56ffb3e16310",
+              "name": "FedNow Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_name\": \"National Phonograph Company\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"fednow_transfer\",\n  \"id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"created_at\": \"1985-12-07T22:19:49.572Z\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"amount\": 4226,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"external_account_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"2025-07-05T03:09:22.499Z\",\n    \"reject_reason_code\": \"invalid_creditor_address\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cb21e44-bc07-473f-be06-f6366d7adbe1",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_name\": \"National Phonograph Company\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea092a6-b6cf-4f5c-85e4-308b79e0c423",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"creditor_address\": {\n    \"city\": \"New York\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_name\": \"National Phonograph Company\",\n  \"routing_number\": \"101050001\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"Invoice 29582\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12f6e2cf-fa6e-4cac-b72b-a86c3f3b8ba1",
+          "name": "Retrieve a FedNow Transfer",
+          "request": {
+            "name": "Retrieve a FedNow Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "fednow_transfers",
+                ":fednow_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fednow_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40aab16f-beae-43c4-a1e0-b3ea5663ec1c",
+              "name": "FedNow Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"fednow_transfer\",\n  \"id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"created_at\": \"1985-12-07T22:19:49.572Z\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"amount\": 4226,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"external_account_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"2025-07-05T03:09:22.499Z\",\n    \"reject_reason_code\": \"invalid_creditor_address\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55bdf6bf-1f1b-48dd-a12b-4b86c96270da",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a56265fe-5f15-4a62-988c-46e77ecf659e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0271955-4fac-4abc-b3e1-2685e1c1e144",
+          "name": "Approve a FedNow Transfer",
+          "request": {
+            "name": "Approve a FedNow Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "fednow_transfers",
+                ":fednow_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fednow_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28fac24c-3708-4c9f-950c-b63dc14dbd0d",
+              "name": "FedNow Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"fednow_transfer\",\n  \"id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"created_at\": \"1985-12-07T22:19:49.572Z\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"amount\": 4226,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"external_account_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"2025-07-05T03:09:22.499Z\",\n    \"reject_reason_code\": \"invalid_creditor_address\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf75e5d0-735b-45db-848a-61f3ddec98be",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b277c58-2b8a-43a6-a01f-ef4d36eb4331",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bc66ab4-7d76-4dde-9dd8-98116b8ecb82",
+          "name": "Cancel a pending FedNow Transfer",
+          "request": {
+            "name": "Cancel a pending FedNow Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "fednow_transfers",
+                ":fednow_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fednow_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f972f98-26d5-4d0b-a4be-34d0c98ee8bf",
+              "name": "FedNow Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"fednow_transfer\",\n  \"id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"created_at\": \"1985-12-07T22:19:49.572Z\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"debtor_name\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"amount\": 4226,\n  \"currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"routing_number\": \"string\",\n  \"external_account_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"submission\": {\n    \"message_identification\": \"20250308723260130GT4LAKENDXBHQCZDWS\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"rejection\": {\n    \"rejected_at\": \"2025-07-05T03:09:22.499Z\",\n    \"reject_reason_code\": \"invalid_creditor_address\",\n    \"reject_reason_additional_information\": \"string\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dc2ee3b-de64-4342-8660-de85e09494a0",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0412339-c32f-413a-a9de-a2eaea738f96",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fednow_transfers",
+                    ":fednow_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fednow_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "391ec642-0559-4cbd-96ee-8d3f6a7916c6",
+    "name": "Increase Account Numbers Fednow Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

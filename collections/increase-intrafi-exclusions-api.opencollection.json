@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Intrafi Exclusions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Intrafi Exclusions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List IntraFi Exclusions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/intrafi_exclusions",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List IntraFi Exclusions"
+        },
+        {
+          "info": {
+            "name": "Create an IntraFi Exclusion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/intrafi_exclusions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an IntraFi Exclusion"
+        },
+        {
+          "info": {
+            "name": "Get an IntraFi Exclusion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/intrafi_exclusions/:intrafi_exclusion_id",
+            "params": [
+              {
+                "name": "intrafi_exclusion_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an IntraFi Exclusion"
+        },
+        {
+          "info": {
+            "name": "Archive an IntraFi Exclusion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/intrafi_exclusions/:intrafi_exclusion_id/archive",
+            "params": [
+              {
+                "name": "intrafi_exclusion_id",
+                "value": "intrafi_exclusion_ygfqduuzpau3jqof6jyh",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive an IntraFi Exclusion"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

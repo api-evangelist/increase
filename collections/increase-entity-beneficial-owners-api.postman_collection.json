@@ -1,0 +1,1105 @@
+{
+  "item": [
+    {
+      "id": "1f64c456-18cc-45fa-a766-8d3ca4977483",
+      "name": "Entity Beneficial Owners",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12e46fe9-35bf-4e85-993d-e631f94647b3",
+          "name": "List Beneficial Owners",
+          "request": {
+            "name": "List Beneficial Owners",
+            "description": {},
+            "url": {
+              "path": [
+                "entity_beneficial_owners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31ce9159-a85a-4c4c-bbc8-17040ee17216",
+              "name": "Beneficial Owner List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "entity_n8y8tnk2p9339ti393yi"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"entity_id\": \"string\",\n      \"individual\": {\n        \"name\": \"string\",\n        \"date_of_birth\": \"1965-06-06\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"individual_taxpayer_identification_number\",\n          \"number_last4\": \"string\"\n        }\n      },\n      \"created_at\": \"1993-07-24T17:54:20.240Z\",\n      \"company_title\": \"string\",\n      \"prongs\": [\n        \"control\",\n        \"ownership\"\n      ],\n      \"idempotency_key\": \"string\",\n      \"type\": \"entity_beneficial_owner\"\n    },\n    {\n      \"id\": \"string\",\n      \"entity_id\": \"string\",\n      \"individual\": {\n        \"name\": \"string\",\n        \"date_of_birth\": \"2026-03-07\",\n        \"address\": {\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"zip\": \"string\",\n          \"country\": \"string\"\n        },\n        \"identification\": {\n          \"method\": \"drivers_license\",\n          \"number_last4\": \"string\"\n        }\n      },\n      \"created_at\": \"1970-10-06T14:29:23.427Z\",\n      \"company_title\": \"string\",\n      \"prongs\": [\n        \"ownership\",\n        \"control\"\n      ],\n      \"idempotency_key\": \"string\",\n      \"type\": \"entity_beneficial_owner\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b672aee4-0e76-4b12-a328-f13de2ddec3b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "entity_n8y8tnk2p9339ti393yi"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bb6f696-6157-4f24-bcc6-404f7c7081d1",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "entity_n8y8tnk2p9339ti393yi"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aa03f37c-11c4-4815-869e-2763c270316a",
+          "name": "Create a Beneficial Owner",
+          "request": {
+            "name": "Create a Beneficial Owner",
+            "description": {},
+            "url": {
+              "path": [
+                "entity_beneficial_owners"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_id\": \"<string>\",\n  \"prongs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"individual\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"company_title\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d37b199-aae2-4649-b1ab-fb076e3b1bce",
+              "name": "Beneficial Owner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<string>\",\n  \"prongs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"individual\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"company_title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"entity_id\": \"string\",\n  \"individual\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1956-07-06\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"other\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"created_at\": \"1968-04-05T04:18:07.841Z\",\n  \"company_title\": \"string\",\n  \"prongs\": [\n    \"ownership\",\n    \"control\"\n  ],\n  \"idempotency_key\": \"string\",\n  \"type\": \"entity_beneficial_owner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7054bcd-644b-49fe-8a9c-da3b857ff322",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<string>\",\n  \"prongs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"individual\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"company_title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33ef6832-aa29-44c0-8c3a-86f399089629",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<string>\",\n  \"prongs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"individual\": {\n    \"name\": \"<string>\",\n    \"date_of_birth\": \"<date>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip\": \"<string>\"\n    },\n    \"identification\": {\n      \"method\": \"<string>\",\n      \"number\": \"<string>\",\n      \"drivers_license\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"state\": \"<string>\",\n        \"back_file_id\": \"<string>\"\n      },\n      \"other\": {\n        \"country\": \"<string>\",\n        \"description\": \"<string>\",\n        \"file_id\": \"<string>\",\n        \"back_file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\"\n      },\n      \"passport\": {\n        \"file_id\": \"<string>\",\n        \"expiration_date\": \"<date>\",\n        \"country\": \"<string>\"\n      }\n    },\n    \"confirmed_no_us_tax_id\": \"<boolean>\"\n  },\n  \"company_title\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4aebed1-3c9d-4280-ac80-5d462480c046",
+          "name": "Retrieve a Beneficial Owner",
+          "request": {
+            "name": "Retrieve a Beneficial Owner",
+            "description": {},
+            "url": {
+              "path": [
+                "entity_beneficial_owners",
+                ":entity_beneficial_owner_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_beneficial_owner_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a63d6eae-586f-4f76-8956-fe18149d1f2f",
+              "name": "Beneficial Owner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"entity_id\": \"string\",\n  \"individual\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1956-07-06\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"other\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"created_at\": \"1968-04-05T04:18:07.841Z\",\n  \"company_title\": \"string\",\n  \"prongs\": [\n    \"ownership\",\n    \"control\"\n  ],\n  \"idempotency_key\": \"string\",\n  \"type\": \"entity_beneficial_owner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b98d85-878b-4b6e-a58b-8c7e09ed7cb8",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17c0c297-c16c-4a1b-a026-1e63bc57fa8b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39b8bb9e-08af-4872-a7ee-577211a331a9",
+          "name": "Update a Beneficial Owner",
+          "request": {
+            "name": "Update a Beneficial Owner",
+            "description": {},
+            "url": {
+              "path": [
+                "entity_beneficial_owners",
+                ":entity_beneficial_owner_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_beneficial_owner_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zip\": \"<string>\"\n  },\n  \"confirmed_no_us_tax_id\": \"<boolean>\",\n  \"identification\": {\n    \"method\": \"<string>\",\n    \"number\": \"<string>\",\n    \"drivers_license\": {\n      \"file_id\": \"<string>\",\n      \"expiration_date\": \"<date>\",\n      \"state\": \"<string>\",\n      \"back_file_id\": \"<string>\"\n    },\n    \"other\": {\n      \"country\": \"<string>\",\n      \"description\": \"<string>\",\n      \"file_id\": \"<string>\",\n      \"back_file_id\": \"<string>\",\n      \"expiration_date\": \"<date>\"\n    },\n    \"passport\": {\n      \"file_id\": \"<string>\",\n      \"expiration_date\": \"<date>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "338756df-34f2-487b-969a-42d0a0183687",
+              "name": "Beneficial Owner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"line2\": \"Unit 2\",\n    \"state\": \"NY\",\n    \"zip\": \"10045\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"entity_id\": \"string\",\n  \"individual\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1956-07-06\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"other\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"created_at\": \"1968-04-05T04:18:07.841Z\",\n  \"company_title\": \"string\",\n  \"prongs\": [\n    \"ownership\",\n    \"control\"\n  ],\n  \"idempotency_key\": \"string\",\n  \"type\": \"entity_beneficial_owner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67a3af76-fcea-4dfe-8b0a-7fc1f06ce8b8",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"line2\": \"Unit 2\",\n    \"state\": \"NY\",\n    \"zip\": \"10045\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bdb7cfc-69e3-4b1a-bfc9-cc28df12d970",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"line2\": \"Unit 2\",\n    \"state\": \"NY\",\n    \"zip\": \"10045\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1b11d82-f646-4e73-9d9f-c0e7a97bcd23",
+          "name": "Archive a Beneficial Owner",
+          "request": {
+            "name": "Archive a Beneficial Owner",
+            "description": {},
+            "url": {
+              "path": [
+                "entity_beneficial_owners",
+                ":entity_beneficial_owner_id",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_beneficial_owner_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "259ab60a-8222-4e47-bc41-74444036c775",
+              "name": "Beneficial Owner",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"entity_id\": \"string\",\n  \"individual\": {\n    \"name\": \"string\",\n    \"date_of_birth\": \"1956-07-06\",\n    \"address\": {\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zip\": \"string\",\n      \"country\": \"string\"\n    },\n    \"identification\": {\n      \"method\": \"other\",\n      \"number_last4\": \"string\"\n    }\n  },\n  \"created_at\": \"1968-04-05T04:18:07.841Z\",\n  \"company_title\": \"string\",\n  \"prongs\": [\n    \"ownership\",\n    \"control\"\n  ],\n  \"idempotency_key\": \"string\",\n  \"type\": \"entity_beneficial_owner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbd98439-ef21-4f81-939a-139ae25a1ef6",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a65259c-9731-4eda-b65d-9ae080f7b496",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_beneficial_owners",
+                    ":entity_beneficial_owner_id",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_beneficial_owner_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "34c809f3-7038-49e7-8ee8-eb44979a9722",
+    "name": "Increase Account Numbers Entity Beneficial Owners API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

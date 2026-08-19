@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Swift Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Swift Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Swift Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/swift_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Swift Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a Swift Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/swift_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Swift Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Swift Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/swift_transfers/:swift_transfer_id",
+            "params": [
+              {
+                "name": "swift_transfer_id",
+                "value": "swift_transfer_29h21xkng03788zwd3fh",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Swift Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a Swift Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/swift_transfers/:swift_transfer_id/approve",
+            "params": [
+              {
+                "name": "swift_transfer_id",
+                "value": "swift_transfer_29h21xkng03788zwd3fh",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a Swift Transfer"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending Swift Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/swift_transfers/:swift_transfer_id/cancel",
+            "params": [
+              {
+                "name": "swift_transfer_id",
+                "value": "swift_transfer_29h21xkng03788zwd3fh",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending Swift Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

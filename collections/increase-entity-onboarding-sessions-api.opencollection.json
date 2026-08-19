@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Entity Onboarding Sessions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity Onboarding Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Entity Onboarding Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entity_onboarding_sessions",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Entity Onboarding Session"
+        },
+        {
+          "info": {
+            "name": "Create an Entity Onboarding Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entity_onboarding_sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Entity Onboarding Session"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Entity Onboarding Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entity_onboarding_sessions/:entity_onboarding_session_id",
+            "params": [
+              {
+                "name": "entity_onboarding_session_id",
+                "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Entity Onboarding Session"
+        },
+        {
+          "info": {
+            "name": "Expire an Entity Onboarding Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entity_onboarding_sessions/:entity_onboarding_session_id/expire",
+            "params": [
+              {
+                "name": "entity_onboarding_session_id",
+                "value": "entity_onboarding_session_wid2ug11fsmvh3k9hymd",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Expire an Entity Onboarding Session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

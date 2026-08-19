@@ -1,0 +1,556 @@
+{
+  "item": [
+    {
+      "id": "5e560926-dd63-4be5-a9de-6db7c46cba02",
+      "name": "Declined Transactions",
+      "description": {
+        "content": "Declined Transactions are refused additions and removals of money from your bank account. For example, Declined Transactions are caused when your Account has an insufficient balance or your Limits are triggered.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7be86481-f57d-44d8-be76-c5283376610d",
+          "name": "List Declined Transactions",
+          "request": {
+            "name": "List Declined Transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "declined_transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "route_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category.in",
+                  "value": "<string>,<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "038f8843-59a6-4805-a9a7-7eec48fe349a",
+              "name": "Declined Transaction List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"declined_transaction\",\n      \"account_id\": \"string\",\n      \"amount\": 686,\n      \"currency\": \"USD\",\n      \"created_at\": \"1975-01-07T04:26:37.831Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"route_id\": \"string\",\n      \"route_type\": \"card\",\n      \"source\": {\n        \"category\": \"check_deposit_rejection\",\n        \"ach_decline\": {\n          \"type\": \"ach_decline\",\n          \"id\": \"string\",\n          \"amount\": 1938,\n          \"originator_company_name\": \"string\",\n          \"originator_company_descriptive_date\": \"string\",\n          \"originator_company_discretionary_data\": \"string\",\n          \"originator_company_id\": \"string\",\n          \"reason\": \"payment_stopped\",\n          \"receiver_id_number\": \"string\",\n          \"receiver_name\": \"string\",\n          \"trace_number\": \"string\",\n          \"inbound_ach_transfer_id\": \"string\"\n        },\n        \"card_decline\": {\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_descriptor\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"terminal_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"digital_wallet_token_id\": \"string\",\n          \"physical_card_id\": \"string\",\n          \"verification\": {\n            \"cardholder_address\": {\n              \"provided_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"result\": \"postal_code_no_match_address_match\"\n            },\n            \"cardholder_name\": {\n              \"provided_first_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_middle_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_last_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"card_verification_code\": {\n              \"result\": \"no_match\"\n            }\n          },\n          \"additional_amounts\": {\n            \"total_healthcare\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"total_cumulative\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"surcharge\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"transit\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"vision\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"clinic\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"dental\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"prescription\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"original\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"unknown\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"network_identifiers\": {\n            \"transaction_id\": \"string\",\n            \"trace_number\": \"string\",\n            \"retrieval_reference_number\": \"string\",\n            \"authorization_identification_response\": \"string\"\n          },\n          \"network_risk_score\": 9660,\n          \"network_details\": {\n            \"category\": \"pulse\",\n            \"visa\": {\n              \"electronic_commerce_indicator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point_of_service_entry_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"stand_in_processing_reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"terminal_entry_capability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"pulse\": {}\n          },\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"amount\": 1257,\n          \"presentment_amount\": 5518,\n          \"presentment_currency\": \"string\",\n          \"currency\": \"USD\",\n          \"processing_category\": \"bill_payment\",\n          \"reason\": \"entity_not_active\",\n          \"real_time_decision_reason\": \"suspected_fraud\",\n          \"incremented_card_authorization_id\": \"string\",\n          \"actioner\": \"user\",\n          \"direction\": \"refund\",\n          \"real_time_decision_id\": \"string\",\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"declined_transaction_id\": \"string\"\n        },\n        \"check_decline\": {\n          \"amount\": 8442,\n          \"auxiliary_on_us\": \"string\",\n          \"reason\": \"unusable_image\",\n          \"front_image_file_id\": \"string\",\n          \"back_image_file_id\": \"string\",\n          \"inbound_check_deposit_id\": \"string\",\n          \"check_transfer_id\": \"string\"\n        },\n        \"check_deposit_rejection\": {\n          \"amount\": 1750,\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"currency\": \"USD\",\n          \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n          \"reason\": \"incomplete_image\",\n          \"rejected_at\": \"2020-01-31T23:59:59Z\"\n        },\n        \"inbound_fednow_transfer_decline\": {\n          \"reason\": \"account_number_disabled\",\n          \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n        },\n        \"inbound_real_time_payments_transfer_decline\": {\n          \"amount\": 100,\n          \"creditor_name\": \"Ian Crease\",\n          \"currency\": \"USD\",\n          \"debtor_account_number\": \"987654321\",\n          \"debtor_name\": \"National Phonograph Company\",\n          \"debtor_routing_number\": \"101050001\",\n          \"reason\": \"account_number_disabled\",\n          \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n          \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"other\": {},\n        \"wire_decline\": {\n          \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\",\n          \"reason\": \"account_number_disabled\"\n        }\n      }\n    },\n    {\n      \"type\": \"declined_transaction\",\n      \"account_id\": \"string\",\n      \"amount\": 3133,\n      \"currency\": \"USD\",\n      \"created_at\": \"2003-12-03T09:46:11.571Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"route_id\": \"string\",\n      \"route_type\": \"account_number\",\n      \"source\": {\n        \"category\": \"check_decline\",\n        \"ach_decline\": {\n          \"type\": \"ach_decline\",\n          \"id\": \"string\",\n          \"amount\": 5586,\n          \"originator_company_name\": \"string\",\n          \"originator_company_descriptive_date\": \"string\",\n          \"originator_company_discretionary_data\": \"string\",\n          \"originator_company_id\": \"string\",\n          \"reason\": \"beneficiary_or_account_holder_deceased\",\n          \"receiver_id_number\": \"string\",\n          \"receiver_name\": \"string\",\n          \"trace_number\": \"string\",\n          \"inbound_ach_transfer_id\": \"string\"\n        },\n        \"card_decline\": {\n          \"merchant_acceptor_id\": \"string\",\n          \"merchant_descriptor\": \"string\",\n          \"merchant_category_code\": \"string\",\n          \"terminal_id\": \"string\",\n          \"merchant_city\": \"string\",\n          \"merchant_state\": \"string\",\n          \"merchant_postal_code\": \"string\",\n          \"merchant_country\": \"string\",\n          \"digital_wallet_token_id\": \"string\",\n          \"physical_card_id\": \"string\",\n          \"verification\": {\n            \"cardholder_address\": {\n              \"provided_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"actual_line1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"result\": \"no_match\"\n            },\n            \"cardholder_name\": {\n              \"provided_first_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_middle_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"provided_last_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"card_verification_code\": {\n              \"result\": \"no_match\"\n            }\n          },\n          \"additional_amounts\": {\n            \"total_healthcare\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"total_cumulative\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"surcharge\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"transit\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"vision\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"clinic\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"dental\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"prescription\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"original\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"unknown\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"network_identifiers\": {\n            \"transaction_id\": \"string\",\n            \"trace_number\": \"string\",\n            \"retrieval_reference_number\": \"string\",\n            \"authorization_identification_response\": \"string\"\n          },\n          \"network_risk_score\": 7848,\n          \"network_details\": {\n            \"category\": \"visa\",\n            \"visa\": {\n              \"electronic_commerce_indicator\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"point_of_service_entry_mode\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"stand_in_processing_reason\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"terminal_entry_capability\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"pulse\": {}\n          },\n          \"id\": \"string\",\n          \"card_payment_id\": \"string\",\n          \"amount\": 9993,\n          \"presentment_amount\": 3458,\n          \"presentment_currency\": \"string\",\n          \"currency\": \"USD\",\n          \"processing_category\": \"bill_payment\",\n          \"reason\": \"declined_by_stand_in_processing\",\n          \"real_time_decision_reason\": \"card_temporarily_disabled\",\n          \"incremented_card_authorization_id\": \"string\",\n          \"actioner\": \"increase\",\n          \"direction\": \"settlement\",\n          \"real_time_decision_id\": \"string\",\n          \"scheme_fees\": [\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            },\n            {\n              \"amount\": \"0.137465\",\n              \"created_at\": \"2020-01-31T23:59:59Z\",\n              \"currency\": \"USD\",\n              \"fee_type\": \"visa_corporate_acceptance_fee\",\n              \"fixed_component\": null,\n              \"variable_rate\": \"0.0002\"\n            }\n          ],\n          \"declined_transaction_id\": \"string\"\n        },\n        \"check_decline\": {\n          \"amount\": 754,\n          \"auxiliary_on_us\": \"string\",\n          \"reason\": \"amount_mismatch\",\n          \"front_image_file_id\": \"string\",\n          \"back_image_file_id\": \"string\",\n          \"inbound_check_deposit_id\": \"string\",\n          \"check_transfer_id\": \"string\"\n        },\n        \"check_deposit_rejection\": {\n          \"amount\": 1750,\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"currency\": \"USD\",\n          \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n          \"reason\": \"incomplete_image\",\n          \"rejected_at\": \"2020-01-31T23:59:59Z\"\n        },\n        \"inbound_fednow_transfer_decline\": {\n          \"reason\": \"account_number_disabled\",\n          \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n        },\n        \"inbound_real_time_payments_transfer_decline\": {\n          \"amount\": 100,\n          \"creditor_name\": \"Ian Crease\",\n          \"currency\": \"USD\",\n          \"debtor_account_number\": \"987654321\",\n          \"debtor_name\": \"National Phonograph Company\",\n          \"debtor_routing_number\": \"101050001\",\n          \"reason\": \"account_number_disabled\",\n          \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n          \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n          \"unstructured_remittance_information\": \"Invoice 29582\"\n        },\n        \"other\": {},\n        \"wire_decline\": {\n          \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\",\n          \"reason\": \"account_number_disabled\"\n        }\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef91ead2-f397-4656-b833-c4da4cb00bc3",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5a1951c-6819-44cb-a38d-abdc32f144ee",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "route_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6d0d127-dad5-43a3-b65b-5910106ebbba",
+          "name": "Retrieve a Declined Transaction",
+          "request": {
+            "name": "Retrieve a Declined Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "declined_transactions",
+                ":declined_transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "declined_transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5434c551-cc1c-4973-884c-9f3c3d24315e",
+              "name": "Declined Transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions",
+                    ":declined_transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "declined_transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"declined_transaction\",\n  \"account_id\": \"string\",\n  \"amount\": 3958,\n  \"currency\": \"USD\",\n  \"created_at\": \"1959-07-06T22:23:00.451Z\",\n  \"description\": \"string\",\n  \"id\": \"string\",\n  \"route_id\": \"string\",\n  \"route_type\": \"account_number\",\n  \"source\": {\n    \"category\": \"card_decline\",\n    \"ach_decline\": {\n      \"type\": \"ach_decline\",\n      \"id\": \"string\",\n      \"amount\": 133,\n      \"originator_company_name\": \"string\",\n      \"originator_company_descriptive_date\": \"string\",\n      \"originator_company_discretionary_data\": \"string\",\n      \"originator_company_id\": \"string\",\n      \"reason\": \"ach_route_disabled\",\n      \"receiver_id_number\": \"string\",\n      \"receiver_name\": \"string\",\n      \"trace_number\": \"string\",\n      \"inbound_ach_transfer_id\": \"string\"\n    },\n    \"card_decline\": {\n      \"merchant_acceptor_id\": \"string\",\n      \"merchant_descriptor\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"terminal_id\": \"string\",\n      \"merchant_city\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_country\": \"string\",\n      \"digital_wallet_token_id\": \"string\",\n      \"physical_card_id\": \"string\",\n      \"verification\": {\n        \"cardholder_address\": {\n          \"provided_postal_code\": \"string\",\n          \"provided_line1\": \"string\",\n          \"actual_postal_code\": \"string\",\n          \"actual_line1\": \"string\",\n          \"result\": \"match\"\n        },\n        \"cardholder_name\": {\n          \"provided_first_name\": \"string\",\n          \"provided_middle_name\": \"string\",\n          \"provided_last_name\": \"string\"\n        },\n        \"card_verification_code\": {\n          \"result\": \"match\"\n        }\n      },\n      \"additional_amounts\": {\n        \"total_healthcare\": {\n          \"amount\": 1886,\n          \"currency\": \"string\"\n        },\n        \"total_cumulative\": {\n          \"amount\": 1243,\n          \"currency\": \"string\"\n        },\n        \"surcharge\": {\n          \"amount\": 6200,\n          \"currency\": \"string\"\n        },\n        \"transit\": {\n          \"amount\": 6817,\n          \"currency\": \"string\"\n        },\n        \"vision\": {\n          \"amount\": 1555,\n          \"currency\": \"string\"\n        },\n        \"clinic\": {\n          \"amount\": 4228,\n          \"currency\": \"string\"\n        },\n        \"dental\": {\n          \"amount\": 9283,\n          \"currency\": \"string\"\n        },\n        \"prescription\": {\n          \"amount\": 2935,\n          \"currency\": \"string\"\n        },\n        \"original\": {\n          \"amount\": 8211,\n          \"currency\": \"string\"\n        },\n        \"unknown\": {\n          \"amount\": 546,\n          \"currency\": \"string\"\n        }\n      },\n      \"network_identifiers\": {\n        \"transaction_id\": \"string\",\n        \"trace_number\": \"string\",\n        \"retrieval_reference_number\": \"string\",\n        \"authorization_identification_response\": \"string\"\n      },\n      \"network_risk_score\": 4410,\n      \"network_details\": {\n        \"category\": \"visa\",\n        \"visa\": {\n          \"electronic_commerce_indicator\": \"non_authenticated_security_transaction\",\n          \"point_of_service_entry_mode\": \"optical_code\",\n          \"stand_in_processing_reason\": \"invalid_cryptogram\",\n          \"terminal_entry_capability\": \"terminal_not_used\"\n        },\n        \"pulse\": {}\n      },\n      \"id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"amount\": 233,\n      \"presentment_amount\": 9486,\n      \"presentment_currency\": \"string\",\n      \"currency\": \"USD\",\n      \"processing_category\": \"balance_inquiry\",\n      \"reason\": \"account_closed\",\n      \"real_time_decision_reason\": \"insufficient_funds\",\n      \"incremented_card_authorization_id\": \"string\",\n      \"actioner\": \"network\",\n      \"direction\": \"refund\",\n      \"real_time_decision_id\": \"string\",\n      \"scheme_fees\": [\n        {\n          \"created_at\": \"1946-10-31T19:16:13.878Z\",\n          \"amount\": \"-113551883\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_authorization_reversal_point_of_sale\",\n          \"variable_rate\": \"672457.153795351\",\n          \"fixed_component\": \"30.100\"\n        },\n        {\n          \"created_at\": \"2000-02-13T20:49:04.296Z\",\n          \"amount\": \"6579\",\n          \"currency\": \"USD\",\n          \"fee_type\": \"visa_service_commercial_credit\",\n          \"variable_rate\": \"6\",\n          \"fixed_component\": \"349242977.86\"\n        }\n      ],\n      \"declined_transaction_id\": \"string\"\n    },\n    \"check_decline\": {\n      \"amount\": 9963,\n      \"auxiliary_on_us\": \"string\",\n      \"reason\": \"altered_or_fictitious\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"inbound_check_deposit_id\": \"string\",\n      \"check_transfer_id\": \"string\"\n    },\n    \"check_deposit_rejection\": {\n      \"amount\": 1750,\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"currency\": \"USD\",\n      \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n      \"reason\": \"incomplete_image\",\n      \"rejected_at\": \"2020-01-31T23:59:59Z\"\n    },\n    \"inbound_fednow_transfer_decline\": {\n      \"reason\": \"account_number_disabled\",\n      \"transfer_id\": \"inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20\"\n    },\n    \"inbound_real_time_payments_transfer_decline\": {\n      \"amount\": 100,\n      \"creditor_name\": \"Ian Crease\",\n      \"currency\": \"USD\",\n      \"debtor_account_number\": \"987654321\",\n      \"debtor_name\": \"National Phonograph Company\",\n      \"debtor_routing_number\": \"101050001\",\n      \"reason\": \"account_number_disabled\",\n      \"transaction_identification\": \"20220501234567891T1BSLZO01745013025\",\n      \"transfer_id\": \"inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr\",\n      \"unstructured_remittance_information\": \"Invoice 29582\"\n    },\n    \"other\": {},\n    \"wire_decline\": {\n      \"inbound_wire_transfer_id\": \"inbound_wire_transfer_f228m6bmhtcxjco9pwp0\",\n      \"reason\": \"account_number_disabled\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e582b6f7-f598-4f00-b860-fcd46a5c92f4",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions",
+                    ":declined_transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "declined_transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "628f3429-c203-48f9-a86f-720b402c2b01",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declined_transactions",
+                    ":declined_transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "declined_transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2eb81bd2-c7b7-47bd-a110-58c3f3ad7b48",
+    "name": "Increase Account Numbers Declined Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

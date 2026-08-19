@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Real Time Decisions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real Time Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a Real-Time Decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/real_time_decisions/:real_time_decision_id",
+            "params": [
+              {
+                "name": "real_time_decision_id",
+                "value": "real_time_decision_j76n2e810ezcg3zh5qtn",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Real-Time Decision"
+        },
+        {
+          "info": {
+            "name": "Action a Real-Time Decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/real_time_decisions/:real_time_decision_id/action",
+            "params": [
+              {
+                "name": "real_time_decision_id",
+                "value": "real_time_decision_j76n2e810ezcg3zh5qtn",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Action a Real-Time Decision"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

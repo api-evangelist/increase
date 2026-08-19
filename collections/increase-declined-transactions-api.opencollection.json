@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Declined Transactions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Declined Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Declined Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/declined_transactions",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "route_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category.in",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Declined Transactions"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Declined Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/declined_transactions/:declined_transaction_id",
+            "params": [
+              {
+                "name": "declined_transaction_id",
+                "value": "declined_transaction_17jbn0yyhvkt4v4ooym8",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Declined Transaction"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

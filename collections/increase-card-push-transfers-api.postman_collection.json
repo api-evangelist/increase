@@ -1,0 +1,1162 @@
+{
+  "item": [
+    {
+      "id": "f0606a4a-8ae6-47da-8471-135317650038",
+      "name": "Card Push Transfers",
+      "description": {
+        "content": "Card Push Transfers send funds to a recipient's payment card in real-time.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da54b05c-f2c7-483d-bebe-234b97eefb9c",
+          "name": "List Card Push Transfers",
+          "request": {
+            "name": "List Card Push Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "card_push_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf01ce6d-3b47-407a-bd97-1a5aa3f873e1",
+              "name": "Card Push Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"card_push_transfer\",\n      \"id\": \"string\",\n      \"card_token_id\": \"string\",\n      \"created_at\": \"2017-11-13T01:55:54.973Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"approval\": {\n        \"approved_at\": \"2014-09-10T04:14:07.262Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"2023-09-09T00:23:51.930Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"status\": \"pending_submission\",\n      \"presentment_amount\": {\n        \"currency\": \"USD\",\n        \"value\": \"12.34\"\n      },\n      \"merchant_city_name\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"merchant_name\": \"string\",\n      \"merchant_name_prefix\": \"string\",\n      \"sender_name\": \"string\",\n      \"sender_address_line1\": \"string\",\n      \"sender_address_city\": \"string\",\n      \"sender_address_state\": \"string\",\n      \"sender_address_postal_code\": \"string\",\n      \"recipient_name\": \"string\",\n      \"business_application_identifier\": \"merchant_payment\",\n      \"route\": \"visa\",\n      \"submission\": {\n        \"retrieval_reference_number\": \"123456789012\",\n        \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"trace_number\": \"123456\"\n      },\n      \"decline\": {\n        \"declined_at\": \"2020-01-31T23:59:59Z\",\n        \"network_transaction_identifier\": \"841488484271872\",\n        \"reason\": \"transaction_not_permitted_to_cardholder\"\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"2024-11-21T05:50:16.541Z\",\n        \"settlement_amount\": 7403,\n        \"authorization_identification_response\": \"string\",\n        \"network_transaction_identifier\": \"string\",\n        \"card_verification_value2_result\": \"match\"\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"card_push_transfer\",\n      \"id\": \"string\",\n      \"card_token_id\": \"string\",\n      \"created_at\": \"1969-11-14T13:34:13.116Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"approval\": {\n        \"approved_at\": \"2020-08-02T04:04:24.231Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"2023-08-29T00:09:04.319Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"status\": \"pending_reviewing\",\n      \"presentment_amount\": {\n        \"currency\": \"USD\",\n        \"value\": \"12.34\"\n      },\n      \"merchant_city_name\": \"string\",\n      \"merchant_state\": \"string\",\n      \"merchant_postal_code\": \"string\",\n      \"merchant_category_code\": \"string\",\n      \"merchant_name\": \"string\",\n      \"merchant_name_prefix\": \"string\",\n      \"sender_name\": \"string\",\n      \"sender_address_line1\": \"string\",\n      \"sender_address_city\": \"string\",\n      \"sender_address_state\": \"string\",\n      \"sender_address_postal_code\": \"string\",\n      \"recipient_name\": \"string\",\n      \"business_application_identifier\": \"wallet_transfer\",\n      \"route\": \"visa\",\n      \"submission\": {\n        \"retrieval_reference_number\": \"123456789012\",\n        \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n        \"submitted_at\": \"2020-01-31T23:59:59Z\",\n        \"trace_number\": \"123456\"\n      },\n      \"decline\": {\n        \"declined_at\": \"2020-01-31T23:59:59Z\",\n        \"network_transaction_identifier\": \"841488484271872\",\n        \"reason\": \"transaction_not_permitted_to_cardholder\"\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"2017-05-28T01:23:01.477Z\",\n        \"settlement_amount\": 8784,\n        \"authorization_identification_response\": \"string\",\n        \"network_transaction_identifier\": \"string\",\n        \"card_verification_value2_result\": \"match\"\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3bd9daf-dbb7-4c97-8140-48deee74df53",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ab9352d-1377-48c0-a58c-07dd9bb7cef6",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd99764c-238b-4e92-9c4f-829185413b6d",
+          "name": "Create a Card Push Transfer",
+          "request": {
+            "name": "Create a Card Push Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "card_push_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source_account_number_id\": \"<string>\",\n  \"card_token_id\": \"<string>\",\n  \"presentment_amount\": {\n    \"value\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"merchant_city_name\": \"<string>\",\n  \"merchant_state\": \"<string>\",\n  \"merchant_postal_code\": \"<string>\",\n  \"merchant_category_code\": \"<string>\",\n  \"merchant_name\": \"<string>\",\n  \"merchant_name_prefix\": \"<string>\",\n  \"sender_name\": \"<string>\",\n  \"sender_address_line1\": \"<string>\",\n  \"sender_address_city\": \"<string>\",\n  \"sender_address_state\": \"<string>\",\n  \"sender_address_postal_code\": \"<string>\",\n  \"recipient_name\": \"<string>\",\n  \"business_application_identifier\": \"<string>\",\n  \"merchant_legal_business_name\": \"<string>\",\n  \"merchant_street_address\": \"<string>\",\n  \"recipient_address_city\": \"<string>\",\n  \"recipient_address_line1\": \"<string>\",\n  \"recipient_address_postal_code\": \"<string>\",\n  \"recipient_address_state\": \"<string>\",\n  \"require_approval\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1314d73-8b39-4a5f-9ce9-5f04c33cf50b",
+              "name": "Card Push Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"merchant_category_code\": \"5734\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_name_prefix\": \"Acme\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"1234.56\"\n  },\n  \"recipient_name\": \"Ian Crease\",\n  \"sender_address_city\": \"New York\",\n  \"sender_address_line1\": \"33 Liberty Street\",\n  \"sender_address_postal_code\": \"10045\",\n  \"sender_address_state\": \"NY\",\n  \"sender_name\": \"Ian Crease\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_push_transfer\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2010-09-27T00:03:15.270Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"approval\": {\n    \"approved_at\": \"1950-01-23T01:24:19.687Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1983-01-06T15:16:12.461Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"12.34\"\n  },\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"merchant_name_prefix\": \"string\",\n  \"sender_name\": \"string\",\n  \"sender_address_line1\": \"string\",\n  \"sender_address_city\": \"string\",\n  \"sender_address_state\": \"string\",\n  \"sender_address_postal_code\": \"string\",\n  \"recipient_name\": \"string\",\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"route\": \"visa\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2002-09-09T20:31:15.651Z\",\n    \"settlement_amount\": 5432,\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"card_verification_value2_result\": \"no_match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7fbd4c0-dcd4-40ba-9f5b-cce317150e74",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"merchant_category_code\": \"5734\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_name_prefix\": \"Acme\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"1234.56\"\n  },\n  \"recipient_name\": \"Ian Crease\",\n  \"sender_address_city\": \"New York\",\n  \"sender_address_line1\": \"33 Liberty Street\",\n  \"sender_address_postal_code\": \"10045\",\n  \"sender_address_state\": \"NY\",\n  \"sender_name\": \"Ian Crease\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f5bf084-33f6-4a6d-9b2f-269a18c21f4b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"card_token_id\": \"outbound_card_token_zlt0ml6youq3q7vcdlg0\",\n  \"merchant_category_code\": \"5734\",\n  \"merchant_city_name\": \"New York\",\n  \"merchant_name\": \"Acme Corp\",\n  \"merchant_name_prefix\": \"Acme\",\n  \"merchant_postal_code\": \"10045\",\n  \"merchant_state\": \"NY\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"1234.56\"\n  },\n  \"recipient_name\": \"Ian Crease\",\n  \"sender_address_city\": \"New York\",\n  \"sender_address_line1\": \"33 Liberty Street\",\n  \"sender_address_postal_code\": \"10045\",\n  \"sender_address_state\": \"NY\",\n  \"sender_name\": \"Ian Crease\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0389045-5497-4e97-b79f-a52e231fef20",
+          "name": "Retrieve a Card Push Transfer",
+          "request": {
+            "name": "Retrieve a Card Push Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "card_push_transfers",
+                ":card_push_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_push_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28c7639b-abe9-43ee-9448-79bb72391e0a",
+              "name": "Card Push Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_push_transfer\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2010-09-27T00:03:15.270Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"approval\": {\n    \"approved_at\": \"1950-01-23T01:24:19.687Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1983-01-06T15:16:12.461Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"12.34\"\n  },\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"merchant_name_prefix\": \"string\",\n  \"sender_name\": \"string\",\n  \"sender_address_line1\": \"string\",\n  \"sender_address_city\": \"string\",\n  \"sender_address_state\": \"string\",\n  \"sender_address_postal_code\": \"string\",\n  \"recipient_name\": \"string\",\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"route\": \"visa\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2002-09-09T20:31:15.651Z\",\n    \"settlement_amount\": 5432,\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"card_verification_value2_result\": \"no_match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5262fcd-9e6d-441d-81a7-0529f0d81496",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc60c73f-b156-4e92-8036-73c4e9d703f7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e551307b-41b7-4f57-b888-31423251a0aa",
+          "name": "Approve a Card Push Transfer",
+          "request": {
+            "name": "Approve a Card Push Transfer",
+            "description": {
+              "content": "Approves a Card Push Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "card_push_transfers",
+                ":card_push_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_push_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "377e5948-001f-43f2-ac26-a445b9f5564c",
+              "name": "Card Push Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_push_transfer\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2010-09-27T00:03:15.270Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"approval\": {\n    \"approved_at\": \"1950-01-23T01:24:19.687Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1983-01-06T15:16:12.461Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"12.34\"\n  },\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"merchant_name_prefix\": \"string\",\n  \"sender_name\": \"string\",\n  \"sender_address_line1\": \"string\",\n  \"sender_address_city\": \"string\",\n  \"sender_address_state\": \"string\",\n  \"sender_address_postal_code\": \"string\",\n  \"recipient_name\": \"string\",\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"route\": \"visa\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2002-09-09T20:31:15.651Z\",\n    \"settlement_amount\": 5432,\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"card_verification_value2_result\": \"no_match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e76f2736-8007-41cc-817c-59f73f55ed6f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "808cef2b-17cb-4934-824e-5037beb64981",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf5c6966-2ef3-42e4-9627-4b129cec7101",
+          "name": "Cancel a pending Card Push Transfer",
+          "request": {
+            "name": "Cancel a pending Card Push Transfer",
+            "description": {
+              "content": "Cancels a Card Push Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "card_push_transfers",
+                ":card_push_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_push_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8d6356a-1671-4d75-b43f-0e3a0cc75119",
+              "name": "Card Push Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_push_transfer\",\n  \"id\": \"string\",\n  \"card_token_id\": \"string\",\n  \"created_at\": \"2010-09-27T00:03:15.270Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"approval\": {\n    \"approved_at\": \"1950-01-23T01:24:19.687Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1983-01-06T15:16:12.461Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"presentment_amount\": {\n    \"currency\": \"USD\",\n    \"value\": \"12.34\"\n  },\n  \"merchant_city_name\": \"string\",\n  \"merchant_state\": \"string\",\n  \"merchant_postal_code\": \"string\",\n  \"merchant_category_code\": \"string\",\n  \"merchant_name\": \"string\",\n  \"merchant_name_prefix\": \"string\",\n  \"sender_name\": \"string\",\n  \"sender_address_line1\": \"string\",\n  \"sender_address_city\": \"string\",\n  \"sender_address_state\": \"string\",\n  \"sender_address_postal_code\": \"string\",\n  \"recipient_name\": \"string\",\n  \"business_application_identifier\": \"funds_disbursement\",\n  \"route\": \"visa\",\n  \"submission\": {\n    \"retrieval_reference_number\": \"123456789012\",\n    \"sender_reference\": \"OPQRRX3BNAKA6QLT\",\n    \"submitted_at\": \"2020-01-31T23:59:59Z\",\n    \"trace_number\": \"123456\"\n  },\n  \"decline\": {\n    \"declined_at\": \"2020-01-31T23:59:59Z\",\n    \"network_transaction_identifier\": \"841488484271872\",\n    \"reason\": \"transaction_not_permitted_to_cardholder\"\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2002-09-09T20:31:15.651Z\",\n    \"settlement_amount\": 5432,\n    \"authorization_identification_response\": \"string\",\n    \"network_transaction_identifier\": \"string\",\n    \"card_verification_value2_result\": \"no_match\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e34db00-62aa-4946-9994-6d9d59f032ab",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5209b87f-3513-4606-af78-fafa7a56c330",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_push_transfers",
+                    ":card_push_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_push_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "02e41b85-c49a-4278-a346-25c13a483770",
+    "name": "Increase Account Numbers Card Push Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

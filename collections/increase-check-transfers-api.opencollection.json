@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Check Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Check Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Check Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/check_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Check Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/check_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Check Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/check_transfers/:check_transfer_id",
+            "params": [
+              {
+                "name": "check_transfer_id",
+                "value": "check_transfer_30b43acfu9vw8fyc4f5",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Check Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/check_transfers/:check_transfer_id/approve",
+            "params": [
+              {
+                "name": "check_transfer_id",
+                "value": "check_transfer_30b43acfu9vw8fyc4f5",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a Check Transfer"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/check_transfers/:check_transfer_id/cancel",
+            "params": [
+              {
+                "name": "check_transfer_id",
+                "value": "check_transfer_30b43acfu9vw8fyc4f5",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a Check Transfer with the `pending_approval` status. See [Transfer Approvals](/documentation/transfer-approvals) for more information."
+        },
+        {
+          "info": {
+            "name": "Stop payment on a Check Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/check_transfers/:check_transfer_id/stop_payment",
+            "params": [
+              {
+                "name": "check_transfer_id",
+                "value": "check_transfer_30b43acfu9vw8fyc4f5",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stop payment on a Check Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

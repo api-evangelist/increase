@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Card Purchase Supplements API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Purchase Supplements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Card Purchase Supplements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_purchase_supplements",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "card_payment_id",
+                "value": "card_payment_nd3k2kacrqjli8482ave",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Card Purchase Supplements"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Card Purchase Supplement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_purchase_supplements/:card_purchase_supplement_id",
+            "params": [
+              {
+                "name": "card_purchase_supplement_id",
+                "value": "card_purchase_supplement_ijuc45iym4jchnh2sfk3",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Card Purchase Supplement"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

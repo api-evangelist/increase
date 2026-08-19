@@ -1,0 +1,737 @@
+{
+  "item": [
+    {
+      "id": "eb897db8-9c01-4ab1-b96f-754ec1ea9c06",
+      "name": "Check Deposits",
+      "description": {
+        "content": "Check Deposits allow you to deposit images of paper checks into your account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70ca79f8-1114-405a-b952-0e6fa9d62006",
+          "name": "List Check Deposits",
+          "request": {
+            "name": "List Check Deposits",
+            "description": {},
+            "url": {
+              "path": [
+                "check_deposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b020728-c17d-454d-836b-2cffc222a6a2",
+              "name": "Check Deposit List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"check_deposit\",\n      \"id\": \"string\",\n      \"amount\": 5168,\n      \"description\": \"string\",\n      \"created_at\": \"2013-07-04T14:55:52.632Z\",\n      \"status\": \"pending\",\n      \"account_id\": \"string\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"deposit_acceptance\": {\n        \"amount\": 904,\n        \"currency\": \"USD\",\n        \"account_number\": \"string\",\n        \"routing_number\": \"string\",\n        \"auxiliary_on_us\": \"string\",\n        \"serial_number\": \"string\",\n        \"check_deposit_id\": \"string\"\n      },\n      \"deposit_submission\": {\n        \"back_file_id\": \"file_frhw4s443nh7noss55kq\",\n        \"front_file_id\": \"file_j7ed9mrve741m6yui9ju\",\n        \"submitted_at\": \"2020-02-01T00:59:59+00:00\"\n      },\n      \"deposit_rejection\": {\n        \"amount\": 1750,\n        \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n        \"currency\": \"USD\",\n        \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n        \"reason\": \"incomplete_image\",\n        \"rejected_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"deposit_return\": {\n        \"amount\": 100,\n        \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n        \"currency\": \"USD\",\n        \"return_reason\": \"insufficient_funds\",\n        \"returned_at\": \"2020-01-31T23:59:59Z\",\n        \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n      },\n      \"inbound_funds_hold\": {\n        \"type\": \"inbound_funds_hold\",\n        \"amount\": 9344,\n        \"created_at\": \"1990-06-14T05:32:15.113Z\",\n        \"currency\": \"USD\",\n        \"automatically_releases_at\": \"1979-11-27T17:43:20.170Z\",\n        \"released_at\": \"2025-04-05T09:39:04.857Z\",\n        \"status\": \"held\",\n        \"held_transaction_id\": \"string\",\n        \"pending_transaction_id\": \"string\"\n      },\n      \"inbound_mail_item_id\": \"string\",\n      \"lockbox_recipient_id\": \"string\",\n      \"deposit_adjustments\": [\n        {\n          \"adjusted_at\": \"1969-02-24T09:06:05.852Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"adjusted_amount\",\n          \"amount\": 9743\n        },\n        {\n          \"adjusted_at\": \"2015-05-31T10:32:27.460Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"adjusted_amount\",\n          \"amount\": 83\n        }\n      ],\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"check_deposit\",\n      \"id\": \"string\",\n      \"amount\": 5844,\n      \"description\": \"string\",\n      \"created_at\": \"2023-02-02T15:38:08.300Z\",\n      \"status\": \"rejected\",\n      \"account_id\": \"string\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"deposit_acceptance\": {\n        \"amount\": 6160,\n        \"currency\": \"USD\",\n        \"account_number\": \"string\",\n        \"routing_number\": \"string\",\n        \"auxiliary_on_us\": \"string\",\n        \"serial_number\": \"string\",\n        \"check_deposit_id\": \"string\"\n      },\n      \"deposit_submission\": {\n        \"back_file_id\": \"file_frhw4s443nh7noss55kq\",\n        \"front_file_id\": \"file_j7ed9mrve741m6yui9ju\",\n        \"submitted_at\": \"2020-02-01T00:59:59+00:00\"\n      },\n      \"deposit_rejection\": {\n        \"amount\": 1750,\n        \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n        \"currency\": \"USD\",\n        \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n        \"reason\": \"incomplete_image\",\n        \"rejected_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"deposit_return\": {\n        \"amount\": 100,\n        \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n        \"currency\": \"USD\",\n        \"return_reason\": \"insufficient_funds\",\n        \"returned_at\": \"2020-01-31T23:59:59Z\",\n        \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n      },\n      \"inbound_funds_hold\": {\n        \"type\": \"inbound_funds_hold\",\n        \"amount\": 2779,\n        \"created_at\": \"1948-06-12T23:15:27.630Z\",\n        \"currency\": \"USD\",\n        \"automatically_releases_at\": \"1989-12-04T01:59:01.413Z\",\n        \"released_at\": \"2017-01-09T01:42:54.023Z\",\n        \"status\": \"complete\",\n        \"held_transaction_id\": \"string\",\n        \"pending_transaction_id\": \"string\"\n      },\n      \"inbound_mail_item_id\": \"string\",\n      \"lockbox_recipient_id\": \"string\",\n      \"deposit_adjustments\": [\n        {\n          \"adjusted_at\": \"1977-12-27T15:30:48.251Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"paid\",\n          \"amount\": 8976\n        },\n        {\n          \"adjusted_at\": \"1956-04-14T23:23:21.672Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"paid\",\n          \"amount\": 3579\n        }\n      ],\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "110973f0-b389-4fb0-bb4f-fb5817e87662",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bc705e7-f7ce-4ce8-a7bc-5f4e2f7ff914",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d35fe00-bcde-434f-a2bc-23e42679a3bb",
+          "name": "Create a Check Deposit",
+          "request": {
+            "name": "Create a Check Deposit",
+            "description": {},
+            "url": {
+              "path": [
+                "check_deposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"front_image_file_id\": \"<string>\",\n  \"back_image_file_id\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a65d861b-c6c7-487e-b5c4-56bc115f7a99",
+              "name": "Check Deposit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 1000,\n  \"back_image_file_id\": \"file_26khfk98mzfz90a11oqx\",\n  \"description\": \"Vendor payment\",\n  \"front_image_file_id\": \"file_hkv175ovmc2tb2v2zbrm\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_deposit\",\n  \"id\": \"string\",\n  \"amount\": 3199,\n  \"description\": \"string\",\n  \"created_at\": \"2011-12-01T10:57:20.718Z\",\n  \"status\": \"returned\",\n  \"account_id\": \"string\",\n  \"front_image_file_id\": \"string\",\n  \"back_image_file_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"deposit_acceptance\": {\n    \"amount\": 8494,\n    \"currency\": \"USD\",\n    \"account_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"auxiliary_on_us\": \"string\",\n    \"serial_number\": \"string\",\n    \"check_deposit_id\": \"string\"\n  },\n  \"deposit_submission\": {\n    \"back_file_id\": \"file_frhw4s443nh7noss55kq\",\n    \"front_file_id\": \"file_j7ed9mrve741m6yui9ju\",\n    \"submitted_at\": \"2020-02-01T00:59:59+00:00\"\n  },\n  \"deposit_rejection\": {\n    \"amount\": 1750,\n    \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n    \"currency\": \"USD\",\n    \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n    \"reason\": \"incomplete_image\",\n    \"rejected_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"deposit_return\": {\n    \"amount\": 100,\n    \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n    \"currency\": \"USD\",\n    \"return_reason\": \"insufficient_funds\",\n    \"returned_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 7665,\n    \"created_at\": \"2010-02-06T11:57:00.506Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"2012-05-09T18:04:31.471Z\",\n    \"released_at\": \"1997-09-11T07:48:31.521Z\",\n    \"status\": \"held\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"inbound_mail_item_id\": \"string\",\n  \"lockbox_recipient_id\": \"string\",\n  \"deposit_adjustments\": [\n    {\n      \"adjusted_at\": \"1982-10-08T09:52:49.219Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"paid\",\n      \"amount\": 688\n    },\n    {\n      \"adjusted_at\": \"1995-06-15T11:21:36.337Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"paid\",\n      \"amount\": 30\n    }\n  ],\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1044e89-c96c-4b1e-be3c-707f3aa16b95",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 1000,\n  \"back_image_file_id\": \"file_26khfk98mzfz90a11oqx\",\n  \"description\": \"Vendor payment\",\n  \"front_image_file_id\": \"file_hkv175ovmc2tb2v2zbrm\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "047f369c-df7a-42c1-87a9-7affe827eec9",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"amount\": 1000,\n  \"back_image_file_id\": \"file_26khfk98mzfz90a11oqx\",\n  \"description\": \"Vendor payment\",\n  \"front_image_file_id\": \"file_hkv175ovmc2tb2v2zbrm\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c4492fb-851b-447d-9ece-e6d33963913d",
+          "name": "Retrieve a Check Deposit",
+          "request": {
+            "name": "Retrieve a Check Deposit",
+            "description": {},
+            "url": {
+              "path": [
+                "check_deposits",
+                ":check_deposit_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "check_deposit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93a63033-618f-422a-8cc2-1bff42a5edbc",
+              "name": "Check Deposit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits",
+                    ":check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"check_deposit\",\n  \"id\": \"string\",\n  \"amount\": 3199,\n  \"description\": \"string\",\n  \"created_at\": \"2011-12-01T10:57:20.718Z\",\n  \"status\": \"returned\",\n  \"account_id\": \"string\",\n  \"front_image_file_id\": \"string\",\n  \"back_image_file_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"deposit_acceptance\": {\n    \"amount\": 8494,\n    \"currency\": \"USD\",\n    \"account_number\": \"string\",\n    \"routing_number\": \"string\",\n    \"auxiliary_on_us\": \"string\",\n    \"serial_number\": \"string\",\n    \"check_deposit_id\": \"string\"\n  },\n  \"deposit_submission\": {\n    \"back_file_id\": \"file_frhw4s443nh7noss55kq\",\n    \"front_file_id\": \"file_j7ed9mrve741m6yui9ju\",\n    \"submitted_at\": \"2020-02-01T00:59:59+00:00\"\n  },\n  \"deposit_rejection\": {\n    \"amount\": 1750,\n    \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n    \"currency\": \"USD\",\n    \"declined_transaction_id\": \"declined_transaction_17jbn0yyhvkt4v4ooym8\",\n    \"reason\": \"incomplete_image\",\n    \"rejected_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"deposit_return\": {\n    \"amount\": 100,\n    \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n    \"currency\": \"USD\",\n    \"return_reason\": \"insufficient_funds\",\n    \"returned_at\": \"2020-01-31T23:59:59Z\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 7665,\n    \"created_at\": \"2010-02-06T11:57:00.506Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"2012-05-09T18:04:31.471Z\",\n    \"released_at\": \"1997-09-11T07:48:31.521Z\",\n    \"status\": \"held\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"inbound_mail_item_id\": \"string\",\n  \"lockbox_recipient_id\": \"string\",\n  \"deposit_adjustments\": [\n    {\n      \"adjusted_at\": \"1982-10-08T09:52:49.219Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"paid\",\n      \"amount\": 688\n    },\n    {\n      \"adjusted_at\": \"1995-06-15T11:21:36.337Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"paid\",\n      \"amount\": 30\n    }\n  ],\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d647c489-b59c-4963-9daa-68efc8925e9b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits",
+                    ":check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3442d3f-4ec6-47bf-8eae-75f674434e84",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "check_deposits",
+                    ":check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1099205b-dfd2-427c-829f-158c3b1b62cf",
+    "name": "Increase Account Numbers Check Deposits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

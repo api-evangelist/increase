@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "ba560d74-4bae-4dd6-a626-61dd60ff427e",
+      "name": "Inbound Wire Drawdown Requests",
+      "description": {
+        "content": "Inbound wire drawdown requests are requests from someone else to send them a wire. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cca3704-6404-498a-83f6-dca924b9ecaf",
+          "name": "List Inbound Wire Drawdown Requests",
+          "request": {
+            "name": "List Inbound Wire Drawdown Requests",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_wire_drawdown_requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41303bfd-5d1b-48ca-93a2-1f8d9925d004",
+              "name": "Inbound Wire Drawdown Request List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inbound_wire_drawdown_request\",\n      \"id\": \"string\",\n      \"created_at\": \"1976-11-16T06:42:10.161Z\",\n      \"recipient_account_number_id\": \"string\",\n      \"amount\": 979,\n      \"currency\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"end_to_end_identification\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_routing_number\": \"string\",\n      \"creditor_account_number\": \"string\",\n      \"creditor_address_line1\": \"string\",\n      \"creditor_address_line2\": \"string\",\n      \"creditor_address_line3\": \"string\",\n      \"debtor_name\": \"string\",\n      \"debtor_address_line1\": \"string\",\n      \"debtor_address_line2\": \"string\",\n      \"debtor_address_line3\": \"string\",\n      \"unstructured_remittance_information\": \"string\"\n    },\n    {\n      \"type\": \"inbound_wire_drawdown_request\",\n      \"id\": \"string\",\n      \"created_at\": \"1976-10-02T02:33:22.036Z\",\n      \"recipient_account_number_id\": \"string\",\n      \"amount\": 1683,\n      \"currency\": \"string\",\n      \"input_message_accountability_data\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"instruction_identification\": \"string\",\n      \"end_to_end_identification\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_routing_number\": \"string\",\n      \"creditor_account_number\": \"string\",\n      \"creditor_address_line1\": \"string\",\n      \"creditor_address_line2\": \"string\",\n      \"creditor_address_line3\": \"string\",\n      \"debtor_name\": \"string\",\n      \"debtor_address_line1\": \"string\",\n      \"debtor_address_line2\": \"string\",\n      \"debtor_address_line3\": \"string\",\n      \"unstructured_remittance_information\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fee302a5-21ff-42cf-8e0f-5e96d46be6b2",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4e871ee-6b56-4482-bc4d-74dfe51d2950",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "957b6fb5-8e4e-4652-ae0e-5dfb35d4252d",
+          "name": "Retrieve an Inbound Wire Drawdown Request",
+          "request": {
+            "name": "Retrieve an Inbound Wire Drawdown Request",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_wire_drawdown_requests",
+                ":inbound_wire_drawdown_request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_wire_drawdown_request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0577e40a-516e-4162-92c1-5253e3d72153",
+              "name": "Inbound Wire Drawdown Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests",
+                    ":inbound_wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_wire_drawdown_request\",\n  \"id\": \"string\",\n  \"created_at\": \"2010-12-17T20:29:02.216Z\",\n  \"recipient_account_number_id\": \"string\",\n  \"amount\": 5877,\n  \"currency\": \"string\",\n  \"input_message_accountability_data\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"instruction_identification\": \"string\",\n  \"end_to_end_identification\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_routing_number\": \"string\",\n  \"creditor_account_number\": \"string\",\n  \"creditor_address_line1\": \"string\",\n  \"creditor_address_line2\": \"string\",\n  \"creditor_address_line3\": \"string\",\n  \"debtor_name\": \"string\",\n  \"debtor_address_line1\": \"string\",\n  \"debtor_address_line2\": \"string\",\n  \"debtor_address_line3\": \"string\",\n  \"unstructured_remittance_information\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90055b30-61ca-42ea-b21d-4c11a3c2e990",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests",
+                    ":inbound_wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa5e08bf-16dc-41cd-89a9-f479967d07d3",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_wire_drawdown_requests",
+                    ":inbound_wire_drawdown_request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_wire_drawdown_request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "602bcd89-d062-4134-b3b7-f386ac9fa925",
+    "name": "Increase Account Numbers Inbound Wire Drawdown Requests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Card Disputes API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Disputes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Card Disputes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_disputes",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Card Disputes"
+        },
+        {
+          "info": {
+            "name": "Create a Card Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_disputes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Card Dispute"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Card Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_disputes/:card_dispute_id",
+            "params": [
+              {
+                "name": "card_dispute_id",
+                "value": "card_dispute_h9sc95nbl1cgltpp7men",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Card Dispute"
+        },
+        {
+          "info": {
+            "name": "Submit a User Submission for a Card Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_disputes/:card_dispute_id/submit_user_submission",
+            "params": [
+              {
+                "name": "card_dispute_id",
+                "value": "card_dispute_h9sc95nbl1cgltpp7men",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a User Submission for a Card Dispute"
+        },
+        {
+          "info": {
+            "name": "Withdraw a Card Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_disputes/:card_dispute_id/withdraw",
+            "params": [
+              {
+                "name": "card_dispute_id",
+                "value": "card_dispute_h9sc95nbl1cgltpp7men",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw a Card Dispute"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1179 @@
+{
+  "item": [
+    {
+      "id": "1b7ad284-3bfe-4dd3-a3a2-788c1c5e1420",
+      "name": "Ach Transfers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "380cc8a9-ac89-4896-9221-833207514fc1",
+          "name": "List ACH Transfers",
+          "request": {
+            "name": "List ACH Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "ach_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9584f6f-cfb9-41e4-bc99-c71cab993aad",
+              "name": "ACH Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"ach_transfer\",\n      \"account_id\": \"string\",\n      \"account_number\": \"string\",\n      \"addenda\": {\n        \"category\": \"freeform\",\n        \"freeform\": {\n          \"entries\": [\n            {\n              \"payment_related_information\": \"addendum\"\n            }\n          ]\n        }\n      },\n      \"amount\": 7559,\n      \"currency\": \"USD\",\n      \"approval\": {\n        \"approved_at\": \"1990-02-27T05:12:46.564Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1946-08-18T06:11:27.653Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"created_at\": \"1968-05-12T21:22:44.274Z\",\n      \"destination_account_holder\": \"individual\",\n      \"external_account_id\": \"string\",\n      \"id\": \"string\",\n      \"network\": \"ach\",\n      \"notifications_of_change\": [\n        {\n          \"change_code\": \"incorrect_transaction_code\",\n          \"corrected_data\": \"32\",\n          \"created_at\": \"2020-01-31T23:59:59Z\"\n        },\n        {\n          \"change_code\": \"incorrect_transaction_code\",\n          \"corrected_data\": \"32\",\n          \"created_at\": \"2020-01-31T23:59:59Z\"\n        }\n      ],\n      \"return\": {\n        \"created_at\": \"2020-01-31T23:59:59Z\",\n        \"raw_return_reason_code\": \"R01\",\n        \"return_reason_code\": \"insufficient_fund\",\n        \"trace_number\": \"111122223292834\",\n        \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n        \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n      },\n      \"routing_number\": \"string\",\n      \"statement_descriptor\": \"string\",\n      \"status\": \"returned\",\n      \"submission\": {\n        \"trace_number\": \"string\",\n        \"submitted_at\": \"1992-08-02T23:46:35.291Z\",\n        \"expected_funds_settlement_at\": \"1982-05-27T11:05:07.577Z\",\n        \"effective_date\": \"2003-01-09\",\n        \"expected_settlement_schedule\": \"future_dated\",\n        \"administrative_returns_expected_by\": \"1957-03-13T20:03:35.396Z\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"settlement\": {\n        \"settled_at\": \"1983-07-25T08:46:48.177Z\"\n      },\n      \"inbound_funds_hold\": {\n        \"type\": \"inbound_funds_hold\",\n        \"amount\": 5726,\n        \"created_at\": \"1954-04-06T03:16:43.329Z\",\n        \"currency\": \"USD\",\n        \"automatically_releases_at\": \"1995-09-27T13:42:00.796Z\",\n        \"released_at\": \"1980-05-14T20:30:41.469Z\",\n        \"status\": \"complete\",\n        \"held_transaction_id\": \"string\",\n        \"pending_transaction_id\": \"string\"\n      },\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"company_descriptive_date\": \"string\",\n      \"company_discretionary_data\": \"string\",\n      \"company_entry_description\": \"string\",\n      \"company_name\": \"string\",\n      \"company_id\": \"string\",\n      \"funding\": \"checking\",\n      \"individual_id\": \"string\",\n      \"individual_name\": \"string\",\n      \"preferred_effective_date\": {\n        \"date\": \"1965-06-07\",\n        \"settlement_schedule\": \"same_day\"\n      },\n      \"standard_entry_class_code\": \"prearranged_payments_and_deposit\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"ach_transfer\",\n      \"account_id\": \"string\",\n      \"account_number\": \"string\",\n      \"addenda\": {\n        \"category\": \"freeform\",\n        \"freeform\": {\n          \"entries\": [\n            {\n              \"payment_related_information\": \"addendum\"\n            }\n          ]\n        }\n      },\n      \"amount\": 5053,\n      \"currency\": \"USD\",\n      \"approval\": {\n        \"approved_at\": \"1965-01-04T05:59:20.183Z\",\n        \"approved_by\": \"string\"\n      },\n      \"cancellation\": {\n        \"canceled_at\": \"1949-12-20T10:54:00.718Z\",\n        \"canceled_by\": \"string\"\n      },\n      \"created_at\": \"1984-09-09T23:03:49.185Z\",\n      \"destination_account_holder\": \"unknown\",\n      \"external_account_id\": \"string\",\n      \"id\": \"string\",\n      \"network\": \"ach\",\n      \"notifications_of_change\": [\n        {\n          \"change_code\": \"incorrect_transaction_code\",\n          \"corrected_data\": \"32\",\n          \"created_at\": \"2020-01-31T23:59:59Z\"\n        },\n        {\n          \"change_code\": \"incorrect_transaction_code\",\n          \"corrected_data\": \"32\",\n          \"created_at\": \"2020-01-31T23:59:59Z\"\n        }\n      ],\n      \"return\": {\n        \"created_at\": \"2020-01-31T23:59:59Z\",\n        \"raw_return_reason_code\": \"R01\",\n        \"return_reason_code\": \"insufficient_fund\",\n        \"trace_number\": \"111122223292834\",\n        \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n        \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n      },\n      \"routing_number\": \"string\",\n      \"statement_descriptor\": \"string\",\n      \"status\": \"pending_approval\",\n      \"submission\": {\n        \"trace_number\": \"string\",\n        \"submitted_at\": \"1979-12-22T14:31:30.795Z\",\n        \"expected_funds_settlement_at\": \"2007-07-10T06:46:14.409Z\",\n        \"effective_date\": \"2019-12-27\",\n        \"expected_settlement_schedule\": \"same_day\",\n        \"administrative_returns_expected_by\": \"2006-01-27T18:57:16.598Z\"\n      },\n      \"acknowledgement\": {\n        \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n      },\n      \"settlement\": {\n        \"settled_at\": \"1952-09-04T19:44:41.291Z\"\n      },\n      \"inbound_funds_hold\": {\n        \"type\": \"inbound_funds_hold\",\n        \"amount\": 9207,\n        \"created_at\": \"1954-10-10T17:26:06.164Z\",\n        \"currency\": \"USD\",\n        \"automatically_releases_at\": \"2016-07-27T13:27:59.593Z\",\n        \"released_at\": \"2004-11-17T07:35:56.221Z\",\n        \"status\": \"held\",\n        \"held_transaction_id\": \"string\",\n        \"pending_transaction_id\": \"string\"\n      },\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"company_descriptive_date\": \"string\",\n      \"company_discretionary_data\": \"string\",\n      \"company_entry_description\": \"string\",\n      \"company_name\": \"string\",\n      \"company_id\": \"string\",\n      \"funding\": \"checking\",\n      \"individual_id\": \"string\",\n      \"individual_name\": \"string\",\n      \"preferred_effective_date\": {\n        \"date\": \"1986-07-03\",\n        \"settlement_schedule\": \"future_dated\"\n      },\n      \"standard_entry_class_code\": \"internet_initiated\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e800b415-3192-4400-b539-a3eefe92e3ea",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afb47d30-6d1e-47c3-a66f-6a21ad259e63",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "external_account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c5caa6a-1655-47fd-a237-9ac801c049f3",
+          "name": "Create an ACH Transfer",
+          "request": {
+            "name": "Create an ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "ach_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"amount\": \"<integer>\",\n  \"statement_descriptor\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"addenda\": {\n    \"category\": \"<string>\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"<string>\"\n        },\n        {\n          \"payment_related_information\": \"<string>\"\n        }\n      ]\n    },\n    \"payment_order_remittance_advice\": {\n      \"invoices\": [\n        {\n          \"invoice_number\": \"<string>\",\n          \"paid_amount\": \"<integer>\"\n        },\n        {\n          \"invoice_number\": \"<string>\",\n          \"paid_amount\": \"<integer>\"\n        }\n      ]\n    }\n  },\n  \"company_descriptive_date\": \"<string>\",\n  \"company_discretionary_data\": \"<string>\",\n  \"company_entry_description\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"destination_account_holder\": \"<string>\",\n  \"external_account_id\": \"<string>\",\n  \"funding\": \"<string>\",\n  \"individual_id\": \"<string>\",\n  \"individual_name\": \"<string>\",\n  \"preferred_effective_date\": {\n    \"date\": \"<date>\",\n    \"settlement_schedule\": \"<string>\"\n  },\n  \"require_approval\": \"<boolean>\",\n  \"routing_number\": \"<string>\",\n  \"standard_entry_class_code\": \"<string>\",\n  \"transaction_timing\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dd34118-e0e7-4380-b100-174887a8204c",
+              "name": "ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"routing_number\": \"101050001\",\n  \"statement_descriptor\": \"New ACH transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ach_transfer\",\n  \"account_id\": \"string\",\n  \"account_number\": \"string\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"addendum\"\n        }\n      ]\n    }\n  },\n  \"amount\": 1465,\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"1949-02-16T23:44:05.102Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1978-08-23T14:44:32.253Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_at\": \"2005-07-17T05:39:49.143Z\",\n  \"destination_account_holder\": \"individual\",\n  \"external_account_id\": \"string\",\n  \"id\": \"string\",\n  \"network\": \"ach\",\n  \"notifications_of_change\": [\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    },\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    }\n  ],\n  \"return\": {\n    \"created_at\": \"2020-01-31T23:59:59Z\",\n    \"raw_return_reason_code\": \"R01\",\n    \"return_reason_code\": \"insufficient_fund\",\n    \"trace_number\": \"111122223292834\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n    \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n  },\n  \"routing_number\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"submission\": {\n    \"trace_number\": \"string\",\n    \"submitted_at\": \"2006-01-10T00:08:48.490Z\",\n    \"expected_funds_settlement_at\": \"2025-10-19T12:09:51.815Z\",\n    \"effective_date\": \"1958-03-12\",\n    \"expected_settlement_schedule\": \"future_dated\",\n    \"administrative_returns_expected_by\": \"1954-02-12T19:06:44.539Z\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"settlement\": {\n    \"settled_at\": \"1991-10-24T11:24:30.185Z\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 9115,\n    \"created_at\": \"2002-05-11T12:45:39.213Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"1946-11-30T07:32:46.699Z\",\n    \"released_at\": \"2012-11-07T22:52:27.676Z\",\n    \"status\": \"complete\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"company_descriptive_date\": \"string\",\n  \"company_discretionary_data\": \"string\",\n  \"company_entry_description\": \"string\",\n  \"company_name\": \"string\",\n  \"company_id\": \"string\",\n  \"funding\": \"checking\",\n  \"individual_id\": \"string\",\n  \"individual_name\": \"string\",\n  \"preferred_effective_date\": {\n    \"date\": \"2003-02-04\",\n    \"settlement_schedule\": \"same_day\"\n  },\n  \"standard_entry_class_code\": \"corporate_trade_exchange\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5cf0d9a-afd7-41c9-8780-ea27337b9af6",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"routing_number\": \"101050001\",\n  \"statement_descriptor\": \"New ACH transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02327903-eda0-4a9b-8ac4-1ce87318a7af",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"amount\": 100,\n  \"routing_number\": \"101050001\",\n  \"statement_descriptor\": \"New ACH transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32643ad9-8a57-4e48-81f0-bbde419b6bef",
+          "name": "Retrieve an ACH Transfer",
+          "request": {
+            "name": "Retrieve an ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "ach_transfers",
+                ":ach_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6775beaf-72d4-49e1-917d-97ba14c13073",
+              "name": "ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ach_transfer\",\n  \"account_id\": \"string\",\n  \"account_number\": \"string\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"addendum\"\n        }\n      ]\n    }\n  },\n  \"amount\": 1465,\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"1949-02-16T23:44:05.102Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1978-08-23T14:44:32.253Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_at\": \"2005-07-17T05:39:49.143Z\",\n  \"destination_account_holder\": \"individual\",\n  \"external_account_id\": \"string\",\n  \"id\": \"string\",\n  \"network\": \"ach\",\n  \"notifications_of_change\": [\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    },\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    }\n  ],\n  \"return\": {\n    \"created_at\": \"2020-01-31T23:59:59Z\",\n    \"raw_return_reason_code\": \"R01\",\n    \"return_reason_code\": \"insufficient_fund\",\n    \"trace_number\": \"111122223292834\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n    \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n  },\n  \"routing_number\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"submission\": {\n    \"trace_number\": \"string\",\n    \"submitted_at\": \"2006-01-10T00:08:48.490Z\",\n    \"expected_funds_settlement_at\": \"2025-10-19T12:09:51.815Z\",\n    \"effective_date\": \"1958-03-12\",\n    \"expected_settlement_schedule\": \"future_dated\",\n    \"administrative_returns_expected_by\": \"1954-02-12T19:06:44.539Z\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"settlement\": {\n    \"settled_at\": \"1991-10-24T11:24:30.185Z\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 9115,\n    \"created_at\": \"2002-05-11T12:45:39.213Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"1946-11-30T07:32:46.699Z\",\n    \"released_at\": \"2012-11-07T22:52:27.676Z\",\n    \"status\": \"complete\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"company_descriptive_date\": \"string\",\n  \"company_discretionary_data\": \"string\",\n  \"company_entry_description\": \"string\",\n  \"company_name\": \"string\",\n  \"company_id\": \"string\",\n  \"funding\": \"checking\",\n  \"individual_id\": \"string\",\n  \"individual_name\": \"string\",\n  \"preferred_effective_date\": {\n    \"date\": \"2003-02-04\",\n    \"settlement_schedule\": \"same_day\"\n  },\n  \"standard_entry_class_code\": \"corporate_trade_exchange\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c99f63a-d964-46d3-bd97-4d60e0eee369",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9149f216-a266-451e-a285-ef9d7f42d555",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01a8e406-87bc-4cdc-b86c-be75b22570ab",
+          "name": "Approve an ACH Transfer",
+          "request": {
+            "name": "Approve an ACH Transfer",
+            "description": {
+              "content": "Approves an ACH Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ach_transfers",
+                ":ach_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b53e7edb-b8eb-4c51-a6db-df92aec31169",
+              "name": "ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ach_transfer\",\n  \"account_id\": \"string\",\n  \"account_number\": \"string\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"addendum\"\n        }\n      ]\n    }\n  },\n  \"amount\": 1465,\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"1949-02-16T23:44:05.102Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1978-08-23T14:44:32.253Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_at\": \"2005-07-17T05:39:49.143Z\",\n  \"destination_account_holder\": \"individual\",\n  \"external_account_id\": \"string\",\n  \"id\": \"string\",\n  \"network\": \"ach\",\n  \"notifications_of_change\": [\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    },\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    }\n  ],\n  \"return\": {\n    \"created_at\": \"2020-01-31T23:59:59Z\",\n    \"raw_return_reason_code\": \"R01\",\n    \"return_reason_code\": \"insufficient_fund\",\n    \"trace_number\": \"111122223292834\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n    \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n  },\n  \"routing_number\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"submission\": {\n    \"trace_number\": \"string\",\n    \"submitted_at\": \"2006-01-10T00:08:48.490Z\",\n    \"expected_funds_settlement_at\": \"2025-10-19T12:09:51.815Z\",\n    \"effective_date\": \"1958-03-12\",\n    \"expected_settlement_schedule\": \"future_dated\",\n    \"administrative_returns_expected_by\": \"1954-02-12T19:06:44.539Z\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"settlement\": {\n    \"settled_at\": \"1991-10-24T11:24:30.185Z\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 9115,\n    \"created_at\": \"2002-05-11T12:45:39.213Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"1946-11-30T07:32:46.699Z\",\n    \"released_at\": \"2012-11-07T22:52:27.676Z\",\n    \"status\": \"complete\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"company_descriptive_date\": \"string\",\n  \"company_discretionary_data\": \"string\",\n  \"company_entry_description\": \"string\",\n  \"company_name\": \"string\",\n  \"company_id\": \"string\",\n  \"funding\": \"checking\",\n  \"individual_id\": \"string\",\n  \"individual_name\": \"string\",\n  \"preferred_effective_date\": {\n    \"date\": \"2003-02-04\",\n    \"settlement_schedule\": \"same_day\"\n  },\n  \"standard_entry_class_code\": \"corporate_trade_exchange\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d317c37-1628-48ec-aa84-c69a8d7674b6",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f84aa23-75be-4dec-9313-0435f53d9297",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8841d66a-e322-46f3-be58-05c7280a9017",
+          "name": "Cancel a pending ACH Transfer",
+          "request": {
+            "name": "Cancel a pending ACH Transfer",
+            "description": {
+              "content": "Cancels an ACH Transfer in a pending_approval state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ach_transfers",
+                ":ach_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fc7a6da-2e83-442f-b8c1-c41bc1c4b667",
+              "name": "ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ach_transfer\",\n  \"account_id\": \"string\",\n  \"account_number\": \"string\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"addendum\"\n        }\n      ]\n    }\n  },\n  \"amount\": 1465,\n  \"currency\": \"USD\",\n  \"approval\": {\n    \"approved_at\": \"1949-02-16T23:44:05.102Z\",\n    \"approved_by\": \"string\"\n  },\n  \"cancellation\": {\n    \"canceled_at\": \"1978-08-23T14:44:32.253Z\",\n    \"canceled_by\": \"string\"\n  },\n  \"created_at\": \"2005-07-17T05:39:49.143Z\",\n  \"destination_account_holder\": \"individual\",\n  \"external_account_id\": \"string\",\n  \"id\": \"string\",\n  \"network\": \"ach\",\n  \"notifications_of_change\": [\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    },\n    {\n      \"change_code\": \"incorrect_transaction_code\",\n      \"corrected_data\": \"32\",\n      \"created_at\": \"2020-01-31T23:59:59Z\"\n    }\n  ],\n  \"return\": {\n    \"created_at\": \"2020-01-31T23:59:59Z\",\n    \"raw_return_reason_code\": \"R01\",\n    \"return_reason_code\": \"insufficient_fund\",\n    \"trace_number\": \"111122223292834\",\n    \"transaction_id\": \"transaction_uyrp7fld2ium70oa7oi\",\n    \"transfer_id\": \"ach_transfer_uoxatyh3lt5evrsdvo7q\"\n  },\n  \"routing_number\": \"string\",\n  \"statement_descriptor\": \"string\",\n  \"status\": \"pending_reviewing\",\n  \"submission\": {\n    \"trace_number\": \"string\",\n    \"submitted_at\": \"2006-01-10T00:08:48.490Z\",\n    \"expected_funds_settlement_at\": \"2025-10-19T12:09:51.815Z\",\n    \"effective_date\": \"1958-03-12\",\n    \"expected_settlement_schedule\": \"future_dated\",\n    \"administrative_returns_expected_by\": \"1954-02-12T19:06:44.539Z\"\n  },\n  \"acknowledgement\": {\n    \"acknowledged_at\": \"2020-01-31T23:59:59Z\"\n  },\n  \"settlement\": {\n    \"settled_at\": \"1991-10-24T11:24:30.185Z\"\n  },\n  \"inbound_funds_hold\": {\n    \"type\": \"inbound_funds_hold\",\n    \"amount\": 9115,\n    \"created_at\": \"2002-05-11T12:45:39.213Z\",\n    \"currency\": \"USD\",\n    \"automatically_releases_at\": \"1946-11-30T07:32:46.699Z\",\n    \"released_at\": \"2012-11-07T22:52:27.676Z\",\n    \"status\": \"complete\",\n    \"held_transaction_id\": \"string\",\n    \"pending_transaction_id\": \"string\"\n  },\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"company_descriptive_date\": \"string\",\n  \"company_discretionary_data\": \"string\",\n  \"company_entry_description\": \"string\",\n  \"company_name\": \"string\",\n  \"company_id\": \"string\",\n  \"funding\": \"checking\",\n  \"individual_id\": \"string\",\n  \"individual_name\": \"string\",\n  \"preferred_effective_date\": {\n    \"date\": \"2003-02-04\",\n    \"settlement_schedule\": \"same_day\"\n  },\n  \"standard_entry_class_code\": \"corporate_trade_exchange\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dda1407f-8a3f-474d-82e2-a92120ccaa59",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "930f4e56-beb2-4cd3-b2ef-b2b109770e8e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ach_transfers",
+                    ":ach_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "98500404-8b53-4eee-adaa-b13deceeddda",
+    "name": "Increase Account Numbers Ach Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

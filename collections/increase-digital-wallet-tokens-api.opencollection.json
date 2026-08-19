@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Digital Wallet Tokens API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Digital Wallet Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Digital Wallet Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/digital_wallet_tokens",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "card_id",
+                "value": "card_oubs0hwk5rn6knuecxg2",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Digital Wallet Tokens"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Digital Wallet Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/digital_wallet_tokens/:digital_wallet_token_id",
+            "params": [
+              {
+                "name": "digital_wallet_token_id",
+                "value": "digital_wallet_token_izi62go3h51p369jrie0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Digital Wallet Token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

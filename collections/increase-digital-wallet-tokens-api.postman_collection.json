@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "5e20a065-f682-4e9f-979a-3187642f3e72",
+      "name": "Digital Wallet Tokens",
+      "description": {
+        "content": "A Digital Wallet Token is created when a user adds a Card to their Apple Pay or Google Pay app. The Digital Wallet Token can be used for purchases just like a Card.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8c3279fc-5832-4129-a9cf-efaa093d00ce",
+          "name": "List Digital Wallet Tokens",
+          "request": {
+            "name": "List Digital Wallet Tokens",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_wallet_tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "card_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "232134ac-6d2f-4dad-bea6-ab895cf4cd38",
+              "name": "Digital Wallet Token List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"digital_wallet_token\",\n      \"id\": \"string\",\n      \"card_id\": \"string\",\n      \"created_at\": \"1991-07-30T16:32:47.767Z\",\n      \"status\": \"active\",\n      \"token_requestor\": \"samsung_pay\",\n      \"dynamic_primary_account_number\": {\n        \"first6\": \"string\",\n        \"last4\": \"string\"\n      },\n      \"cardholder\": {\n        \"name\": \"string\"\n      },\n      \"device\": {\n        \"device_type\": \"unknown\",\n        \"identifier\": \"string\",\n        \"ip_address\": \"string\",\n        \"name\": \"string\"\n      },\n      \"updates\": [\n        {\n          \"timestamp\": \"2006-06-23T14:03:56.697Z\",\n          \"status\": \"active\"\n        },\n        {\n          \"timestamp\": \"1965-05-05T13:06:49.467Z\",\n          \"status\": \"active\"\n        }\n      ]\n    },\n    {\n      \"type\": \"digital_wallet_token\",\n      \"id\": \"string\",\n      \"card_id\": \"string\",\n      \"created_at\": \"1971-05-02T18:49:24.206Z\",\n      \"status\": \"suspended\",\n      \"token_requestor\": \"unknown\",\n      \"dynamic_primary_account_number\": {\n        \"first6\": \"string\",\n        \"last4\": \"string\"\n      },\n      \"cardholder\": {\n        \"name\": \"string\"\n      },\n      \"device\": {\n        \"device_type\": \"wearable_device\",\n        \"identifier\": \"string\",\n        \"ip_address\": \"string\",\n        \"name\": \"string\"\n      },\n      \"updates\": [\n        {\n          \"timestamp\": \"1948-04-12T06:04:07.373Z\",\n          \"status\": \"suspended\"\n        },\n        {\n          \"timestamp\": \"2005-06-20T19:42:23.605Z\",\n          \"status\": \"deactivated\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "279ad2bb-6c13-4b9e-99a9-3fe51e545d44",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19d4017d-c87d-4a9d-957e-a20ddc2796f0",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9944875c-29e8-4d30-beae-c08850240d8c",
+          "name": "Retrieve a Digital Wallet Token",
+          "request": {
+            "name": "Retrieve a Digital Wallet Token",
+            "description": {},
+            "url": {
+              "path": [
+                "digital_wallet_tokens",
+                ":digital_wallet_token_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "digital_wallet_token_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b758ace-e162-4f50-b862-bbdd6b53113d",
+              "name": "Digital Wallet Token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens",
+                    ":digital_wallet_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_wallet_token_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"digital_wallet_token\",\n  \"id\": \"string\",\n  \"card_id\": \"string\",\n  \"created_at\": \"1984-03-06T13:10:38.898Z\",\n  \"status\": \"suspended\",\n  \"token_requestor\": \"google_pay\",\n  \"dynamic_primary_account_number\": {\n    \"first6\": \"string\",\n    \"last4\": \"string\"\n  },\n  \"cardholder\": {\n    \"name\": \"string\"\n  },\n  \"device\": {\n    \"device_type\": \"tablet\",\n    \"identifier\": \"string\",\n    \"ip_address\": \"string\",\n    \"name\": \"string\"\n  },\n  \"updates\": [\n    {\n      \"timestamp\": \"1971-05-31T03:09:22.138Z\",\n      \"status\": \"deactivated\"\n    },\n    {\n      \"timestamp\": \"1995-01-20T08:20:56.228Z\",\n      \"status\": \"deactivated\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e6dc164-b213-4d6f-b3bb-977c999e72bf",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens",
+                    ":digital_wallet_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_wallet_token_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "092900df-a492-4d37-b437-dc964afb3904",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "digital_wallet_tokens",
+                    ":digital_wallet_token_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "digital_wallet_token_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4eda626f-0a1d-4885-83a5-bd3411363d27",
+    "name": "Increase Account Numbers Digital Wallet Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

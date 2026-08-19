@@ -1,0 +1,777 @@
+{
+  "item": [
+    {
+      "id": "e82d6ac0-56f1-4b78-95f4-327674f83348",
+      "name": "Inbound Mail Items",
+      "description": {
+        "content": "Inbound Mail Items represent pieces of physical mail delivered to a Lockbox Address.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65930a30-fde4-4896-960b-a02681bb040c",
+          "name": "List Inbound Mail Items",
+          "request": {
+            "name": "List Inbound Mail Items",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_mail_items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "lockbox_recipient_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "lockbox_address_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "089abdc8-4e9c-421a-964c-05f5cba66a18",
+              "name": "Inbound Mail Item List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lockbox_recipient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lockbox_address_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inbound_mail_item\",\n      \"id\": \"string\",\n      \"created_at\": \"2001-07-27T12:12:54.718Z\",\n      \"recipient_name\": \"string\",\n      \"status\": \"processed\",\n      \"rejection_reason\": \"no_check\",\n      \"file_id\": \"string\",\n      \"lockbox_recipient_id\": \"string\",\n      \"lockbox_address_id\": \"string\",\n      \"checks\": [\n        {\n          \"amount\": 1750,\n          \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"status\": \"deposited\"\n        },\n        {\n          \"amount\": 1750,\n          \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"status\": \"deposited\"\n        }\n      ]\n    },\n    {\n      \"type\": \"inbound_mail_item\",\n      \"id\": \"string\",\n      \"created_at\": \"2022-10-14T12:33:03.179Z\",\n      \"recipient_name\": \"string\",\n      \"status\": \"pending\",\n      \"rejection_reason\": \"lockbox_not_active\",\n      \"file_id\": \"string\",\n      \"lockbox_recipient_id\": \"string\",\n      \"lockbox_address_id\": \"string\",\n      \"checks\": [\n        {\n          \"amount\": 1750,\n          \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"status\": \"deposited\"\n        },\n        {\n          \"amount\": 1750,\n          \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n          \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n          \"status\": \"deposited\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b193b72-6b70-4d53-8e86-fd92f4e30bc7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lockbox_recipient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lockbox_address_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cea0144c-d157-4236-ab22-c304945459d0",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lockbox_recipient_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lockbox_address_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7359bbdd-7c08-4884-823f-129c5f0e7478",
+          "name": "Retrieve an Inbound Mail Item",
+          "request": {
+            "name": "Retrieve an Inbound Mail Item",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_mail_items",
+                ":inbound_mail_item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_mail_item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f67e5aac-91f3-41f1-8021-d9a18282dd5e",
+              "name": "Inbound Mail Item",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_mail_item\",\n  \"id\": \"string\",\n  \"created_at\": \"2021-07-16T19:11:20.265Z\",\n  \"recipient_name\": \"string\",\n  \"status\": \"rejected\",\n  \"rejection_reason\": \"lockbox_recipient_not_active\",\n  \"file_id\": \"string\",\n  \"lockbox_recipient_id\": \"string\",\n  \"lockbox_address_id\": \"string\",\n  \"checks\": [\n    {\n      \"amount\": 1750,\n      \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"status\": \"deposited\"\n    },\n    {\n      \"amount\": 1750,\n      \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"status\": \"deposited\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ae698be-ed6b-4957-a22b-2980ac0156f3",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaf7787a-e54a-4381-a8dd-573cb77dea29",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6493a95-24f7-4ffb-8179-fd43cd62ad37",
+          "name": "Action an Inbound Mail Item",
+          "request": {
+            "name": "Action an Inbound Mail Item",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_mail_items",
+                ":inbound_mail_item_id",
+                "action"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_mail_item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"checks\": [\n    {\n      \"action\": \"<string>\",\n      \"account_id\": \"<string>\"\n    },\n    {\n      \"action\": \"<string>\",\n      \"account_id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7783fbca-bbea-46bb-8eff-1894287ac56a",
+              "name": "Inbound Mail Item",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checks\": [\n    {\n      \"account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"action\": \"deposit\"\n    },\n    {\n      \"action\": \"ignore\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_mail_item\",\n  \"id\": \"string\",\n  \"created_at\": \"2021-07-16T19:11:20.265Z\",\n  \"recipient_name\": \"string\",\n  \"status\": \"rejected\",\n  \"rejection_reason\": \"lockbox_recipient_not_active\",\n  \"file_id\": \"string\",\n  \"lockbox_recipient_id\": \"string\",\n  \"lockbox_address_id\": \"string\",\n  \"checks\": [\n    {\n      \"amount\": 1750,\n      \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"status\": \"deposited\"\n    },\n    {\n      \"amount\": 1750,\n      \"back_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"check_deposit_id\": \"check_deposit_f06n9gpg7sxn8t19lfc1\",\n      \"front_file_id\": \"file_makxrc67oh9l6sg7w9yc\",\n      \"status\": \"deposited\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b0ca97c-dc98-4d41-8121-979cc1097b95",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checks\": [\n    {\n      \"account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"action\": \"deposit\"\n    },\n    {\n      \"action\": \"ignore\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24f43d2f-692f-4974-b597-2ec538e97d1c",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_mail_items",
+                    ":inbound_mail_item_id",
+                    "action"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_mail_item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"checks\": [\n    {\n      \"account_id\": \"account_in71c4amph0vgo2qllky\",\n      \"action\": \"deposit\"\n    },\n    {\n      \"action\": \"ignore\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67db6716-322a-45d2-b178-d888fdbad2b8",
+    "name": "Increase Account Numbers Inbound Mail Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Ach Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ach Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ACH Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/ach_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "external_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List ACH Transfers"
+        },
+        {
+          "info": {
+            "name": "Create an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/ach_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an ACH Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/ach_transfers/:ach_transfer_id",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an ACH Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve an ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/ach_transfers/:ach_transfer_id/approve",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approves an ACH Transfer in a pending_approval state."
+        },
+        {
+          "info": {
+            "name": "Cancel a pending ACH Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/ach_transfers/:ach_transfer_id/cancel",
+            "params": [
+              {
+                "name": "ach_transfer_id",
+                "value": "ach_transfer_uoxatyh3lt5evrsdvo7q",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels an ACH Transfer in a pending_approval state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

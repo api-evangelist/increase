@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Wire Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wire Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Wire Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/wire_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "external_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Wire Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/wire_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Wire Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/wire_transfers/:wire_transfer_id",
+            "params": [
+              {
+                "name": "wire_transfer_id",
+                "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Wire Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/wire_transfers/:wire_transfer_id/approve",
+            "params": [
+              {
+                "name": "wire_transfer_id",
+                "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a Wire Transfer"
+        },
+        {
+          "info": {
+            "name": "Cancel a pending Wire Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/wire_transfers/:wire_transfer_id/cancel",
+            "params": [
+              {
+                "name": "wire_transfer_id",
+                "value": "wire_transfer_5akynk7dqsq25qwk9q2u",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending Wire Transfer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

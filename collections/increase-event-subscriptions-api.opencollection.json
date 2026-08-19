@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Event Subscriptions API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/event_subscriptions",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Event Subscriptions"
+        },
+        {
+          "info": {
+            "name": "Create an Event Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/event_subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Event Subscription"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/event_subscriptions/:event_subscription_id",
+            "params": [
+              {
+                "name": "event_subscription_id",
+                "value": "event_subscription_001dzz0r20rcdxgb013zqb8m04g",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Event Subscription"
+        },
+        {
+          "info": {
+            "name": "Update an Event Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/event_subscriptions/:event_subscription_id",
+            "params": [
+              {
+                "name": "event_subscription_id",
+                "value": "event_subscription_001dzz0r20rcdxgb013zqb8m04g",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Event Subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

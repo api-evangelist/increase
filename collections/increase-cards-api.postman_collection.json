@@ -1,0 +1,1671 @@
+{
+  "item": [
+    {
+      "id": "fa9c27a7-1a6a-4728-97d5-7f09f5af45d3",
+      "name": "Cards",
+      "description": {
+        "content": "Cards may operate on credit, debit, or prepaid BINs. They’ll immediately work for online purchases after you create them. All cards work on a good funds model, and maintain a maximum limit of 100% of the Account’s available balance at the time of transaction. Funds are deducted from the Account upon transaction settlement.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d14a2652-5cce-45b6-a87f-211e551748f9",
+          "name": "List Cards",
+          "request": {
+            "name": "List Cards",
+            "description": {},
+            "url": {
+              "path": [
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b515bce-9e6f-455f-92c9-fd68ef1dbe2f",
+              "name": "Card List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"card\",\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"entity_id\": \"string\",\n      \"created_at\": \"2018-06-03T15:29:06.610Z\",\n      \"description\": \"string\",\n      \"last4\": \"string\",\n      \"expiration_month\": 4041,\n      \"expiration_year\": 1506,\n      \"status\": \"active\",\n      \"billing_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\"\n      },\n      \"digital_wallet\": {\n        \"email\": \"string\",\n        \"phone\": \"string\",\n        \"digital_card_profile_id\": \"string\"\n      },\n      \"authorization_controls\": {\n        \"usage\": {\n          \"category\": \"single_use\",\n          \"single_use\": {\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"multi_use\": {\n            \"spending_limits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"merchant_category_code\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"merchant_acceptor_identifier\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"merchant_country\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"card\",\n      \"id\": \"string\",\n      \"account_id\": \"string\",\n      \"entity_id\": \"string\",\n      \"created_at\": \"1979-07-05T09:41:24.851Z\",\n      \"description\": \"string\",\n      \"last4\": \"string\",\n      \"expiration_month\": 248,\n      \"expiration_year\": 9045,\n      \"status\": \"active\",\n      \"billing_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\"\n      },\n      \"digital_wallet\": {\n        \"email\": \"string\",\n        \"phone\": \"string\",\n        \"digital_card_profile_id\": \"string\"\n      },\n      \"authorization_controls\": {\n        \"usage\": {\n          \"category\": \"single_use\",\n          \"single_use\": {\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"multi_use\": {\n            \"spending_limits\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"merchant_category_code\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"merchant_acceptor_identifier\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"merchant_country\": {\n          \"allowed\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"blocked\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0c3e731-c46a-486c-9b47-34572cb9236c",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45c2d6d4-6b0c-442a-b6e2-b3d1217f3050",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63998523-ec7e-4429-b09e-52f78d29dbcd",
+          "name": "Create a Card",
+          "request": {
+            "name": "Create a Card",
+            "description": {},
+            "url": {
+              "path": [
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"authorization_controls\": {\n    \"merchant_acceptor_identifier\": {\n      \"allowed\": [\n        {\n          \"identifier\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"identifier\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\"\n        }\n      ]\n    },\n    \"merchant_category_code\": {\n      \"allowed\": [\n        {\n          \"code\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"code\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\"\n        }\n      ]\n    },\n    \"merchant_country\": {\n      \"allowed\": [\n        {\n          \"country\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"country\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\"\n        }\n      ]\n    },\n    \"usage\": {\n      \"category\": \"<string>\",\n      \"multi_use\": {\n        \"spending_limits\": [\n          {\n            \"interval\": \"<string>\",\n            \"settlement_amount\": \"<integer>\",\n            \"merchant_category_codes\": [\n              {\n                \"code\": \"<string>\"\n              },\n              {\n                \"code\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"interval\": \"<string>\",\n            \"settlement_amount\": \"<integer>\",\n            \"merchant_category_codes\": [\n              {\n                \"code\": \"<string>\"\n              },\n              {\n                \"code\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"single_use\": {\n        \"settlement_amount\": {\n          \"value\": \"<integer>\",\n          \"comparison\": \"<string>\"\n        }\n      }\n    }\n  },\n  \"billing_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"digital_wallet\": {\n    \"digital_card_profile_id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3075a231-c7df-4084-a83e-90adcf0c8b69",
+              "name": "Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"description\": \"Card for Ian Crease\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card\",\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"entity_id\": \"string\",\n  \"created_at\": \"1991-12-11T15:38:04.061Z\",\n  \"description\": \"string\",\n  \"last4\": \"string\",\n  \"expiration_month\": 7455,\n  \"expiration_year\": 8956,\n  \"status\": \"canceled\",\n  \"billing_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"digital_wallet\": {\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"digital_card_profile_id\": \"string\"\n  },\n  \"authorization_controls\": {\n    \"usage\": {\n      \"category\": \"multi_use\",\n      \"single_use\": {\n        \"settlement_amount\": {\n          \"value\": 2165,\n          \"comparison\": \"less_than_or_equals\"\n        }\n      },\n      \"multi_use\": {\n        \"spending_limits\": [\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"merchant_category_code\": {\n      \"allowed\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ]\n    },\n    \"merchant_acceptor_identifier\": {\n      \"allowed\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ]\n    },\n    \"merchant_country\": {\n      \"allowed\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ]\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95d8961a-b9cb-478d-8b89-f9ba6d71e5b1",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"description\": \"Card for Ian Crease\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa6357c1-46c2-4290-b2de-118cb9815f6e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"description\": \"Card for Ian Crease\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87adaebb-9678-4765-9439-4666b4392e95",
+          "name": "Retrieve a Card",
+          "request": {
+            "name": "Retrieve a Card",
+            "description": {},
+            "url": {
+              "path": [
+                "cards",
+                ":card_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "913d578e-7373-46f2-a973-397dc9b3b91b",
+              "name": "Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card\",\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"entity_id\": \"string\",\n  \"created_at\": \"1991-12-11T15:38:04.061Z\",\n  \"description\": \"string\",\n  \"last4\": \"string\",\n  \"expiration_month\": 7455,\n  \"expiration_year\": 8956,\n  \"status\": \"canceled\",\n  \"billing_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"digital_wallet\": {\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"digital_card_profile_id\": \"string\"\n  },\n  \"authorization_controls\": {\n    \"usage\": {\n      \"category\": \"multi_use\",\n      \"single_use\": {\n        \"settlement_amount\": {\n          \"value\": 2165,\n          \"comparison\": \"less_than_or_equals\"\n        }\n      },\n      \"multi_use\": {\n        \"spending_limits\": [\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"merchant_category_code\": {\n      \"allowed\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ]\n    },\n    \"merchant_acceptor_identifier\": {\n      \"allowed\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ]\n    },\n    \"merchant_country\": {\n      \"allowed\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ]\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "327575c8-859c-4046-bd6c-6a7eed6c6153",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d3c54cd-7827-4496-9e6b-932feadd6f3a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e328e933-1c51-448a-8c7c-7fd050c67f32",
+          "name": "Update a Card",
+          "request": {
+            "name": "Update a Card",
+            "description": {},
+            "url": {
+              "path": [
+                "cards",
+                ":card_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"authorization_controls\": {\n    \"merchant_acceptor_identifier\": {\n      \"allowed\": [\n        {\n          \"identifier\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"identifier\": \"<string>\"\n        },\n        {\n          \"identifier\": \"<string>\"\n        }\n      ]\n    },\n    \"merchant_category_code\": {\n      \"allowed\": [\n        {\n          \"code\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"code\": \"<string>\"\n        },\n        {\n          \"code\": \"<string>\"\n        }\n      ]\n    },\n    \"merchant_country\": {\n      \"allowed\": [\n        {\n          \"country\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"country\": \"<string>\"\n        },\n        {\n          \"country\": \"<string>\"\n        }\n      ]\n    },\n    \"usage\": {\n      \"category\": \"<string>\",\n      \"multi_use\": {\n        \"spending_limits\": [\n          {\n            \"interval\": \"<string>\",\n            \"settlement_amount\": \"<integer>\",\n            \"merchant_category_codes\": [\n              {\n                \"code\": \"<string>\"\n              },\n              {\n                \"code\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"interval\": \"<string>\",\n            \"settlement_amount\": \"<integer>\",\n            \"merchant_category_codes\": [\n              {\n                \"code\": \"<string>\"\n              },\n              {\n                \"code\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      },\n      \"single_use\": {\n        \"settlement_amount\": {\n          \"value\": \"<integer>\",\n          \"comparison\": \"<string>\"\n        }\n      }\n    }\n  },\n  \"billing_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"line2\": \"<string>\"\n  },\n  \"description\": \"<string>\",\n  \"digital_wallet\": {\n    \"digital_card_profile_id\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a29a059d-f556-4800-a1bd-348b6448bfdb",
+              "name": "Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"New description\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card\",\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"entity_id\": \"string\",\n  \"created_at\": \"1991-12-11T15:38:04.061Z\",\n  \"description\": \"string\",\n  \"last4\": \"string\",\n  \"expiration_month\": 7455,\n  \"expiration_year\": 8956,\n  \"status\": \"canceled\",\n  \"billing_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\"\n  },\n  \"digital_wallet\": {\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"digital_card_profile_id\": \"string\"\n  },\n  \"authorization_controls\": {\n    \"usage\": {\n      \"category\": \"multi_use\",\n      \"single_use\": {\n        \"settlement_amount\": {\n          \"value\": 2165,\n          \"comparison\": \"less_than_or_equals\"\n        }\n      },\n      \"multi_use\": {\n        \"spending_limits\": [\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"interval\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"settlement_amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"merchant_category_codes\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"merchant_category_code\": {\n      \"allowed\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"code\": \"string\"\n        },\n        {\n          \"code\": \"string\"\n        }\n      ]\n    },\n    \"merchant_acceptor_identifier\": {\n      \"allowed\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"identifier\": \"string\"\n        },\n        {\n          \"identifier\": \"string\"\n        }\n      ]\n    },\n    \"merchant_country\": {\n      \"allowed\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ],\n      \"blocked\": [\n        {\n          \"country\": \"string\"\n        },\n        {\n          \"country\": \"string\"\n        }\n      ]\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d93fcb6-cc0e-49b1-89fa-f2ba789c0b54",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"New description\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a2429f9-75e7-4f1a-b3fa-946b81e37a1a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"New description\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fa60e45-0d1f-4bc1-8804-010225970198",
+          "name": "Create a Card details iframe",
+          "request": {
+            "name": "Create a Card details iframe",
+            "description": {
+              "content": "Create an iframe URL for a Card to display the card details. More details about styling and usage can be found in the [documentation](/documentation/embedded-card-component).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":card_id",
+                "create_details_iframe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"physical_card_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea9cb6cc-497e-4c06-bcb1-2088683218fb",
+              "name": "Card iframe URL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "create_details_iframe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"expires_at\": \"2020-01-31T23:59:59Z\",\n  \"iframe_url\": \"https://increase.com/card_details_iframe/index.html?token=0\",\n  \"type\": \"card_iframe_url\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85d801ba-bd3d-47cb-a4e9-4153df7dec25",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "create_details_iframe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a41ba94-83d7-471a-9664-8452c0f677d1",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "create_details_iframe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8654e101-c67e-4326-a9f7-2285559e3b37",
+          "name": "Retrieve sensitive details for a Card",
+          "request": {
+            "name": "Retrieve sensitive details for a Card",
+            "description": {
+              "content": "Sensitive details for a Card include the primary account number, expiry, card verification code, and PIN.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cards",
+                ":card_id",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec90aada-3342-48b6-a773-f9480d621a8a",
+              "name": "Card Details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n  \"expiration_month\": 7,\n  \"expiration_year\": 2025,\n  \"pin\": \"1234\",\n  \"primary_account_number\": \"4242424242424242\",\n  \"type\": \"card_details\",\n  \"verification_code\": \"123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33aaac34-c7f0-4a3b-a313-f9b840aef412",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b96b2b3-4552-4ada-b4b0-4d677417ae94",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "331deaf6-6db4-4120-a6cc-e7f2817397bf",
+          "name": "Update a Card's PIN",
+          "request": {
+            "name": "Update a Card's PIN",
+            "description": {},
+            "url": {
+              "path": [
+                "cards",
+                ":card_id",
+                "update_pin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pin\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6920b301-4453-47ea-855f-ad0b6ea72e7a",
+              "name": "Card Details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "update_pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pin\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n  \"expiration_month\": 7,\n  \"expiration_year\": 2025,\n  \"pin\": \"1234\",\n  \"primary_account_number\": \"4242424242424242\",\n  \"type\": \"card_details\",\n  \"verification_code\": \"123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fe611c1-e0d7-48bc-ac06-e0d8c3c03b29",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "update_pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pin\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ed35356-429f-4b45-ba43-722b3ecee631",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cards",
+                    ":card_id",
+                    "update_pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pin\": \"1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2716f991-fbef-4185-a8bc-493c08a68c5c",
+    "name": "Increase Account Numbers Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

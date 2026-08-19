@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Oauth Connections API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Oauth Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List OAuth Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/oauth_connections",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "oauth_application_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List OAuth Connections"
+        },
+        {
+          "info": {
+            "name": "Retrieve an OAuth Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/oauth_connections/:oauth_connection_id",
+            "params": [
+              {
+                "name": "oauth_connection_id",
+                "value": "connection_dauknoksyr4wilz4e6my",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an OAuth Connection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

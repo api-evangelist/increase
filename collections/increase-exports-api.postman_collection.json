@@ -1,0 +1,788 @@
+{
+  "item": [
+    {
+      "id": "c31391ac-8fe2-4d13-869d-da26a7084d31",
+      "name": "Exports",
+      "description": {
+        "content": "Exports are generated files. Some exports can contain a lot of data, like a CSV of your transactions. Others can be a single document, like a tax form. Since they can take a while, they are generated asynchronously. We send a webhook when they are ready. For more information, please read our [Exports documentation](https://increase.com/documentation/exports).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c960408f-140b-41a3-af07-33edfcd0725b",
+          "name": "List Exports",
+          "request": {
+            "name": "List Exports",
+            "description": {},
+            "url": {
+              "path": [
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "form_1099_int.account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "form_1099_misc.account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c0fee4a1-0475-4ff4-bab6-4478c29d27e7",
+              "name": "Export List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "form_1099_int.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "form_1099_misc.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"export\",\n      \"id\": \"string\",\n      \"created_at\": \"1958-09-02T06:28:21.645Z\",\n      \"category\": \"daily_account_balance_csv\",\n      \"status\": \"failed\",\n      \"result\": {\n        \"file_id\": \"string\"\n      },\n      \"account_statement_ofx\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"before\": \"2023-01-17T10:53:12.725Z\",\n          \"on_or_after\": \"1967-07-25T13:18:52.474Z\"\n        }\n      },\n      \"account_statement_bai2\": {\n        \"account_id\": \"string\",\n        \"program_id\": \"string\",\n        \"effective_date\": \"1987-09-25\"\n      },\n      \"dashboard_table_csv\": {},\n      \"transaction_csv\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"after\": \"1952-10-06T18:25:08.266Z\",\n          \"before\": \"1965-01-14T22:55:24.565Z\"\n        }\n      },\n      \"balance_csv\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"after\": \"1971-07-29T12:25:09.637Z\",\n          \"before\": \"2003-02-16T23:37:03.728Z\"\n        }\n      },\n      \"bookkeeping_account_balance_csv\": {\n        \"bookkeeping_account_id\": \"string\",\n        \"on_or_before_date\": \"2009-12-06\",\n        \"on_or_after_date\": \"2007-09-22\"\n      },\n      \"entity_csv\": {},\n      \"vendor_csv\": {},\n      \"account_verification_letter\": {\n        \"account_number_id\": \"string\",\n        \"balance_date\": \"2025-02-20\"\n      },\n      \"funding_instructions\": {\n        \"account_number_id\": \"string\"\n      },\n      \"form_1099_int\": {\n        \"account_id\": \"string\",\n        \"description\": \"string\",\n        \"year\": 3944,\n        \"corrected\": false\n      },\n      \"form_1099_misc\": {\n        \"account_id\": \"string\",\n        \"year\": 6367,\n        \"corrected\": true\n      },\n      \"fee_csv\": {\n        \"created_at\": {\n          \"after\": \"1959-12-28T00:09:25.663Z\",\n          \"before\": \"1947-04-04T00:28:37.344Z\"\n        }\n      },\n      \"voided_check\": {\n        \"account_number_id\": \"string\",\n        \"payer\": [\n          {\n            \"line\": \"string\"\n          },\n          {\n            \"line\": \"string\"\n          }\n        ]\n      },\n      \"daily_account_balance_csv\": {\n        \"account_id\": \"string\",\n        \"on_or_after_date\": \"1969-10-20\",\n        \"on_or_before_date\": \"1950-02-17\"\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"export\",\n      \"id\": \"string\",\n      \"created_at\": \"2005-01-17T20:37:31.362Z\",\n      \"category\": \"account_statement_ofx\",\n      \"status\": \"pending\",\n      \"result\": {\n        \"file_id\": \"string\"\n      },\n      \"account_statement_ofx\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"before\": \"2025-01-13T04:28:40.705Z\",\n          \"on_or_after\": \"2020-01-21T00:06:17.658Z\"\n        }\n      },\n      \"account_statement_bai2\": {\n        \"account_id\": \"string\",\n        \"program_id\": \"string\",\n        \"effective_date\": \"1971-12-07\"\n      },\n      \"dashboard_table_csv\": {},\n      \"transaction_csv\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"after\": \"1961-07-20T10:12:54.338Z\",\n          \"before\": \"1974-12-22T20:47:56.972Z\"\n        }\n      },\n      \"balance_csv\": {\n        \"account_id\": \"string\",\n        \"created_at\": {\n          \"after\": \"1958-02-19T14:30:45.058Z\",\n          \"before\": \"1982-10-08T12:27:56.502Z\"\n        }\n      },\n      \"bookkeeping_account_balance_csv\": {\n        \"bookkeeping_account_id\": \"string\",\n        \"on_or_before_date\": \"2016-07-04\",\n        \"on_or_after_date\": \"1982-03-08\"\n      },\n      \"entity_csv\": {},\n      \"vendor_csv\": {},\n      \"account_verification_letter\": {\n        \"account_number_id\": \"string\",\n        \"balance_date\": \"1976-04-02\"\n      },\n      \"funding_instructions\": {\n        \"account_number_id\": \"string\"\n      },\n      \"form_1099_int\": {\n        \"account_id\": \"string\",\n        \"description\": \"string\",\n        \"year\": 4201,\n        \"corrected\": false\n      },\n      \"form_1099_misc\": {\n        \"account_id\": \"string\",\n        \"year\": 3898,\n        \"corrected\": false\n      },\n      \"fee_csv\": {\n        \"created_at\": {\n          \"after\": \"1972-04-21T02:28:29.959Z\",\n          \"before\": \"1953-06-06T02:54:47.612Z\"\n        }\n      },\n      \"voided_check\": {\n        \"account_number_id\": \"string\",\n        \"payer\": [\n          {\n            \"line\": \"string\"\n          },\n          {\n            \"line\": \"string\"\n          }\n        ]\n      },\n      \"daily_account_balance_csv\": {\n        \"account_id\": \"string\",\n        \"on_or_after_date\": \"1976-08-14\",\n        \"on_or_before_date\": \"1966-08-04\"\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "345eb541-dbdf-4ecb-96ac-e443afe0f35b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "form_1099_int.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "form_1099_misc.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a22c9cd-e806-49ea-a530-aeff832ad366",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "form_1099_int.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "form_1099_misc.account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dc56d88-dfaa-4f52-ac23-65dca9558aac",
+          "name": "Create an Export",
+          "request": {
+            "name": "Create an Export",
+            "description": {},
+            "url": {
+              "path": [
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"<string>\",\n  \"account_statement_bai2\": {\n    \"account_id\": \"<string>\",\n    \"effective_date\": \"<date>\",\n    \"program_id\": \"<string>\"\n  },\n  \"account_statement_ofx\": {\n    \"account_id\": \"<string>\",\n    \"created_at\": {\n      \"before\": \"<dateTime>\",\n      \"on_or_after\": \"<dateTime>\",\n      \"key_0\": 4393.459043977263,\n      \"key_1\": 2871.775891406627,\n      \"key_2\": true\n    }\n  },\n  \"account_verification_letter\": {\n    \"account_number_id\": \"<string>\",\n    \"balance_date\": \"<date>\"\n  },\n  \"bookkeeping_account_balance_csv\": {\n    \"bookkeeping_account_id\": \"<string>\",\n    \"on_or_after_date\": \"<date>\",\n    \"on_or_before_date\": \"<date>\"\n  },\n  \"daily_account_balance_csv\": {\n    \"account_id\": \"<string>\",\n    \"on_or_after_date\": \"<date>\",\n    \"on_or_before_date\": \"<date>\"\n  },\n  \"entity_csv\": {},\n  \"funding_instructions\": {\n    \"account_number_id\": \"<string>\"\n  },\n  \"transaction_csv\": {\n    \"account_id\": \"<string>\",\n    \"created_at\": {\n      \"after\": \"<dateTime>\",\n      \"before\": \"<dateTime>\",\n      \"on_or_after\": \"<dateTime>\",\n      \"on_or_before\": \"<dateTime>\"\n    }\n  },\n  \"vendor_csv\": {},\n  \"voided_check\": {\n    \"account_number_id\": \"<string>\",\n    \"payer\": [\n      {\n        \"line\": \"<string>\"\n      },\n      {\n        \"line\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "244bdb1e-6189-4958-a5ad-e34c7c2e16aa",
+              "name": "Export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"transaction_csv\",\n  \"transaction_csv\": {\n    \"account_id\": \"account_in71c4amph0vgo2qllky\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"export\",\n  \"id\": \"string\",\n  \"created_at\": \"1978-10-29T23:42:25.373Z\",\n  \"category\": \"balance_csv\",\n  \"status\": \"complete\",\n  \"result\": {\n    \"file_id\": \"string\"\n  },\n  \"account_statement_ofx\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"before\": \"1948-04-25T03:29:35.312Z\",\n      \"on_or_after\": \"2004-01-03T13:06:32.710Z\"\n    }\n  },\n  \"account_statement_bai2\": {\n    \"account_id\": \"string\",\n    \"program_id\": \"string\",\n    \"effective_date\": \"1969-02-27\"\n  },\n  \"dashboard_table_csv\": {},\n  \"transaction_csv\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"after\": \"1953-09-21T22:59:01.461Z\",\n      \"before\": \"1997-02-07T14:12:46.580Z\"\n    }\n  },\n  \"balance_csv\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"after\": \"1957-05-10T23:01:27.264Z\",\n      \"before\": \"1955-06-29T05:23:10.297Z\"\n    }\n  },\n  \"bookkeeping_account_balance_csv\": {\n    \"bookkeeping_account_id\": \"string\",\n    \"on_or_before_date\": \"1948-10-31\",\n    \"on_or_after_date\": \"1968-07-07\"\n  },\n  \"entity_csv\": {},\n  \"vendor_csv\": {},\n  \"account_verification_letter\": {\n    \"account_number_id\": \"string\",\n    \"balance_date\": \"2014-05-17\"\n  },\n  \"funding_instructions\": {\n    \"account_number_id\": \"string\"\n  },\n  \"form_1099_int\": {\n    \"account_id\": \"string\",\n    \"description\": \"string\",\n    \"year\": 9221,\n    \"corrected\": false\n  },\n  \"form_1099_misc\": {\n    \"account_id\": \"string\",\n    \"year\": 6583,\n    \"corrected\": true\n  },\n  \"fee_csv\": {\n    \"created_at\": {\n      \"after\": \"2023-12-13T16:39:19.677Z\",\n      \"before\": \"1982-09-06T08:33:22.275Z\"\n    }\n  },\n  \"voided_check\": {\n    \"account_number_id\": \"string\",\n    \"payer\": [\n      {\n        \"line\": \"string\"\n      },\n      {\n        \"line\": \"string\"\n      }\n    ]\n  },\n  \"daily_account_balance_csv\": {\n    \"account_id\": \"string\",\n    \"on_or_after_date\": \"1974-02-20\",\n    \"on_or_before_date\": \"1950-04-25\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cdd9ba4-fdcd-41b4-a936-3741f7e23046",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"transaction_csv\",\n  \"transaction_csv\": {\n    \"account_id\": \"account_in71c4amph0vgo2qllky\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4aec739d-723b-47a6-a678-0bc5e6b19500",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"transaction_csv\",\n  \"transaction_csv\": {\n    \"account_id\": \"account_in71c4amph0vgo2qllky\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f837a297-6db2-4067-a9d8-45a67b88b513",
+          "name": "Retrieve an Export",
+          "request": {
+            "name": "Retrieve an Export",
+            "description": {},
+            "url": {
+              "path": [
+                "exports",
+                ":export_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "export_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd7ef116-6036-4553-810c-dd6d9dd36f02",
+              "name": "Export",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports",
+                    ":export_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "export_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"export\",\n  \"id\": \"string\",\n  \"created_at\": \"1978-10-29T23:42:25.373Z\",\n  \"category\": \"balance_csv\",\n  \"status\": \"complete\",\n  \"result\": {\n    \"file_id\": \"string\"\n  },\n  \"account_statement_ofx\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"before\": \"1948-04-25T03:29:35.312Z\",\n      \"on_or_after\": \"2004-01-03T13:06:32.710Z\"\n    }\n  },\n  \"account_statement_bai2\": {\n    \"account_id\": \"string\",\n    \"program_id\": \"string\",\n    \"effective_date\": \"1969-02-27\"\n  },\n  \"dashboard_table_csv\": {},\n  \"transaction_csv\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"after\": \"1953-09-21T22:59:01.461Z\",\n      \"before\": \"1997-02-07T14:12:46.580Z\"\n    }\n  },\n  \"balance_csv\": {\n    \"account_id\": \"string\",\n    \"created_at\": {\n      \"after\": \"1957-05-10T23:01:27.264Z\",\n      \"before\": \"1955-06-29T05:23:10.297Z\"\n    }\n  },\n  \"bookkeeping_account_balance_csv\": {\n    \"bookkeeping_account_id\": \"string\",\n    \"on_or_before_date\": \"1948-10-31\",\n    \"on_or_after_date\": \"1968-07-07\"\n  },\n  \"entity_csv\": {},\n  \"vendor_csv\": {},\n  \"account_verification_letter\": {\n    \"account_number_id\": \"string\",\n    \"balance_date\": \"2014-05-17\"\n  },\n  \"funding_instructions\": {\n    \"account_number_id\": \"string\"\n  },\n  \"form_1099_int\": {\n    \"account_id\": \"string\",\n    \"description\": \"string\",\n    \"year\": 9221,\n    \"corrected\": false\n  },\n  \"form_1099_misc\": {\n    \"account_id\": \"string\",\n    \"year\": 6583,\n    \"corrected\": true\n  },\n  \"fee_csv\": {\n    \"created_at\": {\n      \"after\": \"2023-12-13T16:39:19.677Z\",\n      \"before\": \"1982-09-06T08:33:22.275Z\"\n    }\n  },\n  \"voided_check\": {\n    \"account_number_id\": \"string\",\n    \"payer\": [\n      {\n        \"line\": \"string\"\n      },\n      {\n        \"line\": \"string\"\n      }\n    ]\n  },\n  \"daily_account_balance_csv\": {\n    \"account_id\": \"string\",\n    \"on_or_after_date\": \"1974-02-20\",\n    \"on_or_before_date\": \"1950-04-25\"\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "033ce236-ef5d-4b8a-90c7-ab3eac622446",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports",
+                    ":export_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "export_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24c543e3-4c88-48c4-bc25-2dc13e1a89dc",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exports",
+                    ":export_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "export_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0e72d68a-dfe8-49f6-92de-935568a46bf6",
+    "name": "Increase Account Numbers Exports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

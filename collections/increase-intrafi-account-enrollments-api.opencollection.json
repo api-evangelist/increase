@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Intrafi Account Enrollments API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Intrafi Account Enrollments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List IntraFi Account Enrollments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/intrafi_account_enrollments",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List IntraFi Account Enrollments"
+        },
+        {
+          "info": {
+            "name": "Enroll an account in the IntraFi deposit sweep network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/intrafi_account_enrollments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enroll an account in the IntraFi deposit sweep network"
+        },
+        {
+          "info": {
+            "name": "Get an IntraFi Account Enrollment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/intrafi_account_enrollments/:intrafi_account_enrollment_id",
+            "params": [
+              {
+                "name": "intrafi_account_enrollment_id",
+                "value": "intrafi_account_enrollment_w8l97znzreopkwf2tg75",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an IntraFi Account Enrollment"
+        },
+        {
+          "info": {
+            "name": "Unenroll an account from IntraFi",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/intrafi_account_enrollments/:intrafi_account_enrollment_id/unenroll",
+            "params": [
+              {
+                "name": "intrafi_account_enrollment_id",
+                "value": "intrafi_account_enrollment_w8l97znzreopkwf2tg75",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unenroll an account from IntraFi"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

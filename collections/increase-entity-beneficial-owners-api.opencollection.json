@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Entity Beneficial Owners API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity Beneficial Owners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Beneficial Owners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entity_beneficial_owners",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "entity_id",
+                "value": "entity_n8y8tnk2p9339ti393yi",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Beneficial Owners"
+        },
+        {
+          "info": {
+            "name": "Create a Beneficial Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entity_beneficial_owners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Beneficial Owner"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Beneficial Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id",
+            "params": [
+              {
+                "name": "entity_beneficial_owner_id",
+                "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Beneficial Owner"
+        },
+        {
+          "info": {
+            "name": "Update a Beneficial Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id",
+            "params": [
+              {
+                "name": "entity_beneficial_owner_id",
+                "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Beneficial Owner"
+        },
+        {
+          "info": {
+            "name": "Archive a Beneficial Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/entity_beneficial_owners/:entity_beneficial_owner_id/archive",
+            "params": [
+              {
+                "name": "entity_beneficial_owner_id",
+                "value": "entity_beneficial_owner_vozma8szzu1sxezp5zq6",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive a Beneficial Owner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

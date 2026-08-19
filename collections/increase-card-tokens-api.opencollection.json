@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Card Tokens API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Card Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_tokens",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Card Tokens"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Card Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_tokens/:card_token_id",
+            "params": [
+              {
+                "name": "card_token_id",
+                "value": "outbound_card_token_zlt0ml6youq3q7vcdlg0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Card Token"
+        },
+        {
+          "info": {
+            "name": "Retrieve the capabilities of a Card Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_tokens/:card_token_id/capabilities",
+            "params": [
+              {
+                "name": "card_token_id",
+                "value": "outbound_card_token_zlt0ml6youq3q7vcdlg0",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "The capabilities of a Card Token describe whether the card can be used for specific operations, such as Card Push Transfers. The capabilities can change over time based on the issuing bank's configuration of the card range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

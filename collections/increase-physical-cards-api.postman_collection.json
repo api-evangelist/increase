@@ -1,0 +1,971 @@
+{
+  "item": [
+    {
+      "id": "afd8c70d-fe82-4481-bb2a-46c5d102142a",
+      "name": "Physical Cards",
+      "description": {
+        "content": "Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "875d666c-cc3b-499c-bcce-6d0b207cec2a",
+          "name": "List Physical Cards",
+          "request": {
+            "name": "List Physical Cards",
+            "description": {},
+            "url": {
+              "path": [
+                "physical_cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "card_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "706c8ea5-6c2f-4edb-94f4-f29bd364972f",
+              "name": "Physical Card List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"physical_card\",\n      \"id\": \"string\",\n      \"card_id\": \"string\",\n      \"physical_card_profile_id\": \"string\",\n      \"created_at\": \"2013-11-19T19:58:50.642Z\",\n      \"status\": \"canceled\",\n      \"cardholder\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"shipment\": {\n        \"method\": \"fedex_2_day\",\n        \"schedule\": \"next_day\",\n        \"status\": \"submitted\",\n        \"tracking\": {\n          \"number\": \"string\",\n          \"shipped_at\": \"1969-03-30T07:12:13.197Z\",\n          \"return_reason\": \"string\",\n          \"return_number\": \"string\",\n          \"updates\": [\n            {\n              \"category\": \"delivery_issue\",\n              \"created_at\": \"2019-09-03T17:53:49.441Z\",\n              \"carrier_estimated_delivery_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"category\": \"delivery_issue\",\n              \"created_at\": \"1971-06-29T08:22:20.690Z\",\n              \"carrier_estimated_delivery_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"line3\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"physical_card\",\n      \"id\": \"string\",\n      \"card_id\": \"string\",\n      \"physical_card_profile_id\": \"string\",\n      \"created_at\": \"2017-02-09T08:14:25.927Z\",\n      \"status\": \"active\",\n      \"cardholder\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\"\n      },\n      \"shipment\": {\n        \"method\": \"dhl_worldwide_express\",\n        \"schedule\": \"same_day\",\n        \"status\": \"submitted\",\n        \"tracking\": {\n          \"number\": \"string\",\n          \"shipped_at\": \"1998-09-06T04:22:21.723Z\",\n          \"return_reason\": \"string\",\n          \"return_number\": \"string\",\n          \"updates\": [\n            {\n              \"category\": \"returned_to_sender\",\n              \"created_at\": \"1990-07-31T01:41:36.365Z\",\n              \"carrier_estimated_delivery_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"category\": \"returned_to_sender\",\n              \"created_at\": \"1997-10-24T04:42:12.312Z\",\n              \"carrier_estimated_delivery_at\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"postal_code\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"city\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"state\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        \"address\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"line2\": \"string\",\n          \"line3\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"postal_code\": \"string\",\n          \"country\": \"string\"\n        }\n      },\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9c711e9-90fc-4221-a827-90e89d7db355",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d164abff-5618-4221-91db-75e29c67ee4f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_id",
+                      "value": "card_oubs0hwk5rn6knuecxg2"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cf27bff-0dce-41e2-a1ca-1dec2494a169",
+          "name": "Create a Physical Card",
+          "request": {
+            "name": "Create a Physical Card",
+            "description": {},
+            "url": {
+              "path": [
+                "physical_cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"card_id\": \"<string>\",\n  \"cardholder\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  },\n  \"shipment\": {\n    \"method\": \"<string>\",\n    \"address\": {\n      \"name\": \"<string>\",\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"line3\": \"<string>\",\n      \"phone_number\": \"<string>\"\n    },\n    \"schedule\": \"<string>\"\n  },\n  \"physical_card_profile_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5536a79-48b0-4d5f-9919-dd1ff0823c65",
+              "name": "Physical Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n  \"cardholder\": {\n    \"first_name\": \"Ian\",\n    \"last_name\": \"Crease\"\n  },\n  \"shipment\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"name\": \"Ian Crease\",\n      \"postal_code\": \"10045\",\n      \"state\": \"NY\"\n    },\n    \"method\": \"usps\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"physical_card\",\n  \"id\": \"string\",\n  \"card_id\": \"string\",\n  \"physical_card_profile_id\": \"string\",\n  \"created_at\": \"2017-01-09T05:49:14.642Z\",\n  \"status\": \"active\",\n  \"cardholder\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"shipment\": {\n    \"method\": \"dhl_worldwide_express\",\n    \"schedule\": \"same_day\",\n    \"status\": \"submitted\",\n    \"tracking\": {\n      \"number\": \"string\",\n      \"shipped_at\": \"1960-08-31T21:43:47.607Z\",\n      \"return_reason\": \"string\",\n      \"return_number\": \"string\",\n      \"updates\": [\n        {\n          \"category\": \"returned_to_sender\",\n          \"created_at\": \"1993-08-26T08:07:07.400Z\",\n          \"carrier_estimated_delivery_at\": \"1967-06-14T14:39:12.723Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        },\n        {\n          \"category\": \"processed_for_delivery\",\n          \"created_at\": \"1994-05-18T01:20:33.588Z\",\n          \"carrier_estimated_delivery_at\": \"1982-01-20T00:52:35.175Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        }\n      ]\n    },\n    \"address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"line3\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbce9320-e419-4fcb-9fb0-3ae0e3ff1810",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n  \"cardholder\": {\n    \"first_name\": \"Ian\",\n    \"last_name\": \"Crease\"\n  },\n  \"shipment\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"name\": \"Ian Crease\",\n      \"postal_code\": \"10045\",\n      \"state\": \"NY\"\n    },\n    \"method\": \"usps\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fddc21be-1ab4-4e17-9a28-a7d1ad74528f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"card_id\": \"card_oubs0hwk5rn6knuecxg2\",\n  \"cardholder\": {\n    \"first_name\": \"Ian\",\n    \"last_name\": \"Crease\"\n  },\n  \"shipment\": {\n    \"address\": {\n      \"city\": \"New York\",\n      \"line1\": \"33 Liberty Street\",\n      \"line2\": \"Unit 2\",\n      \"name\": \"Ian Crease\",\n      \"postal_code\": \"10045\",\n      \"state\": \"NY\"\n    },\n    \"method\": \"usps\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a997ade1-87c7-4469-9f73-f4c971c2243a",
+          "name": "Retrieve a Physical Card",
+          "request": {
+            "name": "Retrieve a Physical Card",
+            "description": {},
+            "url": {
+              "path": [
+                "physical_cards",
+                ":physical_card_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "physical_card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1622897c-a273-40be-baa7-5e392f83c7cf",
+              "name": "Physical Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"physical_card\",\n  \"id\": \"string\",\n  \"card_id\": \"string\",\n  \"physical_card_profile_id\": \"string\",\n  \"created_at\": \"2017-01-09T05:49:14.642Z\",\n  \"status\": \"active\",\n  \"cardholder\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"shipment\": {\n    \"method\": \"dhl_worldwide_express\",\n    \"schedule\": \"same_day\",\n    \"status\": \"submitted\",\n    \"tracking\": {\n      \"number\": \"string\",\n      \"shipped_at\": \"1960-08-31T21:43:47.607Z\",\n      \"return_reason\": \"string\",\n      \"return_number\": \"string\",\n      \"updates\": [\n        {\n          \"category\": \"returned_to_sender\",\n          \"created_at\": \"1993-08-26T08:07:07.400Z\",\n          \"carrier_estimated_delivery_at\": \"1967-06-14T14:39:12.723Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        },\n        {\n          \"category\": \"processed_for_delivery\",\n          \"created_at\": \"1994-05-18T01:20:33.588Z\",\n          \"carrier_estimated_delivery_at\": \"1982-01-20T00:52:35.175Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        }\n      ]\n    },\n    \"address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"line3\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a0c1a3c-3a87-43ac-ae29-0c783c9ca9ca",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd38eaea-bfa6-4d59-b752-b5474441d810",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec4d0425-293c-47ba-80e3-36bb627c0117",
+          "name": "Update a Physical Card",
+          "request": {
+            "name": "Update a Physical Card",
+            "description": {},
+            "url": {
+              "path": [
+                "physical_cards",
+                ":physical_card_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "physical_card_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2769933e-a4db-4604-a2f8-4cf6c5bd0875",
+              "name": "Physical Card",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"physical_card\",\n  \"id\": \"string\",\n  \"card_id\": \"string\",\n  \"physical_card_profile_id\": \"string\",\n  \"created_at\": \"2017-01-09T05:49:14.642Z\",\n  \"status\": \"active\",\n  \"cardholder\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  },\n  \"shipment\": {\n    \"method\": \"dhl_worldwide_express\",\n    \"schedule\": \"same_day\",\n    \"status\": \"submitted\",\n    \"tracking\": {\n      \"number\": \"string\",\n      \"shipped_at\": \"1960-08-31T21:43:47.607Z\",\n      \"return_reason\": \"string\",\n      \"return_number\": \"string\",\n      \"updates\": [\n        {\n          \"category\": \"returned_to_sender\",\n          \"created_at\": \"1993-08-26T08:07:07.400Z\",\n          \"carrier_estimated_delivery_at\": \"1967-06-14T14:39:12.723Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        },\n        {\n          \"category\": \"processed_for_delivery\",\n          \"created_at\": \"1994-05-18T01:20:33.588Z\",\n          \"carrier_estimated_delivery_at\": \"1982-01-20T00:52:35.175Z\",\n          \"postal_code\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\"\n        }\n      ]\n    },\n    \"address\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"line2\": \"string\",\n      \"line3\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"postal_code\": \"string\",\n      \"country\": \"string\"\n    }\n  },\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fe809db-d22e-42cf-8864-f25f98f024b7",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c168b38e-9002-4008-bc7c-43dfe8506767",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "physical_cards",
+                    ":physical_card_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "physical_card_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dfc14f39-60f7-42f2-8e3e-5086f1cc2f27",
+    "name": "Increase Account Numbers Physical Cards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,978 @@
+{
+  "item": [
+    {
+      "id": "aeefdb97-f270-45e2-b936-b5499bb042ff",
+      "name": "Inbound Check Deposits",
+      "description": {
+        "content": "Inbound Check Deposits are records of third-parties attempting to deposit checks against your account.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d555ca5c-06cd-489d-bf4a-6557c3bf2d25",
+          "name": "List Inbound Check Deposits",
+          "request": {
+            "name": "List Inbound Check Deposits",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_check_deposits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "check_transfer_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7fd9802-1ee9-45d2-be57-06ff3ded74dd",
+              "name": "Inbound Check Deposit List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "check_transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inbound_check_deposit\",\n      \"id\": \"string\",\n      \"amount\": 8891,\n      \"created_at\": \"2008-07-09T19:13:00.776Z\",\n      \"currency\": \"USD\",\n      \"status\": \"accepted\",\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"check_transfer_id\": \"string\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"declined_transaction_id\": \"string\",\n      \"deposit_return\": {\n        \"returned_at\": \"1977-11-07T10:17:33.914Z\",\n        \"transaction_id\": \"string\",\n        \"reason\": \"endorsement_irregular\"\n      },\n      \"adjustments\": [\n        {\n          \"adjusted_at\": \"1964-06-29T14:38:59.390Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"wrong_payee_credit\",\n          \"amount\": 6653\n        },\n        {\n          \"adjusted_at\": \"1986-05-07T08:32:41.407Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"wrong_payee_credit\",\n          \"amount\": 4661\n        }\n      ],\n      \"accepted_at\": \"1991-02-09T02:50:19.355Z\",\n      \"declined_at\": \"1977-05-20T17:32:45.864Z\",\n      \"bank_of_first_deposit_routing_number\": \"string\",\n      \"check_number\": \"string\",\n      \"payee_name_analysis\": \"not_evaluated\"\n    },\n    {\n      \"type\": \"inbound_check_deposit\",\n      \"id\": \"string\",\n      \"amount\": 2029,\n      \"created_at\": \"1952-10-10T06:23:27.654Z\",\n      \"currency\": \"USD\",\n      \"status\": \"pending\",\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"check_transfer_id\": \"string\",\n      \"front_image_file_id\": \"string\",\n      \"back_image_file_id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"declined_transaction_id\": \"string\",\n      \"deposit_return\": {\n        \"returned_at\": \"2022-04-22T19:18:25.397Z\",\n        \"transaction_id\": \"string\",\n        \"reason\": \"refer_to_maker\"\n      },\n      \"adjustments\": [\n        {\n          \"adjusted_at\": \"1958-12-25T16:51:11.412Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"late_return\",\n          \"amount\": 811\n        },\n        {\n          \"adjusted_at\": \"2015-11-15T23:59:47.111Z\",\n          \"transaction_id\": \"string\",\n          \"reason\": \"wrong_payee_credit\",\n          \"amount\": 757\n        }\n      ],\n      \"accepted_at\": \"2015-01-22T07:13:21.582Z\",\n      \"declined_at\": \"1956-02-13T22:43:26.905Z\",\n      \"bank_of_first_deposit_routing_number\": \"string\",\n      \"check_number\": \"string\",\n      \"payee_name_analysis\": \"not_evaluated\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9678b3aa-2c11-4586-862a-d8920dc1fe8e",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "check_transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6138ce88-4dd7-415d-977a-0aa3cbcd870a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "check_transfer_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38620361-e6d0-46ee-9110-8e4d69a12176",
+          "name": "Retrieve an Inbound Check Deposit",
+          "request": {
+            "name": "Retrieve an Inbound Check Deposit",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_check_deposits",
+                ":inbound_check_deposit_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_check_deposit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f0aa8a8-2ec0-4ddb-a6fe-6a0381959b73",
+              "name": "Inbound Check Deposit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_check_deposit\",\n  \"id\": \"string\",\n  \"amount\": 5339,\n  \"created_at\": \"1954-06-29T17:24:51.496Z\",\n  \"currency\": \"USD\",\n  \"status\": \"accepted\",\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"check_transfer_id\": \"string\",\n  \"front_image_file_id\": \"string\",\n  \"back_image_file_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"declined_transaction_id\": \"string\",\n  \"deposit_return\": {\n    \"returned_at\": \"2012-11-02T16:43:46.182Z\",\n    \"transaction_id\": \"string\",\n    \"reason\": \"not_authorized\"\n  },\n  \"adjustments\": [\n    {\n      \"adjusted_at\": \"2015-08-22T14:54:31.560Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"wrong_payee_credit\",\n      \"amount\": 9069\n    },\n    {\n      \"adjusted_at\": \"1955-02-14T01:25:10.890Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"late_return\",\n      \"amount\": 716\n    }\n  ],\n  \"accepted_at\": \"2015-06-16T14:36:12.329Z\",\n  \"declined_at\": \"1977-07-11T23:41:28.642Z\",\n  \"bank_of_first_deposit_routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"payee_name_analysis\": \"not_evaluated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d514a35d-fd63-4d29-9c22-056cddf77626",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14084695-e529-433e-9825-44a4d3fe29a8",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9757d297-b5c9-4afe-abe5-ece270131231",
+          "name": "Decline an Inbound Check Deposit",
+          "request": {
+            "name": "Decline an Inbound Check Deposit",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_check_deposits",
+                ":inbound_check_deposit_id",
+                "decline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_check_deposit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "319bb3c2-db44-4bac-94b1-5fdd9a24f92c",
+              "name": "Inbound Check Deposit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_check_deposit\",\n  \"id\": \"string\",\n  \"amount\": 5339,\n  \"created_at\": \"1954-06-29T17:24:51.496Z\",\n  \"currency\": \"USD\",\n  \"status\": \"accepted\",\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"check_transfer_id\": \"string\",\n  \"front_image_file_id\": \"string\",\n  \"back_image_file_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"declined_transaction_id\": \"string\",\n  \"deposit_return\": {\n    \"returned_at\": \"2012-11-02T16:43:46.182Z\",\n    \"transaction_id\": \"string\",\n    \"reason\": \"not_authorized\"\n  },\n  \"adjustments\": [\n    {\n      \"adjusted_at\": \"2015-08-22T14:54:31.560Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"wrong_payee_credit\",\n      \"amount\": 9069\n    },\n    {\n      \"adjusted_at\": \"1955-02-14T01:25:10.890Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"late_return\",\n      \"amount\": 716\n    }\n  ],\n  \"accepted_at\": \"2015-06-16T14:36:12.329Z\",\n  \"declined_at\": \"1977-07-11T23:41:28.642Z\",\n  \"bank_of_first_deposit_routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"payee_name_analysis\": \"not_evaluated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0292a9e0-55b6-4d4c-a233-37c16da824df",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc88a76e-c590-4c3e-8d4b-36577e0c523c",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e811dfa6-2a54-45a9-a88e-4b23fac3f68c",
+          "name": "Return an Inbound Check Deposit",
+          "request": {
+            "name": "Return an Inbound Check Deposit",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_check_deposits",
+                ":inbound_check_deposit_id",
+                "return"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_check_deposit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e0c96f0-0e4d-4450-8834-c64b22f4e111",
+              "name": "Inbound Check Deposit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"altered_or_fictitious\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_check_deposit\",\n  \"id\": \"string\",\n  \"amount\": 5339,\n  \"created_at\": \"1954-06-29T17:24:51.496Z\",\n  \"currency\": \"USD\",\n  \"status\": \"accepted\",\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"check_transfer_id\": \"string\",\n  \"front_image_file_id\": \"string\",\n  \"back_image_file_id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"declined_transaction_id\": \"string\",\n  \"deposit_return\": {\n    \"returned_at\": \"2012-11-02T16:43:46.182Z\",\n    \"transaction_id\": \"string\",\n    \"reason\": \"not_authorized\"\n  },\n  \"adjustments\": [\n    {\n      \"adjusted_at\": \"2015-08-22T14:54:31.560Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"wrong_payee_credit\",\n      \"amount\": 9069\n    },\n    {\n      \"adjusted_at\": \"1955-02-14T01:25:10.890Z\",\n      \"transaction_id\": \"string\",\n      \"reason\": \"late_return\",\n      \"amount\": 716\n    }\n  ],\n  \"accepted_at\": \"2015-06-16T14:36:12.329Z\",\n  \"declined_at\": \"1977-07-11T23:41:28.642Z\",\n  \"bank_of_first_deposit_routing_number\": \"string\",\n  \"check_number\": \"string\",\n  \"payee_name_analysis\": \"not_evaluated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f957cb97-9733-4a0b-b4ea-22b828d73abd",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"altered_or_fictitious\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7800ea6f-064a-4cb4-b2a5-624fcadd89e5",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_check_deposits",
+                    ":inbound_check_deposit_id",
+                    "return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_check_deposit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"altered_or_fictitious\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "85b013c6-47ed-4154-a7bc-13883aa5526f",
+    "name": "Increase Account Numbers Inbound Check Deposits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

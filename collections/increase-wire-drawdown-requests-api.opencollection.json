@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Wire Drawdown Requests API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wire Drawdown Requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Wire Drawdown Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/wire_drawdown_requests",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Wire Drawdown Requests"
+        },
+        {
+          "info": {
+            "name": "Create a Wire Drawdown Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/wire_drawdown_requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Wire Drawdown Request"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Wire Drawdown Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/wire_drawdown_requests/:wire_drawdown_request_id",
+            "params": [
+              {
+                "name": "wire_drawdown_request_id",
+                "value": "wire_drawdown_request_q6lmocus3glo0lr2bfv3",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Wire Drawdown Request"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

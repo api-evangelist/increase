@@ -1,0 +1,1270 @@
+{
+  "item": [
+    {
+      "id": "b4e06433-863f-451b-b55d-82963d6419f3",
+      "name": "Inbound Ach Transfers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ff4e012-13cf-4ba8-a096-bdee5c6d51ba",
+          "name": "List Inbound ACH Transfers",
+          "request": {
+            "name": "List Inbound ACH Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_ach_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_number_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41faf5e1-11c1-434e-bd86-d856742d7f71",
+              "name": "Inbound ACH Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"inbound_ach_transfer\",\n      \"id\": \"string\",\n      \"amount\": 6272,\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"direction\": \"credit\",\n      \"status\": \"declined\",\n      \"created_at\": \"2011-04-08T22:35:34.006Z\",\n      \"originator_company_name\": \"string\",\n      \"originator_company_descriptive_date\": \"string\",\n      \"originator_company_discretionary_data\": \"string\",\n      \"originator_company_entry_description\": \"string\",\n      \"originator_company_id\": \"string\",\n      \"originator_routing_number\": \"string\",\n      \"receiver_id_number\": \"string\",\n      \"receiver_name\": \"string\",\n      \"trace_number\": \"string\",\n      \"effective_date\": \"1996-03-10\",\n      \"standard_entry_class_code\": \"point_of_sale\",\n      \"settlement\": {\n        \"settled_at\": \"1961-11-09T12:12:35.780Z\",\n        \"settlement_schedule\": \"future_dated\"\n      },\n      \"automatically_resolves_at\": \"2008-08-09T06:14:08.625Z\",\n      \"addenda\": {\n        \"category\": \"freeform\",\n        \"freeform\": {\n          \"entries\": [\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"1982-07-13T07:59:50.777Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"decline\": {\n        \"reason\": \"returned_per_odfi_request\",\n        \"declined_at\": \"1996-01-31T10:34:32.267Z\",\n        \"declined_transaction_id\": \"string\"\n      },\n      \"transfer_return\": {\n        \"reason\": \"beneficiary_or_account_holder_deceased\",\n        \"returned_at\": \"1961-08-25T21:07:47.377Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"notification_of_change\": {\n        \"updated_account_number\": \"string\",\n        \"updated_routing_number\": \"string\"\n      },\n      \"international_addenda\": {\n        \"foreign_exchange_indicator\": \"variable_to_fixed\",\n        \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n        \"foreign_exchange_reference\": \"string\",\n        \"destination_country_code\": \"string\",\n        \"destination_currency_code\": \"string\",\n        \"foreign_payment_amount\": 915,\n        \"foreign_trace_number\": \"string\",\n        \"international_transaction_type_code\": \"back_office_conversion\",\n        \"originating_currency_code\": \"string\",\n        \"originating_depository_financial_institution_name\": \"string\",\n        \"originating_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n        \"originating_depository_financial_institution_id\": \"string\",\n        \"originating_depository_financial_institution_branch_country\": \"string\",\n        \"originator_name\": \"string\",\n        \"originator_street_address\": \"string\",\n        \"originator_city\": \"string\",\n        \"originator_state_or_province\": \"string\",\n        \"originator_postal_code\": \"string\",\n        \"originator_country\": \"string\",\n        \"originator_identification\": \"string\",\n        \"payment_related_information\": \"string\",\n        \"payment_related_information2\": \"string\",\n        \"receiver_identification_number\": \"string\",\n        \"receiver_street_address\": \"string\",\n        \"receiver_city\": \"string\",\n        \"receiver_state_or_province\": \"string\",\n        \"receiver_country\": \"string\",\n        \"receiver_postal_code\": \"string\",\n        \"receiving_company_or_individual_name\": \"string\",\n        \"receiving_depository_financial_institution_name\": \"string\",\n        \"receiving_depository_financial_institution_id_qualifier\": \"iban\",\n        \"receiving_depository_financial_institution_id\": \"string\",\n        \"receiving_depository_financial_institution_country\": \"string\"\n      }\n    },\n    {\n      \"type\": \"inbound_ach_transfer\",\n      \"id\": \"string\",\n      \"amount\": 2029,\n      \"account_id\": \"string\",\n      \"account_number_id\": \"string\",\n      \"direction\": \"debit\",\n      \"status\": \"declined\",\n      \"created_at\": \"1996-12-16T15:25:38.788Z\",\n      \"originator_company_name\": \"string\",\n      \"originator_company_descriptive_date\": \"string\",\n      \"originator_company_discretionary_data\": \"string\",\n      \"originator_company_entry_description\": \"string\",\n      \"originator_company_id\": \"string\",\n      \"originator_routing_number\": \"string\",\n      \"receiver_id_number\": \"string\",\n      \"receiver_name\": \"string\",\n      \"trace_number\": \"string\",\n      \"effective_date\": \"1993-07-02\",\n      \"standard_entry_class_code\": \"telephone_initiated\",\n      \"settlement\": {\n        \"settled_at\": \"2024-09-11T08:24:12.887Z\",\n        \"settlement_schedule\": \"future_dated\"\n      },\n      \"automatically_resolves_at\": \"2025-07-02T08:55:37.507Z\",\n      \"addenda\": {\n        \"category\": \"freeform\",\n        \"freeform\": {\n          \"entries\": [\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"payment_related_information\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      \"acceptance\": {\n        \"accepted_at\": \"1953-10-14T17:16:52.400Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"decline\": {\n        \"reason\": \"entity_not_active\",\n        \"declined_at\": \"2006-07-08T02:01:31.534Z\",\n        \"declined_transaction_id\": \"string\"\n      },\n      \"transfer_return\": {\n        \"reason\": \"returned_per_odfi_request\",\n        \"returned_at\": \"2014-11-15T10:06:34.174Z\",\n        \"transaction_id\": \"string\"\n      },\n      \"notification_of_change\": {\n        \"updated_account_number\": \"string\",\n        \"updated_routing_number\": \"string\"\n      },\n      \"international_addenda\": {\n        \"foreign_exchange_indicator\": \"variable_to_fixed\",\n        \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n        \"foreign_exchange_reference\": \"string\",\n        \"destination_country_code\": \"string\",\n        \"destination_currency_code\": \"string\",\n        \"foreign_payment_amount\": 2303,\n        \"foreign_trace_number\": \"string\",\n        \"international_transaction_type_code\": \"miscellaneous\",\n        \"originating_currency_code\": \"string\",\n        \"originating_depository_financial_institution_name\": \"string\",\n        \"originating_depository_financial_institution_id_qualifier\": \"bic_code\",\n        \"originating_depository_financial_institution_id\": \"string\",\n        \"originating_depository_financial_institution_branch_country\": \"string\",\n        \"originator_name\": \"string\",\n        \"originator_street_address\": \"string\",\n        \"originator_city\": \"string\",\n        \"originator_state_or_province\": \"string\",\n        \"originator_postal_code\": \"string\",\n        \"originator_country\": \"string\",\n        \"originator_identification\": \"string\",\n        \"payment_related_information\": \"string\",\n        \"payment_related_information2\": \"string\",\n        \"receiver_identification_number\": \"string\",\n        \"receiver_street_address\": \"string\",\n        \"receiver_city\": \"string\",\n        \"receiver_state_or_province\": \"string\",\n        \"receiver_country\": \"string\",\n        \"receiver_postal_code\": \"string\",\n        \"receiving_company_or_individual_name\": \"string\",\n        \"receiving_depository_financial_institution_name\": \"string\",\n        \"receiving_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n        \"receiving_depository_financial_institution_id\": \"string\",\n        \"receiving_depository_financial_institution_country\": \"string\"\n      }\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa965a22-7986-4fc4-a9cb-cfe054fffb5a",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a60fc2e0-f686-4d1f-ae90-135eda080504",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "account_number_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee0651ca-da45-4332-9b56-104746b83534",
+          "name": "Retrieve an Inbound ACH Transfer",
+          "request": {
+            "name": "Retrieve an Inbound ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_ach_transfers",
+                ":inbound_ach_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5c832ea-654b-4ab3-aef3-579a8377fa01",
+              "name": "Inbound ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_ach_transfer\",\n  \"id\": \"string\",\n  \"amount\": 7716,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"direction\": \"debit\",\n  \"status\": \"returned\",\n  \"created_at\": \"1981-05-05T10:21:41.883Z\",\n  \"originator_company_name\": \"string\",\n  \"originator_company_descriptive_date\": \"string\",\n  \"originator_company_discretionary_data\": \"string\",\n  \"originator_company_entry_description\": \"string\",\n  \"originator_company_id\": \"string\",\n  \"originator_routing_number\": \"string\",\n  \"receiver_id_number\": \"string\",\n  \"receiver_name\": \"string\",\n  \"trace_number\": \"string\",\n  \"effective_date\": \"2015-10-28\",\n  \"standard_entry_class_code\": \"back_office_conversion\",\n  \"settlement\": {\n    \"settled_at\": \"2001-07-16T15:57:54.124Z\",\n    \"settlement_schedule\": \"future_dated\"\n  },\n  \"automatically_resolves_at\": \"1967-12-17T07:34:01.348Z\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"string\"\n        },\n        {\n          \"payment_related_information\": \"string\"\n        }\n      ]\n    }\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2012-04-25T01:55:46.382Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"decline\": {\n    \"reason\": \"customer_advised_unauthorized_improper_ineligible_or_incomplete\",\n    \"declined_at\": \"1999-07-06T22:14:08.042Z\",\n    \"declined_transaction_id\": \"string\"\n  },\n  \"transfer_return\": {\n    \"reason\": \"insufficient_funds\",\n    \"returned_at\": \"1963-01-27T03:08:41.388Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"notification_of_change\": {\n    \"updated_account_number\": \"string\",\n    \"updated_routing_number\": \"string\"\n  },\n  \"international_addenda\": {\n    \"foreign_exchange_indicator\": \"variable_to_fixed\",\n    \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n    \"foreign_exchange_reference\": \"string\",\n    \"destination_country_code\": \"string\",\n    \"destination_currency_code\": \"string\",\n    \"foreign_payment_amount\": 9801,\n    \"foreign_trace_number\": \"string\",\n    \"international_transaction_type_code\": \"miscellaneous\",\n    \"originating_currency_code\": \"string\",\n    \"originating_depository_financial_institution_name\": \"string\",\n    \"originating_depository_financial_institution_id_qualifier\": \"bic_code\",\n    \"originating_depository_financial_institution_id\": \"string\",\n    \"originating_depository_financial_institution_branch_country\": \"string\",\n    \"originator_name\": \"string\",\n    \"originator_street_address\": \"string\",\n    \"originator_city\": \"string\",\n    \"originator_state_or_province\": \"string\",\n    \"originator_postal_code\": \"string\",\n    \"originator_country\": \"string\",\n    \"originator_identification\": \"string\",\n    \"payment_related_information\": \"string\",\n    \"payment_related_information2\": \"string\",\n    \"receiver_identification_number\": \"string\",\n    \"receiver_street_address\": \"string\",\n    \"receiver_city\": \"string\",\n    \"receiver_state_or_province\": \"string\",\n    \"receiver_country\": \"string\",\n    \"receiver_postal_code\": \"string\",\n    \"receiving_company_or_individual_name\": \"string\",\n    \"receiving_depository_financial_institution_name\": \"string\",\n    \"receiving_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n    \"receiving_depository_financial_institution_id\": \"string\",\n    \"receiving_depository_financial_institution_country\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c35bb673-673e-4e04-8aac-1a64f574a907",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2248f564-28b6-4e0d-bd9f-0c9a33b18fc9",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "313e8d62-8a9f-4bf6-afe9-54a3b4214a2a",
+          "name": "Create a notification of change for an Inbound ACH Transfer",
+          "request": {
+            "name": "Create a notification of change for an Inbound ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_ach_transfers",
+                ":inbound_ach_transfer_id",
+                "create_notification_of_change"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updated_account_number\": \"<string>\",\n  \"updated_routing_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c28820f5-548c-46b9-8e73-5541804267aa",
+              "name": "Inbound ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "create_notification_of_change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updated_account_number\": \"987654321\",\n  \"updated_routing_number\": \"101050001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_ach_transfer\",\n  \"id\": \"string\",\n  \"amount\": 7716,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"direction\": \"debit\",\n  \"status\": \"returned\",\n  \"created_at\": \"1981-05-05T10:21:41.883Z\",\n  \"originator_company_name\": \"string\",\n  \"originator_company_descriptive_date\": \"string\",\n  \"originator_company_discretionary_data\": \"string\",\n  \"originator_company_entry_description\": \"string\",\n  \"originator_company_id\": \"string\",\n  \"originator_routing_number\": \"string\",\n  \"receiver_id_number\": \"string\",\n  \"receiver_name\": \"string\",\n  \"trace_number\": \"string\",\n  \"effective_date\": \"2015-10-28\",\n  \"standard_entry_class_code\": \"back_office_conversion\",\n  \"settlement\": {\n    \"settled_at\": \"2001-07-16T15:57:54.124Z\",\n    \"settlement_schedule\": \"future_dated\"\n  },\n  \"automatically_resolves_at\": \"1967-12-17T07:34:01.348Z\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"string\"\n        },\n        {\n          \"payment_related_information\": \"string\"\n        }\n      ]\n    }\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2012-04-25T01:55:46.382Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"decline\": {\n    \"reason\": \"customer_advised_unauthorized_improper_ineligible_or_incomplete\",\n    \"declined_at\": \"1999-07-06T22:14:08.042Z\",\n    \"declined_transaction_id\": \"string\"\n  },\n  \"transfer_return\": {\n    \"reason\": \"insufficient_funds\",\n    \"returned_at\": \"1963-01-27T03:08:41.388Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"notification_of_change\": {\n    \"updated_account_number\": \"string\",\n    \"updated_routing_number\": \"string\"\n  },\n  \"international_addenda\": {\n    \"foreign_exchange_indicator\": \"variable_to_fixed\",\n    \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n    \"foreign_exchange_reference\": \"string\",\n    \"destination_country_code\": \"string\",\n    \"destination_currency_code\": \"string\",\n    \"foreign_payment_amount\": 9801,\n    \"foreign_trace_number\": \"string\",\n    \"international_transaction_type_code\": \"miscellaneous\",\n    \"originating_currency_code\": \"string\",\n    \"originating_depository_financial_institution_name\": \"string\",\n    \"originating_depository_financial_institution_id_qualifier\": \"bic_code\",\n    \"originating_depository_financial_institution_id\": \"string\",\n    \"originating_depository_financial_institution_branch_country\": \"string\",\n    \"originator_name\": \"string\",\n    \"originator_street_address\": \"string\",\n    \"originator_city\": \"string\",\n    \"originator_state_or_province\": \"string\",\n    \"originator_postal_code\": \"string\",\n    \"originator_country\": \"string\",\n    \"originator_identification\": \"string\",\n    \"payment_related_information\": \"string\",\n    \"payment_related_information2\": \"string\",\n    \"receiver_identification_number\": \"string\",\n    \"receiver_street_address\": \"string\",\n    \"receiver_city\": \"string\",\n    \"receiver_state_or_province\": \"string\",\n    \"receiver_country\": \"string\",\n    \"receiver_postal_code\": \"string\",\n    \"receiving_company_or_individual_name\": \"string\",\n    \"receiving_depository_financial_institution_name\": \"string\",\n    \"receiving_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n    \"receiving_depository_financial_institution_id\": \"string\",\n    \"receiving_depository_financial_institution_country\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7482274e-1260-4866-a04e-6fece912d58b",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "create_notification_of_change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updated_account_number\": \"987654321\",\n  \"updated_routing_number\": \"101050001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc64be9a-3716-4fed-bde1-4b62385a9763",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "create_notification_of_change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updated_account_number\": \"987654321\",\n  \"updated_routing_number\": \"101050001\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f0e2c6f-c09a-4500-bab4-47ce6ee23507",
+          "name": "Decline an Inbound ACH Transfer",
+          "request": {
+            "name": "Decline an Inbound ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_ach_transfers",
+                ":inbound_ach_transfer_id",
+                "decline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f255c121-d7e5-4aff-acef-1aaa58ef88c9",
+              "name": "Inbound ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_ach_transfer\",\n  \"id\": \"string\",\n  \"amount\": 7716,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"direction\": \"debit\",\n  \"status\": \"returned\",\n  \"created_at\": \"1981-05-05T10:21:41.883Z\",\n  \"originator_company_name\": \"string\",\n  \"originator_company_descriptive_date\": \"string\",\n  \"originator_company_discretionary_data\": \"string\",\n  \"originator_company_entry_description\": \"string\",\n  \"originator_company_id\": \"string\",\n  \"originator_routing_number\": \"string\",\n  \"receiver_id_number\": \"string\",\n  \"receiver_name\": \"string\",\n  \"trace_number\": \"string\",\n  \"effective_date\": \"2015-10-28\",\n  \"standard_entry_class_code\": \"back_office_conversion\",\n  \"settlement\": {\n    \"settled_at\": \"2001-07-16T15:57:54.124Z\",\n    \"settlement_schedule\": \"future_dated\"\n  },\n  \"automatically_resolves_at\": \"1967-12-17T07:34:01.348Z\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"string\"\n        },\n        {\n          \"payment_related_information\": \"string\"\n        }\n      ]\n    }\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2012-04-25T01:55:46.382Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"decline\": {\n    \"reason\": \"customer_advised_unauthorized_improper_ineligible_or_incomplete\",\n    \"declined_at\": \"1999-07-06T22:14:08.042Z\",\n    \"declined_transaction_id\": \"string\"\n  },\n  \"transfer_return\": {\n    \"reason\": \"insufficient_funds\",\n    \"returned_at\": \"1963-01-27T03:08:41.388Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"notification_of_change\": {\n    \"updated_account_number\": \"string\",\n    \"updated_routing_number\": \"string\"\n  },\n  \"international_addenda\": {\n    \"foreign_exchange_indicator\": \"variable_to_fixed\",\n    \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n    \"foreign_exchange_reference\": \"string\",\n    \"destination_country_code\": \"string\",\n    \"destination_currency_code\": \"string\",\n    \"foreign_payment_amount\": 9801,\n    \"foreign_trace_number\": \"string\",\n    \"international_transaction_type_code\": \"miscellaneous\",\n    \"originating_currency_code\": \"string\",\n    \"originating_depository_financial_institution_name\": \"string\",\n    \"originating_depository_financial_institution_id_qualifier\": \"bic_code\",\n    \"originating_depository_financial_institution_id\": \"string\",\n    \"originating_depository_financial_institution_branch_country\": \"string\",\n    \"originator_name\": \"string\",\n    \"originator_street_address\": \"string\",\n    \"originator_city\": \"string\",\n    \"originator_state_or_province\": \"string\",\n    \"originator_postal_code\": \"string\",\n    \"originator_country\": \"string\",\n    \"originator_identification\": \"string\",\n    \"payment_related_information\": \"string\",\n    \"payment_related_information2\": \"string\",\n    \"receiver_identification_number\": \"string\",\n    \"receiver_street_address\": \"string\",\n    \"receiver_city\": \"string\",\n    \"receiver_state_or_province\": \"string\",\n    \"receiver_country\": \"string\",\n    \"receiver_postal_code\": \"string\",\n    \"receiving_company_or_individual_name\": \"string\",\n    \"receiving_depository_financial_institution_name\": \"string\",\n    \"receiving_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n    \"receiving_depository_financial_institution_id\": \"string\",\n    \"receiving_depository_financial_institution_country\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4327c90f-bb8c-4ba5-998e-a1638f77fb3f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22772880-56f7-40f6-b71b-5685cfad71bc",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "decline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b21ff36-db35-486f-9705-0845cc456587",
+          "name": "Return an Inbound ACH Transfer",
+          "request": {
+            "name": "Return an Inbound ACH Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "inbound_ach_transfers",
+                ":inbound_ach_transfer_id",
+                "transfer_return"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inbound_ach_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6d6c9d6-d10b-4aa6-be3f-6f88e49b581f",
+              "name": "Inbound ACH Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "transfer_return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"inbound_ach_transfer\",\n  \"id\": \"string\",\n  \"amount\": 7716,\n  \"account_id\": \"string\",\n  \"account_number_id\": \"string\",\n  \"direction\": \"debit\",\n  \"status\": \"returned\",\n  \"created_at\": \"1981-05-05T10:21:41.883Z\",\n  \"originator_company_name\": \"string\",\n  \"originator_company_descriptive_date\": \"string\",\n  \"originator_company_discretionary_data\": \"string\",\n  \"originator_company_entry_description\": \"string\",\n  \"originator_company_id\": \"string\",\n  \"originator_routing_number\": \"string\",\n  \"receiver_id_number\": \"string\",\n  \"receiver_name\": \"string\",\n  \"trace_number\": \"string\",\n  \"effective_date\": \"2015-10-28\",\n  \"standard_entry_class_code\": \"back_office_conversion\",\n  \"settlement\": {\n    \"settled_at\": \"2001-07-16T15:57:54.124Z\",\n    \"settlement_schedule\": \"future_dated\"\n  },\n  \"automatically_resolves_at\": \"1967-12-17T07:34:01.348Z\",\n  \"addenda\": {\n    \"category\": \"freeform\",\n    \"freeform\": {\n      \"entries\": [\n        {\n          \"payment_related_information\": \"string\"\n        },\n        {\n          \"payment_related_information\": \"string\"\n        }\n      ]\n    }\n  },\n  \"acceptance\": {\n    \"accepted_at\": \"2012-04-25T01:55:46.382Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"decline\": {\n    \"reason\": \"customer_advised_unauthorized_improper_ineligible_or_incomplete\",\n    \"declined_at\": \"1999-07-06T22:14:08.042Z\",\n    \"declined_transaction_id\": \"string\"\n  },\n  \"transfer_return\": {\n    \"reason\": \"insufficient_funds\",\n    \"returned_at\": \"1963-01-27T03:08:41.388Z\",\n    \"transaction_id\": \"string\"\n  },\n  \"notification_of_change\": {\n    \"updated_account_number\": \"string\",\n    \"updated_routing_number\": \"string\"\n  },\n  \"international_addenda\": {\n    \"foreign_exchange_indicator\": \"variable_to_fixed\",\n    \"foreign_exchange_reference_indicator\": \"foreign_exchange_reference_number\",\n    \"foreign_exchange_reference\": \"string\",\n    \"destination_country_code\": \"string\",\n    \"destination_currency_code\": \"string\",\n    \"foreign_payment_amount\": 9801,\n    \"foreign_trace_number\": \"string\",\n    \"international_transaction_type_code\": \"miscellaneous\",\n    \"originating_currency_code\": \"string\",\n    \"originating_depository_financial_institution_name\": \"string\",\n    \"originating_depository_financial_institution_id_qualifier\": \"bic_code\",\n    \"originating_depository_financial_institution_id\": \"string\",\n    \"originating_depository_financial_institution_branch_country\": \"string\",\n    \"originator_name\": \"string\",\n    \"originator_street_address\": \"string\",\n    \"originator_city\": \"string\",\n    \"originator_state_or_province\": \"string\",\n    \"originator_postal_code\": \"string\",\n    \"originator_country\": \"string\",\n    \"originator_identification\": \"string\",\n    \"payment_related_information\": \"string\",\n    \"payment_related_information2\": \"string\",\n    \"receiver_identification_number\": \"string\",\n    \"receiver_street_address\": \"string\",\n    \"receiver_city\": \"string\",\n    \"receiver_state_or_province\": \"string\",\n    \"receiver_country\": \"string\",\n    \"receiver_postal_code\": \"string\",\n    \"receiving_company_or_individual_name\": \"string\",\n    \"receiving_depository_financial_institution_name\": \"string\",\n    \"receiving_depository_financial_institution_id_qualifier\": \"national_clearing_system_number\",\n    \"receiving_depository_financial_institution_id\": \"string\",\n    \"receiving_depository_financial_institution_country\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3378bfe4-0524-43e6-8b0e-a3ebfddc1ef0",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "transfer_return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d191f8bd-392d-49f2-82bf-1e0a6342003c",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inbound_ach_transfers",
+                    ":inbound_ach_transfer_id",
+                    "transfer_return"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inbound_ach_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"payment_stopped\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40814296-d6d1-4fe0-af01-1ab03a250f72",
+    "name": "Increase Account Numbers Inbound Ach Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

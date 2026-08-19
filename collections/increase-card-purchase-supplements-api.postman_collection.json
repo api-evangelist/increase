@@ -1,0 +1,522 @@
+{
+  "item": [
+    {
+      "id": "84e55f24-3614-4643-a6d5-7919076f8011",
+      "name": "Card Purchase Supplements",
+      "description": {
+        "content": "Additional information about a card purchase (e.g., settlement or refund), such as level 3 line item data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f36d3052-e6f4-47d9-b069-867c7b818466",
+          "name": "List Card Purchase Supplements",
+          "request": {
+            "name": "List Card Purchase Supplements",
+            "description": {},
+            "url": {
+              "path": [
+                "card_purchase_supplements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "card_payment_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b395a61-9f5b-4c5e-8bb1-9b057f19c732",
+              "name": "Card Purchase Supplement List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_payment_id",
+                      "value": "card_payment_nd3k2kacrqjli8482ave"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"card_purchase_supplement\",\n      \"id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"invoice\": {\n        \"discount_amount\": 2356,\n        \"discount_currency\": \"string\",\n        \"shipping_amount\": 215,\n        \"shipping_currency\": \"string\",\n        \"duty_tax_amount\": 4533,\n        \"duty_tax_currency\": \"string\",\n        \"shipping_tax_amount\": 4538,\n        \"shipping_tax_currency\": \"string\",\n        \"shipping_tax_rate\": \"-0703\",\n        \"shipping_destination_postal_code\": \"string\",\n        \"shipping_destination_country_code\": \"string\",\n        \"shipping_source_postal_code\": \"string\",\n        \"unique_value_added_tax_invoice_reference\": \"string\",\n        \"order_date\": \"2024-07-30\",\n        \"discount_treatment_code\": \"no_invoice_level_discount_provided\",\n        \"tax_treatments\": \"gross_price_line_item_level\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"string\",\n          \"item_commodity_code\": \"string\",\n          \"item_descriptor\": \"string\",\n          \"product_code\": \"string\",\n          \"item_quantity\": \"812375.683991\",\n          \"unit_of_measure_code\": \"string\",\n          \"unit_cost\": \"-24799554.984\",\n          \"unit_cost_currency\": \"string\",\n          \"sales_tax_amount\": 1912,\n          \"sales_tax_currency\": \"string\",\n          \"sales_tax_rate\": \"559\",\n          \"discount_amount\": 6075,\n          \"discount_currency\": \"string\",\n          \"discount_treatment_code\": \"no_line_item_level_discount_provided\",\n          \"total_amount\": 9862,\n          \"total_amount_currency\": \"string\",\n          \"detail_indicator\": \"payment\"\n        },\n        {\n          \"id\": \"string\",\n          \"item_commodity_code\": \"string\",\n          \"item_descriptor\": \"string\",\n          \"product_code\": \"string\",\n          \"item_quantity\": \"3553273848\",\n          \"unit_of_measure_code\": \"string\",\n          \"unit_cost\": \"-8805398.5406\",\n          \"unit_cost_currency\": \"string\",\n          \"sales_tax_amount\": 391,\n          \"sales_tax_currency\": \"string\",\n          \"sales_tax_rate\": \"61576378090.38821564008\",\n          \"discount_amount\": 4043,\n          \"discount_currency\": \"string\",\n          \"discount_treatment_code\": \"tax_calculated_on_pre_discount_line_item_total\",\n          \"total_amount\": 7963,\n          \"total_amount_currency\": \"string\",\n          \"detail_indicator\": \"payment\"\n        }\n      ]\n    },\n    {\n      \"type\": \"card_purchase_supplement\",\n      \"id\": \"string\",\n      \"transaction_id\": \"string\",\n      \"card_payment_id\": \"string\",\n      \"invoice\": {\n        \"discount_amount\": 7311,\n        \"discount_currency\": \"string\",\n        \"shipping_amount\": 2329,\n        \"shipping_currency\": \"string\",\n        \"duty_tax_amount\": 1042,\n        \"duty_tax_currency\": \"string\",\n        \"shipping_tax_amount\": 2585,\n        \"shipping_tax_currency\": \"string\",\n        \"shipping_tax_rate\": \"72\",\n        \"shipping_destination_postal_code\": \"string\",\n        \"shipping_destination_country_code\": \"string\",\n        \"shipping_source_postal_code\": \"string\",\n        \"unique_value_added_tax_invoice_reference\": \"string\",\n        \"order_date\": \"2022-08-10\",\n        \"discount_treatment_code\": \"no_invoice_level_discount_provided\",\n        \"tax_treatments\": \"gross_price_line_item_level\"\n      },\n      \"line_items\": [\n        {\n          \"id\": \"string\",\n          \"item_commodity_code\": \"string\",\n          \"item_descriptor\": \"string\",\n          \"product_code\": \"string\",\n          \"item_quantity\": \"-839245973\",\n          \"unit_of_measure_code\": \"string\",\n          \"unit_cost\": \"7498822512.7144952354\",\n          \"unit_cost_currency\": \"string\",\n          \"sales_tax_amount\": 7583,\n          \"sales_tax_currency\": \"string\",\n          \"sales_tax_rate\": \"-64143\",\n          \"discount_amount\": 4693,\n          \"discount_currency\": \"string\",\n          \"discount_treatment_code\": \"tax_calculated_on_pre_discount_line_item_total\",\n          \"total_amount\": 5514,\n          \"total_amount_currency\": \"string\",\n          \"detail_indicator\": \"credit\"\n        },\n        {\n          \"id\": \"string\",\n          \"item_commodity_code\": \"string\",\n          \"item_descriptor\": \"string\",\n          \"product_code\": \"string\",\n          \"item_quantity\": \"-40529319\",\n          \"unit_of_measure_code\": \"string\",\n          \"unit_cost\": \"707\",\n          \"unit_cost_currency\": \"string\",\n          \"sales_tax_amount\": 3333,\n          \"sales_tax_currency\": \"string\",\n          \"sales_tax_rate\": \"-775883169\",\n          \"discount_amount\": 4133,\n          \"discount_currency\": \"string\",\n          \"discount_treatment_code\": \"no_line_item_level_discount_provided\",\n          \"total_amount\": 1402,\n          \"total_amount_currency\": \"string\",\n          \"detail_indicator\": \"credit\"\n        }\n      ]\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd89ccc7-32f2-451e-bd42-0dcea0d00e36",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_payment_id",
+                      "value": "card_payment_nd3k2kacrqjli8482ave"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99caa9be-2a94-41cd-bbba-ea9108487485",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "card_payment_id",
+                      "value": "card_payment_nd3k2kacrqjli8482ave"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "202be2b7-a41c-4791-b076-1879f2b546f4",
+          "name": "Retrieve a Card Purchase Supplement",
+          "request": {
+            "name": "Retrieve a Card Purchase Supplement",
+            "description": {},
+            "url": {
+              "path": [
+                "card_purchase_supplements",
+                ":card_purchase_supplement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "card_purchase_supplement_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15451bc7-fa7a-4186-b624-af06f854746a",
+              "name": "Card Purchase Supplement",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements",
+                    ":card_purchase_supplement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_purchase_supplement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"card_purchase_supplement\",\n  \"id\": \"string\",\n  \"transaction_id\": \"string\",\n  \"card_payment_id\": \"string\",\n  \"invoice\": {\n    \"discount_amount\": 8448,\n    \"discount_currency\": \"string\",\n    \"shipping_amount\": 6245,\n    \"shipping_currency\": \"string\",\n    \"duty_tax_amount\": 4945,\n    \"duty_tax_currency\": \"string\",\n    \"shipping_tax_amount\": 5346,\n    \"shipping_tax_currency\": \"string\",\n    \"shipping_tax_rate\": \"-588794296.9167\",\n    \"shipping_destination_postal_code\": \"string\",\n    \"shipping_destination_country_code\": \"string\",\n    \"shipping_source_postal_code\": \"string\",\n    \"unique_value_added_tax_invoice_reference\": \"string\",\n    \"order_date\": \"2023-01-29\",\n    \"discount_treatment_code\": \"tax_calculated_on_pre_discount_invoice_total\",\n    \"tax_treatments\": \"net_price_invoice_level\"\n  },\n  \"line_items\": [\n    {\n      \"id\": \"string\",\n      \"item_commodity_code\": \"string\",\n      \"item_descriptor\": \"string\",\n      \"product_code\": \"string\",\n      \"item_quantity\": \"-4282.6\",\n      \"unit_of_measure_code\": \"string\",\n      \"unit_cost\": \"86\",\n      \"unit_cost_currency\": \"string\",\n      \"sales_tax_amount\": 2396,\n      \"sales_tax_currency\": \"string\",\n      \"sales_tax_rate\": \"21536777\",\n      \"discount_amount\": 8207,\n      \"discount_currency\": \"string\",\n      \"discount_treatment_code\": \"tax_calculated_on_post_discount_line_item_total\",\n      \"total_amount\": 2477,\n      \"total_amount_currency\": \"string\",\n      \"detail_indicator\": \"normal\"\n    },\n    {\n      \"id\": \"string\",\n      \"item_commodity_code\": \"string\",\n      \"item_descriptor\": \"string\",\n      \"product_code\": \"string\",\n      \"item_quantity\": \"8008646122.621989601\",\n      \"unit_of_measure_code\": \"string\",\n      \"unit_cost\": \"1262.92548317737\",\n      \"unit_cost_currency\": \"string\",\n      \"sales_tax_amount\": 5010,\n      \"sales_tax_currency\": \"string\",\n      \"sales_tax_rate\": \"5108125888\",\n      \"discount_amount\": 9982,\n      \"discount_currency\": \"string\",\n      \"discount_treatment_code\": \"tax_calculated_on_pre_discount_line_item_total\",\n      \"total_amount\": 3514,\n      \"total_amount_currency\": \"string\",\n      \"detail_indicator\": \"credit\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5a5a29f-4576-4875-8423-f48a1766e8c8",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements",
+                    ":card_purchase_supplement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_purchase_supplement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "171833a2-ff1a-4035-9c3a-d2fb5d074c35",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "card_purchase_supplements",
+                    ":card_purchase_supplement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "card_purchase_supplement_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a610125e-525e-4fee-bb84-e4c83b2d414c",
+    "name": "Increase Account Numbers Card Purchase Supplements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

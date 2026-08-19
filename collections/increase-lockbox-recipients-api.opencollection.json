@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Lockbox Recipients API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lockbox Recipients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Lockbox Recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/lockbox_recipients",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lockbox_address_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Lockbox Recipients"
+        },
+        {
+          "info": {
+            "name": "Create a Lockbox Recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/lockbox_recipients",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Lockbox Recipient"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Lockbox Recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/lockbox_recipients/:lockbox_recipient_id",
+            "params": [
+              {
+                "name": "lockbox_recipient_id",
+                "value": "lockbox_3xt21ok13q19advds4t5",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Lockbox Recipient"
+        },
+        {
+          "info": {
+            "name": "Update a Lockbox Recipient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.increase.com/lockbox_recipients/:lockbox_recipient_id",
+            "params": [
+              {
+                "name": "lockbox_recipient_id",
+                "value": "lockbox_3xt21ok13q19advds4t5",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Lockbox Recipient"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

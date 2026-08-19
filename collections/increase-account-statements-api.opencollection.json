@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Account Statements API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Statements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Account Statements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_statements",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "statement_period_start.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statement_period_start.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statement_period_start.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statement_period_start.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Account Statements"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Account Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/account_statements/:account_statement_id",
+            "params": [
+              {
+                "name": "account_statement_id",
+                "value": "account_statement_lkc03a4skm2k7f38vj15",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve an Account Statement"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

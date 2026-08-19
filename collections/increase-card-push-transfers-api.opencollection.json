@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Card Push Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Card Push Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Card Push Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_push_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Card Push Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a Card Push Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_push_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Card Push Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Card Push Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id",
+            "params": [
+              {
+                "name": "card_push_transfer_id",
+                "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Card Push Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a Card Push Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id/approve",
+            "params": [
+              {
+                "name": "card_push_transfer_id",
+                "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approves a Card Push Transfer in a pending_approval state."
+        },
+        {
+          "info": {
+            "name": "Cancel a pending Card Push Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/card_push_transfers/:card_push_transfer_id/cancel",
+            "params": [
+              {
+                "name": "card_push_transfer_id",
+                "value": "outbound_card_push_transfer_e0z9rdpamraczh4tvwye",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a Card Push Transfer in a pending_approval state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

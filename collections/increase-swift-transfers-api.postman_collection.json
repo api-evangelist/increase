@@ -1,0 +1,1156 @@
+{
+  "item": [
+    {
+      "id": "20da77c7-7492-4891-9e2c-d6f90a495652",
+      "name": "Swift Transfers",
+      "description": {
+        "content": "Swift Transfers send funds internationally.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1a645a80-c25d-46c9-8f26-28acbe3db063",
+          "name": "List Swift Transfers",
+          "request": {
+            "name": "List Swift Transfers",
+            "description": {},
+            "url": {
+              "path": [
+                "swift_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "idempotency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status.in",
+                  "value": "<string>,<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.before",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_after",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.on_or_before",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29a859d1-f2c1-41e1-98fb-2e80a6e3f6fb",
+              "name": "Swift Transfer List",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"swift_transfer\",\n      \"id\": \"string\",\n      \"created_at\": \"1982-01-07T12:03:18.309Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"amount\": 7953,\n      \"instructed_amount\": 8510,\n      \"instructed_currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"bank_identification_code\": \"string\",\n      \"routing_number\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"debtor_name\": \"string\",\n      \"debtor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"unstructured_remittance_information\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"status\": \"requires_attention\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"idempotency_key\": \"string\"\n    },\n    {\n      \"type\": \"swift_transfer\",\n      \"id\": \"string\",\n      \"created_at\": \"2022-07-07T03:54:00.996Z\",\n      \"created_by\": {\n        \"category\": \"user\",\n        \"user\": {\n          \"email\": \"user@example.com\"\n        }\n      },\n      \"amount\": 4542,\n      \"instructed_amount\": 9299,\n      \"instructed_currency\": \"USD\",\n      \"account_number\": \"string\",\n      \"bank_identification_code\": \"string\",\n      \"routing_number\": \"string\",\n      \"creditor_name\": \"string\",\n      \"creditor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"debtor_name\": \"string\",\n      \"debtor_address\": {\n        \"line1\": \"string\",\n        \"line2\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"postal_code\": \"string\",\n        \"country\": \"string\"\n      },\n      \"unstructured_remittance_information\": \"string\",\n      \"unique_end_to_end_transaction_reference\": \"string\",\n      \"account_id\": \"string\",\n      \"source_account_number_id\": \"string\",\n      \"status\": \"initiated\",\n      \"transaction_id\": \"string\",\n      \"pending_transaction_id\": \"string\",\n      \"idempotency_key\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa7e7229-851b-4bef-89b1-2f2e3096073f",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85b1f932-665c-41d4-8d99-973f274ccdcd",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_in71c4amph0vgo2qllky"
+                    },
+                    {
+                      "key": "idempotency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status.in",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "created_at.after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at.on_or_before",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81d0a1f1-6deb-4988-a739-3d64122b7188",
+          "name": "Create a Swift Transfer",
+          "request": {
+            "name": "Create a Swift Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "swift_transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"source_account_number_id\": \"<string>\",\n  \"account_number\": \"<string>\",\n  \"bank_identification_code\": \"<string>\",\n  \"instructed_amount\": \"<integer>\",\n  \"instructed_currency\": \"<string>\",\n  \"unstructured_remittance_information\": \"<string>\",\n  \"creditor_name\": \"<string>\",\n  \"creditor_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"debtor_name\": \"<string>\",\n  \"debtor_address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"require_approval\": \"<boolean>\",\n  \"routing_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9f90b10-86c4-40e5-b402-45a071c538a9",
+              "name": "Swift Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"bank_identification_code\": \"ECBFDEFFTPP\",\n  \"creditor_address\": {\n    \"city\": \"Frankfurt\",\n    \"country\": \"DE\",\n    \"line1\": \"Sonnemannstrasse 20\",\n    \"postal_code\": \"60314\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"National Phonograph Company\",\n  \"instructed_amount\": 100,\n  \"instructed_currency\": \"USD\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"New Swift transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"swift_transfer\",\n  \"id\": \"string\",\n  \"created_at\": \"2006-12-08T08:24:30.608Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"amount\": 5419,\n  \"instructed_amount\": 3480,\n  \"instructed_currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"bank_identification_code\": \"string\",\n  \"routing_number\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"returned\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "158f95e6-89ed-4c8b-bb0e-43ccc3a5a9b0",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"bank_identification_code\": \"ECBFDEFFTPP\",\n  \"creditor_address\": {\n    \"city\": \"Frankfurt\",\n    \"country\": \"DE\",\n    \"line1\": \"Sonnemannstrasse 20\",\n    \"postal_code\": \"60314\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"National Phonograph Company\",\n  \"instructed_amount\": 100,\n  \"instructed_currency\": \"USD\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"New Swift transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50991979-1f4f-4002-bee0-e04295f886ee",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"account_in71c4amph0vgo2qllky\",\n  \"account_number\": \"987654321\",\n  \"bank_identification_code\": \"ECBFDEFFTPP\",\n  \"creditor_address\": {\n    \"city\": \"Frankfurt\",\n    \"country\": \"DE\",\n    \"line1\": \"Sonnemannstrasse 20\",\n    \"postal_code\": \"60314\"\n  },\n  \"creditor_name\": \"Ian Crease\",\n  \"debtor_address\": {\n    \"city\": \"New York\",\n    \"country\": \"US\",\n    \"line1\": \"33 Liberty Street\",\n    \"postal_code\": \"10045\",\n    \"state\": \"NY\"\n  },\n  \"debtor_name\": \"National Phonograph Company\",\n  \"instructed_amount\": 100,\n  \"instructed_currency\": \"USD\",\n  \"source_account_number_id\": \"account_number_v18nkfqm6afpsrvy82b2\",\n  \"unstructured_remittance_information\": \"New Swift transfer\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64efc5d6-288c-4c7a-8f53-9fc5f2cd0cc4",
+          "name": "Retrieve a Swift Transfer",
+          "request": {
+            "name": "Retrieve a Swift Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "swift_transfers",
+                ":swift_transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "swift_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec0abfd6-11af-4a26-acf0-44f0e44b4fe1",
+              "name": "Swift Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"swift_transfer\",\n  \"id\": \"string\",\n  \"created_at\": \"2006-12-08T08:24:30.608Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"amount\": 5419,\n  \"instructed_amount\": 3480,\n  \"instructed_currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"bank_identification_code\": \"string\",\n  \"routing_number\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"returned\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea63f0f6-62a0-47b4-b35d-aaeb02fda564",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1cd5a5c-d3e9-47e6-b252-19fc86714690",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9308265-241e-4080-8cba-823b3db02be3",
+          "name": "Approve a Swift Transfer",
+          "request": {
+            "name": "Approve a Swift Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "swift_transfers",
+                ":swift_transfer_id",
+                "approve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "swift_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44393c44-9875-42c2-98e0-f331a6afa119",
+              "name": "Swift Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"swift_transfer\",\n  \"id\": \"string\",\n  \"created_at\": \"2006-12-08T08:24:30.608Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"amount\": 5419,\n  \"instructed_amount\": 3480,\n  \"instructed_currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"bank_identification_code\": \"string\",\n  \"routing_number\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"returned\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b394ccd4-dabc-486e-840e-066dc3ed1f48",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "835c545f-dc3e-4bcd-a3ed-1a5ce7161650",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "approve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bc5eab4-f9a3-4ba0-b950-abc56e652dd7",
+          "name": "Cancel a pending Swift Transfer",
+          "request": {
+            "name": "Cancel a pending Swift Transfer",
+            "description": {},
+            "url": {
+              "path": [
+                "swift_transfers",
+                ":swift_transfer_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "swift_transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d244aa1-34fd-416b-9c93-24c420e0c858",
+              "name": "Swift Transfer",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"swift_transfer\",\n  \"id\": \"string\",\n  \"created_at\": \"2006-12-08T08:24:30.608Z\",\n  \"created_by\": {\n    \"category\": \"user\",\n    \"user\": {\n      \"email\": \"user@example.com\"\n    }\n  },\n  \"amount\": 5419,\n  \"instructed_amount\": 3480,\n  \"instructed_currency\": \"USD\",\n  \"account_number\": \"string\",\n  \"bank_identification_code\": \"string\",\n  \"routing_number\": \"string\",\n  \"creditor_name\": \"string\",\n  \"creditor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"debtor_name\": \"string\",\n  \"debtor_address\": {\n    \"line1\": \"string\",\n    \"line2\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"postal_code\": \"string\",\n    \"country\": \"string\"\n  },\n  \"unstructured_remittance_information\": \"string\",\n  \"unique_end_to_end_transaction_reference\": \"string\",\n  \"account_id\": \"string\",\n  \"source_account_number_id\": \"string\",\n  \"status\": \"returned\",\n  \"transaction_id\": \"string\",\n  \"pending_transaction_id\": \"string\",\n  \"idempotency_key\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4be34bb-688c-4e68-9cb5-c12cec50aff4",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37eaaf9-e7a0-4644-8408-b86a314bb331",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "swift_transfers",
+                    ":swift_transfer_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "swift_transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"api_method_not_found_error\",\n  \"title\": \"string\",\n  \"detail\": \"string\",\n  \"status\": 404\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.increase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41bea4e8-95e5-4cd8-a01f-24c9e262cdc1",
+    "name": "Increase Account Numbers Swift Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!",
+      "type": "text/plain"
+    }
+  }
+}

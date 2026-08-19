@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Increase Account Numbers Real Time Payments Transfers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Real Time Payments Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Real-Time Payments Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/real_time_payments_transfers",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "account_id",
+                "value": "account_in71c4amph0vgo2qllky",
+                "type": "query"
+              },
+              {
+                "name": "external_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "idempotency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status.in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at.on_or_before",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Real-Time Payments Transfers"
+        },
+        {
+          "info": {
+            "name": "Create a Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/real_time_payments_transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Real-Time Payments Transfer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id",
+            "params": [
+              {
+                "name": "real_time_payments_transfer_id",
+                "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a Real-Time Payments Transfer"
+        },
+        {
+          "info": {
+            "name": "Approve a Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id/approve",
+            "params": [
+              {
+                "name": "real_time_payments_transfer_id",
+                "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approves a Real-Time Payments Transfer in a pending_approval state."
+        },
+        {
+          "info": {
+            "name": "Cancel a pending Real-Time Payments Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.increase.com/real_time_payments_transfers/:real_time_payments_transfer_id/cancel",
+            "params": [
+              {
+                "name": "real_time_payments_transfer_id",
+                "value": "real_time_payments_transfer_iyuhl5kdn7ssmup83mvq",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a Real-Time Payments Transfer in a pending_approval state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
