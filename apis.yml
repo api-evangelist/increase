@@ -95,6 +95,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -119,6 +121,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - ACH Transfers
+  tags_raw:
   - Ach Transfers
   properties:
   - type: OpenAPI
@@ -369,6 +373,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -385,6 +391,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Export
+  tags_raw:
   - Exports
   properties:
   - type: OpenAPI
@@ -438,6 +446,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -453,6 +463,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -607,6 +619,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Authentication
+  tags_raw:
   - Oauth
   properties:
   - type: OpenAPI
@@ -619,6 +633,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - OAuth Applications
+  tags_raw:
   - Oauth Applications
   properties:
   - type: OpenAPI
@@ -767,6 +783,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
