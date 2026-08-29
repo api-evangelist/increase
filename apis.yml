@@ -821,6 +821,9 @@ apis:
   - type: Documentation
     url: https://increase.com/documentation/api
 common:
+  - type: CapabilityMap
+    url: capabilities/increase-capability-edges.yml
+    name: Increase Business Capability Map
   - type: Sandbox
     url: https://increase.com/documentation/sandbox
   - type: APIReference

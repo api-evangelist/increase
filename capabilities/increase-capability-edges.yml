@@ -1,0 +1,24 @@
+slug: increase
+provider: Increase
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Event Subscriptions
+  spec_file: increase-event-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: POST /event_subscriptions  create_an_event_subscription  Create an Event Subscription
+  reason: Full CRUD lifecycle over outbound event/webhook subscriptions exposed to API consumers — squarely
+    Webhook & Event Subscription Management.
