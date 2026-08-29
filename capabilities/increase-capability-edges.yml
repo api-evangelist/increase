@@ -3,7 +3,7 @@ provider: Increase
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Banking & Capital Markets
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,14 +11,319 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 33
 edges:
-- tag: Event Subscriptions
-  spec_file: increase-event-subscriptions-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
+- tag: Fednow Transfers
+  spec_file: increase-fednow-transfers-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.95
+  evidence: POST /fednow_transfers create_a_fednow_transfer 'Create a FedNow Transfer'; 'approve_a_fednow_transfer'
+  reason: FedNow is the Federal Reserve instant payment rail; operations create, approve and cancel real-time
+    transfers.
+- tag: Real Time Payments Transfers
+  spec_file: increase-real-time-payments-transfers-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.95
+  evidence: POST /real_time_payments_transfers  create_a_real_time_payments_transfer  Create a Real-Time
+    Payments Transfer
+  reason: Creation, approval and cancellation of RTP instant-rail transfers is plainly Real-Time Payment
+    Management.
+- tag: Physical Cards
+  spec_file: increase-physical-cards-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.92
+  evidence: POST /physical_cards  create_a_physical_card  Create a Physical Card; PATCH /physical_cards/{physical_card_id}  update_a_physical_card
+  reason: Creation, retrieval and status update of physical payment cards (issuance, dispatch, activation
+    lifecycle) is Card Issuance Management.
+- tag: Card Payments
+  spec_file: increase-card-payments-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.9
+  evidence: 'schemas: card_authorization, card_settlement, card_reversal, card_refund, card_authentication,
+    card_balance_inquiry'
+  reason: The surface exposes card authorisation, settlement, reversal and refund events — card transaction
+    processing on the issuing side.
+- tag: Swift Transfers
+  spec_file: increase-swift-transfers-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.9
+  evidence: POST /swift_transfers  create_a_swift_transfer  Create a Swift Transfer
+  reason: SWIFT transfers are international/correspondent-bank payments, matching Cross-Border Payment
+    Management.
+- tag: Wire Transfers
+  spec_file: increase-wire-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /wire_transfers  create_a_wire_transfer ... POST /wire_transfers/{wire_transfer_id}/approve  Approve
+    a Wire Transfer
+  reason: Creation, approval and cancellation of wire transfers is payment instruction capture, validation
+    and authorisation.
+- tag: Cards
+  spec_file: increase-cards-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.88
+  evidence: POST /cards 'Create a Card'; POST /cards/{card_id}/update_pin "Update a Card's PIN"; GET /cards/{card_id}/details
+    'Retrieve sensitive details for a Card'
+  reason: Creating cards, retrieving PAN/CVV details and setting PINs is issuer-side card issuance and
+    lifecycle management.
+- tag: Accounts
+  spec_file: increase-accounts-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
   confidence: 0.85
-  evidence: POST /event_subscriptions  create_an_event_subscription  Create an Event Subscription
-  reason: Full CRUD lifecycle over outbound event/webhook subscriptions exposed to API consumers — squarely
-    Webhook & Event Subscription Management.
+  evidence: POST /accounts create_an_account; GET /accounts/{account_id}/balance retrieve_an_account_balance;
+    POST /accounts/{account_id}/close close_an_account
+  reason: Opening, balance enquiry and closure of bank deposit accounts at a programmatic bank — deposit
+    account management/lifecycle.
+- tag: Ach Transfers
+  spec_file: increase-ach-transfers-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.85
+  evidence: POST /ach_transfers create_an_ach_transfer; POST /ach_transfers/{ach_transfer_id}/approve
+  reason: Origination and approval of ACH transfers over the domestic ACH rail — domestic clearing (ACH)
+    payments capability.
+- tag: Card Disputes
+  spec_file: increase-card-disputes-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.85
+  evidence: POST /card_disputes create_a_card_dispute 'Create a Card Dispute'; schemas card_dispute_visa,
+    card_dispute_visa_network_event
+  reason: Operations create, submit evidence for, and withdraw card network disputes (Visa chargeback
+    lifecycle), which sits within card transaction processing including chargebacks.
+- tag: Entity Beneficial Owners
+  spec_file: increase-entity-beneficial-owners-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.85
+  evidence: POST /entity_beneficial_owners create_a_beneficial_owner 'Create a Beneficial Owner'
+  reason: Beneficial ownership capture is a core KYC/CDD requirement (FinCEN CDD rule) for banking customers;
+    operations manage beneficial owner records on entities.
+- tag: Inbound Fednow Transfers
+  spec_file: increase-inbound-fednow-transfers-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.85
+  evidence: '"List Inbound FedNow Transfers" / schema "inbound_fednow_transfer"'
+  reason: FedNow is the Federal Reserve instant payment rail; receiving and retrieving inbound FedNow
+    transfers is real-time payment management.
+- tag: Inbound Real Time Payments Transfers
+  spec_file: increase-inbound-real-time-payments-transfers-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.85
+  evidence: '"List Inbound Real-Time Payments Transfers" / schema "inbound_real_time_payments_transfer"'
+  reason: RTP (The Clearing House real-time rail) inbound transfer receipt and retrieval maps directly
+    to real-time payment management.
+- tag: Physical Card Profiles
+  spec_file: increase-physical-card-profiles-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.85
+  evidence: POST /physical_card_profiles  create_a_physical_card_profile  Create a Physical Card Profile
+  reason: Physical card profiles define the artwork/personalisation used when producing physical cards,
+    squarely card production and personalisation under Card Issuance Management.
+- tag: Wire Drawdown Requests
+  spec_file: increase-wire-drawdown-requests-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /wire_drawdown_requests  create_a_wire_drawdown_request  Create a Wire Drawdown Request
+  reason: Wire drawdown requests are payment instructions requesting funds via Fedwire; creating/listing
+    them is payment initiation on a bank-direct payments API.
+- tag: Account Transfers
+  spec_file: increase-account-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /account_transfers create_an_account_transfer; POST /account_transfers/{id}/approve approve_an_account_transfer
+  reason: Creation, approval and cancellation of funds transfers between accounts — payment instruction
+    capture, validation and authorisation.
+- tag: Ach Prenotifications
+  spec_file: increase-ach-prenotifications-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.8
+  evidence: POST /ach_prenotifications create_an_ach_prenotification Create an ACH Prenotification
+  reason: ACH prenotification records are part of ACH domestic clearing rails, covered by Clearing & Settlement
+    Management (ACH).
+- tag: Check Transfers
+  spec_file: increase-check-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /check_transfers 'Create a Check Transfer'; 'Approve a Check Transfer'; 'Stop payment
+    on a Check Transfer'
+  reason: Issuing, approving, cancelling and stopping payment on check transfers is payment instruction
+    capture, validation and authorisation.
+- tag: Entity Onboarding Sessions
+  spec_file: increase-entity-onboarding-sessions-api-openapi.yml
+  capability_id: BC-1300.10
+  capability_id_l1: BC-1300
+  capability_name: Customer Onboarding Management
+  confidence: 0.8
+  evidence: POST /entity_onboarding_sessions create_an_entity_onboarding_session 'Create an Entity Onboarding
+    Session'
+  reason: Explicit onboarding sessions for entities in a banking API — customer onboarding / identity
+    verification flow.
+- tag: Inbound Wire Transfers
+  spec_file: increase-inbound-wire-transfers-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.8
+  evidence: '"List Inbound Wire Transfers"; "Reverse an Inbound Wire Transfer"'
+  reason: Receipt and reversal of inbound wire transfers is core banking payment processing; the specific
+    L2 (clearing/settlement vs processing) is not named by the operations.
+- tag: Check Deposits
+  spec_file: increase-check-deposits-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.78
+  evidence: POST /check_deposits 'Create a Check Deposit'; schemas check_deposit, inbound_funds_hold
+  reason: Depositing checks into an account is a payment instrument processing capability; evidence does
+    not distinguish initiation versus clearing sub-capability.
+- tag: Account Numbers
+  spec_file: increase-account-numbers-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
+  confidence: 0.75
+  evidence: 'POST /account_numbers create_an_account_number; schemas: account_number, account_number_list'
+  reason: Issuing and managing bank account numbers for deposit accounts at a bank-direct API; deposit
+    account management is the closest fit.
+- tag: Card Push Transfers
+  spec_file: increase-card-push-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: POST /card_push_transfers 'Create a Card Push Transfer'; 'Approve a Card Push Transfer'; 'Cancel
+    a pending Card Push Transfer'
+  reason: Create/approve/cancel of an outbound push-to-card payment instruction is payment instruction
+    capture, validation and authorisation.
+- tag: Entities
+  spec_file: increase-entities-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.75
+  evidence: POST /entities create_an_entity 'Create an Entity'; schema 'entity_supplemental_document'
+  reason: Increase Entities represent the legal persons/businesses behind bank accounts, carrying KYC
+    identifying information and supplemental documents. This is banking customer onboarding/due-diligence
+    data management; L2 KYC/CDD is the most likely narrower fit though onboarding (1300.10) is also plausible.
+- tag: Entity Supplemental Documents
+  spec_file: increase-entity-supplemental-documents-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.75
+  evidence: POST /entity_supplemental_documents 'Create a supplemental document for an Entity'
+  reason: Supplemental identity/formation documents attached to a banking Entity are KYC/CDD evidence
+    collection, though it could also be read as generic document upload.
+- tag: Inbound Check Deposits
+  spec_file: increase-inbound-check-deposits-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.75
+  evidence: '"List Inbound Check Deposits"; "Decline an Inbound Check Deposit"; "Return an Inbound Check
+    Deposit"'
+  reason: Handling of checks deposited against the bank's accounts, including decline and return — clearly
+    banking payment instrument processing (BC-1340). Which L2 (clearing & settlement vs payment processing)
+    is not determinable from the thin operation set, so no L2 asserted.
+- tag: Card Purchase Supplements
+  spec_file: increase-card-purchase-supplements-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.7
+  evidence: GET /card_purchase_supplements 'List Card Purchase Supplements'; schema card_purchase_supplement
+  reason: Supplemental (Level 2/3) purchase data attached to card transactions; belongs to card transaction
+    processing, though the context is thin.
+- tag: Card Tokens
+  spec_file: increase-card-tokens-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: GET /card_tokens/{card_token_id}/capabilities 'Retrieve the capabilities of a Card Token'
+  reason: Card tokens representing payment cards and their network capabilities are part of card/payment
+    management, but the read-only surface does not clearly name issuance versus transaction processing.
+- tag: Card Validations
+  spec_file: increase-card-validations-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.7
+  evidence: POST /card_validations 'Create a Card Validation'; schema card_validation
+  reason: Account/cardholder validation messages sent over the card networks before payment; a card-network
+    transaction processing function.
+- tag: Digital Card Profiles
+  spec_file: increase-digital-card-profiles-api-openapi.yml
+  capability_id: BC-1340.60
+  capability_id_l1: BC-1340
+  capability_name: Card Issuance Management
+  confidence: 0.7
+  evidence: POST /digital_card_profiles 'Create a Digital Card Profile'; 'Clones a Digital Card Profile'
+  reason: Digital card profiles configure card art and issuer detail used when provisioning cards into
+    digital wallets — issuer-side card personalisation/issuance.
+- tag: Inbound Ach Transfers
+  spec_file: increase-inbound-ach-transfers-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.7
+  evidence: '"List Inbound ACH Transfers"; "Create a notification of change for an Inbound ACH Transfer";
+    "Return an Inbound ACH Transfer"'
+  reason: Operations receive, decline, return and issue notifications-of-change on inbound ACH entries
+    — ACH clearing/settlement handling within a bank-direct payments API. L1 Payments & Card Management
+    is certain; ACH clearing is the closest L2, though inbound processing could also be read as generic
+    payment processing.
+- tag: Inbound Wire Drawdown Requests
+  spec_file: increase-inbound-wire-drawdown-requests-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: '"List Inbound Wire Drawdown Requests"; "Retrieve an Inbound Wire Drawdown Request"'
+  reason: Wire drawdown requests are requests-for-payment received over the wire network — a banking payment
+    capability (BC-1340). Read-only surface gives insufficient basis to choose between initiation and
+    processing L2s.
+- tag: Intrafi Account Enrollments
+  spec_file: increase-intrafi-account-enrollments-api-openapi.yml
+  capability_id: BC-1330
+  capability_id_l1: BC-1330
+  capability_name: Deposits & Savings Management
+  confidence: 0.7
+  evidence: '"Enroll an account in the IntraFi deposit sweep network"; "Unenroll an account from IntraFi"'
+  reason: Enrolling deposit accounts into the IntraFi deposit sweep network is deposit account administration
+    (Deposits & Savings Management). Which L2 — deposit account vs account lifecycle operations — is not
+    clearly named.
