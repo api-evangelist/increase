@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Check Transfers API
+  title: Increase Check Transfers API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -278,744 +278,15 @@ paths:
       tags:
       - Check Transfers
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
-    stop_payment_on_a_check_transfer_parameters:
-      additionalProperties: false
-      example:
-        reason: mail_delivery_failed
-      properties:
-        reason:
-          description: The reason why this transfer should be stopped.
-          enum:
-          - mail_delivery_failed
-          - not_authorized
-          - valid_until_date_passed
-          - unknown
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The check could not be delivered.
-          - The check was not authorized.
-          - The check was stopped for `valid_until_date` being in the past.
-          - The check was stopped for another reason.
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    check_transfer_list:
-      additionalProperties: true
-      description: A list of Check Transfer objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          account_number: '987654321'
-          amount: 1000
-          approval: null
-          approved_inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
-          balance_check: null
-          cancellation: null
-          check_number: '123'
-          created_at: '2020-01-31T23:59:59Z'
-          created_by:
-            category: user
-            user:
-              email: user@example.com
-          currency: USD
-          fulfillment_method: physical_check
-          id: check_transfer_30b43acfu9vw8fyc4f5
-          idempotency_key: null
-          mailing:
-            mailed_at: '2020-01-31T23:59:59Z'
-          pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
-          physical_check:
-            attachment_file_id: null
-            check_voucher_image_file_id: null
-            mailing_address:
-              city: New York
-              line1: 33 Liberty Street
-              line2: null
-              name: Ian Crease
-              phone: '+16505046304'
-              postal_code: '10045'
-              state: NY
-            memo: Invoice 29582
-            note: null
-            payer:
-            - contents: Ian Crease
-            - contents: 33 Liberty Street
-            - contents: New York, NY 10045
-            recipient_name: Ian Crease
-            return_address:
-              city: New York
-              line1: 33 Liberty Street
-              line2: null
-              name: Ian Crease
-              phone: '+16505046304'
-              postal_code: '10045'
-              state: NY
-            shipping_method: null
-            signature:
-              image_file_id: null
-              text: Ian Crease
-            tracking_updates: []
-          routing_number: '101050001'
-          source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          status: mailed
-          stop_payment_request: null
-          submission:
-            preview_file_id: null
-            submitted_address:
-              city: NEW YORK
-              line1: 33 LIBERTY STREET
-              line2: null
-              recipient_name: IAN CREASE
-              state: NY
-              zip: '10045'
-            submitted_at: '2020-01-31T23:59:59Z'
-            tracking_number: null
-          third_party: null
-          type: check_transfer
-          valid_until_date: null
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/check_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Check Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Check Transfer Lists
-    create_a_check_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        amount: 1000
-        fulfillment_method: physical_check
-        physical_check:
-          mailing_address:
-            city: New York
-            line1: 33 Liberty Street
-            name: Ian Crease
-            phone: '+16505046304'
-            postal_code: '10045'
-            state: NY
-          memo: Check payment
-          recipient_name: Ian Crease
-          return_address: null
-          signature:
-            text: Ian Crease
-        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-        valid_until_date: '2025-12-31'
-      properties:
-        account_id:
-          description: The identifier for the account that will send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        amount:
-          description: The transfer amount in USD cents.
-          minimum: 1
-          type: integer
-          x-documentation-priority: default
-        balance_check:
-          description: 'How the account''s available balance should be checked. If omitted, the default behavior is `balance_check: full`.'
-          enum:
-          - full
-          - none
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The available balance of the account must be at least the amount of the check, and a Pending Transaction will be created for the full amount. This is the default behavior if `balance_check` is omitted.
-          - No balance check will performed when the check transfer is initiated. A zero-dollar Pending Transaction will be created. The balance will still be checked when the Inbound Check Deposit is created.
-        check_number:
-          description: The check number Increase should use for the check. This should not contain leading zeroes and must be unique across the `source_account_number`. If this is omitted, Increase will generate a check number for you.
-          maxLength: 10
-          minLength: 1
-          pattern: ^[1-9]\d*$
-          type: string
-          x-documentation-priority: default
-        fulfillment_method:
-          description: Whether Increase will print and mail the check or if you will do it yourself.
-          enum:
-          - physical_check
-          - third_party
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Increase will print and mail a physical check.
-          - Increase will not print a check; you are responsible for printing and mailing a check with the provided account number, routing number, check number, and amount.
-        physical_check:
-          additionalProperties: true
-          description: Details relating to the physical check that Increase will print and mail. This is required if `fulfillment_method` is equal to `physical_check`. It must not be included if any other `fulfillment_method` is provided.
-          properties:
-            attachment_file_id:
-              description: 'The ID of a File to be attached to the check. This must have `purpose: check_attachment`. For details on pricing and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .'
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Files
-            check_voucher_image_file_id:
-              description: 'The ID of a File to be used as the check voucher image. This must have `purpose: check_voucher_image`. For details on pricing and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .'
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Files
-            mailing_address:
-              additionalProperties: false
-              description: Details for where Increase will mail the check.
-              properties:
-                city:
-                  description: The city component of the check's destination address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                line1:
-                  description: The first line of the address component of the check's destination address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                line2:
-                  description: The second line of the address component of the check's destination address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                name:
-                  description: The name component of the check's destination address. Defaults to the provided `recipient_name` parameter if `name` is not provided.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                phone:
-                  description: The phone number to associate with the check's destination address. The phone number is only used when `shipping_method` is `fedex_overnight` and will be supplied to FedEx to be used in case of delivery issues.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                postal_code:
-                  description: The postal code component of the check's destination address.
-                  maxLength: 10
-                  minLength: 1
-                  pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
-                  type: string
-                  x-documentation-priority: default
-                state:
-                  description: The US state component of the check's destination address.
-                  maxLength: 2
-                  minLength: 2
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - line1
-              - city
-              - state
-              - postal_code
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            memo:
-              description: The descriptor that will be printed on the memo field on the check.
-              maxLength: 100
-              minLength: 1
-              pattern: ^[\u0000-\uFFFF]*$
-              type: string
-              x-documentation-priority: default
-            note:
-              description: The descriptor that will be printed on the letter included with the check.
-              maxLength: 1200
-              minLength: 1
-              pattern: ^[\u0000-\uFFFF]*$
-              type: string
-              x-documentation-priority: default
-            payer:
-              description: The payer of the check. This will be printed on the top-left portion of the check and defaults to the return address if unspecified. This should be an array of up to 4 elements, each of which represents a line of the payer.
-              items:
-                additionalProperties: false
-                properties:
-                  contents:
-                    description: The contents of the line.
-                    maxLength: 35
-                    minLength: 1
-                    pattern: ^[\u0000-\uFFFF]*$
-                    type: string
-                    x-documentation-priority: default
-                required:
-                - contents
-                type: object
-                x-event-categories: []
-                x-stainless-empty-object: false
-              type: array
-              x-documentation-priority: default
-            recipient_name:
-              description: The name that will be printed on the check in the 'To:' field.
-              maxLength: 35
-              minLength: 1
-              pattern: ^[\u0000-\uFFFF]*$
-              type: string
-              x-documentation-priority: default
-            return_address:
-              additionalProperties: false
-              description: The return address to be printed on the check. If omitted this will default to an Increase-owned address that will mark checks as delivery failed and shred them.
-              properties:
-                city:
-                  description: The city of the return address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                line1:
-                  description: The first line of the return address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                line2:
-                  description: The second line of the return address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                name:
-                  description: The name of the return address.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-                phone:
-                  description: The phone number to associate with the shipper. The phone number is only used when `shipping_method` is `fedex_overnight` and will be supplied to FedEx to be used in case of delivery issues.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                postal_code:
-                  description: The postal code of the return address.
-                  maxLength: 10
-                  minLength: 1
-                  pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
-                  type: string
-                  x-documentation-priority: default
-                state:
-                  description: The US state of the return address.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - name
-              - line1
-              - city
-              - state
-              - postal_code
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            shipping_method:
-              description: How to ship the check. For details on pricing, timing, and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .
-              enum:
-              - usps_first_class
-              - fedex_overnight
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - USPS First Class
-              - FedEx Overnight
-            signature:
-              additionalProperties: false
-              description: The signature that will appear on the check. If not provided, the check will be printed with 'No Signature Required'. At most one of `text` and `image_file_id` may be provided.
-              properties:
-                image_file_id:
-                  description: 'The ID of a File containing a PNG of the signature. This must have `purpose: check_signature` and be a 1320x120 pixel PNG.'
-                  type: string
-                  x-documentation-priority: default
-                  x-id-reference-to: Files
-                text:
-                  description: The text that will appear as the signature on the check in cursive font.
-                  maxLength: 30
-                  minLength: 1
-                  pattern: ^[\u0000-\uFFFF]*$
-                  type: string
-                  x-documentation-priority: default
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-          required:
-          - memo
-          - recipient_name
-          - mailing_address
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        source_account_number_id:
-          description: The identifier of the Account Number from which to send the transfer and print on the check.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-        third_party:
-          additionalProperties: true
-          description: Details relating to the custom fulfillment you will perform. This is required if `fulfillment_method` is equal to `third_party`. It must not be included if any other `fulfillment_method` is provided.
-          properties:
-            recipient_name:
-              description: The pay-to name you will print on the check. If provided, this is used for [Positive Pay](/documentation/positive-pay). If this is omitted, Increase will be unable to validate the payer name when the check is deposited.
-              maxLength: 200
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        valid_until_date:
-          description: If provided, the check will be valid on or before this date. After this date, the check transfer will be automatically stopped and deposits will not be accepted. For checks printed by Increase, this date is included on the check as its expiry.
-          format: date
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - source_account_number_id
-      - fulfillment_method
-      - amount
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     check_transfer:
       additionalProperties: true
       description: Check Transfers move funds from your Increase account by mailing a physical check.
@@ -1807,6 +1078,743 @@ components:
       x-stainless-empty-object: false
       x-tag: Check Transfers
       x-title-plural: Check Transfers
+    create_a_check_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 1000
+        fulfillment_method: physical_check
+        physical_check:
+          mailing_address:
+            city: New York
+            line1: 33 Liberty Street
+            name: Ian Crease
+            phone: '+16505046304'
+            postal_code: '10045'
+            state: NY
+          memo: Check payment
+          recipient_name: Ian Crease
+          return_address: null
+          signature:
+            text: Ian Crease
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        valid_until_date: '2025-12-31'
+      properties:
+        account_id:
+          description: The identifier for the account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The transfer amount in USD cents.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        balance_check:
+          description: 'How the account''s available balance should be checked. If omitted, the default behavior is `balance_check: full`.'
+          enum:
+          - full
+          - none
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The available balance of the account must be at least the amount of the check, and a Pending Transaction will be created for the full amount. This is the default behavior if `balance_check` is omitted.
+          - No balance check will performed when the check transfer is initiated. A zero-dollar Pending Transaction will be created. The balance will still be checked when the Inbound Check Deposit is created.
+        check_number:
+          description: The check number Increase should use for the check. This should not contain leading zeroes and must be unique across the `source_account_number`. If this is omitted, Increase will generate a check number for you.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[1-9]\d*$
+          type: string
+          x-documentation-priority: default
+        fulfillment_method:
+          description: Whether Increase will print and mail the check or if you will do it yourself.
+          enum:
+          - physical_check
+          - third_party
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Increase will print and mail a physical check.
+          - Increase will not print a check; you are responsible for printing and mailing a check with the provided account number, routing number, check number, and amount.
+        physical_check:
+          additionalProperties: true
+          description: Details relating to the physical check that Increase will print and mail. This is required if `fulfillment_method` is equal to `physical_check`. It must not be included if any other `fulfillment_method` is provided.
+          properties:
+            attachment_file_id:
+              description: 'The ID of a File to be attached to the check. This must have `purpose: check_attachment`. For details on pricing and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .'
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Files
+            check_voucher_image_file_id:
+              description: 'The ID of a File to be used as the check voucher image. This must have `purpose: check_voucher_image`. For details on pricing and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .'
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Files
+            mailing_address:
+              additionalProperties: false
+              description: Details for where Increase will mail the check.
+              properties:
+                city:
+                  description: The city component of the check's destination address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the address component of the check's destination address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the address component of the check's destination address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                name:
+                  description: The name component of the check's destination address. Defaults to the provided `recipient_name` parameter if `name` is not provided.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                phone:
+                  description: The phone number to associate with the check's destination address. The phone number is only used when `shipping_method` is `fedex_overnight` and will be supplied to FedEx to be used in case of delivery issues.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code component of the check's destination address.
+                  maxLength: 10
+                  minLength: 1
+                  pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The US state component of the check's destination address.
+                  maxLength: 2
+                  minLength: 2
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - line1
+              - city
+              - state
+              - postal_code
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            memo:
+              description: The descriptor that will be printed on the memo field on the check.
+              maxLength: 100
+              minLength: 1
+              pattern: ^[\u0000-\uFFFF]*$
+              type: string
+              x-documentation-priority: default
+            note:
+              description: The descriptor that will be printed on the letter included with the check.
+              maxLength: 1200
+              minLength: 1
+              pattern: ^[\u0000-\uFFFF]*$
+              type: string
+              x-documentation-priority: default
+            payer:
+              description: The payer of the check. This will be printed on the top-left portion of the check and defaults to the return address if unspecified. This should be an array of up to 4 elements, each of which represents a line of the payer.
+              items:
+                additionalProperties: false
+                properties:
+                  contents:
+                    description: The contents of the line.
+                    maxLength: 35
+                    minLength: 1
+                    pattern: ^[\u0000-\uFFFF]*$
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - contents
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+            recipient_name:
+              description: The name that will be printed on the check in the 'To:' field.
+              maxLength: 35
+              minLength: 1
+              pattern: ^[\u0000-\uFFFF]*$
+              type: string
+              x-documentation-priority: default
+            return_address:
+              additionalProperties: false
+              description: The return address to be printed on the check. If omitted this will default to an Increase-owned address that will mark checks as delivery failed and shred them.
+              properties:
+                city:
+                  description: The city of the return address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the return address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the return address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                name:
+                  description: The name of the return address.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+                phone:
+                  description: The phone number to associate with the shipper. The phone number is only used when `shipping_method` is `fedex_overnight` and will be supplied to FedEx to be used in case of delivery issues.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code of the return address.
+                  maxLength: 10
+                  minLength: 1
+                  pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The US state of the return address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - line1
+              - city
+              - state
+              - postal_code
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            shipping_method:
+              description: How to ship the check. For details on pricing, timing, and restrictions, see https://increase.com/documentation/originating-checks#printing-checks .
+              enum:
+              - usps_first_class
+              - fedex_overnight
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - USPS First Class
+              - FedEx Overnight
+            signature:
+              additionalProperties: false
+              description: The signature that will appear on the check. If not provided, the check will be printed with 'No Signature Required'. At most one of `text` and `image_file_id` may be provided.
+              properties:
+                image_file_id:
+                  description: 'The ID of a File containing a PNG of the signature. This must have `purpose: check_signature` and be a 1320x120 pixel PNG.'
+                  type: string
+                  x-documentation-priority: default
+                  x-id-reference-to: Files
+                text:
+                  description: The text that will appear as the signature on the check in cursive font.
+                  maxLength: 30
+                  minLength: 1
+                  pattern: ^[\u0000-\uFFFF]*$
+                  type: string
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - memo
+          - recipient_name
+          - mailing_address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The identifier of the Account Number from which to send the transfer and print on the check.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        third_party:
+          additionalProperties: true
+          description: Details relating to the custom fulfillment you will perform. This is required if `fulfillment_method` is equal to `third_party`. It must not be included if any other `fulfillment_method` is provided.
+          properties:
+            recipient_name:
+              description: The pay-to name you will print on the check. If provided, this is used for [Positive Pay](/documentation/positive-pay). If this is omitted, Increase will be unable to validate the payer name when the check is deposited.
+              maxLength: 200
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        valid_until_date:
+          description: If provided, the check will be valid on or before this date. After this date, the check transfer will be automatically stopped and deposits will not be accepted. For checks printed by Increase, this date is included on the check as its expiry.
+          format: date
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - source_account_number_id
+      - fulfillment_method
+      - amount
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    stop_payment_on_a_check_transfer_parameters:
+      additionalProperties: false
+      example:
+        reason: mail_delivery_failed
+      properties:
+        reason:
+          description: The reason why this transfer should be stopped.
+          enum:
+          - mail_delivery_failed
+          - not_authorized
+          - valid_until_date_passed
+          - unknown
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The check could not be delivered.
+          - The check was not authorized.
+          - The check was stopped for `valid_until_date` being in the past.
+          - The check was stopped for another reason.
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    check_transfer_list:
+      additionalProperties: true
+      description: A list of Check Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          amount: 1000
+          approval: null
+          approved_inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
+          balance_check: null
+          cancellation: null
+          check_number: '123'
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          currency: USD
+          fulfillment_method: physical_check
+          id: check_transfer_30b43acfu9vw8fyc4f5
+          idempotency_key: null
+          mailing:
+            mailed_at: '2020-01-31T23:59:59Z'
+          pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+          physical_check:
+            attachment_file_id: null
+            check_voucher_image_file_id: null
+            mailing_address:
+              city: New York
+              line1: 33 Liberty Street
+              line2: null
+              name: Ian Crease
+              phone: '+16505046304'
+              postal_code: '10045'
+              state: NY
+            memo: Invoice 29582
+            note: null
+            payer:
+            - contents: Ian Crease
+            - contents: 33 Liberty Street
+            - contents: New York, NY 10045
+            recipient_name: Ian Crease
+            return_address:
+              city: New York
+              line1: 33 Liberty Street
+              line2: null
+              name: Ian Crease
+              phone: '+16505046304'
+              postal_code: '10045'
+              state: NY
+            shipping_method: null
+            signature:
+              image_file_id: null
+              text: Ian Crease
+            tracking_updates: []
+          routing_number: '101050001'
+          source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          status: mailed
+          stop_payment_request: null
+          submission:
+            preview_file_id: null
+            submitted_address:
+              city: NEW YORK
+              line1: 33 LIBERTY STREET
+              line2: null
+              recipient_name: IAN CREASE
+              state: NY
+              zip: '10045'
+            submitted_at: '2020-01-31T23:59:59Z'
+            tracking_number: null
+          third_party: null
+          type: check_transfer
+          valid_until_date: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/check_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Check Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Check Transfer Lists
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     check_transfer_stop_payment_request:
       additionalProperties: true
       description: A Check Transfer Stop Payment Request is created when a check transfer is stopped. It offsets the Check Transfer Intention.
@@ -1858,14 +1866,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Check Transfer Stop Payment Requests
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Declined Transactions API
+  title: Increase Declined Transactions API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -152,7 +152,145 @@ paths:
       tags:
       - Declined Transactions
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
+    ach_decline:
+      additionalProperties: true
+      example:
+        amount: 1750
+        id: ach_decline_72v1mcwxudctq56efipa
+        inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+        originator_company_descriptive_date: null
+        originator_company_discretionary_data: null
+        originator_company_id: 0987654321
+        originator_company_name: BIG BANK
+        reason: insufficient_funds
+        receiver_id_number: '12345678900'
+        receiver_name: IAN CREASE
+        trace_number: 021000038461022
+        type: ach_decline
+      properties:
+        amount:
+          description: The declined amount in USD cents.
+          type: integer
+          x-documentation-priority: default
+        id:
+          description: The ACH Decline's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: ACH Declines
+        inbound_ach_transfer_id:
+          description: The identifier of the Inbound ACH Transfer object associated with this decline.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound ACH Transfers
+        originator_company_descriptive_date:
+          anyOf:
+          - description: The descriptive date of the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        originator_company_discretionary_data:
+          anyOf:
+          - description: The additional information included with the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        originator_company_id:
+          description: The identifier of the company that initiated the transfer.
+          type: string
+          x-documentation-priority: default
+        originator_company_name:
+          description: The name of the company that initiated the transfer.
+          type: string
+          x-documentation-priority: default
+        reason:
+          description: Why the ACH transfer was declined.
+          enum:
+          - ach_route_canceled
+          - ach_route_disabled
+          - breaches_limit
+          - entity_not_active
+          - group_locked
+          - transaction_not_allowed
+          - returned_per_odfi_request
+          - user_initiated
+          - insufficient_funds
+          - authorization_revoked_by_customer
+          - payment_stopped
+          - customer_advised_unauthorized_improper_ineligible_or_incomplete
+          - representative_payee_deceased_or_unable_to_continue_in_that_capacity
+          - beneficiary_or_account_holder_deceased
+          - credit_entry_refused_by_receiver
+          - duplicate_entry
+          - corporate_customer_advised_not_authorized
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The account number is canceled.
+          - The account number is disabled.
+          - The transaction would cause an Increase limit to be exceeded.
+          - The account's entity is not active.
+          - Your account is inactive.
+          - The transaction is not allowed per Increase's terms.
+          - The originating financial institution asked for this transfer to be returned. The receiving bank is complying with the request.
+          - Your integration declined this transfer via the API.
+          - Your account contains insufficient funds.
+          - The customer no longer authorizes this transaction.
+          - The customer asked for the payment to be stopped.
+          - The customer advises that the debit was unauthorized.
+          - The payee is deceased.
+          - The account holder is deceased.
+          - The customer refused a credit entry.
+          - The account holder identified this transaction as a duplicate.
+          - The corporate customer no longer authorizes this transaction.
+        receiver_id_number:
+          anyOf:
+          - description: The id of the receiver of the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        receiver_name:
+          anyOf:
+          - description: The name of the receiver of the transfer.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        trace_number:
+          description: The trace number of the transfer.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `ach_decline`.
+          enum:
+          - ach_decline
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - amount
+      - originator_company_name
+      - originator_company_descriptive_date
+      - originator_company_discretionary_data
+      - originator_company_id
+      - reason
+      - receiver_id_number
+      - receiver_name
+      - trace_number
+      - inbound_ach_transfer_id
+      title: ACH Decline
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: ACH Declines
     declined_transaction:
       additionalProperties: true
       description: Declined Transactions are refused additions and removals of money from your bank account. For example, Declined Transactions are caused when your Account has an insufficient balance or your Limits are triggered.
@@ -1729,6 +1867,57 @@ components:
       x-stainless-empty-object: false
       x-tag: Declined Transactions
       x-title-plural: Declined Transactions
+    declined_transaction_list:
+      additionalProperties: true
+      description: A list of Declined Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 1750
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          id: declined_transaction_17jbn0yyhvkt4v4ooym8
+          route_id: account_number_v18nkfqm6afpsrvy82b2
+          route_type: account_number
+          source:
+            ach_decline:
+              amount: 1750
+              id: ach_decline_72v1mcwxudctq56efipa
+              inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+              originator_company_descriptive_date: null
+              originator_company_discretionary_data: null
+              originator_company_id: 0987654321
+              originator_company_name: BIG BANK
+              reason: insufficient_funds
+              receiver_id_number: '12345678900'
+              receiver_name: IAN CREASE
+              trace_number: 021000038461022
+              type: ach_decline
+            category: ach_decline
+          type: declined_transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/declined_transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Declined Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Declined Transaction Lists
     error:
       anyOf:
       - properties:
@@ -2040,195 +2229,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    ach_decline:
-      additionalProperties: true
-      example:
-        amount: 1750
-        id: ach_decline_72v1mcwxudctq56efipa
-        inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-        originator_company_descriptive_date: null
-        originator_company_discretionary_data: null
-        originator_company_id: 0987654321
-        originator_company_name: BIG BANK
-        reason: insufficient_funds
-        receiver_id_number: '12345678900'
-        receiver_name: IAN CREASE
-        trace_number: 021000038461022
-        type: ach_decline
-      properties:
-        amount:
-          description: The declined amount in USD cents.
-          type: integer
-          x-documentation-priority: default
-        id:
-          description: The ACH Decline's identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: ACH Declines
-        inbound_ach_transfer_id:
-          description: The identifier of the Inbound ACH Transfer object associated with this decline.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Inbound ACH Transfers
-        originator_company_descriptive_date:
-          anyOf:
-          - description: The descriptive date of the transfer.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        originator_company_discretionary_data:
-          anyOf:
-          - description: The additional information included with the transfer.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        originator_company_id:
-          description: The identifier of the company that initiated the transfer.
-          type: string
-          x-documentation-priority: default
-        originator_company_name:
-          description: The name of the company that initiated the transfer.
-          type: string
-          x-documentation-priority: default
-        reason:
-          description: Why the ACH transfer was declined.
-          enum:
-          - ach_route_canceled
-          - ach_route_disabled
-          - breaches_limit
-          - entity_not_active
-          - group_locked
-          - transaction_not_allowed
-          - returned_per_odfi_request
-          - user_initiated
-          - insufficient_funds
-          - authorization_revoked_by_customer
-          - payment_stopped
-          - customer_advised_unauthorized_improper_ineligible_or_incomplete
-          - representative_payee_deceased_or_unable_to_continue_in_that_capacity
-          - beneficiary_or_account_holder_deceased
-          - credit_entry_refused_by_receiver
-          - duplicate_entry
-          - corporate_customer_advised_not_authorized
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The account number is canceled.
-          - The account number is disabled.
-          - The transaction would cause an Increase limit to be exceeded.
-          - The account's entity is not active.
-          - Your account is inactive.
-          - The transaction is not allowed per Increase's terms.
-          - The originating financial institution asked for this transfer to be returned. The receiving bank is complying with the request.
-          - Your integration declined this transfer via the API.
-          - Your account contains insufficient funds.
-          - The customer no longer authorizes this transaction.
-          - The customer asked for the payment to be stopped.
-          - The customer advises that the debit was unauthorized.
-          - The payee is deceased.
-          - The account holder is deceased.
-          - The customer refused a credit entry.
-          - The account holder identified this transaction as a duplicate.
-          - The corporate customer no longer authorizes this transaction.
-        receiver_id_number:
-          anyOf:
-          - description: The id of the receiver of the transfer.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        receiver_name:
-          anyOf:
-          - description: The name of the receiver of the transfer.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        trace_number:
-          description: The trace number of the transfer.
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `ach_decline`.
-          enum:
-          - ach_decline
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - amount
-      - originator_company_name
-      - originator_company_descriptive_date
-      - originator_company_discretionary_data
-      - originator_company_id
-      - reason
-      - receiver_id_number
-      - receiver_name
-      - trace_number
-      - inbound_ach_transfer_id
-      title: ACH Decline
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: ACH Declines
-    declined_transaction_list:
-      additionalProperties: true
-      description: A list of Declined Transaction objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 1750
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          description: INVOICE 2468
-          id: declined_transaction_17jbn0yyhvkt4v4ooym8
-          route_id: account_number_v18nkfqm6afpsrvy82b2
-          route_type: account_number
-          source:
-            ach_decline:
-              amount: 1750
-              id: ach_decline_72v1mcwxudctq56efipa
-              inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-              originator_company_descriptive_date: null
-              originator_company_discretionary_data: null
-              originator_company_id: 0987654321
-              originator_company_name: BIG BANK
-              reason: insufficient_funds
-              receiver_id_number: '12345678900'
-              receiver_name: IAN CREASE
-              trace_number: 021000038461022
-              type: ach_decline
-            category: ach_decline
-          type: declined_transaction
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/declined_transaction'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Declined Transaction List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Declined Transaction Lists
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

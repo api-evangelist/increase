@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Inbound Ach Transfers API
+  title: Increase Inbound Ach Transfers API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -251,375 +251,38 @@ paths:
       - Inbound Ach Transfers
 components:
   schemas:
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    inbound_ach_transfer_list:
-      additionalProperties: true
-      description: A list of Inbound ACH Transfer objects.
+    decline_an_inbound_ach_transfer_parameters:
+      additionalProperties: false
       example:
-        data:
-        - acceptance:
-            accepted_at: '2020-01-31T23:59:59Z'
-            transaction_id: transaction_uyrp7fld2ium70oa7oi
-          account_id: account_in71c4amph0vgo2qllky
-          account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          addenda: null
-          amount: 100
-          automatically_resolves_at: '2020-01-31T23:59:59Z'
-          created_at: '2020-01-31T23:59:59Z'
-          decline: null
-          direction: credit
-          effective_date: '2023-04-02'
-          id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-          international_addenda: null
-          notification_of_change: null
-          originator_company_descriptive_date: '230401'
-          originator_company_discretionary_data: WEB AUTOPAY
-          originator_company_entry_description: INVOICE 2468
-          originator_company_id: 0987654321
-          originator_company_name: PAYROLL COMPANY
-          originator_routing_number: '101050001'
-          receiver_id_number: null
-          receiver_name: Ian Crease
-          settlement:
-            settled_at: '2020-01-31T23:59:59Z'
-            settlement_schedule: same_day
-          standard_entry_class_code: internet_initiated
-          status: accepted
-          trace_number: 021000038461022
-          transfer_return: null
-          type: inbound_ach_transfer
-        next_cursor: v57w5d
+        reason: payment_stopped
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_ach_transfer'
-          type: array
+        reason:
+          description: The reason why this transfer will be returned. If this parameter is unset, the return codes will be `payment_stopped` for debits and `credit_entry_refused_by_receiver` for credits.
+          enum:
+          - insufficient_funds
+          - authorization_revoked_by_customer
+          - payment_stopped
+          - customer_advised_unauthorized_improper_ineligible_or_incomplete
+          - representative_payee_deceased_or_unable_to_continue_in_that_capacity
+          - beneficiary_or_account_holder_deceased
+          - credit_entry_refused_by_receiver
+          - duplicate_entry
+          - corporate_customer_advised_not_authorized
+          type: string
           x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound ACH Transfer List
+          x-enum-descriptions:
+          - The customer's account has insufficient funds. This reason is only allowed for debits. The Nacha return code is R01.
+          - The customer no longer authorizes this transaction. The Nacha return code is R07.
+          - The customer asked for the payment to be stopped. This reason is only allowed for debits. The Nacha return code is R08.
+          - The customer advises that the debit was unauthorized. The Nacha return code is R10.
+          - The payee is deceased. The Nacha return code is R14.
+          - The account holder is deceased. The Nacha return code is R15.
+          - The customer refused a credit entry. This reason is only allowed for credits. The Nacha return code is R23.
+          - The account holder identified this transaction as a duplicate. The Nacha return code is R24.
+          - The corporate customer no longer authorizes this transaction. The Nacha return code is R29.
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Inbound ACH Transfer Lists
     inbound_ach_transfer:
       additionalProperties: true
       description: An Inbound ACH Transfer is an ACH transfer initiated outside of Increase to your account.
@@ -1395,6 +1058,64 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound ACH Transfers
       x-title-plural: Inbound ACH Transfers
+    inbound_ach_transfer_list:
+      additionalProperties: true
+      description: A list of Inbound ACH Transfer objects.
+      example:
+        data:
+        - acceptance:
+            accepted_at: '2020-01-31T23:59:59Z'
+            transaction_id: transaction_uyrp7fld2ium70oa7oi
+          account_id: account_in71c4amph0vgo2qllky
+          account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          addenda: null
+          amount: 100
+          automatically_resolves_at: '2020-01-31T23:59:59Z'
+          created_at: '2020-01-31T23:59:59Z'
+          decline: null
+          direction: credit
+          effective_date: '2023-04-02'
+          id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+          international_addenda: null
+          notification_of_change: null
+          originator_company_descriptive_date: '230401'
+          originator_company_discretionary_data: WEB AUTOPAY
+          originator_company_entry_description: INVOICE 2468
+          originator_company_id: 0987654321
+          originator_company_name: PAYROLL COMPANY
+          originator_routing_number: '101050001'
+          receiver_id_number: null
+          receiver_name: Ian Crease
+          settlement:
+            settled_at: '2020-01-31T23:59:59Z'
+            settlement_schedule: same_day
+          standard_entry_class_code: internet_initiated
+          status: accepted
+          trace_number: 021000038461022
+          transfer_return: null
+          type: inbound_ach_transfer
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_ach_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound ACH Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound ACH Transfer Lists
     return_an_inbound_ach_transfer_parameters:
       additionalProperties: false
       example:
@@ -1450,38 +1171,317 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    decline_an_inbound_ach_transfer_parameters:
-      additionalProperties: false
-      example:
-        reason: payment_stopped
-      properties:
-        reason:
-          description: The reason why this transfer will be returned. If this parameter is unset, the return codes will be `payment_stopped` for debits and `credit_entry_refused_by_receiver` for credits.
-          enum:
-          - insufficient_funds
-          - authorization_revoked_by_customer
-          - payment_stopped
-          - customer_advised_unauthorized_improper_ineligible_or_incomplete
-          - representative_payee_deceased_or_unable_to_continue_in_that_capacity
-          - beneficiary_or_account_holder_deceased
-          - credit_entry_refused_by_receiver
-          - duplicate_entry
-          - corporate_customer_advised_not_authorized
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The customer's account has insufficient funds. This reason is only allowed for debits. The Nacha return code is R01.
-          - The customer no longer authorizes this transaction. The Nacha return code is R07.
-          - The customer asked for the payment to be stopped. This reason is only allowed for debits. The Nacha return code is R08.
-          - The customer advises that the debit was unauthorized. The Nacha return code is R10.
-          - The payee is deceased. The Nacha return code is R14.
-          - The account holder is deceased. The Nacha return code is R15.
-          - The customer refused a credit entry. This reason is only allowed for credits. The Nacha return code is R23.
-          - The account holder identified this transaction as a duplicate. The Nacha return code is R24.
-          - The corporate customer no longer authorizes this transaction. The Nacha return code is R29.
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
   responses:
     errorResponse:
       content:

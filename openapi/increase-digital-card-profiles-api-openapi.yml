@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Digital Card Profiles API
+  title: Increase Digital Card Profiles API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -196,6 +196,380 @@ paths:
       - Digital Card Profiles
 components:
   schemas:
+    clones_a_digital_card_profile_parameters:
+      additionalProperties: true
+      example:
+        background_image_file_id: file_1ai913suu1zfn1pdetru
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          description: An email address the user can contact to receive support for their card.
+          format: email
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_website:
+          description: A website the user can visit to view and receive support for their card.
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple. The default is white.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    digital_card_profile:
+      additionalProperties: true
+      description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
+      example:
+        app_icon_file_id: file_makxrc67oh9l6sg7w9yc
+        background_image_file_id: file_makxrc67oh9l6sg7w9yc
+        card_description: Black Card
+        contact_email: user@example.com
+        contact_phone: '+18882988865'
+        contact_website: https://example.com
+        created_at: '2020-01-31T23:59:59Z'
+        description: Corporate logo Apple Pay Card
+        id: digital_card_profile_s3puplu90f04xhcwkiga
+        idempotency_key: null
+        issuer_name: National Phonograph Company
+        status: active
+        text_color:
+          blue: 230
+          green: 255
+          red: 189
+        type: digital_card_profile
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          anyOf:
+          - description: An email address the user can contact to receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        contact_phone:
+          anyOf:
+          - description: A phone number the user can contact to receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        contact_website:
+          anyOf:
+          - description: A website the user can visit to view and receive support for their card.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Digital Card Profile was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Card Profile identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Digital Card Profiles
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          type: string
+          x-documentation-priority: default
+        status:
+          description: The status of the Card Profile.
+          enum:
+          - pending
+          - rejected
+          - active
+          - archived
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Card Profile is awaiting review from Increase and/or processing by card networks.
+          - There is an issue with the Card Profile preventing it from use.
+          - The Card Profile can be assigned to Cards.
+          - The Card Profile is no longer in use.
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          title: Digital Card Profile TextColor
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: TextColors
+        type:
+          description: A constant representing the object's type. For this resource it will always be `digital_card_profile`.
+          enum:
+          - digital_card_profile
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - status
+      - description
+      - text_color
+      - issuer_name
+      - card_description
+      - contact_website
+      - contact_email
+      - contact_phone
+      - background_image_file_id
+      - app_icon_file_id
+      - idempotency_key
+      title: Digital Card Profile
+      type: object
+      x-event-categories:
+      - digital_card_profile.created
+      - digital_card_profile.updated
+      x-stainless-empty-object: false
+      x-tag: Digital Card Profiles
+      x-title-plural: Digital Card Profiles
+    create_a_digital_card_profile_parameters:
+      additionalProperties: true
+      example:
+        app_icon_file_id: file_8zxqkwlh43wo144u8yec
+        background_image_file_id: file_1ai913suu1zfn1pdetru
+        card_description: MyBank Signature Card
+        contact_email: user@example.com
+        contact_phone: '+18885551212'
+        contact_website: https://example.com
+        description: My Card Profile
+        issuer_name: MyBank
+        text_color:
+          blue: 59
+          green: 43
+          red: 26
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          description: An email address the user can contact to receive support for their card.
+          format: email
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_website:
+          description: A website the user can visit to view and receive support for their card.
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple. The default is white.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - description
+      - issuer_name
+      - card_description
+      - background_image_file_id
+      - app_icon_file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    digital_card_profile_list:
+      additionalProperties: true
+      description: A list of Digital Card Profile objects.
+      example:
+        data:
+        - app_icon_file_id: file_makxrc67oh9l6sg7w9yc
+          background_image_file_id: file_makxrc67oh9l6sg7w9yc
+          card_description: Black Card
+          contact_email: user@example.com
+          contact_phone: '+18882988865'
+          contact_website: https://example.com
+          created_at: '2020-01-31T23:59:59Z'
+          description: Corporate logo Apple Pay Card
+          id: digital_card_profile_s3puplu90f04xhcwkiga
+          idempotency_key: null
+          issuer_name: National Phonograph Company
+          status: active
+          text_color:
+            blue: 230
+            green: 255
+            red: 189
+          type: digital_card_profile
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/digital_card_profile'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Digital Card Profile List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Digital Card Profile Lists
     error:
       anyOf:
       - properties:
@@ -507,380 +881,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    digital_card_profile_list:
-      additionalProperties: true
-      description: A list of Digital Card Profile objects.
-      example:
-        data:
-        - app_icon_file_id: file_makxrc67oh9l6sg7w9yc
-          background_image_file_id: file_makxrc67oh9l6sg7w9yc
-          card_description: Black Card
-          contact_email: user@example.com
-          contact_phone: '+18882988865'
-          contact_website: https://example.com
-          created_at: '2020-01-31T23:59:59Z'
-          description: Corporate logo Apple Pay Card
-          id: digital_card_profile_s3puplu90f04xhcwkiga
-          idempotency_key: null
-          issuer_name: National Phonograph Company
-          status: active
-          text_color:
-            blue: 230
-            green: 255
-            red: 189
-          type: digital_card_profile
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/digital_card_profile'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Digital Card Profile List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Digital Card Profile Lists
-    clones_a_digital_card_profile_parameters:
-      additionalProperties: true
-      example:
-        background_image_file_id: file_1ai913suu1zfn1pdetru
-      properties:
-        app_icon_file_id:
-          description: The identifier of the File containing the card's icon image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        background_image_file_id:
-          description: The identifier of the File containing the card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        card_description:
-          description: A user-facing description for the card itself.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_email:
-          description: An email address the user can contact to receive support for their card.
-          format: email
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_phone:
-          description: A phone number the user can contact to receive support for their card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_website:
-          description: A website the user can visit to view and receive support for their card.
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        issuer_name:
-          description: A user-facing description for whoever is issuing the card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        text_color:
-          additionalProperties: false
-          description: The Card's text color, specified as an RGB triple. The default is white.
-          properties:
-            blue:
-              description: The value of the blue channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            green:
-              description: The value of the green channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            red:
-              description: The value of the red channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-          required:
-          - red
-          - green
-          - blue
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    create_a_digital_card_profile_parameters:
-      additionalProperties: true
-      example:
-        app_icon_file_id: file_8zxqkwlh43wo144u8yec
-        background_image_file_id: file_1ai913suu1zfn1pdetru
-        card_description: MyBank Signature Card
-        contact_email: user@example.com
-        contact_phone: '+18885551212'
-        contact_website: https://example.com
-        description: My Card Profile
-        issuer_name: MyBank
-        text_color:
-          blue: 59
-          green: 43
-          red: 26
-      properties:
-        app_icon_file_id:
-          description: The identifier of the File containing the card's icon image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        background_image_file_id:
-          description: The identifier of the File containing the card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        card_description:
-          description: A user-facing description for the card itself.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_email:
-          description: An email address the user can contact to receive support for their card.
-          format: email
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_phone:
-          description: A phone number the user can contact to receive support for their card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_website:
-          description: A website the user can visit to view and receive support for their card.
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        issuer_name:
-          description: A user-facing description for whoever is issuing the card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        text_color:
-          additionalProperties: false
-          description: The Card's text color, specified as an RGB triple. The default is white.
-          properties:
-            blue:
-              description: The value of the blue channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            green:
-              description: The value of the green channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            red:
-              description: The value of the red channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-          required:
-          - red
-          - green
-          - blue
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      required:
-      - description
-      - issuer_name
-      - card_description
-      - background_image_file_id
-      - app_icon_file_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    digital_card_profile:
-      additionalProperties: true
-      description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
-      example:
-        app_icon_file_id: file_makxrc67oh9l6sg7w9yc
-        background_image_file_id: file_makxrc67oh9l6sg7w9yc
-        card_description: Black Card
-        contact_email: user@example.com
-        contact_phone: '+18882988865'
-        contact_website: https://example.com
-        created_at: '2020-01-31T23:59:59Z'
-        description: Corporate logo Apple Pay Card
-        id: digital_card_profile_s3puplu90f04xhcwkiga
-        idempotency_key: null
-        issuer_name: National Phonograph Company
-        status: active
-        text_color:
-          blue: 230
-          green: 255
-          red: 189
-        type: digital_card_profile
-      properties:
-        app_icon_file_id:
-          description: The identifier of the File containing the card's icon image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        background_image_file_id:
-          description: The identifier of the File containing the card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        card_description:
-          description: A user-facing description for the card itself.
-          type: string
-          x-documentation-priority: default
-        contact_email:
-          anyOf:
-          - description: An email address the user can contact to receive support for their card.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        contact_phone:
-          anyOf:
-          - description: A phone number the user can contact to receive support for their card.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        contact_website:
-          anyOf:
-          - description: A website the user can visit to view and receive support for their card.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Digital Card Profile was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          type: string
-          x-documentation-priority: default
-        id:
-          description: The Card Profile identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Digital Card Profiles
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        issuer_name:
-          description: A user-facing description for whoever is issuing the card.
-          type: string
-          x-documentation-priority: default
-        status:
-          description: The status of the Card Profile.
-          enum:
-          - pending
-          - rejected
-          - active
-          - archived
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The Card Profile is awaiting review from Increase and/or processing by card networks.
-          - There is an issue with the Card Profile preventing it from use.
-          - The Card Profile can be assigned to Cards.
-          - The Card Profile is no longer in use.
-        text_color:
-          additionalProperties: false
-          description: The Card's text color, specified as an RGB triple.
-          properties:
-            blue:
-              description: The value of the blue channel in the RGB color.
-              type: integer
-              x-documentation-priority: default
-            green:
-              description: The value of the green channel in the RGB color.
-              type: integer
-              x-documentation-priority: default
-            red:
-              description: The value of the red channel in the RGB color.
-              type: integer
-              x-documentation-priority: default
-          required:
-          - red
-          - green
-          - blue
-          title: Digital Card Profile TextColor
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: TextColors
-        type:
-          description: A constant representing the object's type. For this resource it will always be `digital_card_profile`.
-          enum:
-          - digital_card_profile
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - created_at
-      - status
-      - description
-      - text_color
-      - issuer_name
-      - card_description
-      - contact_website
-      - contact_email
-      - contact_phone
-      - background_image_file_id
-      - app_icon_file_id
-      - idempotency_key
-      title: Digital Card Profile
-      type: object
-      x-event-categories:
-      - digital_card_profile.created
-      - digital_card_profile.updated
-      x-stainless-empty-object: false
-      x-tag: Digital Card Profiles
-      x-title-plural: Digital Card Profiles
   responses:
     errorResponse:
       content:

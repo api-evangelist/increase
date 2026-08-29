@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Ach Prenotifications API
+  title: Increase Ach Prenotifications API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -143,468 +143,6 @@ paths:
       - Ach Prenotifications
 components:
   schemas:
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    create_an_ach_prenotification_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        account_number: '987654321'
-        routing_number: '101050001'
-      properties:
-        account_id:
-          description: The Increase identifier for the account that will send the ACH Prenotification.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        account_number:
-          description: The account number for the destination account.
-          maxLength: 200
-          minLength: 1
-          pattern: ^[a-zA-Z0-9]*$
-          type: string
-          x-documentation-priority: default
-        addendum:
-          description: Additional information that will be sent to the recipient.
-          maxLength: 80
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        company_descriptive_date:
-          description: The description of the date of the ACH Prenotification.
-          maxLength: 6
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        company_discretionary_data:
-          description: The data you choose to associate with the ACH Prenotification.
-          maxLength: 20
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        company_entry_description:
-          description: The description you wish to be shown to the recipient.
-          maxLength: 10
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        company_name:
-          description: The name by which the recipient knows you.
-          maxLength: 16
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        credit_debit_indicator:
-          description: Whether the Prenotification is for a future debit or credit.
-          enum:
-          - credit
-          - debit
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The Prenotification is for an anticipated credit.
-          - The Prenotification is for an anticipated debit.
-        effective_date:
-          description: The ACH Prenotification effective date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
-          format: date
-          type: string
-          x-documentation-priority: default
-        individual_id:
-          description: Your identifier for the recipient.
-          maxLength: 22
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        individual_name:
-          description: The name of therecipient. This value is informational and not verified by the recipient's bank.
-          maxLength: 22
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        routing_number:
-          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        standard_entry_class_code:
-          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the ACH Prenotification.
-          enum:
-          - corporate_credit_or_debit
-          - corporate_trade_exchange
-          - prearranged_payments_and_deposit
-          - internet_initiated
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
-          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
-          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
-          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
-      required:
-      - account_id
-      - account_number
-      - routing_number
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    ach_prenotification_list:
-      additionalProperties: true
-      description: A list of ACH Prenotification objects.
-      example:
-        data:
-        - account_id: null
-          account_number: '987654321'
-          addendum: null
-          company_descriptive_date: null
-          company_discretionary_data: null
-          company_entry_description: null
-          company_name: null
-          created_at: '2020-01-31T23:59:59Z'
-          credit_debit_indicator: null
-          effective_date: null
-          id: ach_prenotification_ubjf9qqsxl3obbcn1u34
-          idempotency_key: null
-          individual_id: null
-          individual_name: null
-          notifications_of_change: []
-          prenotification_return: null
-          routing_number: '101050001'
-          standard_entry_class_code: null
-          status: submitted
-          type: ach_prenotification
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/ach_prenotification'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: ACH Prenotification List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: ACH Prenotification Lists
     ach_prenotification:
       additionalProperties: false
       description: ACH Prenotifications are one way you can verify account and routing numbers by Automated Clearing House (ACH).
@@ -1029,6 +567,468 @@ components:
       x-stainless-empty-object: false
       x-tag: ACH Prenotifications
       x-title-plural: ACH Prenotifications
+    create_an_ach_prenotification_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        routing_number: '101050001'
+      properties:
+        account_id:
+          description: The Increase identifier for the account that will send the ACH Prenotification.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 200
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        addendum:
+          description: Additional information that will be sent to the recipient.
+          maxLength: 80
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_descriptive_date:
+          description: The description of the date of the ACH Prenotification.
+          maxLength: 6
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_discretionary_data:
+          description: The data you choose to associate with the ACH Prenotification.
+          maxLength: 20
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_entry_description:
+          description: The description you wish to be shown to the recipient.
+          maxLength: 10
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        company_name:
+          description: The name by which the recipient knows you.
+          maxLength: 16
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        credit_debit_indicator:
+          description: Whether the Prenotification is for a future debit or credit.
+          enum:
+          - credit
+          - debit
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Prenotification is for an anticipated credit.
+          - The Prenotification is for an anticipated debit.
+        effective_date:
+          description: The ACH Prenotification effective date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+          format: date
+          type: string
+          x-documentation-priority: default
+        individual_id:
+          description: Your identifier for the recipient.
+          maxLength: 22
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        individual_name:
+          description: The name of therecipient. This value is informational and not verified by the recipient's bank.
+          maxLength: 22
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        standard_entry_class_code:
+          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the ACH Prenotification.
+          enum:
+          - corporate_credit_or_debit
+          - corporate_trade_exchange
+          - prearranged_payments_and_deposit
+          - internet_initiated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+      required:
+      - account_id
+      - account_number
+      - routing_number
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    ach_prenotification_list:
+      additionalProperties: true
+      description: A list of ACH Prenotification objects.
+      example:
+        data:
+        - account_id: null
+          account_number: '987654321'
+          addendum: null
+          company_descriptive_date: null
+          company_discretionary_data: null
+          company_entry_description: null
+          company_name: null
+          created_at: '2020-01-31T23:59:59Z'
+          credit_debit_indicator: null
+          effective_date: null
+          id: ach_prenotification_ubjf9qqsxl3obbcn1u34
+          idempotency_key: null
+          individual_id: null
+          individual_name: null
+          notifications_of_change: []
+          prenotification_return: null
+          routing_number: '101050001'
+          standard_entry_class_code: null
+          status: submitted
+          type: ach_prenotification
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/ach_prenotification'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: ACH Prenotification List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: ACH Prenotification Lists
   responses:
     errorResponse:
       content:

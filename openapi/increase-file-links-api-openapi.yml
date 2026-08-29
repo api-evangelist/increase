@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers File Links API
+  title: Increase File Links API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -39,35 +39,7 @@ paths:
       tags:
       - File Links
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    create_a_file_link_parameters:
-      additionalProperties: true
-      example:
-        file_id: file_makxrc67oh9l6sg7w9yc
-      properties:
-        expires_at:
-          description: The time at which the File Link will expire. The default is 1 hour from the time of the request. The maximum is 1 day from the time of the request.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        file_id:
-          description: The File to create a File Link for.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-      required:
-      - file_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     file_link:
       additionalProperties: false
       description: File Links let you generate a URL that can be used to download a File.
@@ -441,6 +413,34 @@ components:
         - status
         type: object
         x-event-categories: []
+    create_a_file_link_parameters:
+      additionalProperties: true
+      example:
+        file_id: file_makxrc67oh9l6sg7w9yc
+      properties:
+        expires_at:
+          description: The time at which the File Link will expire. The default is 1 hour from the time of the request. The maximum is 1 day from the time of the request.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        file_id:
+          description: The File to create a File Link for.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+      required:
+      - file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

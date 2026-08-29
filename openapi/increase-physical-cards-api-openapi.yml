@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Physical Cards API
+  title: Increase Physical Cards API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -187,502 +187,6 @@ paths:
       - Physical Cards
 components:
   schemas:
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    create_a_physical_card_parameters:
-      additionalProperties: true
-      example:
-        card_id: card_oubs0hwk5rn6knuecxg2
-        cardholder:
-          first_name: Ian
-          last_name: Crease
-        shipment:
-          address:
-            city: New York
-            line1: 33 Liberty Street
-            line2: Unit 2
-            name: Ian Crease
-            postal_code: '10045'
-            state: NY
-          method: usps
-      properties:
-        card_id:
-          description: The underlying card representing this physical card.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Cards
-        cardholder:
-          additionalProperties: false
-          description: Details about the cardholder, as it will appear on the physical card.
-          properties:
-            first_name:
-              description: The cardholder's first name.
-              maxLength: 200
-              minLength: 1
-              pattern: ^[\w.\-/ ]*$
-              type: string
-              x-documentation-priority: default
-            last_name:
-              description: The cardholder's last name.
-              maxLength: 200
-              minLength: 1
-              pattern: ^[\w.\-/ ]*$
-              type: string
-              x-documentation-priority: default
-          required:
-          - first_name
-          - last_name
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        physical_card_profile_id:
-          description: The physical card profile to use for this physical card. The latest default physical card profile will be used if not provided.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Physical Card Profiles
-        shipment:
-          additionalProperties: false
-          description: The details used to ship this physical card.
-          properties:
-            address:
-              additionalProperties: false
-              description: The address to where the card should be shipped.
-              properties:
-                city:
-                  description: The city of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                country:
-                  description: The two-character ISO 3166-1 code of the country where the card should be shipped (e.g., `US`). Please reach out to [support@increase.com](mailto:support@increase.com) to ship cards internationally.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line1:
-                  description: The first line of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line2:
-                  description: The second line of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line3:
-                  description: The third line of the shipping address.
-                  maxLength: 9
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                name:
-                  description: The name of the recipient.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\w.\-/ ]*$
-                  type: string
-                  x-documentation-priority: default
-                phone_number:
-                  description: The phone number of the recipient.
-                  maxLength: 15
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                postal_code:
-                  description: The postal code of the shipping address.
-                  maxLength: 16
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                state:
-                  description: The state of the shipping address.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - name
-              - line1
-              - city
-              - state
-              - postal_code
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            method:
-              description: The shipping method to use.
-              enum:
-              - usps
-              - fedex_priority_overnight
-              - fedex_2_day
-              - dhl_worldwide_express
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - USPS Post.
-              - FedEx Priority Overnight, no signature.
-              - FedEx 2-day.
-              - DHL Worldwide Express, international shipping only.
-            schedule:
-              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
-              enum:
-              - next_day
-              - same_day
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
-              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
-          required:
-          - method
-          - address
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      required:
-      - card_id
-      - cardholder
-      - shipment
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    update_a_physical_card_parameters:
-      additionalProperties: false
-      example:
-        status: disabled
-      properties:
-        status:
-          description: The status to update the Physical Card to.
-          enum:
-          - active
-          - disabled
-          - canceled
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The physical card is active.
-          - The physical card is temporarily disabled.
-          - The physical card is permanently canceled.
-      required:
-      - status
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     physical_card:
       additionalProperties: false
       description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!
@@ -1031,6 +535,502 @@ components:
       x-stainless-empty-object: false
       x-tag: Physical Cards
       x-title-plural: Physical Cards
+    create_a_physical_card_parameters:
+      additionalProperties: true
+      example:
+        card_id: card_oubs0hwk5rn6knuecxg2
+        cardholder:
+          first_name: Ian
+          last_name: Crease
+        shipment:
+          address:
+            city: New York
+            line1: 33 Liberty Street
+            line2: Unit 2
+            name: Ian Crease
+            postal_code: '10045'
+            state: NY
+          method: usps
+      properties:
+        card_id:
+          description: The underlying card representing this physical card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        cardholder:
+          additionalProperties: false
+          description: Details about the cardholder, as it will appear on the physical card.
+          properties:
+            first_name:
+              description: The cardholder's first name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+            last_name:
+              description: The cardholder's last name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - first_name
+          - last_name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        physical_card_profile_id:
+          description: The physical card profile to use for this physical card. The latest default physical card profile will be used if not provided.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+        shipment:
+          additionalProperties: false
+          description: The details used to ship this physical card.
+          properties:
+            address:
+              additionalProperties: false
+              description: The address to where the card should be shipped.
+              properties:
+                city:
+                  description: The city of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-character ISO 3166-1 code of the country where the card should be shipped (e.g., `US`). Please reach out to [support@increase.com](mailto:support@increase.com) to ship cards internationally.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line3:
+                  description: The third line of the shipping address.
+                  maxLength: 9
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                name:
+                  description: The name of the recipient.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\w.\-/ ]*$
+                  type: string
+                  x-documentation-priority: default
+                phone_number:
+                  description: The phone number of the recipient.
+                  maxLength: 15
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code of the shipping address.
+                  maxLength: 16
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The state of the shipping address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - line1
+              - city
+              - state
+              - postal_code
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            method:
+              description: The shipping method to use.
+              enum:
+              - usps
+              - fedex_priority_overnight
+              - fedex_2_day
+              - dhl_worldwide_express
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - USPS Post.
+              - FedEx Priority Overnight, no signature.
+              - FedEx 2-day.
+              - DHL Worldwide Express, international shipping only.
+            schedule:
+              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
+              enum:
+              - next_day
+              - same_day
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
+              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
+          required:
+          - method
+          - address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - card_id
+      - cardholder
+      - shipment
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    update_a_physical_card_parameters:
+      additionalProperties: false
+      example:
+        status: disabled
+      properties:
+        status:
+          description: The status to update the Physical Card to.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The physical card is active.
+          - The physical card is temporarily disabled.
+          - The physical card is permanently canceled.
+      required:
+      - status
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     physical_card_list:
       additionalProperties: true
       description: A list of Physical Card objects.

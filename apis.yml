@@ -820,6 +820,16 @@ apis:
     url: openapi/increase-wire-transfers-api-openapi.yml
   - type: Documentation
     url: https://increase.com/documentation/api
+- aid: increase:increase-increase-api-api
+  name: Increase Increase API
+  description: The Increase API API from Increase — 0 operation(s) for increase api.
+  humanURL: https://increase.com/documentation/api
+  baseURL: https://api.increase.com
+  tags:
+  - Increase API
+  properties:
+  - type: OpenAPI
+    url: openapi/increase-increase-api-api-openapi.yml
 common:
   - type: CapabilityMap
     url: capabilities/increase-capability-edges.yml

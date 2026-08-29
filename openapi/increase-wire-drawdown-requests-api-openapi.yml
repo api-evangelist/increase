@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
-  title: Increase Account Numbers Wire Drawdown Requests API
+  title: Increase Wire Drawdown Requests API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -131,7 +131,333 @@ paths:
       tags:
       - Wire Drawdown Requests
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
+    wire_drawdown_request_list:
+      additionalProperties: true
+      description: A list of Wire Drawdown Request objects.
+      example:
+        data:
+        - account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 10000
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_account_number: '987654321'
+          debtor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          debtor_external_account_id: null
+          debtor_name: Ian Crease
+          debtor_routing_number: '101050001'
+          fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+          id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+          idempotency_key: null
+          status: fulfilled
+          submission:
+            input_message_accountability_data: 20220118MMQFMP0P000003
+          type: wire_drawdown_request
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/wire_drawdown_request'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Wire Drawdown Request List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Wire Drawdown Request Lists
+    wire_drawdown_request:
+      additionalProperties: true
+      description: Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
+      example:
+        account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        amount: 10000
+        created_at: '2020-01-31T23:59:59Z'
+        creditor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          line2: null
+          postal_code: '10045'
+          state: NY
+        creditor_name: Ian Crease
+        currency: USD
+        debtor_account_number: '987654321'
+        debtor_address:
+          city: New York
+          country: US
+          line1: 33 Liberty Street
+          line2: null
+          postal_code: '10045'
+          state: NY
+        debtor_external_account_id: null
+        debtor_name: Ian Crease
+        debtor_routing_number: '101050001'
+        fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+        id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+        idempotency_key: null
+        status: fulfilled
+        submission:
+          input_message_accountability_data: 20220118MMQFMP0P000003
+        type: wire_drawdown_request
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number_id:
+          description: The Account Number to which the debtor—the recipient of this request—is being requested to send funds.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        amount:
+          description: The amount being requested in cents.
+          type: integer
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the wire drawdown request was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        creditor_address:
+          additionalProperties: false
+          description: The creditor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address.
+              type: string
+              x-documentation-priority: default
+            line2:
+              anyOf:
+              - description: The second line of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            postal_code:
+              anyOf:
+              - description: The ZIP code of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            state:
+              anyOf:
+              - description: The address state.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - line1
+          - line2
+          - city
+          - state
+          - postal_code
+          - country
+          title: Wire Drawdown Request Address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Addresses
+        creditor_name:
+          description: The creditor's name.
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the amount being requested. Will always be "USD".
+          type: string
+          x-documentation-priority: default
+        debtor_account_number:
+          description: The debtor's account number.
+          type: string
+          x-documentation-priority: default
+        debtor_address:
+          additionalProperties: false
+          description: The debtor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              type: string
+              x-documentation-priority: default
+            country:
+              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address.
+              type: string
+              x-documentation-priority: default
+            line2:
+              anyOf:
+              - description: The second line of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            postal_code:
+              anyOf:
+              - description: The ZIP code of the address.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            state:
+              anyOf:
+              - description: The address state.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - line1
+          - line2
+          - city
+          - state
+          - postal_code
+          - country
+          title: Wire Drawdown Request Address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: Addresses
+        debtor_external_account_id:
+          anyOf:
+          - description: The debtor's external account identifier.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: External Accounts
+          - type: 'null'
+        debtor_name:
+          description: The debtor's name.
+          type: string
+          x-documentation-priority: default
+        debtor_routing_number:
+          description: The debtor's routing number.
+          type: string
+          x-documentation-priority: default
+        fulfillment_inbound_wire_transfer_id:
+          anyOf:
+          - description: If the recipient fulfills the drawdown request by sending funds, then this will be the identifier of the corresponding Transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Wire Transfers
+          - type: 'null'
+        id:
+          description: The Wire drawdown request identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Wire Drawdown Requests
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The lifecycle status of the drawdown request.
+          enum:
+          - pending_submission
+          - fulfilled
+          - pending_response
+          - refused
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The drawdown request is queued to be submitted to Fedwire.
+          - The drawdown request has been fulfilled by the recipient.
+          - The drawdown request has been sent and the recipient should respond in some way.
+          - The drawdown request has been refused by the recipient.
+        submission:
+          anyOf:
+          - additionalProperties: false
+            description: After the drawdown request is submitted to Fedwire, this will contain supplemental details.
+            example:
+              input_message_accountability_data: 20220118MMQFMP0P000003
+            properties:
+              input_message_accountability_data:
+                description: The input message accountability data (IMAD) uniquely identifying the submission with Fedwire.
+                type: string
+                x-documentation-priority: default
+            required:
+            - input_message_accountability_data
+            title: Wire Drawdown Request Wire Drawdown Request Submission
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Wire Drawdown Request Submissions
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `wire_drawdown_request`.
+          enum:
+          - wire_drawdown_request
+          type: string
+          x-documentation-priority: default
+        unstructured_remittance_information:
+          description: Remittance information the debtor will see as part of the drawdown request.
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - account_number_id
+      - debtor_account_number
+      - debtor_routing_number
+      - debtor_external_account_id
+      - amount
+      - currency
+      - unstructured_remittance_information
+      - debtor_name
+      - debtor_address
+      - creditor_name
+      - creditor_address
+      - submission
+      - fulfillment_inbound_wire_transfer_id
+      - status
+      - idempotency_key
+      title: Wire Drawdown Request
+      type: object
+      x-event-categories:
+      - wire_drawdown_request.created
+      - wire_drawdown_request.updated
+      x-stainless-empty-object: false
+      x-tag: Wire Drawdown Requests
+      x-title-plural: Wire Drawdown Requests
     error:
       anyOf:
       - properties:
@@ -443,266 +769,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    wire_drawdown_request:
-      additionalProperties: true
-      description: Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
-      example:
-        account_number_id: account_number_v18nkfqm6afpsrvy82b2
-        amount: 10000
-        created_at: '2020-01-31T23:59:59Z'
-        creditor_address:
-          city: New York
-          country: US
-          line1: 33 Liberty Street
-          line2: null
-          postal_code: '10045'
-          state: NY
-        creditor_name: Ian Crease
-        currency: USD
-        debtor_account_number: '987654321'
-        debtor_address:
-          city: New York
-          country: US
-          line1: 33 Liberty Street
-          line2: null
-          postal_code: '10045'
-          state: NY
-        debtor_external_account_id: null
-        debtor_name: Ian Crease
-        debtor_routing_number: '101050001'
-        fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-        id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
-        idempotency_key: null
-        status: fulfilled
-        submission:
-          input_message_accountability_data: 20220118MMQFMP0P000003
-        type: wire_drawdown_request
-        unstructured_remittance_information: Invoice 29582
-      properties:
-        account_number_id:
-          description: The Account Number to which the debtor—the recipient of this request—is being requested to send funds.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-        amount:
-          description: The amount being requested in cents.
-          type: integer
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the wire drawdown request was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        creditor_address:
-          additionalProperties: false
-          description: The creditor's address.
-          properties:
-            city:
-              description: The city, district, town, or village of the address.
-              type: string
-              x-documentation-priority: default
-            country:
-              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
-              type: string
-              x-documentation-priority: default
-            line1:
-              description: The first line of the address.
-              type: string
-              x-documentation-priority: default
-            line2:
-              anyOf:
-              - description: The second line of the address.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-            postal_code:
-              anyOf:
-              - description: The ZIP code of the address.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-            state:
-              anyOf:
-              - description: The address state.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-          required:
-          - line1
-          - line2
-          - city
-          - state
-          - postal_code
-          - country
-          title: Wire Drawdown Request Address
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: Addresses
-        creditor_name:
-          description: The creditor's name.
-          type: string
-          x-documentation-priority: default
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the amount being requested. Will always be "USD".
-          type: string
-          x-documentation-priority: default
-        debtor_account_number:
-          description: The debtor's account number.
-          type: string
-          x-documentation-priority: default
-        debtor_address:
-          additionalProperties: false
-          description: The debtor's address.
-          properties:
-            city:
-              description: The city, district, town, or village of the address.
-              type: string
-              x-documentation-priority: default
-            country:
-              description: The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) code for the country of the address.
-              type: string
-              x-documentation-priority: default
-            line1:
-              description: The first line of the address.
-              type: string
-              x-documentation-priority: default
-            line2:
-              anyOf:
-              - description: The second line of the address.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-            postal_code:
-              anyOf:
-              - description: The ZIP code of the address.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-            state:
-              anyOf:
-              - description: The address state.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-          required:
-          - line1
-          - line2
-          - city
-          - state
-          - postal_code
-          - country
-          title: Wire Drawdown Request Address
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: Addresses
-        debtor_external_account_id:
-          anyOf:
-          - description: The debtor's external account identifier.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: External Accounts
-          - type: 'null'
-        debtor_name:
-          description: The debtor's name.
-          type: string
-          x-documentation-priority: default
-        debtor_routing_number:
-          description: The debtor's routing number.
-          type: string
-          x-documentation-priority: default
-        fulfillment_inbound_wire_transfer_id:
-          anyOf:
-          - description: If the recipient fulfills the drawdown request by sending funds, then this will be the identifier of the corresponding Transaction.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Inbound Wire Transfers
-          - type: 'null'
-        id:
-          description: The Wire drawdown request identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Wire Drawdown Requests
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        status:
-          description: The lifecycle status of the drawdown request.
-          enum:
-          - pending_submission
-          - fulfilled
-          - pending_response
-          - refused
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The drawdown request is queued to be submitted to Fedwire.
-          - The drawdown request has been fulfilled by the recipient.
-          - The drawdown request has been sent and the recipient should respond in some way.
-          - The drawdown request has been refused by the recipient.
-        submission:
-          anyOf:
-          - additionalProperties: false
-            description: After the drawdown request is submitted to Fedwire, this will contain supplemental details.
-            example:
-              input_message_accountability_data: 20220118MMQFMP0P000003
-            properties:
-              input_message_accountability_data:
-                description: The input message accountability data (IMAD) uniquely identifying the submission with Fedwire.
-                type: string
-                x-documentation-priority: default
-            required:
-            - input_message_accountability_data
-            title: Wire Drawdown Request Wire Drawdown Request Submission
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Wire Drawdown Request Submissions
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `wire_drawdown_request`.
-          enum:
-          - wire_drawdown_request
-          type: string
-          x-documentation-priority: default
-        unstructured_remittance_information:
-          description: Remittance information the debtor will see as part of the drawdown request.
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - created_at
-      - account_number_id
-      - debtor_account_number
-      - debtor_routing_number
-      - debtor_external_account_id
-      - amount
-      - currency
-      - unstructured_remittance_information
-      - debtor_name
-      - debtor_address
-      - creditor_name
-      - creditor_address
-      - submission
-      - fulfillment_inbound_wire_transfer_id
-      - status
-      - idempotency_key
-      title: Wire Drawdown Request
-      type: object
-      x-event-categories:
-      - wire_drawdown_request.created
-      - wire_drawdown_request.updated
-      x-stainless-empty-object: false
-      x-tag: Wire Drawdown Requests
-      x-title-plural: Wire Drawdown Requests
     create_a_wire_drawdown_request_parameters:
       additionalProperties: true
       example:
@@ -904,72 +970,6 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    wire_drawdown_request_list:
-      additionalProperties: true
-      description: A list of Wire Drawdown Request objects.
-      example:
-        data:
-        - account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          amount: 10000
-          created_at: '2020-01-31T23:59:59Z'
-          creditor_address:
-            city: New York
-            country: US
-            line1: 33 Liberty Street
-            line2: null
-            postal_code: '10045'
-            state: NY
-          creditor_name: Ian Crease
-          currency: USD
-          debtor_account_number: '987654321'
-          debtor_address:
-            city: New York
-            country: US
-            line1: 33 Liberty Street
-            line2: null
-            postal_code: '10045'
-            state: NY
-          debtor_external_account_id: null
-          debtor_name: Ian Crease
-          debtor_routing_number: '101050001'
-          fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-          id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
-          idempotency_key: null
-          status: fulfilled
-          submission:
-            input_message_accountability_data: 20220118MMQFMP0P000003
-          type: wire_drawdown_request
-          unstructured_remittance_information: Invoice 29582
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/wire_drawdown_request'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Wire Drawdown Request List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Wire Drawdown Request Lists
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer
