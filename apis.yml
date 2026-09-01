@@ -121,7 +121,7 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
-  - Ach Transfers
+  - ACH Transfers
   tags_raw:
   - Ach Transfers
   properties:
@@ -633,7 +633,7 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
-  - Oauth Applications
+  - OAuth Applications
   tags_raw:
   - Oauth Applications
   properties:
