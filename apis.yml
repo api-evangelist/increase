@@ -43,10 +43,11 @@ specificationVersion: '0.23'
 apis:
 - aid: increase:increase-account-numbers-api
   name: Increase Account Numbers API
-  description: Each account can have multiple account and routing numbers. We recommend that you use a
-    set per vendor. This is similar to how you use different passwords for different websites. Account
-    numbers can also be used to seamlessly reconcile inbound payments. Generating a unique account number
-    per vendor ensures you always know the originator of an incoming payment.
+  description: >-
+    Each account can have multiple account and routing numbers. We recommend that you use a set per vendor.
+    This is similar to how you use different passwords for different websites. Account numbers can also
+    be used to seamlessly reconcile inbound payments. Generating a unique account number per vendor ensures
+    you always know the originator of an incoming payment.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -58,7 +59,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-account-statements-api
   name: Increase Account Statements API
-  description: Account Statements are generated monthly for every active Account. You can access the statement's
+  description: >-
+    Account Statements are generated monthly for every active Account. You can access the statement's
     data via the API or retrieve a PDF with its details via its associated File.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
@@ -71,11 +73,12 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-account-transfers-api
   name: Increase Account Transfers API
-  description: Account transfers move funds between your own accounts at Increase (accounting systems
-    often refer to these as Book Transfers). Account Transfers are free and synchronous. Upon creation
-    they create two Transactions, one negative on the originating account and one positive on the destination
-    account (unless the transfer requires approval, in which case the Transactions will be created when
-    the transfer is approved).
+  description: >-
+    Account transfers move funds between your own accounts at Increase (accounting systems often refer
+    to these as Book Transfers). Account Transfers are free and synchronous. Upon creation they create
+    two Transactions, one negative on the originating account and one positive on the destination account
+    (unless the transfer requires approval, in which case the Transactions will be created when the transfer
+    is approved).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -87,8 +90,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-accounts-api
   name: Increase Accounts API
-  description: Accounts are your bank accounts with Increase. They store money, receive transfers, and
-    send payments. They earn interest and have depository insurance.
+  description: >-
+    Accounts are your bank accounts with Increase. They store money, receive transfers, and send payments.
+    They earn interest and have depository insurance.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -128,8 +132,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-card-disputes-api
   name: Increase Card Disputes API
-  description: If unauthorized activity occurs on a card, you can create a Card Dispute and we'll work
-    with the card networks to return the funds if appropriate.
+  description: >-
+    If unauthorized activity occurs on a card, you can create a Card Dispute and we'll work with the card
+    networks to return the funds if appropriate.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -141,8 +146,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-card-payments-api
   name: Increase Card Payments API
-  description: Card Payments group together interactions related to a single card payment, such as an
-    authorization and its corresponding settlement.
+  description: >-
+    Card Payments group together interactions related to a single card payment, such as an authorization
+    and its corresponding settlement.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -154,8 +160,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-card-purchase-supplements-api
   name: Increase Card Purchase Supplements API
-  description: Additional information about a card purchase (e.g., settlement or refund), such as level
-    3 line item data.
+  description: >-
+    Additional information about a card purchase (e.g., settlement or refund), such as level 3 line item
+    data.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -179,8 +186,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-card-tokens-api
   name: Increase Card Tokens API
-  description: Card Tokens represent a tokenized card number that can be used for Card Push Transfers
-    and Card Validations.
+  description: >-
+    Card Tokens represent a tokenized card number that can be used for Card Push Transfers and Card Validations.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -192,8 +199,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-card-validations-api
   name: Increase Card Validations API
-  description: Card Validations are used to validate a card and its cardholder before sending funds to
-    or pulling funds from a card.
+  description: >-
+    Card Validations are used to validate a card and its cardholder before sending funds to or pulling
+    funds from a card.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -205,10 +213,11 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-cards-api
   name: Increase Cards API
-  description: Cards may operate on credit, debit, or prepaid BINs. They’ll immediately work for online
-    purchases after you create them. All cards work on a good funds model, and maintain a maximum limit
-    of 100% of the Account’s available balance at the time of transaction. Funds are deducted from the
-    Account upon transaction settlement.
+  description: >-
+    Cards may operate on credit, debit, or prepaid BINs. They’ll immediately work for online purchases
+    after you create them. All cards work on a good funds model, and maintain a maximum limit of 100%
+    of the Account’s available balance at the time of transaction. Funds are deducted from the Account
+    upon transaction settlement.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -244,9 +253,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-declined-transactions-api
   name: Increase Declined Transactions API
-  description: Declined Transactions are refused additions and removals of money from your bank account.
-    For example, Declined Transactions are caused when your Account has an insufficient balance or your
-    Limits are triggered.
+  description: >-
+    Declined Transactions are refused additions and removals of money from your bank account. For example,
+    Declined Transactions are caused when your Account has an insufficient balance or your Limits are
+    triggered.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -258,8 +268,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-digital-card-profiles-api
   name: Increase Digital Card Profiles API
-  description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps
-    like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
+  description: >-
+    This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple
+    Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -271,8 +282,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-digital-wallet-tokens-api
   name: Increase Digital Wallet Tokens API
-  description: A Digital Wallet Token is created when a user adds a Card to their Apple Pay or Google
-    Pay app. The Digital Wallet Token can be used for purchases just like a Card.
+  description: >-
+    A Digital Wallet Token is created when a user adds a Card to their Apple Pay or Google Pay app. The
+    Digital Wallet Token can be used for purchases just like a Card.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -284,7 +296,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-entities-api
   name: Increase Entities API
-  description: Entities are the legal entities that own accounts. They can be people, corporations, partnerships,
+  description: >-
+    Entities are the legal entities that own accounts. They can be people, corporations, partnerships,
     government authorities, or trusts. To learn more, see [Entities](/documentation/entities).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
@@ -297,7 +310,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-entity-beneficial-owners-api
   name: Increase Entity Beneficial Owners API
-  description: The Entity Beneficial Owners API from Increase — 3 operation(s) for entity beneficial owners.
+  description: >-
+    The Entity Beneficial Owners API from Increase — 3 operation(s) for entity beneficial owners.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -309,9 +323,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-entity-onboarding-sessions-api
   name: Increase Entity Onboarding Sessions API
-  description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted
-    forms. Create a session and redirect your customer to the returned URL. When they're done, they'll
-    be redirected back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
+  description: >-
+    Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms.
+    Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected
+    back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -323,8 +338,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-entity-supplemental-documents-api
   name: Increase Entity Supplemental Documents API
-  description: The Entity Supplemental Documents API from Increase — 1 operation(s) for entity supplemental
-    documents.
+  description: >-
+    The Entity Supplemental Documents API from Increase — 1 operation(s) for entity supplemental documents.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -336,10 +351,11 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-event-subscriptions-api
   name: Increase Event Subscriptions API
-  description: Webhooks are event notifications we send to you by HTTPS POST requests. Event Subscriptions
-    are how you configure your application to listen for them. You can create an Event Subscription through
-    your [developer dashboard](https://dashboard.increase.com/developers/webhooks) or the API. For more
-    information, see our [webhooks guide](https://increase.com/documentation/webhooks).
+  description: >-
+    Webhooks are event notifications we send to you by HTTPS POST requests. Event Subscriptions are how
+    you configure your application to listen for them. You can create an Event Subscription through your
+    [developer dashboard](https://dashboard.increase.com/developers/webhooks) or the API. For more information,
+    see our [webhooks guide](https://increase.com/documentation/webhooks).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -351,9 +367,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-events-api
   name: Increase Events API
-  description: Events are records of things that happened to objects at Increase. Events are accessible
-    via the List Events endpoint and can be delivered to your application via webhooks. For more information,
-    see our [webhooks guide](https://increase.com/documentation/webhooks).
+  description: >-
+    Events are records of things that happened to objects at Increase. Events are accessible via the List
+    Events endpoint and can be delivered to your application via webhooks. For more information, see our
+    [webhooks guide](https://increase.com/documentation/webhooks).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -367,10 +384,11 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-exports-api
   name: Increase Exports API
-  description: Exports are generated files. Some exports can contain a lot of data, like a CSV of your
-    transactions. Others can be a single document, like a tax form. Since they can take a while, they
-    are generated asynchronously. We send a webhook when they are ready. For more information, please
-    read our [Exports documentation](https://increase.com/documentation/exports).
+  description: >-
+    Exports are generated files. Some exports can contain a lot of data, like a CSV of your transactions.
+    Others can be a single document, like a tax form. Since they can take a while, they are generated
+    asynchronously. We send a webhook when they are ready. For more information, please read our [Exports
+    documentation](https://increase.com/documentation/exports).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -384,8 +402,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-external-accounts-api
   name: Increase External Accounts API
-  description: External Accounts represent accounts at financial institutions other than Increase. You
-    can use this API to store their details for reuse.
+  description: >-
+    External Accounts represent accounts at financial institutions other than Increase. You can use this
+    API to store their details for reuse.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -421,9 +440,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-files-api
   name: Increase Files API
-  description: Files are objects that represent a file hosted on Increase's servers. The file may have
-    been uploaded by you (for example, when uploading a check image) or it may have been created by Increase
-    (for example, an autogenerated statement PDF). If you need to download a File, create a File Link.
+  description: >-
+    Files are objects that represent a file hosted on Increase's servers. The file may have been uploaded
+    by you (for example, when uploading a check image) or it may have been created by Increase (for example,
+    an autogenerated statement PDF). If you need to download a File, create a File Link.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -437,9 +457,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-groups-api
   name: Increase Groups API
-  description: Groups represent organizations using Increase. You can retrieve information about your
-    own organization via the API. More commonly, OAuth platforms can retrieve information about the organizations
-    that have granted them access. Learn more about OAuth [here](https://increase.com/documentation/oauth).
+  description: >-
+    Groups represent organizations using Increase. You can retrieve information about your own organization
+    via the API. More commonly, OAuth platforms can retrieve information about the organizations that
+    have granted them access. Learn more about OAuth [here](https://increase.com/documentation/oauth).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -465,8 +486,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-inbound-check-deposits-api
   name: Increase Inbound Check Deposits API
-  description: Inbound Check Deposits are records of third-parties attempting to deposit checks against
-    your account.
+  description: >-
+    Inbound Check Deposits are records of third-parties attempting to deposit checks against your account.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -478,7 +499,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-inbound-fednow-transfers-api
   name: Increase Inbound Fednow Transfers API
-  description: The Inbound Fednow Transfers API from Increase — 2 operation(s) for inbound fednow transfers.
+  description: >-
+    The Inbound Fednow Transfers API from Increase — 2 operation(s) for inbound fednow transfers.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -502,8 +524,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-inbound-real-time-payments-transfers-api
   name: Increase Inbound Real Time Payments Transfers API
-  description: The Inbound Real Time Payments Transfers API from Increase — 2 operation(s) for inbound
-    real time payments transfers.
+  description: >-
+    The Inbound Real Time Payments Transfers API from Increase — 2 operation(s) for inbound real time
+    payments transfers.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -515,8 +538,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-inbound-wire-drawdown-requests-api
   name: Increase Inbound Wire Drawdown Requests API
-  description: Inbound wire drawdown requests are requests from someone else to send them a wire. For
-    more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
+  description: >-
+    Inbound wire drawdown requests are requests from someone else to send them a wire. For more information,
+    see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -528,7 +552,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-inbound-wire-transfers-api
   name: Increase Inbound Wire Transfers API
-  description: An Inbound Wire Transfer is a wire transfer initiated outside of Increase to your account.
+  description: >-
+    An Inbound Wire Transfer is a wire transfer initiated outside of Increase to your account.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -540,8 +565,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-intrafi-account-enrollments-api
   name: Increase Intrafi Account Enrollments API
-  description: The Intrafi Account Enrollments API from Increase — 3 operation(s) for intrafi account
-    enrollments.
+  description: >-
+    The Intrafi Account Enrollments API from Increase — 3 operation(s) for intrafi account enrollments.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -577,8 +602,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-lockbox-recipients-api
   name: Increase Lockbox Recipients API
-  description: Lockbox Recipients represent an inbox at a Lockbox Address. Checks received for a Lockbox
-    Recipient are deposited into its associated Account.
+  description: >-
+    Lockbox Recipients represent an inbox at a Lockbox Address. Checks received for a Lockbox Recipient
+    are deposited into its associated Account.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -586,20 +612,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/increase-lockbox-recipients-api-openapi.yml
-  - type: Documentation
-    url: https://increase.com/documentation/api
-- aid: increase:increase-oauth-api
-  name: Increase Oauth API
-  description: The Oauth API from Increase — 1 operation(s) for oauth.
-  humanURL: https://increase.com/documentation/api
-  baseURL: https://api.increase.com
-  tags:
-  - Authentication
-  tags_raw:
-  - Oauth
-  properties:
-  - type: OpenAPI
-    url: openapi/increase-oauth-api-openapi.yml
   - type: Documentation
     url: https://increase.com/documentation/api
 - aid: increase:increase-oauth-applications-api
@@ -630,8 +642,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-pending-transactions-api
   name: Increase Pending Transactions API
-  description: Pending Transactions are potential future additions and removals of money from your bank
-    account. They impact your available balance, but not your current balance. To learn more, see [Transactions
+  description: >-
+    Pending Transactions are potential future additions and removals of money from your bank account.
+    They impact your available balance, but not your current balance. To learn more, see [Transactions
     and Transfers](/documentation/transactions-transfers).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
@@ -644,7 +657,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-physical-card-profiles-api
   name: Increase Physical Card Profiles API
-  description: This contains artwork and metadata relating to a Physical Card's appearance. For more information,
+  description: >-
+    This contains artwork and metadata relating to a Physical Card's appearance. For more information,
     see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
@@ -657,9 +671,10 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-physical-cards-api
   name: Increase Physical Cards API
-  description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable
-    by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple
-    Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com)
+  description: >-
+    Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected
+    [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical
+    Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com)
     for pricing!
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
@@ -672,10 +687,11 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-programs-api
   name: Increase Programs API
-  description: Programs determine the compliance and commercial terms of Accounts. By default, you have
-    a Commercial Banking program for managing your own funds. If you are lending or managing funds on
-    behalf of your customers, or otherwise engaged in regulated activity, we will work together to create
-    additional Programs for you.
+  description: >-
+    Programs determine the compliance and commercial terms of Accounts. By default, you have a Commercial
+    Banking program for managing your own funds. If you are lending or managing funds on behalf of your
+    customers, or otherwise engaged in regulated activity, we will work together to create additional
+    Programs for you.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -699,8 +715,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-real-time-payments-transfers-api
   name: Increase Real Time Payments Transfers API
-  description: The Real Time Payments Transfers API from Increase — 4 operation(s) for real time payments
-    transfers.
+  description: >-
+    The Real Time Payments Transfers API from Increase — 4 operation(s) for real time payments transfers.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -748,9 +764,9 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-transactions-api
   name: Increase Transactions API
-  description: Transactions are the immutable additions and removals of money from your bank account.
-    They're the equivalent of line items on your bank statement. To learn more, see [Transactions and
-    Transfers](/documentation/transactions-transfers).
+  description: >-
+    Transactions are the immutable additions and removals of money from your bank account. They're the
+    equivalent of line items on your bank statement. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -764,10 +780,11 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-wire-drawdown-requests-api
   name: Increase Wire Drawdown Requests API
-  description: Wire drawdown requests enable you to request that someone else send you a wire. Because
-    there is nuance to making sure your counterparty's bank processes these correctly, we ask that you
-    reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can
-    help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
+  description: >-
+    Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance
+    to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com)
+    to enable this feature so we can help you plan your integration. For more information, see our [Wire
+    Drawdown Requests documentation](/documentation/wire-drawdown-requests).
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -779,8 +796,8 @@ apis:
     url: https://increase.com/documentation/api
 - aid: increase:increase-wire-transfers-api
   name: Increase Wire Transfers API
-  description: Wire transfers move funds between your Increase account and any other account accessible
-    by Fedwire.
+  description: >-
+    Wire transfers move funds between your Increase account and any other account accessible by Fedwire.
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
@@ -800,6 +817,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/increase-increase-api-api-openapi.yml
+- aid: increase:increase-oauth-api
+  name: Increase OAUTH API
+  description: The Oauth API from Increase — 1 operation(s) for oauth.
+  humanURL: https://increase.com/documentation/api
+  baseURL: https://api.increase.com
+  tags:
+  - Oauth
+  properties:
+  - type: OpenAPI
+    url: openapi/increase-oauth-api-openapi.yml
+  - type: Documentation
+    url: https://increase.com/documentation/api
 common:
 - type: CapabilityMap
   url: capabilities/increase-capability-edges.yml
