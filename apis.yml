@@ -744,6 +744,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Simulation
+  tags_raw:
   - Simulations
   properties:
   - type: OpenAPI
@@ -823,6 +825,8 @@ apis:
   humanURL: https://increase.com/documentation/api
   baseURL: https://api.increase.com
   tags:
+  - Authentication
+  tags_raw:
   - Oauth
   properties:
   - type: OpenAPI
