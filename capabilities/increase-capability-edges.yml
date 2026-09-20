@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 33
+edge_count: 34
 edges:
 - tag: Fednow Transfers
   spec_file: increase-fednow-transfers-api-openapi.yml
@@ -118,6 +118,16 @@ edges:
   evidence: POST /entity_beneficial_owners create_a_beneficial_owner 'Create a Beneficial Owner'
   reason: Beneficial ownership capture is a core KYC/CDD requirement (FinCEN CDD rule) for banking customers;
     operations manage beneficial owner records on entities.
+- tag: Event Subscriptions
+  spec_file: increase-event-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.85
+  evidence: POST /event_subscriptions  create_an_event_subscription  Create an Event Subscription
+  reason: Full CRUD lifecycle over outbound event/webhook subscriptions exposed to API consumers — squarely
+    Webhook & Event Subscription Management.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Inbound Fednow Transfers
   spec_file: increase-inbound-fednow-transfers-api-openapi.yml
   capability_id: BC-1340.50
