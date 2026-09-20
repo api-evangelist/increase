@@ -1,40 +1,30 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
-provider: Increase
-providerId: increase
-created: '2026-05-08'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-08, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-08'
-reconciled: false
-tags:
-- Fintech
-- Banking
-- Payments
-- ACH
-- Wires
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Increase. Replace with real limits once researched.
-notes: "Initial scaffold \u2014 limits have not yet been reconciled."
+# Rate limits transcribed from the provider's own documentation — see provenance. Quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://increase.com/documentation/rate-limits
 sources:
-- https://increase.com/
-- https://increase.com/documentation
-- https://increase.com/documentation/api
-responseCodes:
-  throttled: 429
+- https://increase.com/documentation/rate-limits
+provenance:
+  tool: planning/api-economics/harvest_ratelimits.py
+  run: 20260920T133210
+  grounding: every limit_text was found verbatim in the fetched page text
+published: true
+note: Limits are per group; brief bursts above the per-second rate allowed if average stays within it.
+  Response body includes retry_after.
+limit_count: 2
 limits:
-- name: Default
+- name: Production default
+  limit_text: In production the default limit is 100 requests per second
+  limit: 100
+  window: second
   scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
-policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  plan: production
+- name: Sandbox default
+  limit_text: In sandbox the default limit is 20 requests per second
+  limit: 20
+  window: second
+  scope: account
+  plan: sandbox
+headers:
+- Retry-After
+exceeded_status: 429
