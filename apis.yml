@@ -834,6 +834,8 @@ apis:
   - type: Documentation
     url: https://increase.com/documentation/api
 common:
+- type: Pricing
+  url: https://increase.com/fees
 - type: CapabilityMap
   url: capabilities/increase-capability-edges.yml
   name: Increase Business Capability Map
