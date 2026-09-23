@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Account Numbers API
   version: 0.0.1
 servers:
@@ -219,140 +219,15 @@ paths:
       tags:
       - Account Numbers
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
-    account_number:
-      additionalProperties: true
-      description: Each account can have multiple account and routing numbers. We recommend that you use a set per vendor. This is similar to how you use different passwords for different websites. Account numbers can also be used to seamlessly reconcile inbound payments. Generating a unique account number per vendor ensures you always know the originator of an incoming payment.
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        account_number: '987654321'
-        created_at: '2020-01-31T23:59:59Z'
-        id: account_number_v18nkfqm6afpsrvy82b2
-        idempotency_key: null
-        inbound_ach:
-          debit_status: blocked
-        inbound_checks:
-          status: check_transfers_only
-        name: ACH
-        routing_number: '101050001'
-        status: active
-        type: account_number
-      properties:
-        account_id:
-          description: The identifier for the account this Account Number belongs to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        account_number:
-          description: The account number.
-          type: string
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account Number was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        id:
-          description: The Account Number identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        inbound_ach:
-          additionalProperties: false
-          description: Properties related to how this Account Number handles inbound ACH transfers.
-          properties:
-            debit_status:
-              description: Whether ACH debits are allowed against this Account Number. Note that they will still be declined if this is `allowed` if the Account Number is not active.
-              enum:
-              - allowed
-              - blocked
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - ACH Debits are allowed.
-              - ACH Debits are blocked.
-          required:
-          - debit_status
-          title: Account Number InboundACH
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: InboundAchs
-        inbound_checks:
-          additionalProperties: false
-          description: Properties related to how this Account Number should handle inbound check withdrawals.
-          properties:
-            status:
-              description: How Increase should process checks with this account number printed on them.
-              enum:
-              - allowed
-              - check_transfers_only
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - Checks with this Account Number will be processed even if they are not associated with a Check Transfer.
-              - Checks with this Account Number will be processed only if they can be matched to an existing Check Transfer.
-          required:
-          - status
-          title: Account Number InboundChecks
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: InboundChecks
-        name:
-          description: The name you choose for the Account Number.
-          type: string
-          x-documentation-priority: default
-        routing_number:
-          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
-          type: string
-          x-documentation-priority: default
-        status:
-          description: This indicates if payments can be made to the Account Number.
-          enum:
-          - active
-          - disabled
-          - canceled
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The account number is active.
-          - The account number is temporarily disabled.
-          - The account number is permanently disabled.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `account_number`.
-          enum:
-          - account_number
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - account_id
-      - account_number
-      - id
-      - created_at
-      - name
-      - routing_number
-      - status
-      - inbound_ach
-      - inbound_checks
-      - idempotency_key
-      title: Account Number
-      type: object
-      x-event-categories:
-      - account_number.created
-      - account_number.updated
-      x-stainless-empty-object: false
-      x-tag: Account Numbers
-      x-title-plural: Account Numbers
     update_an_account_number_parameters:
       additionalProperties: false
       example:
@@ -833,14 +708,139 @@ components:
         - status
         type: object
         x-event-categories: []
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
+    account_number:
+      additionalProperties: true
+      description: Each account can have multiple account and routing numbers. We recommend that you use a set per vendor. This is similar to how you use different passwords for different websites. Account numbers can also be used to seamlessly reconcile inbound payments. Generating a unique account number per vendor ensures you always know the originator of an incoming payment.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        created_at: '2020-01-31T23:59:59Z'
+        id: account_number_v18nkfqm6afpsrvy82b2
+        idempotency_key: null
+        inbound_ach:
+          debit_status: blocked
+        inbound_checks:
+          status: check_transfers_only
+        name: ACH
+        routing_number: '101050001'
+        status: active
+        type: account_number
+      properties:
+        account_id:
+          description: The identifier for the account this Account Number belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number.
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account Number was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Account Number identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        inbound_ach:
+          additionalProperties: false
+          description: Properties related to how this Account Number handles inbound ACH transfers.
+          properties:
+            debit_status:
+              description: Whether ACH debits are allowed against this Account Number. Note that they will still be declined if this is `allowed` if the Account Number is not active.
+              enum:
+              - allowed
+              - blocked
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - ACH Debits are allowed.
+              - ACH Debits are blocked.
+          required:
+          - debit_status
+          title: Account Number InboundACH
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: InboundAchs
+        inbound_checks:
+          additionalProperties: false
+          description: Properties related to how this Account Number should handle inbound check withdrawals.
+          properties:
+            status:
+              description: How Increase should process checks with this account number printed on them.
+              enum:
+              - allowed
+              - check_transfers_only
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Checks with this Account Number will be processed even if they are not associated with a Check Transfer.
+              - Checks with this Account Number will be processed only if they can be matched to an existing Check Transfer.
+          required:
+          - status
+          title: Account Number InboundChecks
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: InboundChecks
+        name:
+          description: The name you choose for the Account Number.
+          type: string
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN).
+          type: string
+          x-documentation-priority: default
+        status:
+          description: This indicates if payments can be made to the Account Number.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The account number is active.
+          - The account number is temporarily disabled.
+          - The account number is permanently disabled.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `account_number`.
+          enum:
+          - account_number
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - account_number
+      - id
+      - created_at
+      - name
+      - routing_number
+      - status
+      - inbound_ach
+      - inbound_checks
+      - idempotency_key
+      title: Account Number
+      type: object
+      x-event-categories:
+      - account_number.created
+      - account_number.updated
+      x-stainless-empty-object: false
+      x-tag: Account Numbers
+      x-title-plural: Account Numbers
   securitySchemes:
     bearerAuth:
       scheme: bearer

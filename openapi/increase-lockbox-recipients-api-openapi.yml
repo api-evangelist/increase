@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Lockbox Recipients API
   version: 0.0.1
 servers:
@@ -202,41 +202,6 @@ components:
             - $ref: '#/components/schemas/error'
       description: Error
   schemas:
-    create_a_lockbox_recipient_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
-        recipient_name: Ian Crease
-      properties:
-        account_id:
-          description: The Account that checks sent to this Lockbox Recipient should be deposited into.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        description:
-          description: The description you choose for the Lockbox Recipient.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        lockbox_address_id:
-          description: The Lockbox Address where this Lockbox Recipient may receive mail.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Lockbox Addresses
-        recipient_name:
-          description: The name of the Lockbox Recipient
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - lockbox_address_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     lockbox_recipient_list:
       additionalProperties: true
       description: A list of Lockbox Recipient objects.
@@ -274,6 +239,41 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Lockbox Recipient Lists
+    create_a_lockbox_recipient_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+        recipient_name: Ian Crease
+      properties:
+        account_id:
+          description: The Account that checks sent to this Lockbox Recipient should be deposited into.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        description:
+          description: The description you choose for the Lockbox Recipient.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        lockbox_address_id:
+          description: The Lockbox Address where this Lockbox Recipient may receive mail.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Addresses
+        recipient_name:
+          description: The name of the Lockbox Recipient
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - lockbox_address_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     update_a_lockbox_recipient_parameters:
       additionalProperties: false
       example:
@@ -306,6 +306,102 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
+    lockbox_recipient:
+      additionalProperties: false
+      description: Lockbox Recipients represent an inbox at a Lockbox Address. Checks received for a Lockbox Recipient are deposited into its associated Account.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        created_at: '2020-01-31T23:59:59Z'
+        description: null
+        id: lockbox_3xt21ok13q19advds4t5
+        idempotency_key: null
+        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+        mail_stop_code: VRE6P
+        recipient_name: Company Inc.
+        status: active
+        type: lockbox_recipient
+      properties:
+        account_id:
+          description: The identifier for the Account that checks sent to this Lockbox Recipient will be deposited into.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Lockbox Recipient was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        description:
+          anyOf:
+          - description: The description of the Lockbox Recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        id:
+          description: The Lockbox Recipient identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Recipients
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        lockbox_address_id:
+          description: The identifier for the Lockbox Address where this Lockbox Recipient may receive physical mail.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Addresses
+        mail_stop_code:
+          description: The mail stop code uniquely identifying this Lockbox Recipient at its Lockbox Address. It should be included in the mailing address intended for this Lockbox Recipient.
+          type: string
+          x-documentation-priority: default
+        recipient_name:
+          anyOf:
+          - description: The name of the Lockbox Recipient.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          anyOf:
+          - description: The status of the Lockbox Recipient.
+            enum:
+            - active
+            - disabled
+            - canceled
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - This Lockbox Recipient is active.
+            - This Lockbox Recipient is disabled. Checks mailed to this Lockbox Recipient will be rejected.
+            - This Lockbox Recipient is canceled and cannot be modified. Checks mailed to this Lockbox Recipient will be rejected.
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `lockbox_recipient`.
+          enum:
+          - lockbox_recipient
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - account_id
+      - id
+      - created_at
+      - recipient_name
+      - description
+      - mail_stop_code
+      - lockbox_address_id
+      - status
+      - idempotency_key
+      title: Lockbox Recipient
+      type: object
+      x-event-categories:
+      - lockbox.created
+      - lockbox.updated
+      x-stainless-empty-object: false
+      x-tag: Lockbox Recipients
+      x-title-plural: Lockbox Recipients
     error:
       anyOf:
       - properties:
@@ -617,102 +713,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    lockbox_recipient:
-      additionalProperties: false
-      description: Lockbox Recipients represent an inbox at a Lockbox Address. Checks received for a Lockbox Recipient are deposited into its associated Account.
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        created_at: '2020-01-31T23:59:59Z'
-        description: null
-        id: lockbox_3xt21ok13q19advds4t5
-        idempotency_key: null
-        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
-        mail_stop_code: VRE6P
-        recipient_name: Company Inc.
-        status: active
-        type: lockbox_recipient
-      properties:
-        account_id:
-          description: The identifier for the Account that checks sent to this Lockbox Recipient will be deposited into.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Lockbox Recipient was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        description:
-          anyOf:
-          - description: The description of the Lockbox Recipient.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        id:
-          description: The Lockbox Recipient identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Lockbox Recipients
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        lockbox_address_id:
-          description: The identifier for the Lockbox Address where this Lockbox Recipient may receive physical mail.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Lockbox Addresses
-        mail_stop_code:
-          description: The mail stop code uniquely identifying this Lockbox Recipient at its Lockbox Address. It should be included in the mailing address intended for this Lockbox Recipient.
-          type: string
-          x-documentation-priority: default
-        recipient_name:
-          anyOf:
-          - description: The name of the Lockbox Recipient.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        status:
-          anyOf:
-          - description: The status of the Lockbox Recipient.
-            enum:
-            - active
-            - disabled
-            - canceled
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - This Lockbox Recipient is active.
-            - This Lockbox Recipient is disabled. Checks mailed to this Lockbox Recipient will be rejected.
-            - This Lockbox Recipient is canceled and cannot be modified. Checks mailed to this Lockbox Recipient will be rejected.
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `lockbox_recipient`.
-          enum:
-          - lockbox_recipient
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - account_id
-      - id
-      - created_at
-      - recipient_name
-      - description
-      - mail_stop_code
-      - lockbox_address_id
-      - status
-      - idempotency_key
-      title: Lockbox Recipient
-      type: object
-      x-event-categories:
-      - lockbox.created
-      - lockbox.updated
-      x-stainless-empty-object: false
-      x-tag: Lockbox Recipients
-      x-title-plural: Lockbox Recipients
   securitySchemes:
     bearerAuth:
       scheme: bearer

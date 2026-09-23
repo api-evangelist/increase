@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Oauth Applications API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Oauth Applications
+- name: OAuth Applications
 paths:
   /oauth_applications:
     get:
@@ -93,7 +93,7 @@ paths:
       x-sandbox-only: false
       x-tag: OAuth Applications
       tags:
-      - Oauth Applications
+      - OAuth Applications
   /oauth_applications/{oauth_application_id}:
     get:
       operationId: retrieve_an_oauth_application
@@ -122,7 +122,7 @@ paths:
       x-sandbox-only: false
       x-tag: OAuth Applications
       tags:
-      - Oauth Applications
+      - OAuth Applications
 components:
   schemas:
     oauth_application:

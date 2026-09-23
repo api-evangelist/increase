@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Wire Transfers API
   version: 0.0.1
 servers:
@@ -248,15 +248,328 @@ paths:
       tags:
       - Wire Transfers
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
+    create_a_wire_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        creditor:
+          address:
+            unstructured:
+              line1: 33 Liberty Street
+              line2: New York
+              line3: NY 10045
+          name: Ian Crease
+        remittance:
+          category: unstructured
+          unstructured:
+            message: New account transfer
+        routing_number: '101050001'
+      properties:
+        account_id:
+          description: The identifier for the account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The transfer amount in USD cents.
+          maximum: 999999999999
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        creditor:
+          additionalProperties: false
+          description: The person or business that is receiving the funds from the transfer.
+          properties:
+            address:
+              additionalProperties: false
+              description: The person or business's address.
+              properties:
+                unstructured:
+                  additionalProperties: false
+                  description: Unstructured address lines.
+                  properties:
+                    line1:
+                      description: The address line 1.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line2:
+                      description: The address line 2.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line3:
+                      description: The address line 3.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - line1
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - unstructured
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person or business's name.
+              maxLength: 140
+              minLength: 1
+              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        debtor:
+          additionalProperties: false
+          description: The person or business whose funds are being transferred. This is only necessary if you're transferring from a commingled account. Otherwise, we'll use the associated entity's details.
+          properties:
+            address:
+              additionalProperties: false
+              description: The person or business's address.
+              properties:
+                unstructured:
+                  additionalProperties: false
+                  description: Unstructured address lines.
+                  properties:
+                    line1:
+                      description: The address line 1.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line2:
+                      description: The address line 2.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                    line3:
+                      description: The address line 3.
+                      maxLength: 35
+                      minLength: 1
+                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                      type: string
+                      x-documentation-priority: default
+                  required:
+                  - line1
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+              required:
+              - unstructured
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            name:
+              description: The person or business's name.
+              maxLength: 140
+              minLength: 1
+              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        inbound_wire_drawdown_request_id:
+          description: The ID of an Inbound Wire Drawdown Request in response to which this transfer is being sent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Drawdown Requests
+        remittance:
+          additionalProperties: false
+          description: Additional remittance information related to the wire transfer.
+          properties:
+            category:
+              description: The type of remittance information being passed.
+              enum:
+              - unstructured
+              - tax
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The wire transfer contains unstructured remittance information.
+              - The wire transfer is for tax payment purposes to the Internal Revenue Service (IRS).
+            tax:
+              additionalProperties: false
+              description: Internal Revenue Service (IRS) tax repayment information. Required if `category` is equal to `tax`.
+              properties:
+                date:
+                  description: The month and year the tax payment is for, in YYYY-MM-DD format. The day is ignored.
+                  format: date
+                  type: string
+                  x-documentation-priority: default
+                identification_number:
+                  description: The 9-digit Tax Identification Number (TIN) or Employer Identification Number (EIN).
+                  maxLength: 9
+                  minLength: 9
+                  pattern: ^[0-9]*$
+                  type: string
+                  x-documentation-priority: default
+                type_code:
+                  description: The 5-character tax type code.
+                  maxLength: 5
+                  minLength: 5
+                  pattern: ^[a-zA-Z0-9]*$
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - date
+              - type_code
+              - identification_number
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            unstructured:
+              additionalProperties: false
+              description: Unstructured remittance information. Required if `category` is equal to `unstructured`.
+              properties:
+                message:
+                  description: The information.
+                  maxLength: 140
+                  minLength: 1
+                  pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - message
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - category
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The ID of an Account Number that will be passed to the wire's recipient
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+      required:
+      - account_id
+      - amount
+      - remittance
+      - creditor
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    wire_transfer_list:
+      additionalProperties: true
+      description: A list of Wire Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          amount: 100
+          approval:
+            approved_at: '2020-01-31T23:59:59Z'
+            approved_by: null
+          cancellation: null
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          creditor:
+            address:
+              unstructured:
+                line1: 33 Liberty Street
+                line2: null
+                line3: null
+            name: National Phonograph Company
+          currency: USD
+          debtor: null
+          external_account_id: external_account_ukk55lr923a3ac0pp7iv
+          id: wire_transfer_5akynk7dqsq25qwk9q2u
+          idempotency_key: null
+          inbound_wire_drawdown_request_id: null
+          network: wire
+          pending_transaction_id: null
+          remittance:
+            category: unstructured
+            unstructured:
+              message: Invoice 29582
+          reversal: null
+          routing_number: '101050001'
+          source_account_number_id: null
+          status: complete
+          submission: null
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: wire_transfer
+          unique_end_to_end_transaction_reference: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/wire_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Wire Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Wire Transfer Lists
     wire_transfer:
       additionalProperties: true
       description: Wire transfers move funds between your Increase account and any other account accessible by Fedwire.
@@ -949,327 +1262,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Wire Transfers
       x-title-plural: Wire Transfers
-    wire_transfer_list:
-      additionalProperties: true
-      description: A list of Wire Transfer objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          account_number: '987654321'
-          amount: 100
-          approval:
-            approved_at: '2020-01-31T23:59:59Z'
-            approved_by: null
-          cancellation: null
-          created_at: '2020-01-31T23:59:59Z'
-          created_by:
-            category: user
-            user:
-              email: user@example.com
-          creditor:
-            address:
-              unstructured:
-                line1: 33 Liberty Street
-                line2: null
-                line3: null
-            name: National Phonograph Company
-          currency: USD
-          debtor: null
-          external_account_id: external_account_ukk55lr923a3ac0pp7iv
-          id: wire_transfer_5akynk7dqsq25qwk9q2u
-          idempotency_key: null
-          inbound_wire_drawdown_request_id: null
-          network: wire
-          pending_transaction_id: null
-          remittance:
-            category: unstructured
-            unstructured:
-              message: Invoice 29582
-          reversal: null
-          routing_number: '101050001'
-          source_account_number_id: null
-          status: complete
-          submission: null
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: wire_transfer
-          unique_end_to_end_transaction_reference: null
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/wire_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Wire Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Wire Transfer Lists
-    create_a_wire_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        account_number: '987654321'
-        amount: 100
-        creditor:
-          address:
-            unstructured:
-              line1: 33 Liberty Street
-              line2: New York
-              line3: NY 10045
-          name: Ian Crease
-        remittance:
-          category: unstructured
-          unstructured:
-            message: New account transfer
-        routing_number: '101050001'
-      properties:
-        account_id:
-          description: The identifier for the account that will send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        account_number:
-          description: The account number for the destination account.
-          maxLength: 34
-          minLength: 1
-          pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-          type: string
-          x-documentation-priority: default
-        amount:
-          description: The transfer amount in USD cents.
-          maximum: 999999999999
-          minimum: 1
-          type: integer
-          x-documentation-priority: default
-        creditor:
-          additionalProperties: false
-          description: The person or business that is receiving the funds from the transfer.
-          properties:
-            address:
-              additionalProperties: false
-              description: The person or business's address.
-              properties:
-                unstructured:
-                  additionalProperties: false
-                  description: Unstructured address lines.
-                  properties:
-                    line1:
-                      description: The address line 1.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                    line2:
-                      description: The address line 2.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                    line3:
-                      description: The address line 3.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                  required:
-                  - line1
-                  type: object
-                  x-documentation-priority: default
-                  x-event-categories: []
-                  x-stainless-empty-object: false
-              required:
-              - unstructured
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            name:
-              description: The person or business's name.
-              maxLength: 140
-              minLength: 1
-              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-              type: string
-              x-documentation-priority: default
-          required:
-          - name
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        debtor:
-          additionalProperties: false
-          description: The person or business whose funds are being transferred. This is only necessary if you're transferring from a commingled account. Otherwise, we'll use the associated entity's details.
-          properties:
-            address:
-              additionalProperties: false
-              description: The person or business's address.
-              properties:
-                unstructured:
-                  additionalProperties: false
-                  description: Unstructured address lines.
-                  properties:
-                    line1:
-                      description: The address line 1.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                    line2:
-                      description: The address line 2.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                    line3:
-                      description: The address line 3.
-                      maxLength: 35
-                      minLength: 1
-                      pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                      type: string
-                      x-documentation-priority: default
-                  required:
-                  - line1
-                  type: object
-                  x-documentation-priority: default
-                  x-event-categories: []
-                  x-stainless-empty-object: false
-              required:
-              - unstructured
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            name:
-              description: The person or business's name.
-              maxLength: 140
-              minLength: 1
-              pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-              type: string
-              x-documentation-priority: default
-          required:
-          - name
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        external_account_id:
-          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: External Accounts
-        inbound_wire_drawdown_request_id:
-          description: The ID of an Inbound Wire Drawdown Request in response to which this transfer is being sent.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Inbound Wire Drawdown Requests
-        remittance:
-          additionalProperties: false
-          description: Additional remittance information related to the wire transfer.
-          properties:
-            category:
-              description: The type of remittance information being passed.
-              enum:
-              - unstructured
-              - tax
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - The wire transfer contains unstructured remittance information.
-              - The wire transfer is for tax payment purposes to the Internal Revenue Service (IRS).
-            tax:
-              additionalProperties: false
-              description: Internal Revenue Service (IRS) tax repayment information. Required if `category` is equal to `tax`.
-              properties:
-                date:
-                  description: The month and year the tax payment is for, in YYYY-MM-DD format. The day is ignored.
-                  format: date
-                  type: string
-                  x-documentation-priority: default
-                identification_number:
-                  description: The 9-digit Tax Identification Number (TIN) or Employer Identification Number (EIN).
-                  maxLength: 9
-                  minLength: 9
-                  pattern: ^[0-9]*$
-                  type: string
-                  x-documentation-priority: default
-                type_code:
-                  description: The 5-character tax type code.
-                  maxLength: 5
-                  minLength: 5
-                  pattern: ^[a-zA-Z0-9]*$
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - date
-              - type_code
-              - identification_number
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            unstructured:
-              additionalProperties: false
-              description: Unstructured remittance information. Required if `category` is equal to `unstructured`.
-              properties:
-                message:
-                  description: The information.
-                  maxLength: 140
-                  minLength: 1
-                  pattern: ^[ a-zA-Z0-9.?!,;:_/@\\&'"`~()<>#%+\-=$]*$
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - message
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-          required:
-          - category
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        routing_number:
-          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        source_account_number_id:
-          description: The ID of an Account Number that will be passed to the wire's recipient
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-      required:
-      - account_id
-      - amount
-      - remittance
-      - creditor
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -1581,6 +1573,14 @@ components:
         - status
         type: object
         x-event-categories: []
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Inbound Mail Items API
   version: 0.0.1
 servers:
@@ -161,6 +161,156 @@ paths:
       - Inbound Mail Items
 components:
   schemas:
+    action_an_inbound_mail_item_parameters:
+      additionalProperties: false
+      example:
+        checks:
+        - account_id: account_in71c4amph0vgo2qllky
+          action: deposit
+        - action: ignore
+      properties:
+        checks:
+          description: The actions to perform on the Inbound Mail Item.
+          items:
+            additionalProperties: false
+            example:
+              account_id: account_in71c4amph0vgo2qllky
+              action: deposit
+            properties:
+              account_id:
+                description: The identifier of the Account to deposit the check into.
+                type: string
+                x-documentation-priority: default
+                x-id-reference-to: Accounts
+              action:
+                description: The action to perform on the Inbound Mail Item.
+                enum:
+                - deposit
+                - ignore
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - The check will be deposited.
+                - The check will be ignored.
+            required:
+            - action
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+          type: array
+          x-documentation-priority: default
+      required:
+      - checks
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    inbound_mail_item_check:
+      additionalProperties: false
+      description: Inbound Mail Item Checks represent the checks in an Inbound Mail Item.
+      example:
+        amount: 1750
+        back_file_id: file_makxrc67oh9l6sg7w9yc
+        check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+        front_file_id: file_makxrc67oh9l6sg7w9yc
+        status: deposited
+      properties:
+        amount:
+          description: The amount of the check.
+          type: integer
+          x-documentation-priority: default
+        back_file_id:
+          anyOf:
+          - description: The identifier for the File containing the back of the check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        check_deposit_id:
+          anyOf:
+          - description: The identifier of the Check Deposit if this check was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Check Deposits
+          - type: 'null'
+        front_file_id:
+          anyOf:
+          - description: The identifier for the File containing the front of the check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        status:
+          anyOf:
+          - description: The status of the Inbound Mail Item Check.
+            enum:
+            - pending
+            - deposited
+            - ignored
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - The check is pending processing.
+            - The check has been deposited.
+            - The check has been ignored.
+          - type: 'null'
+      required:
+      - amount
+      - status
+      - front_file_id
+      - back_file_id
+      - check_deposit_id
+      title: Inbound Mail Item Check
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Mail Item Checks
+    inbound_mail_item_list:
+      additionalProperties: true
+      description: A list of Inbound Mail Item objects.
+      example:
+        data:
+        - checks:
+          - amount: 1750
+            back_file_id: file_makxrc67oh9l6sg7w9yc
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            front_file_id: file_makxrc67oh9l6sg7w9yc
+            status: deposited
+          - amount: 1750
+            back_file_id: file_makxrc67oh9l6sg7w9yc
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            front_file_id: file_makxrc67oh9l6sg7w9yc
+            status: deposited
+          created_at: '2020-01-31T23:59:59Z'
+          file_id: file_makxrc67oh9l6sg7w9yc
+          id: inbound_mail_item_q6rrg7mmqpplx80zceev
+          lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+          lockbox_recipient_id: lockbox_3xt21ok13q19advds4t5
+          recipient_name: Ian Crease
+          rejection_reason: null
+          status: processed
+          type: inbound_mail_item
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_mail_item'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound Mail Item List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Mail Item Lists
     inbound_mail_item:
       additionalProperties: true
       description: Inbound Mail Items represent pieces of physical mail delivered to a Lockbox Address.
@@ -280,156 +430,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound Mail Items
       x-title-plural: Inbound Mail Items
-    action_an_inbound_mail_item_parameters:
-      additionalProperties: false
-      example:
-        checks:
-        - account_id: account_in71c4amph0vgo2qllky
-          action: deposit
-        - action: ignore
-      properties:
-        checks:
-          description: The actions to perform on the Inbound Mail Item.
-          items:
-            additionalProperties: false
-            example:
-              account_id: account_in71c4amph0vgo2qllky
-              action: deposit
-            properties:
-              account_id:
-                description: The identifier of the Account to deposit the check into.
-                type: string
-                x-documentation-priority: default
-                x-id-reference-to: Accounts
-              action:
-                description: The action to perform on the Inbound Mail Item.
-                enum:
-                - deposit
-                - ignore
-                type: string
-                x-documentation-priority: default
-                x-enum-descriptions:
-                - The check will be deposited.
-                - The check will be ignored.
-            required:
-            - action
-            type: object
-            x-event-categories: []
-            x-stainless-empty-object: false
-          type: array
-          x-documentation-priority: default
-      required:
-      - checks
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    inbound_mail_item_list:
-      additionalProperties: true
-      description: A list of Inbound Mail Item objects.
-      example:
-        data:
-        - checks:
-          - amount: 1750
-            back_file_id: file_makxrc67oh9l6sg7w9yc
-            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
-            front_file_id: file_makxrc67oh9l6sg7w9yc
-            status: deposited
-          - amount: 1750
-            back_file_id: file_makxrc67oh9l6sg7w9yc
-            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
-            front_file_id: file_makxrc67oh9l6sg7w9yc
-            status: deposited
-          created_at: '2020-01-31T23:59:59Z'
-          file_id: file_makxrc67oh9l6sg7w9yc
-          id: inbound_mail_item_q6rrg7mmqpplx80zceev
-          lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
-          lockbox_recipient_id: lockbox_3xt21ok13q19advds4t5
-          recipient_name: Ian Crease
-          rejection_reason: null
-          status: processed
-          type: inbound_mail_item
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_mail_item'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound Mail Item List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Mail Item Lists
-    inbound_mail_item_check:
-      additionalProperties: false
-      description: Inbound Mail Item Checks represent the checks in an Inbound Mail Item.
-      example:
-        amount: 1750
-        back_file_id: file_makxrc67oh9l6sg7w9yc
-        check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
-        front_file_id: file_makxrc67oh9l6sg7w9yc
-        status: deposited
-      properties:
-        amount:
-          description: The amount of the check.
-          type: integer
-          x-documentation-priority: default
-        back_file_id:
-          anyOf:
-          - description: The identifier for the File containing the back of the check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        check_deposit_id:
-          anyOf:
-          - description: The identifier of the Check Deposit if this check was deposited.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Check Deposits
-          - type: 'null'
-        front_file_id:
-          anyOf:
-          - description: The identifier for the File containing the front of the check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        status:
-          anyOf:
-          - description: The status of the Inbound Mail Item Check.
-            enum:
-            - pending
-            - deposited
-            - ignored
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - The check is pending processing.
-            - The check has been deposited.
-            - The check has been ignored.
-          - type: 'null'
-      required:
-      - amount
-      - status
-      - front_file_id
-      - back_file_id
-      - check_deposit_id
-      title: Inbound Mail Item Check
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Mail Item Checks
     error:
       anyOf:
       - properties:

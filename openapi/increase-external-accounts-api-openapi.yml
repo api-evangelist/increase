@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase External Accounts API
   version: 0.0.1
 servers:
@@ -172,67 +172,6 @@ paths:
       - External Accounts
 components:
   schemas:
-    create_an_external_account_parameters:
-      additionalProperties: true
-      example:
-        account_holder: business
-        account_number: '987654321'
-        description: Landlord
-        routing_number: '101050001'
-      properties:
-        account_holder:
-          description: The type of entity that owns the External Account.
-          enum:
-          - business
-          - individual
-          - unknown
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The External Account is owned by a business.
-          - The External Account is owned by an individual.
-          - It's unknown what kind of entity owns the External Account.
-        account_number:
-          description: The account number for the destination account.
-          maxLength: 17
-          minLength: 1
-          pattern: ^[a-zA-Z0-9]*$
-          type: string
-          x-documentation-priority: default
-        description:
-          description: The name you choose for the Account.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        funding:
-          description: The type of the destination account. Defaults to `checking`.
-          enum:
-          - checking
-          - savings
-          - general_ledger
-          - other
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - A checking account.
-          - A savings account.
-          - A general ledger account.
-          - A different type of account.
-        routing_number:
-          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-      required:
-      - routing_number
-      - account_number
-      - description
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     external_account:
       additionalProperties: true
       description: External Accounts represent accounts at financial institutions other than Increase. You can use this API to store their details for reuse.
@@ -337,6 +276,43 @@ components:
       x-stainless-empty-object: false
       x-tag: External Accounts
       x-title-plural: External Accounts
+    external_account_list:
+      additionalProperties: true
+      description: A list of External Account objects.
+      example:
+        data:
+        - account_holder: business
+          account_number: '987654321'
+          created_at: '2020-01-31T23:59:59Z'
+          description: Landlord
+          funding: checking
+          id: external_account_ukk55lr923a3ac0pp7iv
+          idempotency_key: null
+          routing_number: '101050001'
+          status: active
+          type: external_account
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/external_account'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: External Account List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: External Account Lists
     update_an_external_account_parameters:
       additionalProperties: false
       example:
@@ -385,43 +361,67 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    external_account_list:
+    create_an_external_account_parameters:
       additionalProperties: true
-      description: A list of External Account objects.
       example:
-        data:
-        - account_holder: business
-          account_number: '987654321'
-          created_at: '2020-01-31T23:59:59Z'
-          description: Landlord
-          funding: checking
-          id: external_account_ukk55lr923a3ac0pp7iv
-          idempotency_key: null
-          routing_number: '101050001'
-          status: active
-          type: external_account
-        next_cursor: v57w5d
+        account_holder: business
+        account_number: '987654321'
+        description: Landlord
+        routing_number: '101050001'
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/external_account'
-          type: array
+        account_holder:
+          description: The type of entity that owns the External Account.
+          enum:
+          - business
+          - individual
+          - unknown
+          type: string
           x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
+          x-enum-descriptions:
+          - The External Account is owned by a business.
+          - The External Account is owned by an individual.
+          - It's unknown what kind of entity owns the External Account.
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 17
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        description:
+          description: The name you choose for the Account.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        funding:
+          description: The type of the destination account. Defaults to `checking`.
+          enum:
+          - checking
+          - savings
+          - general_ledger
+          - other
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A checking account.
+          - A savings account.
+          - A general ledger account.
+          - A different type of account.
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
       required:
-      - data
-      - next_cursor
-      title: External Account List
+      - routing_number
+      - account_number
+      - description
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: External Account Lists
     error:
       anyOf:
       - properties:

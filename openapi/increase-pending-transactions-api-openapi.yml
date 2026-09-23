@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Pending Transactions API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: Pending Transactions are potential future additions and removals of money from your bank account. They impact your available balance, but not your current balance. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
+- description: Pending Transactions are potential future additions and removals of money from your bank account. They impact your available balance, but not your current balance. To learn more, see Transactions and Transfers.
   name: Pending Transactions
 paths:
   /pending_transactions:
@@ -240,7 +240,176 @@ paths:
       tags:
       - Pending Transactions
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
+    pending_transaction_list:
+      additionalProperties: true
+      description: A list of Pending Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 100
+          completed_at: null
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          held_amount: 100
+          id: pending_transaction_k1sfetcau2qbvjbzgju4
+          route_id: card_oubs0hwk5rn6knuecxg2
+          route_type: card
+          source:
+            ach_transfer_instruction:
+              amount: 100
+              transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
+            category: ach_transfer_instruction
+          status: pending
+          type: pending_transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/pending_transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Pending Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Pending Transaction Lists
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
+    create_a_pending_transaction_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: -1000
+        description: Hold for pending transaction
+      properties:
+        account_id:
+          description: The Account to place the hold on.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The amount to hold in the minor unit of the account's currency. For dollars, for example, this is cents. This should be a negative amount - to hold $1.00 from the account, you would pass -100.
+          maximum: -1
+          type: integer
+          x-documentation-priority: default
+        description:
+          description: The description you choose to give the hold.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - amount
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     pending_transaction:
       additionalProperties: true
       description: Pending Transactions are potential future additions and removals of money from your bank account. They impact your available balance, but not your current balance. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
@@ -818,68 +987,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Pending Transactions
       x-title-plural: Pending Transactions
-    pending_transaction_list:
-      additionalProperties: true
-      description: A list of Pending Transaction objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 100
-          completed_at: null
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          description: INVOICE 2468
-          held_amount: 100
-          id: pending_transaction_k1sfetcau2qbvjbzgju4
-          route_id: card_oubs0hwk5rn6knuecxg2
-          route_type: card
-          source:
-            ach_transfer_instruction:
-              amount: 100
-              transfer_id: ach_transfer_uoxatyh3lt5evrsdvo7q
-            category: ach_transfer_instruction
-          status: pending
-          type: pending_transaction
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/pending_transaction'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Pending Transaction List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Pending Transaction Lists
-    inbound_wire_transfer_reversal:
-      additionalProperties: true
-      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
-      example:
-        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-      properties:
-        inbound_wire_transfer_id:
-          description: The ID of the Inbound Wire Transfer that is being reversed.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Inbound Wire Transfers
-      required:
-      - inbound_wire_transfer_id
-      title: Inbound Wire Transfer Reversal Intention
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Wire Transfer Reversal Intentions
     card_authorization:
       additionalProperties: true
       description: Card Authorizations are temporary holds placed on a customer's funds with the intent to later clear a transaction.
@@ -1850,123 +1957,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Authorizations
-    inbound_funds_hold:
-      additionalProperties: true
-      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
-      example:
-        amount: 100
-        automatically_releases_at: '2020-01-31T23:59:59Z'
-        created_at: '2020-01-31T23:59:59Z'
-        currency: USD
-        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
-        released_at: null
-        status: held
-        type: inbound_funds_hold
-      properties:
-        amount:
-          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
-          type: integer
-          x-documentation-priority: default
-        automatically_releases_at:
-          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
-          enum:
-          - USD
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - US Dollar (USD)
-        held_transaction_id:
-          anyOf:
-          - description: The ID of the Transaction for which funds were held.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        pending_transaction_id:
-          anyOf:
-          - description: The ID of the Pending Transaction representing the held funds.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Pending Transactions
-          - type: 'null'
-        released_at:
-          anyOf:
-          - description: When the hold was released (if it has been released).
-            format: date-time
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        status:
-          description: The status of the hold.
-          enum:
-          - held
-          - complete
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Funds are still being held.
-          - Funds have been released.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
-          enum:
-          - inbound_funds_hold
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - amount
-      - created_at
-      - currency
-      - automatically_releases_at
-      - released_at
-      - status
-      - held_transaction_id
-      - pending_transaction_id
-      title: Inbound Funds Hold
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Funds Holds
-    create_a_pending_transaction_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        amount: -1000
-        description: Hold for pending transaction
-      properties:
-        account_id:
-          description: The Account to place the hold on.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        amount:
-          description: The amount to hold in the minor unit of the account's currency. For dollars, for example, this is cents. This should be a negative amount - to hold $1.00 from the account, you would pass -100.
-          maximum: -1
-          type: integer
-          x-documentation-priority: default
-        description:
-          description: The description you choose to give the hold.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - amount
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -2278,14 +2268,24 @@ components:
         - status
         type: object
         x-event-categories: []
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
+    inbound_wire_transfer_reversal:
+      additionalProperties: true
+      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
+      example:
+        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+      properties:
+        inbound_wire_transfer_id:
+          description: The ID of the Inbound Wire Transfer that is being reversed.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Transfers
+      required:
+      - inbound_wire_transfer_id
+      title: Inbound Wire Transfer Reversal Intention
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Wire Transfer Reversal Intentions
   securitySchemes:
     bearerAuth:
       scheme: bearer

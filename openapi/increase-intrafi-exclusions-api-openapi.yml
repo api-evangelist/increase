@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Intrafi Exclusions API
   version: 0.0.1
 servers:
@@ -148,44 +148,38 @@ paths:
       tags:
       - Intrafi Exclusions
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
-    intrafi_exclusion_list:
+    create_an_intrafi_exclusion_parameters:
       additionalProperties: true
-      description: A list of IntraFi Exclusion objects.
       example:
-        data:
-        - bank_name: Example Bank
-          created_at: '2020-01-31T23:59:59Z'
-          entity_id: entity_n8y8tnk2p9339ti393yi
-          excluded_at: '2020-02-01T23:59:59+00:00'
-          fdic_certificate_number: '314159'
-          id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
-          idempotency_key: null
-          status: completed
-          submitted_at: '2020-02-01T00:59:59+00:00'
-          type: intrafi_exclusion
-        next_cursor: v57w5d
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        fdic_certificate_number: '314159'
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/intrafi_exclusion'
-          type: array
+        entity_id:
+          description: The identifier of the Entity whose deposits will be excluded.
+          type: string
           x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
+          x-id-reference-to: Entities
+        fdic_certificate_number:
+          description: The FDIC certificate number of the financial institution to be excluded. An FDIC certificate number uniquely identifies a financial institution, and is different than a routing number. To find one, we recommend searching by Bank Name using the [FDIC's bankfind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
       required:
-      - data
-      - next_cursor
-      title: IntraFi Exclusion List
+      - entity_id
+      - fdic_certificate_number
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: IntraFi Exclusion Lists
     intrafi_exclusion:
       additionalProperties: false
       description: Certain institutions may be excluded per Entity when sweeping funds into the IntraFi network. This is useful when an Entity already has deposits at a particular bank, and does not want to sweep additional funds to it. It may take 5 business days for an exclusion to be processed.
@@ -287,6 +281,43 @@ components:
       x-stainless-empty-object: false
       x-tag: IntraFi Exclusions
       x-title-plural: IntraFi Exclusions
+    intrafi_exclusion_list:
+      additionalProperties: true
+      description: A list of IntraFi Exclusion objects.
+      example:
+        data:
+        - bank_name: Example Bank
+          created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          excluded_at: '2020-02-01T23:59:59+00:00'
+          fdic_certificate_number: '314159'
+          id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+          idempotency_key: null
+          status: completed
+          submitted_at: '2020-02-01T00:59:59+00:00'
+          type: intrafi_exclusion
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_exclusion'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Exclusion List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Exclusion Lists
     error:
       anyOf:
       - properties:
@@ -598,37 +629,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    create_an_intrafi_exclusion_parameters:
-      additionalProperties: true
-      example:
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        fdic_certificate_number: '314159'
-      properties:
-        entity_id:
-          description: The identifier of the Entity whose deposits will be excluded.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        fdic_certificate_number:
-          description: The FDIC certificate number of the financial institution to be excluded. An FDIC certificate number uniquely identifies a financial institution, and is different than a routing number. To find one, we recommend searching by Bank Name using the [FDIC's bankfind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - entity_id
-      - fdic_certificate_number
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

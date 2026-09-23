@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Digital Card Profiles API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
+- description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on digital card artwork.
   name: Digital Card Profiles
 paths:
   /digital_card_profiles:
@@ -196,89 +196,6 @@ paths:
       - Digital Card Profiles
 components:
   schemas:
-    clones_a_digital_card_profile_parameters:
-      additionalProperties: true
-      example:
-        background_image_file_id: file_1ai913suu1zfn1pdetru
-      properties:
-        app_icon_file_id:
-          description: The identifier of the File containing the card's icon image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        background_image_file_id:
-          description: The identifier of the File containing the card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        card_description:
-          description: A user-facing description for the card itself.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_email:
-          description: An email address the user can contact to receive support for their card.
-          format: email
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_phone:
-          description: A phone number the user can contact to receive support for their card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        contact_website:
-          description: A website the user can visit to view and receive support for their card.
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        issuer_name:
-          description: A user-facing description for whoever is issuing the card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        text_color:
-          additionalProperties: false
-          description: The Card's text color, specified as an RGB triple. The default is white.
-          properties:
-            blue:
-              description: The value of the blue channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            green:
-              description: The value of the green channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-            red:
-              description: The value of the red channel in the RGB color.
-              maximum: 255
-              minimum: 0
-              type: integer
-              x-documentation-priority: default
-          required:
-          - red
-          - green
-          - blue
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     digital_card_profile:
       additionalProperties: true
       description: This contains artwork and metadata relating to a Card's appearance in digital wallet apps like Apple Pay and Google Pay. For more information, see our guide on [digital card artwork](https://increase.com/documentation/card-art).
@@ -881,6 +798,89 @@ components:
         - status
         type: object
         x-event-categories: []
+    clones_a_digital_card_profile_parameters:
+      additionalProperties: true
+      example:
+        background_image_file_id: file_1ai913suu1zfn1pdetru
+      properties:
+        app_icon_file_id:
+          description: The identifier of the File containing the card's icon image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        background_image_file_id:
+          description: The identifier of the File containing the card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        card_description:
+          description: A user-facing description for the card itself.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_email:
+          description: An email address the user can contact to receive support for their card.
+          format: email
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        contact_website:
+          description: A website the user can visit to view and receive support for their card.
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        issuer_name:
+          description: A user-facing description for whoever is issuing the card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        text_color:
+          additionalProperties: false
+          description: The Card's text color, specified as an RGB triple. The default is white.
+          properties:
+            blue:
+              description: The value of the blue channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            green:
+              description: The value of the green channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+            red:
+              description: The value of the red channel in the RGB color.
+              maximum: 255
+              minimum: 0
+              type: integer
+              x-documentation-priority: default
+          required:
+          - red
+          - green
+          - blue
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase OAUTH API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Oauth
+- name: OAuth
 paths:
   /oauth/tokens:
     post:
@@ -36,8 +36,16 @@ paths:
       x-sandbox-only: false
       x-tag: OAuth Tokens
       tags:
-      - Oauth
+      - OAuth
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
     oauth_token:
       additionalProperties: false
@@ -438,14 +446,6 @@ components:
         - status
         type: object
         x-event-categories: []
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

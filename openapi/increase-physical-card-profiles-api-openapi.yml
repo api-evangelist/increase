@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Physical Card Profiles API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
+- description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on physical card artwork.
   name: Physical Card Profiles
 paths:
   /physical_card_profiles:
@@ -439,6 +439,63 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
+    clone_a_physical_card_profile_parameters:
+      additionalProperties: true
+      example:
+        front_image_file_id: file_o6aex13wm1jcc36sgcj1
+      properties:
+        carrier_image_file_id:
+          description: The identifier of the File containing the physical card's carrier image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          description: The identifier of the File containing the physical card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        front_text:
+          additionalProperties: false
+          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
+          properties:
+            line1:
+              description: The first line of text on the front of the card.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        program_id:
+          description: The identifier of the Program to use for the cloned Physical Card Profile.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -750,63 +807,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    clone_a_physical_card_profile_parameters:
-      additionalProperties: true
-      example:
-        front_image_file_id: file_o6aex13wm1jcc36sgcj1
-      properties:
-        carrier_image_file_id:
-          description: The identifier of the File containing the physical card's carrier image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        contact_phone:
-          description: A phone number the user can contact to receive support for their card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        front_image_file_id:
-          description: The identifier of the File containing the physical card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        front_text:
-          additionalProperties: false
-          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
-          properties:
-            line1:
-              description: The first line of text on the front of the card.
-              maxLength: 33
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            line2:
-              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
-              maxLength: 33
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-          required:
-          - line1
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        program_id:
-          description: The identifier of the Program to use for the cloned Physical Card Profile.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Programs
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

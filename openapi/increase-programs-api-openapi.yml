@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Programs API
   version: 0.0.1
 servers:
@@ -77,123 +77,44 @@ paths:
       tags:
       - Programs
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    program:
-      additionalProperties: false
-      description: Programs determine the compliance and commercial terms of Accounts. By default, you have a Commercial Banking program for managing your own funds. If you are lending or managing funds on behalf of your customers, or otherwise engaged in regulated activity, we will work together to create additional Programs for you.
+    program_list:
+      additionalProperties: true
+      description: A list of Program objects.
       example:
-        bank: first_internet_bank
-        billing_account_id: null
-        created_at: '2020-01-31T23:59:59Z'
-        default_digital_card_profile_id: null
-        id: program_i2v2os4mwza1oetokh9i
-        interest_rate: '0.01'
-        lending: null
-        name: Commercial Banking
-        type: program
-        updated_at: '2020-01-31T23:59:59Z'
+        data:
+        - bank: first_internet_bank
+          billing_account_id: null
+          created_at: '2020-01-31T23:59:59Z'
+          default_digital_card_profile_id: null
+          id: program_i2v2os4mwza1oetokh9i
+          interest_rate: '0.01'
+          lending: null
+          name: Commercial Banking
+          type: program
+          updated_at: '2020-01-31T23:59:59Z'
+        next_cursor: v57w5d
       properties:
-        bank:
-          description: The Bank the Program is with.
-          enum:
-          - core_bank
-          - first_internet_bank
-          - grasshopper_bank
-          type: string
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/program'
+          type: array
           x-documentation-priority: default
-          x-enum-descriptions:
-          - Core Bank
-          - First Internet Bank of Indiana
-          - Grasshopper Bank
-        billing_account_id:
+        next_cursor:
           anyOf:
-          - description: The Program billing account.
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
             type: string
             x-documentation-priority: default
-            x-id-reference-to: Accounts
           - type: 'null'
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Program was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        default_digital_card_profile_id:
-          anyOf:
-          - description: The default configuration for digital cards attached to this Program.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Digital Card Profiles
-          - type: 'null'
-        id:
-          description: The Program identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Programs
-        interest_rate:
-          description: The Interest Rate currently being earned on the accounts in this program, as a string containing a decimal number. For example, a 1% interest rate would be represented as "0.01".
-          pattern: ^-?\d+(\.\d+)?$
-          type: string
-          x-documentation-priority: default
-        lending:
-          anyOf:
-          - additionalProperties: false
-            description: The lending details for the program.
-            properties:
-              maximum_extendable_credit:
-                description: The maximum extendable credit of the program.
-                type: integer
-                x-documentation-priority: default
-            required:
-            - maximum_extendable_credit
-            title: Program Lending
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Lendings
-          - type: 'null'
-        name:
-          description: The name of the Program.
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `program`.
-          enum:
-          - program
-          type: string
-          x-documentation-priority: default
-        updated_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Program was last updated.
-          format: date-time
-          type: string
-          x-documentation-priority: default
       required:
-      - type
-      - name
-      - created_at
-      - updated_at
-      - id
-      - billing_account_id
-      - default_digital_card_profile_id
-      - interest_rate
-      - bank
-      - lending
-      title: Program
+      - data
+      - next_cursor
+      title: Program List
       type: object
-      x-event-categories:
-      - program.created
-      - program.updated
+      x-event-categories: []
       x-stainless-empty-object: false
-      x-tag: Programs
-      x-title-plural: Programs
+      x-title-plural: Program Lists
     error:
       anyOf:
       - properties:
@@ -505,43 +426,122 @@ components:
         - status
         type: object
         x-event-categories: []
-    program_list:
-      additionalProperties: true
-      description: A list of Program objects.
+    program:
+      additionalProperties: false
+      description: Programs determine the compliance and commercial terms of Accounts. By default, you have a Commercial Banking program for managing your own funds. If you are lending or managing funds on behalf of your customers, or otherwise engaged in regulated activity, we will work together to create additional Programs for you.
       example:
-        data:
-        - bank: first_internet_bank
-          billing_account_id: null
-          created_at: '2020-01-31T23:59:59Z'
-          default_digital_card_profile_id: null
-          id: program_i2v2os4mwza1oetokh9i
-          interest_rate: '0.01'
-          lending: null
-          name: Commercial Banking
-          type: program
-          updated_at: '2020-01-31T23:59:59Z'
-        next_cursor: v57w5d
+        bank: first_internet_bank
+        billing_account_id: null
+        created_at: '2020-01-31T23:59:59Z'
+        default_digital_card_profile_id: null
+        id: program_i2v2os4mwza1oetokh9i
+        interest_rate: '0.01'
+        lending: null
+        name: Commercial Banking
+        type: program
+        updated_at: '2020-01-31T23:59:59Z'
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/program'
-          type: array
+        bank:
+          description: The Bank the Program is with.
+          enum:
+          - core_bank
+          - first_internet_bank
+          - grasshopper_bank
+          type: string
           x-documentation-priority: default
-        next_cursor:
+          x-enum-descriptions:
+          - Core Bank
+          - First Internet Bank of Indiana
+          - Grasshopper Bank
+        billing_account_id:
           anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+          - description: The Program billing account.
             type: string
             x-documentation-priority: default
+            x-id-reference-to: Accounts
           - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Program was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        default_digital_card_profile_id:
+          anyOf:
+          - description: The default configuration for digital cards attached to this Program.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Digital Card Profiles
+          - type: 'null'
+        id:
+          description: The Program identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        interest_rate:
+          description: The Interest Rate currently being earned on the accounts in this program, as a string containing a decimal number. For example, a 1% interest rate would be represented as "0.01".
+          pattern: ^-?\d+(\.\d+)?$
+          type: string
+          x-documentation-priority: default
+        lending:
+          anyOf:
+          - additionalProperties: false
+            description: The lending details for the program.
+            properties:
+              maximum_extendable_credit:
+                description: The maximum extendable credit of the program.
+                type: integer
+                x-documentation-priority: default
+            required:
+            - maximum_extendable_credit
+            title: Program Lending
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Lendings
+          - type: 'null'
+        name:
+          description: The name of the Program.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `program`.
+          enum:
+          - program
+          type: string
+          x-documentation-priority: default
+        updated_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Program was last updated.
+          format: date-time
+          type: string
+          x-documentation-priority: default
       required:
-      - data
-      - next_cursor
-      title: Program List
+      - type
+      - name
+      - created_at
+      - updated_at
+      - id
+      - billing_account_id
+      - default_digital_card_profile_id
+      - interest_rate
+      - bank
+      - lending
+      title: Program
       type: object
-      x-event-categories: []
+      x-event-categories:
+      - program.created
+      - program.updated
       x-stainless-empty-object: false
-      x-title-plural: Program Lists
+      x-tag: Programs
+      x-title-plural: Programs
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

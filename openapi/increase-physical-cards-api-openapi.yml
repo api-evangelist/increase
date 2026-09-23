@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Physical Cards API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!
+- description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected Card Profile. The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact support@increase.com for pricing!
   name: Physical Cards
 paths:
   /physical_cards:
@@ -187,6 +187,231 @@ paths:
       - Physical Cards
 components:
   schemas:
+    physical_card_list:
+      additionalProperties: true
+      description: A list of Physical Card objects.
+      example:
+        data:
+        - card_id: card_oubs0hwk5rn6knuecxg2
+          cardholder:
+            first_name: Ian
+            last_name: Crease
+          created_at: '2020-01-31T23:59:59Z'
+          id: physical_card_ode8duyq5v2ynhjoharl
+          idempotency_key: null
+          physical_card_profile_id: physical_card_profile_m534d5rn9qyy9ufqxoec
+          shipment:
+            address:
+              city: New York
+              country: US
+              line1: 33 Liberty Street
+              line2: Unit 2
+              line3: null
+              name: Ian Crease
+              postal_code: '10045'
+              state: NY
+            method: usps
+            schedule: next_day
+            status: shipped
+            tracking:
+              number: '9400110200881234567890'
+              return_number: null
+              return_reason: null
+              shipped_at: '2020-01-31T23:59:59Z'
+              updates:
+              - carrier_estimated_delivery_at: null
+                category: delivered
+                city: null
+                created_at: '2020-01-31T23:59:59Z'
+                postal_code: '10001'
+                state: null
+          status: active
+          type: physical_card
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/physical_card'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Physical Card List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Physical Card Lists
+    create_a_physical_card_parameters:
+      additionalProperties: true
+      example:
+        card_id: card_oubs0hwk5rn6knuecxg2
+        cardholder:
+          first_name: Ian
+          last_name: Crease
+        shipment:
+          address:
+            city: New York
+            line1: 33 Liberty Street
+            line2: Unit 2
+            name: Ian Crease
+            postal_code: '10045'
+            state: NY
+          method: usps
+      properties:
+        card_id:
+          description: The underlying card representing this physical card.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Cards
+        cardholder:
+          additionalProperties: false
+          description: Details about the cardholder, as it will appear on the physical card.
+          properties:
+            first_name:
+              description: The cardholder's first name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+            last_name:
+              description: The cardholder's last name.
+              maxLength: 200
+              minLength: 1
+              pattern: ^[\w.\-/ ]*$
+              type: string
+              x-documentation-priority: default
+          required:
+          - first_name
+          - last_name
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        physical_card_profile_id:
+          description: The physical card profile to use for this physical card. The latest default physical card profile will be used if not provided.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+        shipment:
+          additionalProperties: false
+          description: The details used to ship this physical card.
+          properties:
+            address:
+              additionalProperties: false
+              description: The address to where the card should be shipped.
+              properties:
+                city:
+                  description: The city of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                country:
+                  description: The two-character ISO 3166-1 code of the country where the card should be shipped (e.g., `US`). Please reach out to [support@increase.com](mailto:support@increase.com) to ship cards internationally.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line1:
+                  description: The first line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line2:
+                  description: The second line of the shipping address.
+                  maxLength: 35
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                line3:
+                  description: The third line of the shipping address.
+                  maxLength: 9
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                name:
+                  description: The name of the recipient.
+                  maxLength: 35
+                  minLength: 1
+                  pattern: ^[\w.\-/ ]*$
+                  type: string
+                  x-documentation-priority: default
+                phone_number:
+                  description: The phone number of the recipient.
+                  maxLength: 15
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                postal_code:
+                  description: The postal code of the shipping address.
+                  maxLength: 16
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+                state:
+                  description: The state of the shipping address.
+                  maxLength: 200
+                  minLength: 1
+                  type: string
+                  x-documentation-priority: default
+              required:
+              - name
+              - line1
+              - city
+              - state
+              - postal_code
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            method:
+              description: The shipping method to use.
+              enum:
+              - usps
+              - fedex_priority_overnight
+              - fedex_2_day
+              - dhl_worldwide_express
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - USPS Post.
+              - FedEx Priority Overnight, no signature.
+              - FedEx 2-day.
+              - DHL Worldwide Express, international shipping only.
+            schedule:
+              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
+              enum:
+              - next_day
+              - same_day
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
+              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
+          required:
+          - method
+          - address
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+      required:
+      - card_id
+      - cardholder
+      - shipment
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     physical_card:
       additionalProperties: false
       description: Custom physical Visa cards that are shipped to your customers. The artwork is configurable by a connected [Card Profile](/documentation/api#card-profiles). The same Card can be used for multiple Physical Cards. Printing cards incurs a fee. Please contact [support@increase.com](mailto:support@increase.com) for pricing!
@@ -535,169 +760,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Physical Cards
       x-title-plural: Physical Cards
-    create_a_physical_card_parameters:
-      additionalProperties: true
-      example:
-        card_id: card_oubs0hwk5rn6knuecxg2
-        cardholder:
-          first_name: Ian
-          last_name: Crease
-        shipment:
-          address:
-            city: New York
-            line1: 33 Liberty Street
-            line2: Unit 2
-            name: Ian Crease
-            postal_code: '10045'
-            state: NY
-          method: usps
-      properties:
-        card_id:
-          description: The underlying card representing this physical card.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Cards
-        cardholder:
-          additionalProperties: false
-          description: Details about the cardholder, as it will appear on the physical card.
-          properties:
-            first_name:
-              description: The cardholder's first name.
-              maxLength: 200
-              minLength: 1
-              pattern: ^[\w.\-/ ]*$
-              type: string
-              x-documentation-priority: default
-            last_name:
-              description: The cardholder's last name.
-              maxLength: 200
-              minLength: 1
-              pattern: ^[\w.\-/ ]*$
-              type: string
-              x-documentation-priority: default
-          required:
-          - first_name
-          - last_name
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        physical_card_profile_id:
-          description: The physical card profile to use for this physical card. The latest default physical card profile will be used if not provided.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Physical Card Profiles
-        shipment:
-          additionalProperties: false
-          description: The details used to ship this physical card.
-          properties:
-            address:
-              additionalProperties: false
-              description: The address to where the card should be shipped.
-              properties:
-                city:
-                  description: The city of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                country:
-                  description: The two-character ISO 3166-1 code of the country where the card should be shipped (e.g., `US`). Please reach out to [support@increase.com](mailto:support@increase.com) to ship cards internationally.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line1:
-                  description: The first line of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line2:
-                  description: The second line of the shipping address.
-                  maxLength: 35
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                line3:
-                  description: The third line of the shipping address.
-                  maxLength: 9
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                name:
-                  description: The name of the recipient.
-                  maxLength: 35
-                  minLength: 1
-                  pattern: ^[\w.\-/ ]*$
-                  type: string
-                  x-documentation-priority: default
-                phone_number:
-                  description: The phone number of the recipient.
-                  maxLength: 15
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                postal_code:
-                  description: The postal code of the shipping address.
-                  maxLength: 16
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-                state:
-                  description: The state of the shipping address.
-                  maxLength: 200
-                  minLength: 1
-                  type: string
-                  x-documentation-priority: default
-              required:
-              - name
-              - line1
-              - city
-              - state
-              - postal_code
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            method:
-              description: The shipping method to use.
-              enum:
-              - usps
-              - fedex_priority_overnight
-              - fedex_2_day
-              - dhl_worldwide_express
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - USPS Post.
-              - FedEx Priority Overnight, no signature.
-              - FedEx 2-day.
-              - DHL Worldwide Express, international shipping only.
-            schedule:
-              description: When this physical card should be produced by the card printer. The default timeline is the day after the card printer receives the order, except for `FEDEX_PRIORITY_OVERNIGHT` cards, which default to `SAME_DAY`. To use faster production methods, please reach out to [support@increase.com](mailto:support@increase.com).
-              enum:
-              - next_day
-              - same_day
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - The physical card will be shipped one business day after the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Wednesday.
-              - The physical card will be shipped on the same business day that the order is received by the card printer. A card that is submitted to Increase on a Monday evening (Pacific Time) will ship out on Tuesday.
-          required:
-          - method
-          - address
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      required:
-      - card_id
-      - cardholder
-      - shipment
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     update_a_physical_card_parameters:
       additionalProperties: false
       example:
@@ -1031,68 +1093,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    physical_card_list:
-      additionalProperties: true
-      description: A list of Physical Card objects.
-      example:
-        data:
-        - card_id: card_oubs0hwk5rn6knuecxg2
-          cardholder:
-            first_name: Ian
-            last_name: Crease
-          created_at: '2020-01-31T23:59:59Z'
-          id: physical_card_ode8duyq5v2ynhjoharl
-          idempotency_key: null
-          physical_card_profile_id: physical_card_profile_m534d5rn9qyy9ufqxoec
-          shipment:
-            address:
-              city: New York
-              country: US
-              line1: 33 Liberty Street
-              line2: Unit 2
-              line3: null
-              name: Ian Crease
-              postal_code: '10045'
-              state: NY
-            method: usps
-            schedule: next_day
-            status: shipped
-            tracking:
-              number: '9400110200881234567890'
-              return_number: null
-              return_reason: null
-              shipped_at: '2020-01-31T23:59:59Z'
-              updates:
-              - carrier_estimated_delivery_at: null
-                category: delivered
-                city: null
-                created_at: '2020-01-31T23:59:59Z'
-                postal_code: '10001'
-                state: null
-          status: active
-          type: physical_card
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/physical_card'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Physical Card List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Physical Card Lists
   responses:
     errorResponse:
       content:

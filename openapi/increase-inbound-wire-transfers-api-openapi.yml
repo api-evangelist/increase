@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Inbound Wire Transfers API
   version: 0.0.1
 servers:
@@ -450,6 +450,28 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound Wire Transfers
       x-title-plural: Inbound Wire Transfers
+    reverse_an_inbound_wire_transfer_parameters:
+      additionalProperties: false
+      example:
+        reason: creditor_request
+      properties:
+        reason:
+          description: Reason for the reversal.
+          enum:
+          - duplicate
+          - creditor_request
+          - transaction_forbidden
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The inbound wire transfer was a duplicate.
+          - The recipient of the wire transfer requested the funds be returned to the sender.
+          - The account cannot currently receive inbound wires.
+      required:
+      - reason
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     inbound_wire_transfer_list:
       additionalProperties: true
       description: A list of Inbound Wire Transfer objects.
@@ -502,28 +524,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Inbound Wire Transfer Lists
-    reverse_an_inbound_wire_transfer_parameters:
-      additionalProperties: false
-      example:
-        reason: creditor_request
-      properties:
-        reason:
-          description: Reason for the reversal.
-          enum:
-          - duplicate
-          - creditor_request
-          - transaction_forbidden
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The inbound wire transfer was a duplicate.
-          - The recipient of the wire transfer requested the funds be returned to the sender.
-          - The account cannot currently receive inbound wires.
-      required:
-      - reason
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:

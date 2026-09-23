@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Intrafi Account Enrollments API
   version: 0.0.1
 servers:
@@ -170,14 +170,6 @@ paths:
       tags:
       - Intrafi Account Enrollments
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
     intrafi_account_enrollment:
       additionalProperties: false
@@ -262,6 +254,41 @@ components:
       x-stainless-empty-object: false
       x-tag: IntraFi Account Enrollments
       x-title-plural: IntraFi Account Enrollments
+    intrafi_account_enrollment_list:
+      additionalProperties: true
+      description: A list of IntraFi Account Enrollment objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          created_at: '2020-01-31T23:59:59Z'
+          email_address: null
+          id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+          idempotency_key: null
+          intrafi_id: 01234abcd
+          status: pending_enrolling
+          type: intrafi_account_enrollment
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_account_enrollment'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Account Enrollment List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Account Enrollment Lists
     enroll_an_account_in_the_intrafi_deposit_sweep_network_parameters:
       additionalProperties: true
       example:
@@ -597,41 +624,14 @@ components:
         - status
         type: object
         x-event-categories: []
-    intrafi_account_enrollment_list:
-      additionalProperties: true
-      description: A list of IntraFi Account Enrollment objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          created_at: '2020-01-31T23:59:59Z'
-          email_address: null
-          id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
-          idempotency_key: null
-          intrafi_id: 01234abcd
-          status: pending_enrolling
-          type: intrafi_account_enrollment
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/intrafi_account_enrollment'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: IntraFi Account Enrollment List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: IntraFi Account Enrollment Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

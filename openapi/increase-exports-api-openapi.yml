@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Exports API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: Exports are generated files. Some exports can contain a lot of data, like a CSV of your transactions. Others can be a single document, like a tax form. Since they can take a while, they are generated asynchronously. We send a webhook when they are ready. For more information, please read our [Exports documentation](https://increase.com/documentation/exports).
+- description: Exports are generated files. Some exports can contain a lot of data, like a CSV of your transactions. Others can be a single document, like a tax form. Since they can take a while, they are generated asynchronously. We send a webhook when they are ready. For more information, please read our Exports documentation.
   name: Exports
 paths:
   /exports:
@@ -216,275 +216,15 @@ paths:
       tags:
       - Exports
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
-    create_an_export_parameters:
-      additionalProperties: true
-      example:
-        category: transaction_csv
-        transaction_csv:
-          account_id: account_in71c4amph0vgo2qllky
-      properties:
-        account_statement_bai2:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `account_statement_bai2`.
-          properties:
-            account_id:
-              description: The Account to create a BAI2 report for. If not provided, all open accounts will be included.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Accounts
-            effective_date:
-              description: The date to create a BAI2 report for. If not provided, the current date will be used. The timezone is UTC. If the current date is used, the report will include intraday balances, otherwise it will include end-of-day balances for the provided date.
-              format: date
-              type: string
-              x-documentation-priority: default
-            program_id:
-              description: The Program to create a BAI2 report for. If not provided, all open accounts will be included.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Programs
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        account_statement_ofx:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `account_statement_ofx`.
-          properties:
-            account_id:
-              description: The Account to create a statement for.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Accounts
-            created_at:
-              additionalProperties: true
-              description: Filter transactions by their created date.
-              properties:
-                before:
-                  description: Filter results to transactions created before this time.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-                on_or_after:
-                  description: Filter results to transactions created on or after this time.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-          required:
-          - account_id
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        account_verification_letter:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `account_verification_letter`.
-          properties:
-            account_number_id:
-              description: The Account Number to create a letter for.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Account Numbers
-            balance_date:
-              description: The date of the balance to include in the letter. Defaults to the current date.
-              format: date
-              type: string
-              x-documentation-priority: default
-          required:
-          - account_number_id
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        bookkeeping_account_balance_csv:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `bookkeeping_account_balance_csv`.
-          properties:
-            bookkeeping_account_id:
-              description: Filter exported Bookkeeping Account Balances to the specified Bookkeeping Account.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Bookkeeping Accounts
-            on_or_after_date:
-              description: Filter exported Balances to those on or after this date.
-              format: date
-              type: string
-              x-documentation-priority: default
-            on_or_before_date:
-              description: Filter exported Balances to those on or before this date.
-              format: date
-              type: string
-              x-documentation-priority: default
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        category:
-          description: The type of Export to create.
-          enum:
-          - account_statement_ofx
-          - account_statement_bai2
-          - transaction_csv
-          - balance_csv
-          - bookkeeping_account_balance_csv
-          - entity_csv
-          - vendor_csv
-          - account_verification_letter
-          - funding_instructions
-          - voided_check
-          - daily_account_balance_csv
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Export an Open Financial Exchange (OFX) file of transactions and balances for a given time range and Account.
-          - Export a BAI2 file of transactions and balances for a given date and optional Account.
-          - Export a CSV of all transactions for a given time range.
-          - Export a CSV of account balances for the dates in a given range. (deprecated, use `daily_account_balance_csv` instead)
-          - Export a CSV of bookkeeping account balances for the dates in a given range.
-          - Export a CSV of entities with a given status.
-          - Export a CSV of vendors added to the third-party risk management dashboard.
-          - A PDF of an account verification letter.
-          - A PDF of funding instructions.
-          - A PDF of a voided check.
-          - Export a CSV of daily account balances with starting and ending balances for a given date range.
-        daily_account_balance_csv:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `daily_account_balance_csv`.
-          properties:
-            account_id:
-              description: Filter exported Balances to the specified Account.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Accounts
-            on_or_after_date:
-              description: Filter exported Balances to those on or after this date.
-              format: date
-              type: string
-              x-documentation-priority: default
-            on_or_before_date:
-              description: Filter exported Balances to those on or before this date.
-              format: date
-              type: string
-              x-documentation-priority: default
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        entity_csv:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `entity_csv`.
-          properties: {}
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: true
-        funding_instructions:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `funding_instructions`.
-          properties:
-            account_number_id:
-              description: The Account Number to create funding instructions for.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Account Numbers
-          required:
-          - account_number_id
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        transaction_csv:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `transaction_csv`.
-          properties:
-            account_id:
-              description: Filter exported Transactions to the specified Account.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Accounts
-            created_at:
-              additionalProperties: false
-              description: Filter results by time range on the `created_at` attribute.
-              properties:
-                after:
-                  description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-                before:
-                  description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-                on_or_after:
-                  description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-                on_or_before:
-                  description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        vendor_csv:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `vendor_csv`.
-          properties: {}
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: true
-        voided_check:
-          additionalProperties: false
-          description: Options for the created export. Required if `category` is equal to `voided_check`.
-          properties:
-            account_number_id:
-              description: The Account Number for the voided check.
-              type: string
-              x-documentation-priority: default
-              x-id-reference-to: Account Numbers
-            payer:
-              description: The payer information to be printed on the check.
-              items:
-                additionalProperties: false
-                properties:
-                  line:
-                    description: The contents of the line.
-                    maxLength: 35
-                    minLength: 1
-                    pattern: ^[\u0000-\uFFFF]*$
-                    type: string
-                    x-documentation-priority: default
-                required:
-                - line
-                type: object
-                x-event-categories: []
-                x-stainless-empty-object: false
-              type: array
-              x-documentation-priority: default
-          required:
-          - account_number_id
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-      required:
-      - category
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     export:
       additionalProperties: true
       description: Exports are generated files. Some exports can contain a lot of data, like a CSV of your transactions. Others can be a single document, like a tax form. Since they can take a while, they are generated asynchronously. We send a webhook when they are ready. For more information, please read our [Exports documentation](https://increase.com/documentation/exports).
@@ -1122,58 +862,274 @@ components:
       x-stainless-empty-object: false
       x-tag: Exports
       x-title-plural: Exports
-    export_list:
+    create_an_export_parameters:
       additionalProperties: true
-      description: A list of Export objects.
       example:
-        data:
-        - account_statement_bai2: null
-          account_statement_ofx: null
-          account_verification_letter: null
-          balance_csv: null
-          bookkeeping_account_balance_csv: null
-          category: transaction_csv
-          created_at: '2020-01-31T23:59:59Z'
-          daily_account_balance_csv: null
-          dashboard_table_csv: null
-          entity_csv: null
-          fee_csv: null
-          form_1099_int: null
-          form_1099_misc: null
-          funding_instructions: null
-          id: export_8s4m48qz3bclzje0zwh9
-          idempotency_key: null
-          result:
-            file_id: file_makxrc67oh9l6sg7w9yc
-          status: complete
-          transaction_csv:
-            account_id: account_in71c4amph0vgo2qllky
-            created_at: null
-          type: export
-          vendor_csv: null
-          voided_check: null
-        next_cursor: v57w5d
+        category: transaction_csv
+        transaction_csv:
+          account_id: account_in71c4amph0vgo2qllky
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/export'
-          type: array
+        account_statement_bai2:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `account_statement_bai2`.
+          properties:
+            account_id:
+              description: The Account to create a BAI2 report for. If not provided, all open accounts will be included.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Accounts
+            effective_date:
+              description: The date to create a BAI2 report for. If not provided, the current date will be used. The timezone is UTC. If the current date is used, the report will include intraday balances, otherwise it will include end-of-day balances for the provided date.
+              format: date
+              type: string
+              x-documentation-priority: default
+            program_id:
+              description: The Program to create a BAI2 report for. If not provided, all open accounts will be included.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Programs
+          type: object
           x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
+          x-event-categories: []
+          x-stainless-empty-object: false
+        account_statement_ofx:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `account_statement_ofx`.
+          properties:
+            account_id:
+              description: The Account to create a statement for.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Accounts
+            created_at:
+              additionalProperties: true
+              description: Filter transactions by their created date.
+              properties:
+                before:
+                  description: Filter results to transactions created before this time.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                on_or_after:
+                  description: Filter results to transactions created on or after this time.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - account_id
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        account_verification_letter:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `account_verification_letter`.
+          properties:
+            account_number_id:
+              description: The Account Number to create a letter for.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Account Numbers
+            balance_date:
+              description: The date of the balance to include in the letter. Defaults to the current date.
+              format: date
+              type: string
+              x-documentation-priority: default
+          required:
+          - account_number_id
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        bookkeeping_account_balance_csv:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `bookkeeping_account_balance_csv`.
+          properties:
+            bookkeeping_account_id:
+              description: Filter exported Bookkeeping Account Balances to the specified Bookkeeping Account.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Bookkeeping Accounts
+            on_or_after_date:
+              description: Filter exported Balances to those on or after this date.
+              format: date
+              type: string
+              x-documentation-priority: default
+            on_or_before_date:
+              description: Filter exported Balances to those on or before this date.
+              format: date
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        category:
+          description: The type of Export to create.
+          enum:
+          - account_statement_ofx
+          - account_statement_bai2
+          - transaction_csv
+          - balance_csv
+          - bookkeeping_account_balance_csv
+          - entity_csv
+          - vendor_csv
+          - account_verification_letter
+          - funding_instructions
+          - voided_check
+          - daily_account_balance_csv
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Export an Open Financial Exchange (OFX) file of transactions and balances for a given time range and Account.
+          - Export a BAI2 file of transactions and balances for a given date and optional Account.
+          - Export a CSV of all transactions for a given time range.
+          - Export a CSV of account balances for the dates in a given range. (deprecated, use `daily_account_balance_csv` instead)
+          - Export a CSV of bookkeeping account balances for the dates in a given range.
+          - Export a CSV of entities with a given status.
+          - Export a CSV of vendors added to the third-party risk management dashboard.
+          - A PDF of an account verification letter.
+          - A PDF of funding instructions.
+          - A PDF of a voided check.
+          - Export a CSV of daily account balances with starting and ending balances for a given date range.
+        daily_account_balance_csv:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `daily_account_balance_csv`.
+          properties:
+            account_id:
+              description: Filter exported Balances to the specified Account.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Accounts
+            on_or_after_date:
+              description: Filter exported Balances to those on or after this date.
+              format: date
+              type: string
+              x-documentation-priority: default
+            on_or_before_date:
+              description: Filter exported Balances to those on or before this date.
+              format: date
+              type: string
+              x-documentation-priority: default
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        entity_csv:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `entity_csv`.
+          properties: {}
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: true
+        funding_instructions:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `funding_instructions`.
+          properties:
+            account_number_id:
+              description: The Account Number to create funding instructions for.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Account Numbers
+          required:
+          - account_number_id
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        transaction_csv:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `transaction_csv`.
+          properties:
+            account_id:
+              description: Filter exported Transactions to the specified Account.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Accounts
+            created_at:
+              additionalProperties: false
+              description: Filter results by time range on the `created_at` attribute.
+              properties:
+                after:
+                  description: Return results after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                before:
+                  description: Return results before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                on_or_after:
+                  description: Return results on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                on_or_before:
+                  description: Return results on or before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        vendor_csv:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `vendor_csv`.
+          properties: {}
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: true
+        voided_check:
+          additionalProperties: false
+          description: Options for the created export. Required if `category` is equal to `voided_check`.
+          properties:
+            account_number_id:
+              description: The Account Number for the voided check.
+              type: string
+              x-documentation-priority: default
+              x-id-reference-to: Account Numbers
+            payer:
+              description: The payer information to be printed on the check.
+              items:
+                additionalProperties: false
+                properties:
+                  line:
+                    description: The contents of the line.
+                    maxLength: 35
+                    minLength: 1
+                    pattern: ^[\u0000-\uFFFF]*$
+                    type: string
+                    x-documentation-priority: default
+                required:
+                - line
+                type: object
+                x-event-categories: []
+                x-stainless-empty-object: false
+              type: array
+              x-documentation-priority: default
+          required:
+          - account_number_id
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
       required:
-      - data
-      - next_cursor
-      title: Export List
+      - category
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Export Lists
     error:
       anyOf:
       - properties:
@@ -1485,14 +1441,58 @@ components:
         - status
         type: object
         x-event-categories: []
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
+    export_list:
+      additionalProperties: true
+      description: A list of Export objects.
+      example:
+        data:
+        - account_statement_bai2: null
+          account_statement_ofx: null
+          account_verification_letter: null
+          balance_csv: null
+          bookkeeping_account_balance_csv: null
+          category: transaction_csv
+          created_at: '2020-01-31T23:59:59Z'
+          daily_account_balance_csv: null
+          dashboard_table_csv: null
+          entity_csv: null
+          fee_csv: null
+          form_1099_int: null
+          form_1099_misc: null
+          funding_instructions: null
+          id: export_8s4m48qz3bclzje0zwh9
+          idempotency_key: null
+          result:
+            file_id: file_makxrc67oh9l6sg7w9yc
+          status: complete
+          transaction_csv:
+            account_id: account_in71c4amph0vgo2qllky
+            created_at: null
+          type: export
+          vendor_csv: null
+          voided_check: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/export'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Export List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Export Lists
   securitySchemes:
     bearerAuth:
       scheme: bearer

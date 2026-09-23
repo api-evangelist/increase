@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Oauth Connections API
   version: 0.0.1
 servers:
@@ -413,40 +413,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    oauth_connection_list:
-      additionalProperties: true
-      description: A list of OAuth Connection objects.
-      example:
-        data:
-        - created_at: '2020-01-31T23:59:59Z'
-          deleted_at: null
-          group_id: group_1g4mhziu6kvrs3vz35um
-          id: connection_dauknoksyr4wilz4e6my
-          oauth_application_id: application_gj9ufmpgh5i56k4vyriy
-          status: active
-          type: oauth_connection
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/oauth_connection'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: OAuth Connection List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: OAuth Connection Lists
     oauth_connection:
       additionalProperties: false
       description: When a user authorizes your OAuth application, an OAuth Connection object is created. Learn more about OAuth [here](https://increase.com/documentation/oauth).
@@ -516,6 +482,40 @@ components:
       x-stainless-empty-object: false
       x-tag: OAuth Connections
       x-title-plural: OAuth Connections
+    oauth_connection_list:
+      additionalProperties: true
+      description: A list of OAuth Connection objects.
+      example:
+        data:
+        - created_at: '2020-01-31T23:59:59Z'
+          deleted_at: null
+          group_id: group_1g4mhziu6kvrs3vz35um
+          id: connection_dauknoksyr4wilz4e6my
+          oauth_application_id: application_gj9ufmpgh5i56k4vyriy
+          status: active
+          type: oauth_connection
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/oauth_connection'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: OAuth Connection List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: OAuth Connection Lists
   responses:
     errorResponse:
       content:

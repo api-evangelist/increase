@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Entity Supplemental Documents API
   version: 0.0.1
 servers:
@@ -90,15 +90,78 @@ paths:
       tags:
       - Entity Supplemental Documents
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
+    entity_supplemental_document:
+      additionalProperties: false
+      description: Supplemental Documents are uploaded files connected to an Entity during onboarding.
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        file_id: file_makxrc67oh9l6sg7w9yc
+        idempotency_key: null
+        type: entity_supplemental_document
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Supplemental Document was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The Entity the supplemental document is attached to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        file_id:
+          description: The File containing the document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity_supplemental_document`.
+          enum:
+          - entity_supplemental_document
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - entity_id
+      - file_id
+      - created_at
+      - idempotency_key
+      title: Supplemental Document
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Supplemental Documents
+      x-title-plural: Supplemental Documents
+    create_a_supplemental_document_for_an_entity_parameters:
+      additionalProperties: true
+      example:
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        file_id: file_makxrc67oh9l6sg7w9yc
+      properties:
+        entity_id:
+          description: The identifier of the Entity to associate with the supplemental document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        file_id:
+          description: The identifier of the File containing the document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+      required:
+      - entity_id
+      - file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     entity_supplemental_document_list:
       additionalProperties: true
       description: A list of Supplemental Document objects.
@@ -131,28 +194,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Supplemental Document Lists
-    create_a_supplemental_document_for_an_entity_parameters:
-      additionalProperties: true
-      example:
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        file_id: file_makxrc67oh9l6sg7w9yc
-      properties:
-        entity_id:
-          description: The identifier of the Entity to associate with the supplemental document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        file_id:
-          description: The identifier of the File containing the document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-      required:
-      - entity_id
-      - file_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -464,55 +505,14 @@ components:
         - status
         type: object
         x-event-categories: []
-    entity_supplemental_document:
-      additionalProperties: false
-      description: Supplemental Documents are uploaded files connected to an Entity during onboarding.
-      example:
-        created_at: '2020-01-31T23:59:59Z'
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        file_id: file_makxrc67oh9l6sg7w9yc
-        idempotency_key: null
-        type: entity_supplemental_document
-      properties:
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Supplemental Document was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        entity_id:
-          description: The Entity the supplemental document is attached to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        file_id:
-          description: The File containing the document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `entity_supplemental_document`.
-          enum:
-          - entity_supplemental_document
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - entity_id
-      - file_id
-      - created_at
-      - idempotency_key
-      title: Supplemental Document
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-tag: Supplemental Documents
-      x-title-plural: Supplemental Documents
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

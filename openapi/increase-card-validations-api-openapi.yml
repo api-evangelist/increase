@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Card Validations API
   version: 0.0.1
 servers:
@@ -174,14 +174,6 @@ paths:
       tags:
       - Card Validations
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
     card_validation_list:
       additionalProperties: true
@@ -251,112 +243,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Validation Lists
-    create_a_card_validation_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
-        cardholder_first_name: Dee
-        cardholder_last_name: Hock
-        cardholder_middle_name: Ward
-        cardholder_postal_code: '10045'
-        cardholder_street_address: 33 Liberty Street
-        merchant_category_code: '1234'
-        merchant_city_name: New York
-        merchant_name: Acme Corp
-        merchant_postal_code: '10045'
-        merchant_state: NY
-      properties:
-        account_id:
-          description: The identifier of the Account from which to send the validation.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        card_token_id:
-          description: The Increase identifier for the Card Token that represents the card number you're validating.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Card Tokens
-        cardholder_first_name:
-          description: The cardholder's first name.
-          maxLength: 35
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        cardholder_last_name:
-          description: The cardholder's last name.
-          maxLength: 35
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        cardholder_middle_name:
-          description: The cardholder's middle name.
-          maxLength: 35
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        cardholder_postal_code:
-          description: The postal code of the cardholder's address.
-          maxLength: 9
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        cardholder_street_address:
-          description: The cardholder's street address.
-          maxLength: 40
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_category_code:
-          description: A four-digit code (MCC) identifying the type of business or service provided by the merchant.
-          maxLength: 4
-          minLength: 4
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        merchant_city_name:
-          description: The city where the merchant (typically your business) is located.
-          maxLength: 13
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_name:
-          description: The merchant name that will appear in the cardholder’s statement descriptor. Typically your business name.
-          maxLength: 25
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_postal_code:
-          description: The postal code for the merchant’s (typically your business’s) location.
-          maxLength: 10
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_state:
-          description: The U.S. state where the merchant (typically your business) is located.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - card_token_id
-      - merchant_city_name
-      - merchant_state
-      - merchant_postal_code
-      - merchant_category_code
-      - merchant_name
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     card_validation:
       additionalProperties: true
       description: Card Validations are used to validate a card and its cardholder before sending funds to or pulling funds from a card.
@@ -1276,6 +1162,120 @@ components:
         - status
         type: object
         x-event-categories: []
+    create_a_card_validation_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        cardholder_first_name: Dee
+        cardholder_last_name: Hock
+        cardholder_middle_name: Ward
+        cardholder_postal_code: '10045'
+        cardholder_street_address: 33 Liberty Street
+        merchant_category_code: '1234'
+        merchant_city_name: New York
+        merchant_name: Acme Corp
+        merchant_postal_code: '10045'
+        merchant_state: NY
+      properties:
+        account_id:
+          description: The identifier of the Account from which to send the validation.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        card_token_id:
+          description: The Increase identifier for the Card Token that represents the card number you're validating.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        cardholder_first_name:
+          description: The cardholder's first name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_last_name:
+          description: The cardholder's last name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_middle_name:
+          description: The cardholder's middle name.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_postal_code:
+          description: The postal code of the cardholder's address.
+          maxLength: 9
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        cardholder_street_address:
+          description: The cardholder's street address.
+          maxLength: 40
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_category_code:
+          description: A four-digit code (MCC) identifying the type of business or service provided by the merchant.
+          maxLength: 4
+          minLength: 4
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        merchant_city_name:
+          description: The city where the merchant (typically your business) is located.
+          maxLength: 13
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_name:
+          description: The merchant name that will appear in the cardholder’s statement descriptor. Typically your business name.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          description: The postal code for the merchant’s (typically your business’s) location.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_state:
+          description: The U.S. state where the merchant (typically your business) is located.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - card_token_id
+      - merchant_city_name
+      - merchant_state
+      - merchant_postal_code
+      - merchant_category_code
+      - merchant_name
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

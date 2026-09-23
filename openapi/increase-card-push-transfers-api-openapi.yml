@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Card Push Transfers API
   version: 0.0.1
 servers:
@@ -249,6 +249,562 @@ components:
             - $ref: '#/components/schemas/error'
       description: Error
   schemas:
+    create_a_card_push_transfer_parameters:
+      additionalProperties: true
+      example:
+        business_application_identifier: funds_disbursement
+        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        merchant_category_code: '5734'
+        merchant_city_name: New York
+        merchant_name: Acme Corp
+        merchant_name_prefix: Acme
+        merchant_postal_code: '10045'
+        merchant_state: NY
+        presentment_amount:
+          currency: USD
+          value: '1234.56'
+        recipient_name: Ian Crease
+        sender_address_city: New York
+        sender_address_line1: 33 Liberty Street
+        sender_address_postal_code: '10045'
+        sender_address_state: NY
+        sender_name: Ian Crease
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+      properties:
+        business_application_identifier:
+          description: The Business Application Identifier describes the type of transaction being performed. Your program must be approved for the specified Business Application Identifier in order to use it.
+          enum:
+          - account_to_account
+          - business_to_business
+          - money_transfer_bank_initiated
+          - non_card_bill_payment
+          - consumer_bill_payment
+          - card_bill_payment
+          - funds_disbursement
+          - funds_transfer
+          - loyalty_and_offers
+          - merchant_disbursement
+          - merchant_payment
+          - person_to_person
+          - top_up
+          - wallet_transfer
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Account to Account
+          - Business to Business
+          - Money Transfer Bank Initiated
+          - Non-Card Bill Payment
+          - Consumer Bill Payment
+          - Card Bill Payment
+          - Funds Disbursement
+          - Funds Transfer
+          - Loyalty and Offers
+          - Merchant Disbursement
+          - Merchant Payment
+          - Person to Person
+          - Top Up
+          - Wallet Transfer
+        card_token_id:
+          description: The Increase identifier for the Card Token that represents the card number you're pushing funds to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        merchant_category_code:
+          description: The merchant category code (MCC) of the merchant (generally your business) sending the transfer. This is a four-digit code that describes the type of business or service provided by the merchant. Your program must be approved for the specified MCC in order to use it.
+          maxLength: 4
+          minLength: 4
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        merchant_city_name:
+          description: The city name of the merchant (generally your business) sending the transfer.
+          maxLength: 13
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_legal_business_name:
+          description: The legal business name of the merchant (generally your business) sending the transfer. Required if the card is issued in Canada.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_name:
+          description: The merchant name shows up as the statement descriptor for the transfer. This is typically the name of your business or organization.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_name_prefix:
+          description: For certain Business Application Identifiers, the statement descriptor is `merchant_name_prefix*sender_name`, where the `merchant_name_prefix` is a one to four character prefix that identifies the merchant.
+          maxLength: 4
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          description: The postal code of the merchant (generally your business) sending the transfer.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        merchant_state:
+          description: The state of the merchant (generally your business) sending the transfer.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        merchant_street_address:
+          description: The street address of the merchant (generally your business) sending the transfer. Required if the card is issued in Canada.
+          maxLength: 99
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        presentment_amount:
+          additionalProperties: false
+          description: The amount to transfer. The receiving bank will convert this to the cardholder's currency. The amount that is applied to your Increase account matches the currency of your account.
+          properties:
+            currency:
+              description: The ISO 4217 currency code representing the currency of the amount.
+              enum:
+              - AFN
+              - EUR
+              - ALL
+              - DZD
+              - USD
+              - AOA
+              - ARS
+              - AMD
+              - AWG
+              - AUD
+              - AZN
+              - BSD
+              - BHD
+              - BDT
+              - BBD
+              - BYN
+              - BZD
+              - BMD
+              - INR
+              - BTN
+              - BOB
+              - BOV
+              - BAM
+              - BWP
+              - NOK
+              - BRL
+              - BND
+              - BGN
+              - BIF
+              - CVE
+              - KHR
+              - CAD
+              - KYD
+              - CLP
+              - CLF
+              - CNY
+              - COP
+              - COU
+              - KMF
+              - CDF
+              - NZD
+              - CRC
+              - CUP
+              - CZK
+              - DKK
+              - DJF
+              - DOP
+              - EGP
+              - SVC
+              - ERN
+              - SZL
+              - ETB
+              - FKP
+              - FJD
+              - GMD
+              - GEL
+              - GHS
+              - GIP
+              - GTQ
+              - GBP
+              - GNF
+              - GYD
+              - HTG
+              - HNL
+              - HKD
+              - HUF
+              - ISK
+              - IDR
+              - IRR
+              - IQD
+              - ILS
+              - JMD
+              - JPY
+              - JOD
+              - KZT
+              - KES
+              - KPW
+              - KRW
+              - KWD
+              - KGS
+              - LAK
+              - LBP
+              - LSL
+              - ZAR
+              - LRD
+              - LYD
+              - CHF
+              - MOP
+              - MKD
+              - MGA
+              - MWK
+              - MYR
+              - MVR
+              - MRU
+              - MUR
+              - MXN
+              - MXV
+              - MDL
+              - MNT
+              - MAD
+              - MZN
+              - MMK
+              - NAD
+              - NPR
+              - NIO
+              - NGN
+              - OMR
+              - PKR
+              - PAB
+              - PGK
+              - PYG
+              - PEN
+              - PHP
+              - PLN
+              - QAR
+              - RON
+              - RUB
+              - RWF
+              - SHP
+              - WST
+              - STN
+              - SAR
+              - RSD
+              - SCR
+              - SLE
+              - SGD
+              - SBD
+              - SOS
+              - SSP
+              - LKR
+              - SDG
+              - SRD
+              - SEK
+              - CHE
+              - CHW
+              - SYP
+              - TWD
+              - TJS
+              - TZS
+              - THB
+              - TOP
+              - TTD
+              - TND
+              - TRY
+              - TMT
+              - UGX
+              - UAH
+              - AED
+              - USN
+              - UYU
+              - UYI
+              - UYW
+              - UZS
+              - VUV
+              - VES
+              - VED
+              - VND
+              - YER
+              - ZMW
+              - ZWG
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - AFN
+              - EUR
+              - ALL
+              - DZD
+              - USD
+              - AOA
+              - ARS
+              - AMD
+              - AWG
+              - AUD
+              - AZN
+              - BSD
+              - BHD
+              - BDT
+              - BBD
+              - BYN
+              - BZD
+              - BMD
+              - INR
+              - BTN
+              - BOB
+              - BOV
+              - BAM
+              - BWP
+              - NOK
+              - BRL
+              - BND
+              - BGN
+              - BIF
+              - CVE
+              - KHR
+              - CAD
+              - KYD
+              - CLP
+              - CLF
+              - CNY
+              - COP
+              - COU
+              - KMF
+              - CDF
+              - NZD
+              - CRC
+              - CUP
+              - CZK
+              - DKK
+              - DJF
+              - DOP
+              - EGP
+              - SVC
+              - ERN
+              - SZL
+              - ETB
+              - FKP
+              - FJD
+              - GMD
+              - GEL
+              - GHS
+              - GIP
+              - GTQ
+              - GBP
+              - GNF
+              - GYD
+              - HTG
+              - HNL
+              - HKD
+              - HUF
+              - ISK
+              - IDR
+              - IRR
+              - IQD
+              - ILS
+              - JMD
+              - JPY
+              - JOD
+              - KZT
+              - KES
+              - KPW
+              - KRW
+              - KWD
+              - KGS
+              - LAK
+              - LBP
+              - LSL
+              - ZAR
+              - LRD
+              - LYD
+              - CHF
+              - MOP
+              - MKD
+              - MGA
+              - MWK
+              - MYR
+              - MVR
+              - MRU
+              - MUR
+              - MXN
+              - MXV
+              - MDL
+              - MNT
+              - MAD
+              - MZN
+              - MMK
+              - NAD
+              - NPR
+              - NIO
+              - NGN
+              - OMR
+              - PKR
+              - PAB
+              - PGK
+              - PYG
+              - PEN
+              - PHP
+              - PLN
+              - QAR
+              - RON
+              - RUB
+              - RWF
+              - SHP
+              - WST
+              - STN
+              - SAR
+              - RSD
+              - SCR
+              - SLE
+              - SGD
+              - SBD
+              - SOS
+              - SSP
+              - LKR
+              - SDG
+              - SRD
+              - SEK
+              - CHE
+              - CHW
+              - SYP
+              - TWD
+              - TJS
+              - TZS
+              - THB
+              - TOP
+              - TTD
+              - TND
+              - TRY
+              - TMT
+              - UGX
+              - UAH
+              - AED
+              - USN
+              - UYU
+              - UYI
+              - UYW
+              - UZS
+              - VUV
+              - VES
+              - VED
+              - VND
+              - YER
+              - ZMW
+              - ZWG
+            value:
+              description: The amount value as a decimal string in the currency's major unit. For example, for USD, '1234.56' represents 1234 dollars and 56 cents. For JPY, '1234' represents 1234 yen. A currency with minor units requires at least one decimal place and supports up to the number of decimal places defined by the currency's minor units. A currency without minor units does not support any decimal places.
+              pattern: ^-?\d+(\.\d+)?$
+              type: string
+              x-documentation-priority: default
+          required:
+          - value
+          - currency
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        recipient_address_city:
+          description: The city of the recipient. Required if the card is issued in Canada.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        recipient_address_line1:
+          description: The first line of the recipient's address. Required if the card is issued in Canada.
+          maxLength: 99
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        recipient_address_postal_code:
+          description: The postal code of the recipient. Required if the card is issued in Canada.
+          maxLength: 16
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        recipient_address_state:
+          description: The state or province of the recipient. Required if the card is issued in Canada.
+          maxLength: 3
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        recipient_name:
+          description: The name of the funds recipient.
+          maxLength: 30
+          minLength: 2
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        sender_address_city:
+          description: The city of the sender.
+          maxLength: 25
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        sender_address_line1:
+          description: The address line 1 of the sender.
+          maxLength: 35
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        sender_address_postal_code:
+          description: The postal code of the sender.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        sender_address_state:
+          description: The state of the sender.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        sender_name:
+          description: The name of the funds originator.
+          maxLength: 30
+          minLength: 1
+          pattern: ^[\x00-\x7F]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The identifier of the Account Number from which to send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+      required:
+      - source_account_number_id
+      - card_token_id
+      - presentment_amount
+      - merchant_city_name
+      - merchant_state
+      - merchant_postal_code
+      - merchant_category_code
+      - merchant_name
+      - merchant_name_prefix
+      - sender_name
+      - sender_address_line1
+      - sender_address_city
+      - sender_address_state
+      - sender_address_postal_code
+      - recipient_name
+      - business_application_identifier
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     card_push_transfer_list:
       additionalProperties: true
       description: A list of Card Push Transfer objects.
@@ -1285,562 +1841,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Card Push Transfers
       x-title-plural: Card Push Transfers
-    create_a_card_push_transfer_parameters:
-      additionalProperties: true
-      example:
-        business_application_identifier: funds_disbursement
-        card_token_id: outbound_card_token_zlt0ml6youq3q7vcdlg0
-        merchant_category_code: '5734'
-        merchant_city_name: New York
-        merchant_name: Acme Corp
-        merchant_name_prefix: Acme
-        merchant_postal_code: '10045'
-        merchant_state: NY
-        presentment_amount:
-          currency: USD
-          value: '1234.56'
-        recipient_name: Ian Crease
-        sender_address_city: New York
-        sender_address_line1: 33 Liberty Street
-        sender_address_postal_code: '10045'
-        sender_address_state: NY
-        sender_name: Ian Crease
-        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-      properties:
-        business_application_identifier:
-          description: The Business Application Identifier describes the type of transaction being performed. Your program must be approved for the specified Business Application Identifier in order to use it.
-          enum:
-          - account_to_account
-          - business_to_business
-          - money_transfer_bank_initiated
-          - non_card_bill_payment
-          - consumer_bill_payment
-          - card_bill_payment
-          - funds_disbursement
-          - funds_transfer
-          - loyalty_and_offers
-          - merchant_disbursement
-          - merchant_payment
-          - person_to_person
-          - top_up
-          - wallet_transfer
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Account to Account
-          - Business to Business
-          - Money Transfer Bank Initiated
-          - Non-Card Bill Payment
-          - Consumer Bill Payment
-          - Card Bill Payment
-          - Funds Disbursement
-          - Funds Transfer
-          - Loyalty and Offers
-          - Merchant Disbursement
-          - Merchant Payment
-          - Person to Person
-          - Top Up
-          - Wallet Transfer
-        card_token_id:
-          description: The Increase identifier for the Card Token that represents the card number you're pushing funds to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Card Tokens
-        merchant_category_code:
-          description: The merchant category code (MCC) of the merchant (generally your business) sending the transfer. This is a four-digit code that describes the type of business or service provided by the merchant. Your program must be approved for the specified MCC in order to use it.
-          maxLength: 4
-          minLength: 4
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        merchant_city_name:
-          description: The city name of the merchant (generally your business) sending the transfer.
-          maxLength: 13
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_legal_business_name:
-          description: The legal business name of the merchant (generally your business) sending the transfer. Required if the card is issued in Canada.
-          maxLength: 25
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_name:
-          description: The merchant name shows up as the statement descriptor for the transfer. This is typically the name of your business or organization.
-          maxLength: 25
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_name_prefix:
-          description: For certain Business Application Identifiers, the statement descriptor is `merchant_name_prefix*sender_name`, where the `merchant_name_prefix` is a one to four character prefix that identifies the merchant.
-          maxLength: 4
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_postal_code:
-          description: The postal code of the merchant (generally your business) sending the transfer.
-          maxLength: 10
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        merchant_state:
-          description: The state of the merchant (generally your business) sending the transfer.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        merchant_street_address:
-          description: The street address of the merchant (generally your business) sending the transfer. Required if the card is issued in Canada.
-          maxLength: 99
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        presentment_amount:
-          additionalProperties: false
-          description: The amount to transfer. The receiving bank will convert this to the cardholder's currency. The amount that is applied to your Increase account matches the currency of your account.
-          properties:
-            currency:
-              description: The ISO 4217 currency code representing the currency of the amount.
-              enum:
-              - AFN
-              - EUR
-              - ALL
-              - DZD
-              - USD
-              - AOA
-              - ARS
-              - AMD
-              - AWG
-              - AUD
-              - AZN
-              - BSD
-              - BHD
-              - BDT
-              - BBD
-              - BYN
-              - BZD
-              - BMD
-              - INR
-              - BTN
-              - BOB
-              - BOV
-              - BAM
-              - BWP
-              - NOK
-              - BRL
-              - BND
-              - BGN
-              - BIF
-              - CVE
-              - KHR
-              - CAD
-              - KYD
-              - CLP
-              - CLF
-              - CNY
-              - COP
-              - COU
-              - KMF
-              - CDF
-              - NZD
-              - CRC
-              - CUP
-              - CZK
-              - DKK
-              - DJF
-              - DOP
-              - EGP
-              - SVC
-              - ERN
-              - SZL
-              - ETB
-              - FKP
-              - FJD
-              - GMD
-              - GEL
-              - GHS
-              - GIP
-              - GTQ
-              - GBP
-              - GNF
-              - GYD
-              - HTG
-              - HNL
-              - HKD
-              - HUF
-              - ISK
-              - IDR
-              - IRR
-              - IQD
-              - ILS
-              - JMD
-              - JPY
-              - JOD
-              - KZT
-              - KES
-              - KPW
-              - KRW
-              - KWD
-              - KGS
-              - LAK
-              - LBP
-              - LSL
-              - ZAR
-              - LRD
-              - LYD
-              - CHF
-              - MOP
-              - MKD
-              - MGA
-              - MWK
-              - MYR
-              - MVR
-              - MRU
-              - MUR
-              - MXN
-              - MXV
-              - MDL
-              - MNT
-              - MAD
-              - MZN
-              - MMK
-              - NAD
-              - NPR
-              - NIO
-              - NGN
-              - OMR
-              - PKR
-              - PAB
-              - PGK
-              - PYG
-              - PEN
-              - PHP
-              - PLN
-              - QAR
-              - RON
-              - RUB
-              - RWF
-              - SHP
-              - WST
-              - STN
-              - SAR
-              - RSD
-              - SCR
-              - SLE
-              - SGD
-              - SBD
-              - SOS
-              - SSP
-              - LKR
-              - SDG
-              - SRD
-              - SEK
-              - CHE
-              - CHW
-              - SYP
-              - TWD
-              - TJS
-              - TZS
-              - THB
-              - TOP
-              - TTD
-              - TND
-              - TRY
-              - TMT
-              - UGX
-              - UAH
-              - AED
-              - USN
-              - UYU
-              - UYI
-              - UYW
-              - UZS
-              - VUV
-              - VES
-              - VED
-              - VND
-              - YER
-              - ZMW
-              - ZWG
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - AFN
-              - EUR
-              - ALL
-              - DZD
-              - USD
-              - AOA
-              - ARS
-              - AMD
-              - AWG
-              - AUD
-              - AZN
-              - BSD
-              - BHD
-              - BDT
-              - BBD
-              - BYN
-              - BZD
-              - BMD
-              - INR
-              - BTN
-              - BOB
-              - BOV
-              - BAM
-              - BWP
-              - NOK
-              - BRL
-              - BND
-              - BGN
-              - BIF
-              - CVE
-              - KHR
-              - CAD
-              - KYD
-              - CLP
-              - CLF
-              - CNY
-              - COP
-              - COU
-              - KMF
-              - CDF
-              - NZD
-              - CRC
-              - CUP
-              - CZK
-              - DKK
-              - DJF
-              - DOP
-              - EGP
-              - SVC
-              - ERN
-              - SZL
-              - ETB
-              - FKP
-              - FJD
-              - GMD
-              - GEL
-              - GHS
-              - GIP
-              - GTQ
-              - GBP
-              - GNF
-              - GYD
-              - HTG
-              - HNL
-              - HKD
-              - HUF
-              - ISK
-              - IDR
-              - IRR
-              - IQD
-              - ILS
-              - JMD
-              - JPY
-              - JOD
-              - KZT
-              - KES
-              - KPW
-              - KRW
-              - KWD
-              - KGS
-              - LAK
-              - LBP
-              - LSL
-              - ZAR
-              - LRD
-              - LYD
-              - CHF
-              - MOP
-              - MKD
-              - MGA
-              - MWK
-              - MYR
-              - MVR
-              - MRU
-              - MUR
-              - MXN
-              - MXV
-              - MDL
-              - MNT
-              - MAD
-              - MZN
-              - MMK
-              - NAD
-              - NPR
-              - NIO
-              - NGN
-              - OMR
-              - PKR
-              - PAB
-              - PGK
-              - PYG
-              - PEN
-              - PHP
-              - PLN
-              - QAR
-              - RON
-              - RUB
-              - RWF
-              - SHP
-              - WST
-              - STN
-              - SAR
-              - RSD
-              - SCR
-              - SLE
-              - SGD
-              - SBD
-              - SOS
-              - SSP
-              - LKR
-              - SDG
-              - SRD
-              - SEK
-              - CHE
-              - CHW
-              - SYP
-              - TWD
-              - TJS
-              - TZS
-              - THB
-              - TOP
-              - TTD
-              - TND
-              - TRY
-              - TMT
-              - UGX
-              - UAH
-              - AED
-              - USN
-              - UYU
-              - UYI
-              - UYW
-              - UZS
-              - VUV
-              - VES
-              - VED
-              - VND
-              - YER
-              - ZMW
-              - ZWG
-            value:
-              description: The amount value as a decimal string in the currency's major unit. For example, for USD, '1234.56' represents 1234 dollars and 56 cents. For JPY, '1234' represents 1234 yen. A currency with minor units requires at least one decimal place and supports up to the number of decimal places defined by the currency's minor units. A currency without minor units does not support any decimal places.
-              pattern: ^-?\d+(\.\d+)?$
-              type: string
-              x-documentation-priority: default
-          required:
-          - value
-          - currency
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        recipient_address_city:
-          description: The city of the recipient. Required if the card is issued in Canada.
-          maxLength: 25
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        recipient_address_line1:
-          description: The first line of the recipient's address. Required if the card is issued in Canada.
-          maxLength: 99
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        recipient_address_postal_code:
-          description: The postal code of the recipient. Required if the card is issued in Canada.
-          maxLength: 16
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        recipient_address_state:
-          description: The state or province of the recipient. Required if the card is issued in Canada.
-          maxLength: 3
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        recipient_name:
-          description: The name of the funds recipient.
-          maxLength: 30
-          minLength: 2
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        sender_address_city:
-          description: The city of the sender.
-          maxLength: 25
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        sender_address_line1:
-          description: The address line 1 of the sender.
-          maxLength: 35
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        sender_address_postal_code:
-          description: The postal code of the sender.
-          maxLength: 10
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        sender_address_state:
-          description: The state of the sender.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        sender_name:
-          description: The name of the funds originator.
-          maxLength: 30
-          minLength: 1
-          pattern: ^[\x00-\x7F]*$
-          type: string
-          x-documentation-priority: default
-        source_account_number_id:
-          description: The identifier of the Account Number from which to send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-      required:
-      - source_account_number_id
-      - card_token_id
-      - presentment_amount
-      - merchant_city_name
-      - merchant_state
-      - merchant_postal_code
-      - merchant_category_code
-      - merchant_name
-      - merchant_name_prefix
-      - sender_name
-      - sender_address_line1
-      - sender_address_city
-      - sender_address_state
-      - sender_address_postal_code
-      - recipient_name
-      - business_application_identifier
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:

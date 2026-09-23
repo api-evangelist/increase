@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Routing Numbers API
   version: 0.0.1
 servers:
@@ -14,7 +14,7 @@ tags:
 paths:
   /routing_numbers:
     get:
-      description: You can use this API to confirm if a routing number is valid, such as when a user is providing you with bank account details. Since routing numbers uniquely identify a bank, this will always return 0 or 1 entry. In Sandbox, only a few [routing numbers are valid](/documentation/sandbox-test-values#routing-numbers). `110000000` is an example of a Sandbox routing number.
+      description: You can use this API to confirm if a routing number is valid, such as when a user is providing you with bank account details. Since routing numbers uniquely identify a bank, this will always return 0 or 1 entry. In Sandbox, only a few routing numbers are valid. `110000000` is an example of a Sandbox routing number.
       operationId: list_routing_numbers
       parameters:
       - in: query
@@ -61,6 +61,86 @@ paths:
       - Routing Numbers
 components:
   schemas:
+    routing_number:
+      additionalProperties: false
+      description: Routing numbers are used to identify your bank in a financial transaction.
+      example:
+        ach_transfers: supported
+        fednow_transfers: supported
+        name: First Bank of the United States
+        real_time_payments_transfers: supported
+        routing_number: '021000021'
+        type: routing_number
+        wire_transfers: supported
+      properties:
+        ach_transfers:
+          description: This routing number's support for ACH Transfers.
+          enum:
+          - supported
+          - not_supported
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The routing number can receive this transfer type.
+          - The routing number cannot receive this transfer type.
+        fednow_transfers:
+          description: This routing number's support for FedNow Transfers.
+          enum:
+          - supported
+          - not_supported
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The routing number can receive this transfer type.
+          - The routing number cannot receive this transfer type.
+        name:
+          description: The name of the financial institution belonging to a routing number.
+          type: string
+          x-documentation-priority: default
+        real_time_payments_transfers:
+          description: This routing number's support for Real-Time Payments Transfers.
+          enum:
+          - supported
+          - not_supported
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The routing number can receive this transfer type.
+          - The routing number cannot receive this transfer type.
+        routing_number:
+          description: The nine digit routing number identifier.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `routing_number`.
+          enum:
+          - routing_number
+          type: string
+          x-documentation-priority: default
+        wire_transfers:
+          description: This routing number's support for Wire Transfers.
+          enum:
+          - supported
+          - not_supported
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The routing number can receive this transfer type.
+          - The routing number cannot receive this transfer type.
+      required:
+      - type
+      - name
+      - routing_number
+      - ach_transfers
+      - fednow_transfers
+      - real_time_payments_transfers
+      - wire_transfers
+      title: Routing Number
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Routing Numbers
+      x-title-plural: Routing Numbers
     routing_number_list:
       additionalProperties: true
       description: A list of Routing Number objects.
@@ -406,86 +486,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    routing_number:
-      additionalProperties: false
-      description: Routing numbers are used to identify your bank in a financial transaction.
-      example:
-        ach_transfers: supported
-        fednow_transfers: supported
-        name: First Bank of the United States
-        real_time_payments_transfers: supported
-        routing_number: '021000021'
-        type: routing_number
-        wire_transfers: supported
-      properties:
-        ach_transfers:
-          description: This routing number's support for ACH Transfers.
-          enum:
-          - supported
-          - not_supported
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The routing number can receive this transfer type.
-          - The routing number cannot receive this transfer type.
-        fednow_transfers:
-          description: This routing number's support for FedNow Transfers.
-          enum:
-          - supported
-          - not_supported
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The routing number can receive this transfer type.
-          - The routing number cannot receive this transfer type.
-        name:
-          description: The name of the financial institution belonging to a routing number.
-          type: string
-          x-documentation-priority: default
-        real_time_payments_transfers:
-          description: This routing number's support for Real-Time Payments Transfers.
-          enum:
-          - supported
-          - not_supported
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The routing number can receive this transfer type.
-          - The routing number cannot receive this transfer type.
-        routing_number:
-          description: The nine digit routing number identifier.
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `routing_number`.
-          enum:
-          - routing_number
-          type: string
-          x-documentation-priority: default
-        wire_transfers:
-          description: This routing number's support for Wire Transfers.
-          enum:
-          - supported
-          - not_supported
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The routing number can receive this transfer type.
-          - The routing number cannot receive this transfer type.
-      required:
-      - type
-      - name
-      - routing_number
-      - ach_transfers
-      - fednow_transfers
-      - real_time_payments_transfers
-      - wire_transfers
-      title: Routing Number
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-tag: Routing Numbers
-      x-title-plural: Routing Numbers
   responses:
     errorResponse:
       content:

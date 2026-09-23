@@ -62,7 +62,9 @@
     "increase-wire-drawdown-requests-api-openapi.yml",
     "increase-wire-transfers-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -323,7 +325,9 @@
     "increase-openapi.json: declared missing tag: Oauth Connections",
     "increase-openapi.json: declared missing tag: Real Time Decisions",
     "increase-openapi.json: declared missing tag: Real Time Payments Transfers",
-    "increase-openapi.json: declared missing tag: Simulations"
+    "increase-openapi.json: declared missing tag: Simulations",
+    "superseded outputs removed: increase-o-auth-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 57 total)"
   ],
   "skipped": [
     "increase-account-numbers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -363,11 +367,12 @@
     "increase-inbound-real-time-payments-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-inbound-wire-drawdown-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-inbound-wire-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "increase-increase-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-intrafi-account-enrollments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-intrafi-exclusions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-lockbox-addresses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-lockbox-recipients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "increase-oauth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "increase-o-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-oauth-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-oauth-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "increase-pending-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Transactions API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: Transactions are the immutable additions and removals of money from your bank account. They're the equivalent of line items on your bank statement. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
+- description: Transactions are the immutable additions and removals of money from your bank account. They're the equivalent of line items on your bank statement. To learn more, see Transactions and Transfers.
   name: Transactions
 paths:
   /transactions:
@@ -213,85 +213,24 @@ paths:
       - Transactions
 components:
   schemas:
-    check_transfer_deposit:
+    inbound_wire_transfer_reversal:
       additionalProperties: true
-      description: An Inbound Check is a check drawn on an Increase account that has been deposited by an external bank account. These types of checks are not pre-registered.
+      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
       example:
-        back_image_file_id: file_makxrc67oh9l6sg7w9yc
-        bank_of_first_deposit_routing_number: null
-        deposited_at: '2020-01-31T23:59:59Z'
-        front_image_file_id: file_makxrc67oh9l6sg7w9yc
-        inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
-        transaction_id: transaction_uyrp7fld2ium70oa7oi
-        transfer_id: check_transfer_30b43acfu9vw8fyc4f5
-        type: check_transfer_deposit
+        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
       properties:
-        back_image_file_id:
-          anyOf:
-          - description: The identifier of the API File object containing an image of the back of the deposited check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        bank_of_first_deposit_routing_number:
-          anyOf:
-          - description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the bank depositing this check. In some rare cases, this is not transmitted via Check21 and the value will be null.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        deposited_at:
-          description: When the check was deposited.
-          format: date-time
+        inbound_wire_transfer_id:
+          description: The ID of the Inbound Wire Transfer that is being reversed.
           type: string
           x-documentation-priority: default
-        front_image_file_id:
-          anyOf:
-          - description: The identifier of the API File object containing an image of the front of the deposited check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        inbound_check_deposit_id:
-          anyOf:
-          - description: The identifier of the Inbound Check Deposit object associated with this transaction.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Inbound Check Deposits
-          - type: 'null'
-        transaction_id:
-          anyOf:
-          - description: The identifier of the Transaction object created when the check was deposited.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        transfer_id:
-          anyOf:
-          - description: The identifier of the Check Transfer object that was deposited.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Check Transfers
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `check_transfer_deposit`.
-          enum:
-          - check_transfer_deposit
-          type: string
-          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Transfers
       required:
-      - type
-      - deposited_at
-      - transaction_id
-      - front_image_file_id
-      - back_image_file_id
-      - bank_of_first_deposit_routing_number
-      - inbound_check_deposit_id
-      - transfer_id
-      title: Check Transfer Deposit
+      - inbound_wire_transfer_id
+      title: Inbound Wire Transfer Reversal Intention
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Check Transfer Deposits
+      x-title-plural: Inbound Wire Transfer Reversal Intentions
     inbound_check_deposit_return_intention:
       additionalProperties: true
       description: An Inbound Check Deposit Return Intention is created when Increase receives an Inbound Check and the User requests that it be returned.
@@ -319,6 +258,56 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Inbound Check Deposit Return Intentions
+    transaction_list:
+      additionalProperties: true
+      description: A list of Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 100
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          id: transaction_uyrp7fld2ium70oa7oi
+          route_id: account_number_v18nkfqm6afpsrvy82b2
+          route_type: account_number
+          source:
+            category: inbound_ach_transfer
+            inbound_ach_transfer:
+              addenda: null
+              amount: 100
+              originator_company_descriptive_date: null
+              originator_company_discretionary_data: null
+              originator_company_entry_description: RESERVE
+              originator_company_id: 0987654321
+              originator_company_name: BIG BANK
+              receiver_id_number: '12345678900'
+              receiver_name: IAN CREASE
+              trace_number: 021000038461022
+              transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+          type: transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Transaction Lists
     inbound_ach_transfer_return_intention:
       additionalProperties: true
       description: An Inbound ACH Transfer Return Intention is created when an ACH transfer is initiated at another bank and returned by Increase.
@@ -337,15 +326,16 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Inbound ACH Transfer Return Intentions
-    card_refund:
+    card_settlement:
       additionalProperties: true
-      description: Card Refunds move money back to the cardholder. While they are usually connected to a Card Settlement, an acquirer can also refund money directly to a card without relation to a transaction.
+      description: Card Settlements are card transactions that have cleared and settled. While a settlement is usually preceded by an authorization, an acquirer can also directly clear a transaction without first authorizing it.
       example:
         amount: 100
+        card_authorization: null
         card_payment_id: card_payment_nd3k2kacrqjli8482ave
         cashback: null
         currency: USD
-        id: card_refund_imgc2xwplh6t4r3gn16e
+        id: card_settlement_khv5kfeu0vndj291omg6
         interchange:
           amount: '0.137465'
           code: '271'
@@ -357,11 +347,13 @@ components:
         merchant_name: AMAZON.COM
         merchant_postal_code: '10045'
         merchant_state: NY
+        network: visa
         network_identifiers:
           acquirer_business_id: '69650702'
           acquirer_reference_number: '83163715445437604865089'
           authorization_identification_response: ABC123
           transaction_id: '627199945183184'
+        pending_transaction_id: null
         presentment_amount: 100
         presentment_currency: USD
         purchase_details:
@@ -398,13 +390,20 @@ components:
           fee_type: visa_corporate_acceptance_fee
           fixed_component: null
           variable_rate: '0.0002'
+        surcharge: null
         transaction_id: transaction_uyrp7fld2ium70oa7oi
-        type: card_refund
+        type: card_settlement
       properties:
         amount:
           description: The amount in the minor unit of the transaction's settlement currency. For dollars, for example, this is cents.
           type: integer
           x-documentation-priority: default
+        card_authorization:
+          anyOf:
+          - description: The Card Authorization that was created prior to this Card Settlement, if one exists.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
         card_payment_id:
           description: The ID of the Card Payment this transaction belongs to.
           type: string
@@ -413,7 +412,7 @@ components:
         cashback:
           anyOf:
           - additionalProperties: false
-            description: Cashback debited for this transaction, if eligible. Cashback is paid out in aggregate, monthly.
+            description: Cashback earned on this transaction, if eligible. Cashback is paid out in aggregate, monthly.
             example:
               amount: '0.137465'
               currency: USD
@@ -434,7 +433,7 @@ components:
             required:
             - amount
             - currency
-            title: Card Refund Cashback
+            title: Card Settlement Cashback
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -450,10 +449,10 @@ components:
           x-enum-descriptions:
           - US Dollar (USD)
         id:
-          description: The Card Refund identifier.
+          description: The Card Settlement identifier.
           type: string
           x-documentation-priority: default
-          x-id-reference-to: Card Refunds
+          x-id-reference-to: Card Settlements
         interchange:
           anyOf:
           - additionalProperties: false
@@ -486,7 +485,7 @@ components:
             - amount
             - currency
             - code
-            title: Card Refund Card Interchange
+            title: Card Settlement Card Interchange
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -525,6 +524,16 @@ components:
             type: string
             x-documentation-priority: default
           - type: 'null'
+        network:
+          description: The card network on which this transaction was processed.
+          enum:
+          - visa
+          - pulse
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Visa
+          - Pulse
         network_identifiers:
           additionalProperties: false
           description: Network-specific identifiers for this refund.
@@ -554,12 +563,19 @@ components:
           - acquirer_reference_number
           - acquirer_business_id
           - authorization_identification_response
-          title: Card Refund NetworkIdentifiers
+          title: Card Settlement NetworkIdentifiers
           type: object
           x-documentation-priority: default
           x-event-categories: []
           x-stainless-empty-object: false
           x-title-plural: NetworkIdentifiers
+        pending_transaction_id:
+          anyOf:
+          - description: The identifier of the Pending Transaction associated with this Transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
         presentment_amount:
           description: The amount in the minor unit of the transaction's presentment currency.
           type: integer
@@ -739,7 +755,7 @@ components:
                   - one_way_drop_off_charges_currency
                   - car_class_code
                   - renter_name
-                  title: Card Refund Card Purchase Details CarRental
+                  title: Card Settlement Card Purchase Details CarRental
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -905,7 +921,7 @@ components:
                   - room_nights
                   - total_room_tax_amount
                   - total_room_tax_currency
-                  title: Card Refund Card Purchase Details Lodging
+                  title: Card Settlement Card Purchase Details Lodging
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -1056,7 +1072,7 @@ components:
                               required:
                               - category
                               - sub_category
-                              title: Card Refund Card Purchase Details Travel Ancillary ServicesElement
+                              title: Card Settlement Card Purchase Details Travel Ancillary ServicesElement
                               type: object
                               x-event-categories: []
                               x-stainless-empty-object: false
@@ -1075,7 +1091,7 @@ components:
                         - connected_ticket_document_number
                         - credit_reason_indicator
                         - services
-                        title: Card Refund Card Purchase Details Travel Ancillary
+                        title: Card Settlement Card Purchase Details Travel Ancillary
                         type: object
                         x-documentation-priority: default
                         x-event-categories: []
@@ -1228,7 +1244,7 @@ components:
                           - service_class
                           - stop_over_code
                           - destination_city_airport_code
-                          title: Card Refund Card Purchase Details Travel TripLegsElement
+                          title: Card Settlement Card Purchase Details Travel TripLegsElement
                           type: object
                           x-event-categories: []
                           x-stainless-empty-object: false
@@ -1249,7 +1265,7 @@ components:
                   - ticket_change_indicator
                   - trip_legs
                   - ancillary
-                  title: Card Refund Card Purchase Details Travel
+                  title: Card Settlement Card Purchase Details Travel
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -1267,7 +1283,7 @@ components:
             - car_rental
             - lodging
             - travel
-            title: Card Refund Card Purchase Details
+            title: Card Settlement Card Purchase Details
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -1275,7 +1291,7 @@ components:
             x-title-plural: Card Purchase Details
           - type: 'null'
         scheme_fees:
-          description: The scheme fees associated with this card refund.
+          description: The scheme fees associated with this card settlement.
           items:
             additionalProperties: false
             example:
@@ -1389,28 +1405,52 @@ components:
             - fee_type
             - variable_rate
             - fixed_component
-            title: Card Refund Card Scheme Fee
+            title: Card Settlement Card Scheme Fee
             type: object
             x-event-categories: []
             x-stainless-empty-object: false
             x-title-plural: Card Scheme Fees
           type: array
           x-documentation-priority: default
+        surcharge:
+          anyOf:
+          - additionalProperties: false
+            description: Surcharge amount details, if applicable. The amount is positive if the surcharge is added to the overall transaction amount (surcharge), and negative if the surcharge is deducted from the overall transaction amount (discount).
+            properties:
+              amount:
+                description: The surcharge amount in the minor unit of the transaction's settlement currency.
+                type: integer
+                x-documentation-priority: default
+              presentment_amount:
+                description: The surcharge amount in the minor unit of the transaction's presentment currency.
+                type: integer
+                x-documentation-priority: default
+            required:
+            - amount
+            - presentment_amount
+            title: Card Settlement Surcharge
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Surcharges
+          - type: 'null'
         transaction_id:
           description: The identifier of the Transaction associated with this Transaction.
           type: string
           x-documentation-priority: default
           x-id-reference-to: Transactions
         type:
-          description: A constant representing the object's type. For this resource it will always be `card_refund`.
+          description: A constant representing the object's type. For this resource it will always be `card_settlement`.
           enum:
-          - card_refund
+          - card_settlement
           type: string
           x-documentation-priority: default
       required:
       - type
       - id
       - card_payment_id
+      - card_authorization
       - amount
       - currency
       - presentment_amount
@@ -1418,21 +1458,56 @@ components:
       - merchant_acceptor_id
       - merchant_city
       - merchant_state
-      - merchant_postal_code
       - merchant_country
       - merchant_name
+      - merchant_postal_code
       - merchant_category_code
+      - transaction_id
+      - pending_transaction_id
       - interchange
       - cashback
       - purchase_details
+      - surcharge
       - scheme_fees
-      - transaction_id
+      - network
       - network_identifiers
-      title: Card Refund
+      title: Card Settlement
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Card Refunds
+      x-title-plural: Card Settlements
+    card_dispute_financial_visa:
+      additionalProperties: false
+      example:
+        event_type: chargeback_submitted
+      properties:
+        event_type:
+          description: The type of card dispute financial event.
+          enum:
+          - chargeback_submitted
+          - merchant_prearbitration_decline_submitted
+          - merchant_prearbitration_received
+          - represented
+          - user_prearbitration_decline_received
+          - user_prearbitration_submitted
+          - user_withdrawal_submitted
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The user's chargeback was submitted.
+          - The user declined the merchant's pre-arbitration submission.
+          - The merchant's pre-arbitration submission was received.
+          - The transaction was re-presented by the merchant.
+          - The user's pre-arbitration was declined by the merchant.
+          - The user's pre-arbitration was submitted.
+          - The user withdrew from the dispute.
+      required:
+      - event_type
+      title: Card Dispute Financial Visa-specific details
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Dispute Financial Visa-specific details
     transaction:
       additionalProperties: true
       description: Transactions are the immutable additions and removals of money from your bank account. They're the equivalent of line items on your bank statement. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
@@ -3369,24 +3444,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Transactions
       x-title-plural: Transactions
-    inbound_wire_transfer_reversal:
-      additionalProperties: true
-      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
-      example:
-        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-      properties:
-        inbound_wire_transfer_id:
-          description: The ID of the Inbound Wire Transfer that is being reversed.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Inbound Wire Transfers
-      required:
-      - inbound_wire_transfer_id
-      title: Inbound Wire Transfer Reversal Intention
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Wire Transfer Reversal Intentions
     card_financial:
       additionalProperties: true
       description: Card Financials are temporary holds placed on a customer's funds with the intent to later clear a transaction.
@@ -4348,38 +4405,48 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Financials
-    card_dispute_financial_visa:
-      additionalProperties: false
+    inbound_check_adjustment:
+      additionalProperties: true
+      description: An Inbound Check Adjustment is created when Increase receives an adjustment for a check or return deposited through Check21.
       example:
-        event_type: chargeback_submitted
+        adjusted_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        amount: 1750
+        reason: late_return
       properties:
-        event_type:
-          description: The type of card dispute financial event.
+        adjusted_transaction_id:
+          description: The ID of the transaction that was adjusted.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Transactions
+        amount:
+          description: The amount of the check adjustment.
+          type: integer
+          x-documentation-priority: default
+        reason:
+          description: The reason for the adjustment.
           enum:
-          - chargeback_submitted
-          - merchant_prearbitration_decline_submitted
-          - merchant_prearbitration_received
-          - represented
-          - user_prearbitration_decline_received
-          - user_prearbitration_submitted
-          - user_withdrawal_submitted
+          - late_return
+          - wrong_payee_credit
+          - adjusted_amount
+          - non_conforming_item
+          - paid
           type: string
           x-documentation-priority: default
           x-enum-descriptions:
-          - The user's chargeback was submitted.
-          - The user declined the merchant's pre-arbitration submission.
-          - The merchant's pre-arbitration submission was received.
-          - The transaction was re-presented by the merchant.
-          - The user's pre-arbitration was declined by the merchant.
-          - The user's pre-arbitration was submitted.
-          - The user withdrew from the dispute.
+          - The return was initiated too late and the receiving institution has responded with a Late Return Claim.
+          - The check was deposited to the wrong payee and the depositing institution has reimbursed the funds with a Wrong Payee Credit.
+          - The check was deposited with a different amount than what was written on the check.
+          - The recipient was not able to process the check. This usually happens for e.g., low quality images.
+          - The check has already been deposited elsewhere and so this is a duplicate.
       required:
-      - event_type
-      title: Card Dispute Financial Visa-specific details
+      - adjusted_transaction_id
+      - amount
+      - reason
+      title: Inbound Check Adjustment
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Card Dispute Financial Visa-specific details
+      x-title-plural: Inbound Check Adjustments
     error:
       anyOf:
       - properties:
@@ -4691,16 +4758,15 @@ components:
         - status
         type: object
         x-event-categories: []
-    card_settlement:
+    card_refund:
       additionalProperties: true
-      description: Card Settlements are card transactions that have cleared and settled. While a settlement is usually preceded by an authorization, an acquirer can also directly clear a transaction without first authorizing it.
+      description: Card Refunds move money back to the cardholder. While they are usually connected to a Card Settlement, an acquirer can also refund money directly to a card without relation to a transaction.
       example:
         amount: 100
-        card_authorization: null
         card_payment_id: card_payment_nd3k2kacrqjli8482ave
         cashback: null
         currency: USD
-        id: card_settlement_khv5kfeu0vndj291omg6
+        id: card_refund_imgc2xwplh6t4r3gn16e
         interchange:
           amount: '0.137465'
           code: '271'
@@ -4712,13 +4778,11 @@ components:
         merchant_name: AMAZON.COM
         merchant_postal_code: '10045'
         merchant_state: NY
-        network: visa
         network_identifiers:
           acquirer_business_id: '69650702'
           acquirer_reference_number: '83163715445437604865089'
           authorization_identification_response: ABC123
           transaction_id: '627199945183184'
-        pending_transaction_id: null
         presentment_amount: 100
         presentment_currency: USD
         purchase_details:
@@ -4755,20 +4819,13 @@ components:
           fee_type: visa_corporate_acceptance_fee
           fixed_component: null
           variable_rate: '0.0002'
-        surcharge: null
         transaction_id: transaction_uyrp7fld2ium70oa7oi
-        type: card_settlement
+        type: card_refund
       properties:
         amount:
           description: The amount in the minor unit of the transaction's settlement currency. For dollars, for example, this is cents.
           type: integer
           x-documentation-priority: default
-        card_authorization:
-          anyOf:
-          - description: The Card Authorization that was created prior to this Card Settlement, if one exists.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
         card_payment_id:
           description: The ID of the Card Payment this transaction belongs to.
           type: string
@@ -4777,7 +4834,7 @@ components:
         cashback:
           anyOf:
           - additionalProperties: false
-            description: Cashback earned on this transaction, if eligible. Cashback is paid out in aggregate, monthly.
+            description: Cashback debited for this transaction, if eligible. Cashback is paid out in aggregate, monthly.
             example:
               amount: '0.137465'
               currency: USD
@@ -4798,7 +4855,7 @@ components:
             required:
             - amount
             - currency
-            title: Card Settlement Cashback
+            title: Card Refund Cashback
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -4814,10 +4871,10 @@ components:
           x-enum-descriptions:
           - US Dollar (USD)
         id:
-          description: The Card Settlement identifier.
+          description: The Card Refund identifier.
           type: string
           x-documentation-priority: default
-          x-id-reference-to: Card Settlements
+          x-id-reference-to: Card Refunds
         interchange:
           anyOf:
           - additionalProperties: false
@@ -4850,7 +4907,7 @@ components:
             - amount
             - currency
             - code
-            title: Card Settlement Card Interchange
+            title: Card Refund Card Interchange
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -4889,16 +4946,6 @@ components:
             type: string
             x-documentation-priority: default
           - type: 'null'
-        network:
-          description: The card network on which this transaction was processed.
-          enum:
-          - visa
-          - pulse
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Visa
-          - Pulse
         network_identifiers:
           additionalProperties: false
           description: Network-specific identifiers for this refund.
@@ -4928,19 +4975,12 @@ components:
           - acquirer_reference_number
           - acquirer_business_id
           - authorization_identification_response
-          title: Card Settlement NetworkIdentifiers
+          title: Card Refund NetworkIdentifiers
           type: object
           x-documentation-priority: default
           x-event-categories: []
           x-stainless-empty-object: false
           x-title-plural: NetworkIdentifiers
-        pending_transaction_id:
-          anyOf:
-          - description: The identifier of the Pending Transaction associated with this Transaction.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Pending Transactions
-          - type: 'null'
         presentment_amount:
           description: The amount in the minor unit of the transaction's presentment currency.
           type: integer
@@ -5120,7 +5160,7 @@ components:
                   - one_way_drop_off_charges_currency
                   - car_class_code
                   - renter_name
-                  title: Card Settlement Card Purchase Details CarRental
+                  title: Card Refund Card Purchase Details CarRental
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -5286,7 +5326,7 @@ components:
                   - room_nights
                   - total_room_tax_amount
                   - total_room_tax_currency
-                  title: Card Settlement Card Purchase Details Lodging
+                  title: Card Refund Card Purchase Details Lodging
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -5437,7 +5477,7 @@ components:
                               required:
                               - category
                               - sub_category
-                              title: Card Settlement Card Purchase Details Travel Ancillary ServicesElement
+                              title: Card Refund Card Purchase Details Travel Ancillary ServicesElement
                               type: object
                               x-event-categories: []
                               x-stainless-empty-object: false
@@ -5456,7 +5496,7 @@ components:
                         - connected_ticket_document_number
                         - credit_reason_indicator
                         - services
-                        title: Card Settlement Card Purchase Details Travel Ancillary
+                        title: Card Refund Card Purchase Details Travel Ancillary
                         type: object
                         x-documentation-priority: default
                         x-event-categories: []
@@ -5609,7 +5649,7 @@ components:
                           - service_class
                           - stop_over_code
                           - destination_city_airport_code
-                          title: Card Settlement Card Purchase Details Travel TripLegsElement
+                          title: Card Refund Card Purchase Details Travel TripLegsElement
                           type: object
                           x-event-categories: []
                           x-stainless-empty-object: false
@@ -5630,7 +5670,7 @@ components:
                   - ticket_change_indicator
                   - trip_legs
                   - ancillary
-                  title: Card Settlement Card Purchase Details Travel
+                  title: Card Refund Card Purchase Details Travel
                   type: object
                   x-documentation-priority: default
                   x-event-categories: []
@@ -5648,7 +5688,7 @@ components:
             - car_rental
             - lodging
             - travel
-            title: Card Settlement Card Purchase Details
+            title: Card Refund Card Purchase Details
             type: object
             x-documentation-priority: default
             x-event-categories: []
@@ -5656,7 +5696,7 @@ components:
             x-title-plural: Card Purchase Details
           - type: 'null'
         scheme_fees:
-          description: The scheme fees associated with this card settlement.
+          description: The scheme fees associated with this card refund.
           items:
             additionalProperties: false
             example:
@@ -5770,52 +5810,28 @@ components:
             - fee_type
             - variable_rate
             - fixed_component
-            title: Card Settlement Card Scheme Fee
+            title: Card Refund Card Scheme Fee
             type: object
             x-event-categories: []
             x-stainless-empty-object: false
             x-title-plural: Card Scheme Fees
           type: array
           x-documentation-priority: default
-        surcharge:
-          anyOf:
-          - additionalProperties: false
-            description: Surcharge amount details, if applicable. The amount is positive if the surcharge is added to the overall transaction amount (surcharge), and negative if the surcharge is deducted from the overall transaction amount (discount).
-            properties:
-              amount:
-                description: The surcharge amount in the minor unit of the transaction's settlement currency.
-                type: integer
-                x-documentation-priority: default
-              presentment_amount:
-                description: The surcharge amount in the minor unit of the transaction's presentment currency.
-                type: integer
-                x-documentation-priority: default
-            required:
-            - amount
-            - presentment_amount
-            title: Card Settlement Surcharge
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Surcharges
-          - type: 'null'
         transaction_id:
           description: The identifier of the Transaction associated with this Transaction.
           type: string
           x-documentation-priority: default
           x-id-reference-to: Transactions
         type:
-          description: A constant representing the object's type. For this resource it will always be `card_settlement`.
+          description: A constant representing the object's type. For this resource it will always be `card_refund`.
           enum:
-          - card_settlement
+          - card_refund
           type: string
           x-documentation-priority: default
       required:
       - type
       - id
       - card_payment_id
-      - card_authorization
       - amount
       - currency
       - presentment_amount
@@ -5823,116 +5839,100 @@ components:
       - merchant_acceptor_id
       - merchant_city
       - merchant_state
+      - merchant_postal_code
       - merchant_country
       - merchant_name
-      - merchant_postal_code
       - merchant_category_code
-      - transaction_id
-      - pending_transaction_id
       - interchange
       - cashback
       - purchase_details
-      - surcharge
       - scheme_fees
-      - network
+      - transaction_id
       - network_identifiers
-      title: Card Settlement
+      title: Card Refund
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Card Settlements
-    transaction_list:
+      x-title-plural: Card Refunds
+    check_transfer_deposit:
       additionalProperties: true
-      description: A list of Transaction objects.
+      description: An Inbound Check is a check drawn on an Increase account that has been deposited by an external bank account. These types of checks are not pre-registered.
       example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 100
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          description: INVOICE 2468
-          id: transaction_uyrp7fld2ium70oa7oi
-          route_id: account_number_v18nkfqm6afpsrvy82b2
-          route_type: account_number
-          source:
-            category: inbound_ach_transfer
-            inbound_ach_transfer:
-              addenda: null
-              amount: 100
-              originator_company_descriptive_date: null
-              originator_company_discretionary_data: null
-              originator_company_entry_description: RESERVE
-              originator_company_id: 0987654321
-              originator_company_name: BIG BANK
-              receiver_id_number: '12345678900'
-              receiver_name: IAN CREASE
-              trace_number: 021000038461022
-              transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-          type: transaction
-        next_cursor: v57w5d
+        back_image_file_id: file_makxrc67oh9l6sg7w9yc
+        bank_of_first_deposit_routing_number: null
+        deposited_at: '2020-01-31T23:59:59Z'
+        front_image_file_id: file_makxrc67oh9l6sg7w9yc
+        inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        transfer_id: check_transfer_30b43acfu9vw8fyc4f5
+        type: check_transfer_deposit
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/transaction'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
+        back_image_file_id:
           anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+          - description: The identifier of the API File object containing an image of the back of the deposited check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        bank_of_first_deposit_routing_number:
+          anyOf:
+          - description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the bank depositing this check. In some rare cases, this is not transmitted via Check21 and the value will be null.
             type: string
             x-documentation-priority: default
           - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Transaction List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Transaction Lists
-    inbound_check_adjustment:
-      additionalProperties: true
-      description: An Inbound Check Adjustment is created when Increase receives an adjustment for a check or return deposited through Check21.
-      example:
-        adjusted_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        amount: 1750
-        reason: late_return
-      properties:
-        adjusted_transaction_id:
-          description: The ID of the transaction that was adjusted.
+        deposited_at:
+          description: When the check was deposited.
+          format: date-time
           type: string
           x-documentation-priority: default
-          x-id-reference-to: Transactions
-        amount:
-          description: The amount of the check adjustment.
-          type: integer
-          x-documentation-priority: default
-        reason:
-          description: The reason for the adjustment.
+        front_image_file_id:
+          anyOf:
+          - description: The identifier of the API File object containing an image of the front of the deposited check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        inbound_check_deposit_id:
+          anyOf:
+          - description: The identifier of the Inbound Check Deposit object associated with this transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Check Deposits
+          - type: 'null'
+        transaction_id:
+          anyOf:
+          - description: The identifier of the Transaction object created when the check was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        transfer_id:
+          anyOf:
+          - description: The identifier of the Check Transfer object that was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Check Transfers
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `check_transfer_deposit`.
           enum:
-          - late_return
-          - wrong_payee_credit
-          - adjusted_amount
-          - non_conforming_item
-          - paid
+          - check_transfer_deposit
           type: string
           x-documentation-priority: default
-          x-enum-descriptions:
-          - The return was initiated too late and the receiving institution has responded with a Late Return Claim.
-          - The check was deposited to the wrong payee and the depositing institution has reimbursed the funds with a Wrong Payee Credit.
-          - The check was deposited with a different amount than what was written on the check.
-          - The recipient was not able to process the check. This usually happens for e.g., low quality images.
-          - The check has already been deposited elsewhere and so this is a duplicate.
       required:
-      - adjusted_transaction_id
-      - amount
-      - reason
-      title: Inbound Check Adjustment
+      - type
+      - deposited_at
+      - transaction_id
+      - front_image_file_id
+      - back_image_file_id
+      - bank_of_first_deposit_routing_number
+      - inbound_check_deposit_id
+      - transfer_id
+      title: Check Transfer Deposit
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Inbound Check Adjustments
+      x-title-plural: Check Transfer Deposits
   responses:
     errorResponse:
       content:

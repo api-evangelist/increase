@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API. We've always wanted a fully programmatic bank so we built one. Our API faithfully exposes the data and capabilities of the Federal Reserve, Visa, The Clearing House, depository networks, and accounting tools. It's lovingly boring and exceptionally powerful. If you have any questions or want to get started, don't hesitate to ping us at sales@increase.com. We can't wait to see what you build!
+  description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
   title: Increase Entity Onboarding Sessions API
   version: 0.0.1
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms. Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
+- description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms. Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected back to your site. This API is used for hosted onboarding.
   name: Entity Onboarding Sessions
 paths:
   /entity_onboarding_sessions:
@@ -165,6 +165,69 @@ components:
             - $ref: '#/components/schemas/error'
       description: Error
   schemas:
+    create_an_entity_onboarding_session_parameters:
+      additionalProperties: true
+      example:
+        program_id: program_i2v2os4mwza1oetokh9i
+        redirect_url: https://example.com/onboarding/session
+      properties:
+        entity_id:
+          description: The identifier of an existing Entity to associate with the onboarding session. If provided, the onboarding form will display any outstanding tasks required to complete the Entity's onboarding.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        program_id:
+          description: The identifier of the Program the Entity will be onboarded to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        redirect_url:
+          description: The URL to redirect the customer to after they complete the onboarding form. The redirect will include `entity_onboarding_session_id` and `entity_id` query parameters.
+          type: string
+          x-documentation-priority: default
+      required:
+      - redirect_url
+      - program_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity_onboarding_session_list:
+      additionalProperties: true
+      description: A list of Entity Onboarding Session objects.
+      example:
+        data:
+        - created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          expires_at: '2020-02-01T05:59:59+00:00'
+          id: entity_onboarding_session_wid2ug11fsmvh3k9hymd
+          idempotency_key: null
+          program_id: program_i2v2os4mwza1oetokh9i
+          redirect_url: https://example.com/onboarding/completed
+          session_url: https://onboarding.increase.com/onboarding/sessions?id=HIrdj46cXyyNqT5RDcIR38dzPqzRBgTdG84XwzOz
+          status: active
+          type: entity_onboarding_session
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity_onboarding_session'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Entity Onboarding Session List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Entity Onboarding Session Lists
     entity_onboarding_session:
       additionalProperties: false
       description: Entity Onboarding Sessions let your customers onboard themselves by completing Increase-hosted forms. Create a session and redirect your customer to the returned URL. When they're done, they'll be redirected back to your site. This API is used for [hosted onboarding](/documentation/hosted-onboarding).
@@ -567,69 +630,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    create_an_entity_onboarding_session_parameters:
-      additionalProperties: true
-      example:
-        program_id: program_i2v2os4mwza1oetokh9i
-        redirect_url: https://example.com/onboarding/session
-      properties:
-        entity_id:
-          description: The identifier of an existing Entity to associate with the onboarding session. If provided, the onboarding form will display any outstanding tasks required to complete the Entity's onboarding.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        program_id:
-          description: The identifier of the Program the Entity will be onboarded to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Programs
-        redirect_url:
-          description: The URL to redirect the customer to after they complete the onboarding form. The redirect will include `entity_onboarding_session_id` and `entity_id` query parameters.
-          type: string
-          x-documentation-priority: default
-      required:
-      - redirect_url
-      - program_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    entity_onboarding_session_list:
-      additionalProperties: true
-      description: A list of Entity Onboarding Session objects.
-      example:
-        data:
-        - created_at: '2020-01-31T23:59:59Z'
-          entity_id: entity_n8y8tnk2p9339ti393yi
-          expires_at: '2020-02-01T05:59:59+00:00'
-          id: entity_onboarding_session_wid2ug11fsmvh3k9hymd
-          idempotency_key: null
-          program_id: program_i2v2os4mwza1oetokh9i
-          redirect_url: https://example.com/onboarding/completed
-          session_url: https://onboarding.increase.com/onboarding/sessions?id=HIrdj46cXyyNqT5RDcIR38dzPqzRBgTdG84XwzOz
-          status: active
-          type: entity_onboarding_session
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/entity_onboarding_session'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Entity Onboarding Session List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Entity Onboarding Session Lists
   securitySchemes:
     bearerAuth:
       scheme: bearer
