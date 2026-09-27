@@ -148,14 +148,6 @@ paths:
       tags:
       - Intrafi Exclusions
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
     create_an_intrafi_exclusion_parameters:
       additionalProperties: true
@@ -180,144 +172,6 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    intrafi_exclusion:
-      additionalProperties: false
-      description: Certain institutions may be excluded per Entity when sweeping funds into the IntraFi network. This is useful when an Entity already has deposits at a particular bank, and does not want to sweep additional funds to it. It may take 5 business days for an exclusion to be processed.
-      example:
-        bank_name: Example Bank
-        created_at: '2020-01-31T23:59:59Z'
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        excluded_at: '2020-02-01T23:59:59+00:00'
-        fdic_certificate_number: '314159'
-        id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
-        idempotency_key: null
-        status: completed
-        submitted_at: '2020-02-01T00:59:59+00:00'
-        type: intrafi_exclusion
-      properties:
-        bank_name:
-          anyOf:
-          - description: The name of the excluded institution.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the exclusion was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        entity_id:
-          description: The entity for which this institution is excluded.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        excluded_at:
-          anyOf:
-          - description: When this was exclusion was confirmed by IntraFi.
-            format: date-time
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        fdic_certificate_number:
-          anyOf:
-          - description: The Federal Deposit Insurance Corporation's certificate number for the institution.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        id:
-          description: The identifier of this exclusion request.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: IntraFi Exclusions
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        status:
-          description: The status of the exclusion request.
-          enum:
-          - pending
-          - completed
-          - archived
-          - ineligible
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The exclusion is being added to the IntraFi network.
-          - The exclusion has been added to the IntraFi network.
-          - The exclusion has been removed from the IntraFi network.
-          - The exclusion wasn't eligible to be added to the IntraFi network.
-        submitted_at:
-          anyOf:
-          - description: When this was exclusion was submitted to IntraFi by Increase.
-            format: date-time
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `intrafi_exclusion`.
-          enum:
-          - intrafi_exclusion
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - created_at
-      - submitted_at
-      - excluded_at
-      - bank_name
-      - fdic_certificate_number
-      - entity_id
-      - status
-      - idempotency_key
-      title: IntraFi Exclusion
-      type: object
-      x-event-categories:
-      - intrafi_exclusion.created
-      - intrafi_exclusion.updated
-      x-stainless-empty-object: false
-      x-tag: IntraFi Exclusions
-      x-title-plural: IntraFi Exclusions
-    intrafi_exclusion_list:
-      additionalProperties: true
-      description: A list of IntraFi Exclusion objects.
-      example:
-        data:
-        - bank_name: Example Bank
-          created_at: '2020-01-31T23:59:59Z'
-          entity_id: entity_n8y8tnk2p9339ti393yi
-          excluded_at: '2020-02-01T23:59:59+00:00'
-          fdic_certificate_number: '314159'
-          id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
-          idempotency_key: null
-          status: completed
-          submitted_at: '2020-02-01T00:59:59+00:00'
-          type: intrafi_exclusion
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/intrafi_exclusion'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: IntraFi Exclusion List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: IntraFi Exclusion Lists
     error:
       anyOf:
       - properties:
@@ -629,6 +483,152 @@ components:
         - status
         type: object
         x-event-categories: []
+    intrafi_exclusion:
+      additionalProperties: false
+      description: Certain institutions may be excluded per Entity when sweeping funds into the IntraFi network. This is useful when an Entity already has deposits at a particular bank, and does not want to sweep additional funds to it. It may take 5 business days for an exclusion to be processed.
+      example:
+        bank_name: Example Bank
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        excluded_at: '2020-02-01T23:59:59+00:00'
+        fdic_certificate_number: '314159'
+        id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+        idempotency_key: null
+        status: completed
+        submitted_at: '2020-02-01T00:59:59+00:00'
+        type: intrafi_exclusion
+      properties:
+        bank_name:
+          anyOf:
+          - description: The name of the excluded institution.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the exclusion was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The entity for which this institution is excluded.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        excluded_at:
+          anyOf:
+          - description: When this was exclusion was confirmed by IntraFi.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        fdic_certificate_number:
+          anyOf:
+          - description: The Federal Deposit Insurance Corporation's certificate number for the institution.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        id:
+          description: The identifier of this exclusion request.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: IntraFi Exclusions
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the exclusion request.
+          enum:
+          - pending
+          - completed
+          - archived
+          - ineligible
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The exclusion is being added to the IntraFi network.
+          - The exclusion has been added to the IntraFi network.
+          - The exclusion has been removed from the IntraFi network.
+          - The exclusion wasn't eligible to be added to the IntraFi network.
+        submitted_at:
+          anyOf:
+          - description: When this was exclusion was submitted to IntraFi by Increase.
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `intrafi_exclusion`.
+          enum:
+          - intrafi_exclusion
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - submitted_at
+      - excluded_at
+      - bank_name
+      - fdic_certificate_number
+      - entity_id
+      - status
+      - idempotency_key
+      title: IntraFi Exclusion
+      type: object
+      x-event-categories:
+      - intrafi_exclusion.created
+      - intrafi_exclusion.updated
+      x-stainless-empty-object: false
+      x-tag: IntraFi Exclusions
+      x-title-plural: IntraFi Exclusions
+    intrafi_exclusion_list:
+      additionalProperties: true
+      description: A list of IntraFi Exclusion objects.
+      example:
+        data:
+        - bank_name: Example Bank
+          created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          excluded_at: '2020-02-01T23:59:59+00:00'
+          fdic_certificate_number: '314159'
+          id: intrafi_exclusion_ygfqduuzpau3jqof6jyh
+          idempotency_key: null
+          status: completed
+          submitted_at: '2020-02-01T00:59:59+00:00'
+          type: intrafi_exclusion
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_exclusion'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Exclusion List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Exclusion Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

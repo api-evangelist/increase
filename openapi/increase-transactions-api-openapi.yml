@@ -213,24 +213,6 @@ paths:
       - Transactions
 components:
   schemas:
-    inbound_wire_transfer_reversal:
-      additionalProperties: true
-      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
-      example:
-        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-      properties:
-        inbound_wire_transfer_id:
-          description: The ID of the Inbound Wire Transfer that is being reversed.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Inbound Wire Transfers
-      required:
-      - inbound_wire_transfer_id
-      title: Inbound Wire Transfer Reversal Intention
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Wire Transfer Reversal Intentions
     inbound_check_deposit_return_intention:
       additionalProperties: true
       description: An Inbound Check Deposit Return Intention is created when Increase receives an Inbound Check and the User requests that it be returned.
@@ -258,74 +240,1463 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Inbound Check Deposit Return Intentions
-    transaction_list:
+    inbound_wire_transfer_reversal:
       additionalProperties: true
-      description: A list of Transaction objects.
+      description: An Inbound Wire Transfer Reversal Intention is created when Increase has received a wire and the User requests that it be reversed.
       example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 100
+        inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+      properties:
+        inbound_wire_transfer_id:
+          description: The ID of the Inbound Wire Transfer that is being reversed.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound Wire Transfers
+      required:
+      - inbound_wire_transfer_id
+      title: Inbound Wire Transfer Reversal Intention
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Wire Transfer Reversal Intentions
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    card_refund:
+      additionalProperties: true
+      description: Card Refunds move money back to the cardholder. While they are usually connected to a Card Settlement, an acquirer can also refund money directly to a card without relation to a transaction.
+      example:
+        amount: 100
+        card_payment_id: card_payment_nd3k2kacrqjli8482ave
+        cashback: null
+        currency: USD
+        id: card_refund_imgc2xwplh6t4r3gn16e
+        interchange:
+          amount: '0.137465'
+          code: '271'
+          currency: USD
+        merchant_acceptor_id: '5665270011000168'
+        merchant_category_code: '5734'
+        merchant_city: New York
+        merchant_country: US
+        merchant_name: AMAZON.COM
+        merchant_postal_code: '10045'
+        merchant_state: NY
+        network_identifiers:
+          acquirer_business_id: '69650702'
+          acquirer_reference_number: '83163715445437604865089'
+          authorization_identification_response: ABC123
+          transaction_id: '627199945183184'
+        presentment_amount: 100
+        presentment_currency: USD
+        purchase_details:
+          car_rental: null
+          customer_reference_identifier: '51201'
+          local_tax_amount: null
+          local_tax_currency: usd
+          lodging:
+            check_in_date: '2023-07-20'
+            daily_room_rate_amount: 1000
+            daily_room_rate_currency: usd
+            extra_charges: restaurant
+            folio_cash_advances_amount: 0
+            folio_cash_advances_currency: usd
+            food_beverage_charges_amount: 0
+            food_beverage_charges_currency: usd
+            no_show_indicator: no_show
+            prepaid_expenses_amount: 0
+            prepaid_expenses_currency: usd
+            room_nights: 1
+            total_room_tax_amount: 100
+            total_room_tax_currency: usd
+            total_tax_amount: 100
+            total_tax_currency: usd
+          national_tax_amount: null
+          national_tax_currency: usd
+          purchase_identifier: '10203'
+          purchase_identifier_format: order_number
+          travel: null
+        scheme_fees:
+        - amount: '0.137465'
           created_at: '2020-01-31T23:59:59Z'
           currency: USD
-          description: INVOICE 2468
-          id: transaction_uyrp7fld2ium70oa7oi
-          route_id: account_number_v18nkfqm6afpsrvy82b2
-          route_type: account_number
-          source:
-            category: inbound_ach_transfer
-            inbound_ach_transfer:
-              addenda: null
-              amount: 100
-              originator_company_descriptive_date: null
-              originator_company_discretionary_data: null
-              originator_company_entry_description: RESERVE
-              originator_company_id: 0987654321
-              originator_company_name: BIG BANK
-              receiver_id_number: '12345678900'
-              receiver_name: IAN CREASE
-              trace_number: 021000038461022
-              transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-          type: transaction
-        next_cursor: v57w5d
+          fee_type: visa_corporate_acceptance_fee
+          fixed_component: null
+          variable_rate: '0.0002'
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        type: card_refund
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/transaction'
-          type: array
+        amount:
+          description: The amount in the minor unit of the transaction's settlement currency. For dollars, for example, this is cents.
+          type: integer
           x-documentation-priority: default
-        next_cursor:
+        card_payment_id:
+          description: The ID of the Card Payment this transaction belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Payments
+        cashback:
           anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+          - additionalProperties: false
+            description: Cashback debited for this transaction, if eligible. Cashback is paid out in aggregate, monthly.
+            example:
+              amount: '0.137465'
+              currency: USD
+            properties:
+              amount:
+                description: The cashback amount given as a string containing a decimal number. The amount is a positive number if it will be credited to you (e.g., settlements) and a negative number if it will be debited (e.g., refunds).
+                pattern: ^-?\d+(\.\d+)?$
+                type: string
+                x-documentation-priority: default
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the cashback.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+            required:
+            - amount
+            - currency
+            title: Card Refund Cashback
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Cashbacks
+          - type: 'null'
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's settlement currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        id:
+          description: The Card Refund identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Refunds
+        interchange:
+          anyOf:
+          - additionalProperties: false
+            description: Interchange assessed as a part of this transaction.
+            example:
+              amount: '0.137465'
+              code: '271'
+              currency: USD
+            properties:
+              amount:
+                description: The interchange amount given as a string containing a decimal number in major units (so e.g., "3.14" for $3.14). The amount is a positive number if it is credited to Increase (e.g., settlements) and a negative number if it is debited (e.g., refunds).
+                pattern: ^-?\d+(\.\d+)?$
+                type: string
+                x-documentation-priority: default
+              code:
+                anyOf:
+                - description: The card network specific interchange code.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the interchange reimbursement.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+            required:
+            - amount
+            - currency
+            - code
+            title: Card Refund Card Interchange
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Interchanges
+          - type: 'null'
+        merchant_acceptor_id:
+          description: The merchant identifier (commonly abbreviated as MID) of the merchant the card is transacting with.
+          type: string
+          x-documentation-priority: default
+        merchant_category_code:
+          description: The 4-digit MCC describing the merchant's business.
+          type: string
+          x-documentation-priority: default
+        merchant_city:
+          description: The city the merchant resides in.
+          type: string
+          x-documentation-priority: default
+        merchant_country:
+          description: The country the merchant resides in.
+          type: string
+          x-documentation-priority: default
+        merchant_name:
+          description: The name of the merchant.
+          type: string
+          x-documentation-priority: default
+        merchant_postal_code:
+          anyOf:
+          - description: The merchant's postal code. For US merchants this is always a 5-digit ZIP code.
             type: string
             x-documentation-priority: default
           - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Transaction List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Transaction Lists
-    inbound_ach_transfer_return_intention:
-      additionalProperties: true
-      description: An Inbound ACH Transfer Return Intention is created when an ACH transfer is initiated at another bank and returned by Increase.
-      example:
-        inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-      properties:
-        inbound_ach_transfer_id:
-          description: The ID of the Inbound ACH Transfer that is being returned.
+        merchant_state:
+          anyOf:
+          - description: The state the merchant resides in.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        network_identifiers:
+          additionalProperties: false
+          description: Network-specific identifiers for this refund.
+          properties:
+            acquirer_business_id:
+              description: A network assigned business ID that identifies the acquirer that processed this transaction.
+              type: string
+              x-documentation-priority: default
+            acquirer_reference_number:
+              description: A globally unique identifier for this settlement.
+              type: string
+              x-documentation-priority: default
+            authorization_identification_response:
+              anyOf:
+              - description: The randomly generated 6-character Authorization Identification Response code sent back to the acquirer in an approved response.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+            transaction_id:
+              anyOf:
+              - description: A globally unique transaction identifier provided by the card network, used across multiple life-cycle requests.
+                type: string
+                x-documentation-priority: default
+              - type: 'null'
+          required:
+          - transaction_id
+          - acquirer_reference_number
+          - acquirer_business_id
+          - authorization_identification_response
+          title: Card Refund NetworkIdentifiers
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+          x-title-plural: NetworkIdentifiers
+        presentment_amount:
+          description: The amount in the minor unit of the transaction's presentment currency.
+          type: integer
+          x-documentation-priority: default
+        presentment_currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's presentment currency.
           type: string
           x-documentation-priority: default
-          x-id-reference-to: Inbound ACH Transfers
+        purchase_details:
+          anyOf:
+          - additionalProperties: false
+            description: Additional details about the card purchase, such as tax and industry-specific fields.
+            example:
+              car_rental: null
+              customer_reference_identifier: '51201'
+              local_tax_amount: null
+              local_tax_currency: usd
+              lodging:
+                check_in_date: '2023-07-20'
+                daily_room_rate_amount: 1000
+                daily_room_rate_currency: usd
+                extra_charges: restaurant
+                folio_cash_advances_amount: 0
+                folio_cash_advances_currency: usd
+                food_beverage_charges_amount: 0
+                food_beverage_charges_currency: usd
+                no_show_indicator: no_show
+                prepaid_expenses_amount: 0
+                prepaid_expenses_currency: usd
+                room_nights: 1
+                total_room_tax_amount: 100
+                total_room_tax_currency: usd
+                total_tax_amount: 100
+                total_tax_currency: usd
+              national_tax_amount: null
+              national_tax_currency: usd
+              purchase_identifier: '10203'
+              purchase_identifier_format: order_number
+              travel: null
+            properties:
+              car_rental:
+                anyOf:
+                - additionalProperties: false
+                  description: Fields specific to car rentals.
+                  properties:
+                    car_class_code:
+                      anyOf:
+                      - description: Code indicating the vehicle's class.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    checkout_date:
+                      anyOf:
+                      - description: Date the customer picked up the car or, in the case of a no-show or pre-pay transaction, the scheduled pick up date.
+                        format: date
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    daily_rental_rate_amount:
+                      anyOf:
+                      - description: Daily rate being charged for the vehicle.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    daily_rental_rate_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the daily rental rate.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    days_rented:
+                      anyOf:
+                      - description: Number of days the vehicle was rented.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    extra_charges:
+                      anyOf:
+                      - description: Additional charges (gas, late fee, etc.) being billed.
+                        enum:
+                        - no_extra_charge
+                        - gas
+                        - extra_mileage
+                        - late_return
+                        - one_way_service_fee
+                        - parking_violation
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - No extra charge
+                        - Gas
+                        - Extra mileage
+                        - Late return
+                        - One way service fee
+                        - Parking violation
+                      - type: 'null'
+                    fuel_charges_amount:
+                      anyOf:
+                      - description: Fuel charges for the vehicle.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    fuel_charges_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the fuel charges assessed.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    insurance_charges_amount:
+                      anyOf:
+                      - description: Any insurance being charged for the vehicle.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    insurance_charges_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the insurance charges assessed.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    no_show_indicator:
+                      anyOf:
+                      - description: An indicator that the cardholder is being billed for a reserved vehicle that was not actually rented (that is, a "no-show" charge).
+                        enum:
+                        - not_applicable
+                        - no_show_for_specialized_vehicle
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - Not applicable
+                        - No show for specialized vehicle
+                      - type: 'null'
+                    one_way_drop_off_charges_amount:
+                      anyOf:
+                      - description: Charges for returning the vehicle at a different location than where it was picked up.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    one_way_drop_off_charges_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the one-way drop-off charges assessed.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    renter_name:
+                      anyOf:
+                      - description: Name of the person renting the vehicle.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    weekly_rental_rate_amount:
+                      anyOf:
+                      - description: Weekly rate being charged for the vehicle.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    weekly_rental_rate_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the weekly rental rate.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - extra_charges
+                  - days_rented
+                  - no_show_indicator
+                  - checkout_date
+                  - daily_rental_rate_amount
+                  - daily_rental_rate_currency
+                  - weekly_rental_rate_amount
+                  - weekly_rental_rate_currency
+                  - insurance_charges_amount
+                  - insurance_charges_currency
+                  - fuel_charges_amount
+                  - fuel_charges_currency
+                  - one_way_drop_off_charges_amount
+                  - one_way_drop_off_charges_currency
+                  - car_class_code
+                  - renter_name
+                  title: Card Refund Card Purchase Details CarRental
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: CarRentals
+                - type: 'null'
+              customer_reference_identifier:
+                anyOf:
+                - description: An identifier from the merchant for the customer or consumer.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              local_tax_amount:
+                anyOf:
+                - description: The state or provincial tax amount in minor units.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              local_tax_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the local tax assessed.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              lodging:
+                anyOf:
+                - additionalProperties: false
+                  description: Fields specific to lodging.
+                  properties:
+                    check_in_date:
+                      anyOf:
+                      - description: Date the customer checked in.
+                        format: date
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    daily_room_rate_amount:
+                      anyOf:
+                      - description: Daily rate being charged for the room.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    daily_room_rate_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the daily room rate.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    extra_charges:
+                      anyOf:
+                      - description: Additional charges (phone, late check-out, etc.) being billed.
+                        enum:
+                        - no_extra_charge
+                        - restaurant
+                        - gift_shop
+                        - mini_bar
+                        - telephone
+                        - other
+                        - laundry
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - No extra charge
+                        - Restaurant
+                        - Gift shop
+                        - Mini bar
+                        - Telephone
+                        - Other
+                        - Laundry
+                      - type: 'null'
+                    folio_cash_advances_amount:
+                      anyOf:
+                      - description: Folio cash advances for the room.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    folio_cash_advances_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the folio cash advances.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    food_beverage_charges_amount:
+                      anyOf:
+                      - description: Food and beverage charges for the room.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    food_beverage_charges_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the food and beverage charges.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    no_show_indicator:
+                      anyOf:
+                      - description: Indicator that the cardholder is being billed for a reserved room that was not actually used.
+                        enum:
+                        - not_applicable
+                        - no_show
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - Not applicable
+                        - No show
+                      - type: 'null'
+                    prepaid_expenses_amount:
+                      anyOf:
+                      - description: Prepaid expenses being charged for the room.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    prepaid_expenses_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the prepaid expenses.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    room_nights:
+                      anyOf:
+                      - description: Number of nights the room was rented.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    total_room_tax_amount:
+                      anyOf:
+                      - description: Total room tax being charged.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    total_room_tax_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the total room tax.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    total_tax_amount:
+                      anyOf:
+                      - description: Total tax being charged for the room.
+                        type: integer
+                        x-documentation-priority: default
+                      - type: 'null'
+                    total_tax_currency:
+                      anyOf:
+                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the total tax assessed.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - no_show_indicator
+                  - extra_charges
+                  - check_in_date
+                  - daily_room_rate_amount
+                  - daily_room_rate_currency
+                  - total_tax_amount
+                  - total_tax_currency
+                  - prepaid_expenses_amount
+                  - prepaid_expenses_currency
+                  - food_beverage_charges_amount
+                  - food_beverage_charges_currency
+                  - folio_cash_advances_amount
+                  - folio_cash_advances_currency
+                  - room_nights
+                  - total_room_tax_amount
+                  - total_room_tax_currency
+                  title: Card Refund Card Purchase Details Lodging
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Lodgings
+                - type: 'null'
+              national_tax_amount:
+                anyOf:
+                - description: The national tax amount in minor units.
+                  type: integer
+                  x-documentation-priority: default
+                - type: 'null'
+              national_tax_currency:
+                anyOf:
+                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the local tax assessed.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              purchase_identifier:
+                anyOf:
+                - description: An identifier from the merchant for the purchase to the issuer and cardholder.
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              purchase_identifier_format:
+                anyOf:
+                - description: The format of the purchase identifier.
+                  enum:
+                  - free_text
+                  - order_number
+                  - rental_agreement_number
+                  - hotel_folio_number
+                  - invoice_number
+                  type: string
+                  x-documentation-priority: default
+                  x-enum-descriptions:
+                  - Free text
+                  - Order number
+                  - Rental agreement number
+                  - Hotel folio number
+                  - Invoice number
+                - type: 'null'
+              travel:
+                anyOf:
+                - additionalProperties: false
+                  description: Fields specific to travel.
+                  properties:
+                    ancillary:
+                      anyOf:
+                      - additionalProperties: false
+                        description: Ancillary purchases in addition to the airfare.
+                        properties:
+                          connected_ticket_document_number:
+                            anyOf:
+                            - description: If this purchase has a connection or relationship to another purchase, such as a baggage fee for a passenger transport ticket, this field should contain the ticket document number for the other purchase.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          credit_reason_indicator:
+                            anyOf:
+                            - description: Indicates the reason for a credit to the cardholder.
+                              enum:
+                              - no_credit
+                              - passenger_transport_ancillary_purchase_cancellation
+                              - airline_ticket_and_passenger_transport_ancillary_purchase_cancellation
+                              - other
+                              type: string
+                              x-documentation-priority: default
+                              x-enum-descriptions:
+                              - No credit
+                              - Passenger transport ancillary purchase cancellation
+                              - Airline ticket and passenger transport ancillary purchase cancellation
+                              - Other
+                            - type: 'null'
+                          passenger_name_or_description:
+                            anyOf:
+                            - description: Name of the passenger or description of the ancillary purchase.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                          services:
+                            description: Additional travel charges, such as baggage fees.
+                            items:
+                              additionalProperties: false
+                              properties:
+                                category:
+                                  anyOf:
+                                  - description: Category of the ancillary service.
+                                    enum:
+                                    - none
+                                    - bundled_service
+                                    - baggage_fee
+                                    - change_fee
+                                    - cargo
+                                    - carbon_offset
+                                    - frequent_flyer
+                                    - gift_card
+                                    - ground_transport
+                                    - in_flight_entertainment
+                                    - lounge
+                                    - medical
+                                    - meal_beverage
+                                    - other
+                                    - passenger_assist_fee
+                                    - pets
+                                    - seat_fees
+                                    - standby
+                                    - service_fee
+                                    - store
+                                    - travel_service
+                                    - unaccompanied_travel
+                                    - upgrades
+                                    - wifi
+                                    type: string
+                                    x-documentation-priority: default
+                                    x-enum-descriptions:
+                                    - None
+                                    - Bundled service
+                                    - Baggage fee
+                                    - Change fee
+                                    - Cargo
+                                    - Carbon offset
+                                    - Frequent flyer
+                                    - Gift card
+                                    - Ground transport
+                                    - In-flight entertainment
+                                    - Lounge
+                                    - Medical
+                                    - Meal beverage
+                                    - Other
+                                    - Passenger assist fee
+                                    - Pets
+                                    - Seat fees
+                                    - Standby
+                                    - Service fee
+                                    - Store
+                                    - Travel service
+                                    - Unaccompanied travel
+                                    - Upgrades
+                                    - Wi-fi
+                                  - type: 'null'
+                                sub_category:
+                                  anyOf:
+                                  - description: Sub-category of the ancillary service, free-form.
+                                    type: string
+                                    x-documentation-priority: default
+                                  - type: 'null'
+                              required:
+                              - category
+                              - sub_category
+                              title: Card Refund Card Purchase Details Travel Ancillary ServicesElement
+                              type: object
+                              x-event-categories: []
+                              x-stainless-empty-object: false
+                              x-title-plural: ServicesElements
+                            type: array
+                            x-documentation-priority: default
+                          ticket_document_number:
+                            anyOf:
+                            - description: Ticket document number.
+                              type: string
+                              x-documentation-priority: default
+                            - type: 'null'
+                        required:
+                        - ticket_document_number
+                        - passenger_name_or_description
+                        - connected_ticket_document_number
+                        - credit_reason_indicator
+                        - services
+                        title: Card Refund Card Purchase Details Travel Ancillary
+                        type: object
+                        x-documentation-priority: default
+                        x-event-categories: []
+                        x-stainless-empty-object: false
+                        x-title-plural: Ancillaries
+                      - type: 'null'
+                    computerized_reservation_system:
+                      anyOf:
+                      - description: Indicates the computerized reservation system used to book the ticket.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    credit_reason_indicator:
+                      anyOf:
+                      - description: Indicates the reason for a credit to the cardholder.
+                        enum:
+                        - no_credit
+                        - passenger_transport_ancillary_purchase_cancellation
+                        - airline_ticket_and_passenger_transport_ancillary_purchase_cancellation
+                        - airline_ticket_cancellation
+                        - other
+                        - partial_refund_of_airline_ticket
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - No credit
+                        - Passenger transport ancillary purchase cancellation
+                        - Airline ticket and passenger transport ancillary purchase cancellation
+                        - Airline ticket cancellation
+                        - Other
+                        - Partial refund of airline ticket
+                      - type: 'null'
+                    departure_date:
+                      anyOf:
+                      - description: Date of departure.
+                        format: date
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    origination_city_airport_code:
+                      anyOf:
+                      - description: Code for the originating city or airport.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    passenger_name:
+                      anyOf:
+                      - description: Name of the passenger.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    restricted_ticket_indicator:
+                      anyOf:
+                      - description: Indicates whether this ticket is non-refundable.
+                        enum:
+                        - no_restrictions
+                        - restricted_non_refundable_ticket
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - No restrictions
+                        - Restricted non-refundable ticket
+                      - type: 'null'
+                    ticket_change_indicator:
+                      anyOf:
+                      - description: Indicates why a ticket was changed.
+                        enum:
+                        - none
+                        - change_to_existing_ticket
+                        - new_ticket
+                        type: string
+                        x-documentation-priority: default
+                        x-enum-descriptions:
+                        - None
+                        - Change to existing ticket
+                        - New ticket
+                      - type: 'null'
+                    ticket_number:
+                      anyOf:
+                      - description: Ticket number.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    travel_agency_code:
+                      anyOf:
+                      - description: Code for the travel agency if the ticket was issued by a travel agency.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    travel_agency_name:
+                      anyOf:
+                      - description: Name of the travel agency if the ticket was issued by a travel agency.
+                        type: string
+                        x-documentation-priority: default
+                      - type: 'null'
+                    trip_legs:
+                      anyOf:
+                      - description: Fields specific to each leg of the journey.
+                        items:
+                          additionalProperties: false
+                          properties:
+                            carrier_code:
+                              anyOf:
+                              - description: Carrier code (e.g., United Airlines, Jet Blue, etc.).
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            destination_city_airport_code:
+                              anyOf:
+                              - description: Code for the destination city or airport.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            fare_basis_code:
+                              anyOf:
+                              - description: Fare basis code.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            flight_number:
+                              anyOf:
+                              - description: Flight number.
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            service_class:
+                              anyOf:
+                              - description: Service class (e.g., first class, business class, etc.).
+                                type: string
+                                x-documentation-priority: default
+                              - type: 'null'
+                            stop_over_code:
+                              anyOf:
+                              - description: Indicates whether a stopover is allowed on this ticket.
+                                enum:
+                                - none
+                                - stop_over_allowed
+                                - stop_over_not_allowed
+                                type: string
+                                x-documentation-priority: default
+                                x-enum-descriptions:
+                                - None
+                                - Stop over allowed
+                                - Stop over not allowed
+                              - type: 'null'
+                          required:
+                          - flight_number
+                          - carrier_code
+                          - fare_basis_code
+                          - service_class
+                          - stop_over_code
+                          - destination_city_airport_code
+                          title: Card Refund Card Purchase Details Travel TripLegsElement
+                          type: object
+                          x-event-categories: []
+                          x-stainless-empty-object: false
+                          x-title-plural: TripLegsElements
+                        type: array
+                        x-documentation-priority: default
+                      - type: 'null'
+                  required:
+                  - ticket_number
+                  - passenger_name
+                  - departure_date
+                  - origination_city_airport_code
+                  - travel_agency_code
+                  - travel_agency_name
+                  - restricted_ticket_indicator
+                  - computerized_reservation_system
+                  - credit_reason_indicator
+                  - ticket_change_indicator
+                  - trip_legs
+                  - ancillary
+                  title: Card Refund Card Purchase Details Travel
+                  type: object
+                  x-documentation-priority: default
+                  x-event-categories: []
+                  x-stainless-empty-object: false
+                  x-title-plural: Travels
+                - type: 'null'
+            required:
+            - purchase_identifier
+            - purchase_identifier_format
+            - customer_reference_identifier
+            - local_tax_amount
+            - local_tax_currency
+            - national_tax_amount
+            - national_tax_currency
+            - car_rental
+            - lodging
+            - travel
+            title: Card Refund Card Purchase Details
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Purchase Details
+          - type: 'null'
+        scheme_fees:
+          description: The scheme fees associated with this card refund.
+          items:
+            additionalProperties: false
+            example:
+              amount: '0.137465'
+              created_at: '2020-01-31T23:59:59Z'
+              currency: USD
+              fee_type: visa_corporate_acceptance_fee
+              fixed_component: null
+              variable_rate: '0.0002'
+            properties:
+              amount:
+                description: The fee amount given as a string containing a decimal number.
+                pattern: ^-?\d+(\.\d+)?$
+                type: string
+                x-documentation-priority: default
+              created_at:
+                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the fee was created.
+                format: date-time
+                type: string
+                x-documentation-priority: default
+              currency:
+                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the fee reimbursement.
+                enum:
+                - USD
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - US Dollar (USD)
+              fee_type:
+                description: The type of fee being assessed.
+                enum:
+                - visa_international_service_assessment_single_currency
+                - visa_international_service_assessment_cross_currency
+                - visa_authorization_domestic_point_of_sale
+                - visa_authorization_international_point_of_sale
+                - visa_authorization_canada_point_of_sale
+                - visa_authorization_reversal_point_of_sale
+                - visa_authorization_reversal_international_point_of_sale
+                - visa_authorization_address_verification_service
+                - visa_advanced_authorization
+                - visa_message_transmission
+                - visa_account_verification_domestic
+                - visa_account_verification_international
+                - visa_account_verification_canada
+                - visa_corporate_acceptance_fee
+                - visa_consumer_debit_acceptance_fee
+                - visa_business_debit_acceptance_fee
+                - visa_purchasing_acceptance_fee
+                - visa_purchase_domestic
+                - visa_purchase_international
+                - visa_credit_purchase_token
+                - visa_debit_purchase_token
+                - visa_clearing_transmission
+                - visa_direct_authorization
+                - visa_direct_transaction_domestic
+                - visa_service_commercial_credit
+                - visa_advertising_service_commercial_credit
+                - visa_community_growth_acceleration_program
+                - visa_processing_guarantee_commercial_credit
+                - pulse_switch_fee
+                type: string
+                x-documentation-priority: default
+                x-enum-descriptions:
+                - International Service Assessment (ISA) single-currency is a fee assessed by the card network for cross-border transactions presented and settled in the same currency.
+                - International Service Assessment (ISA) cross-currency is a fee assessed by the card network for cross-border transactions presented and settled in different currencies.
+                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
+                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) International authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
+                - Activity and charges for Visa Settlement System processing for Canada Region POS (Point-of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified.
+                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
+                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) International reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
+                - A per Address Verification Service (AVS) result fee. Applies to all usable AVS result codes.
+                - Advanced Authorization is a fraud detection tool that monitors and risk evaluates 100 percent of US VisaNet authorizations in real-time. Activity related to Purchase (includes Signature Authenticated Visa and PIN Authenticated Visa Debit (PAVD) transactions).
+                - Issuer Transactions Visa represents a charge based on total actual monthly processing (Visa transactions only) through a VisaNet Access Point (VAP). Charges are assessed to the processor for each VisaNet Access Point.
+                - Activity, per inquiry, related to the domestic Issuer for Account Number Verification.
+                - Activity, per inquiry, related to the international Issuer for Account Number Verification.
+                - Activity, per inquiry, related to the US-Canada Issuer for Account Number Verification.
+                - The Corporate Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
+                - The Consumer Debit Acceptance Fee is charged to issuers and is based on the monthly sales volume of Consumer Debit or Prepaid card transactions. The cashback portion of a Debit and Prepaid card transaction is excluded from the sales volume calculation.
+                - The Business Acceptance Fee is charged to issuers and is based on the monthly sales volume on Business Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions. The cashback portion is included in the sales volume calculation with the exception of a Debit and Prepaid card transactions.
+                - The Purchasing Card Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
+                - Activity and fees for the processing of a sales draft original for a purchase transaction.
+                - Activity and fees for the processing of an international sales draft original for a purchase transaction.
+                - Apple Pay Credit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
+                - Apple Pay Debit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
+                - A per transaction fee assessed for Base II financial draft - Issuer.
+                - Issuer charge for Non-Financial OCT/AFT Authorization 0100 and Declined Financial OCT/AFT 0200 transactions.
+                - Data processing charge for Visa Direct OCTs for all business application identifiers (BAIs) other than money transfer-bank initiated (BI). BASE II transactions.
+                - Issuer card service fee for Commercial Credit cards.
+                - Issuer Advertising Service Fee for Commercial Credit cards.
+                - Issuer Community Growth Acceleration Program Fee.
+                - Issuer Processing Guarantee for Commercial Credit cards.
+                - Pulse Switch Fee is a fee charged by the Pulse network for processing transactions on its network.
+              fixed_component:
+                anyOf:
+                - description: The fixed component of the fee, if applicable, given in major units of the fee amount.
+                  pattern: ^-?\d+(\.\d+)?$
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              variable_rate:
+                anyOf:
+                - description: The variable rate component of the fee, if applicable, given as a decimal (e.g., 0.015 for 1.5%).
+                  pattern: ^-?\d+(\.\d+)?$
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+            required:
+            - created_at
+            - amount
+            - currency
+            - fee_type
+            - variable_rate
+            - fixed_component
+            title: Card Refund Card Scheme Fee
+            type: object
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Card Scheme Fees
+          type: array
+          x-documentation-priority: default
+        transaction_id:
+          description: The identifier of the Transaction associated with this Transaction.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Transactions
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_refund`.
+          enum:
+          - card_refund
+          type: string
+          x-documentation-priority: default
       required:
-      - inbound_ach_transfer_id
-      title: Inbound ACH Transfer Return Intention
+      - type
+      - id
+      - card_payment_id
+      - amount
+      - currency
+      - presentment_amount
+      - presentment_currency
+      - merchant_acceptor_id
+      - merchant_city
+      - merchant_state
+      - merchant_postal_code
+      - merchant_country
+      - merchant_name
+      - merchant_category_code
+      - interchange
+      - cashback
+      - purchase_details
+      - scheme_fees
+      - transaction_id
+      - network_identifiers
+      title: Card Refund
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Inbound ACH Transfer Return Intentions
+      x-title-plural: Card Refunds
+    card_dispute_financial_visa:
+      additionalProperties: false
+      example:
+        event_type: chargeback_submitted
+      properties:
+        event_type:
+          description: The type of card dispute financial event.
+          enum:
+          - chargeback_submitted
+          - merchant_prearbitration_decline_submitted
+          - merchant_prearbitration_received
+          - represented
+          - user_prearbitration_decline_received
+          - user_prearbitration_submitted
+          - user_withdrawal_submitted
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The user's chargeback was submitted.
+          - The user declined the merchant's pre-arbitration submission.
+          - The merchant's pre-arbitration submission was received.
+          - The transaction was re-presented by the merchant.
+          - The user's pre-arbitration was declined by the merchant.
+          - The user's pre-arbitration was submitted.
+          - The user withdrew from the dispute.
+      required:
+      - event_type
+      title: Card Dispute Financial Visa-specific details
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Dispute Financial Visa-specific details
     card_settlement:
       additionalProperties: true
       description: Card Settlements are card transactions that have cleared and settled. While a settlement is usually preceded by an authorization, an acquirer can also directly clear a transaction without first authorizing it.
@@ -1476,38 +2847,48 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Settlements
-    card_dispute_financial_visa:
-      additionalProperties: false
+    inbound_check_adjustment:
+      additionalProperties: true
+      description: An Inbound Check Adjustment is created when Increase receives an adjustment for a check or return deposited through Check21.
       example:
-        event_type: chargeback_submitted
+        adjusted_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        amount: 1750
+        reason: late_return
       properties:
-        event_type:
-          description: The type of card dispute financial event.
+        adjusted_transaction_id:
+          description: The ID of the transaction that was adjusted.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Transactions
+        amount:
+          description: The amount of the check adjustment.
+          type: integer
+          x-documentation-priority: default
+        reason:
+          description: The reason for the adjustment.
           enum:
-          - chargeback_submitted
-          - merchant_prearbitration_decline_submitted
-          - merchant_prearbitration_received
-          - represented
-          - user_prearbitration_decline_received
-          - user_prearbitration_submitted
-          - user_withdrawal_submitted
+          - late_return
+          - wrong_payee_credit
+          - adjusted_amount
+          - non_conforming_item
+          - paid
           type: string
           x-documentation-priority: default
           x-enum-descriptions:
-          - The user's chargeback was submitted.
-          - The user declined the merchant's pre-arbitration submission.
-          - The merchant's pre-arbitration submission was received.
-          - The transaction was re-presented by the merchant.
-          - The user's pre-arbitration was declined by the merchant.
-          - The user's pre-arbitration was submitted.
-          - The user withdrew from the dispute.
+          - The return was initiated too late and the receiving institution has responded with a Late Return Claim.
+          - The check was deposited to the wrong payee and the depositing institution has reimbursed the funds with a Wrong Payee Credit.
+          - The check was deposited with a different amount than what was written on the check.
+          - The recipient was not able to process the check. This usually happens for e.g., low quality images.
+          - The check has already been deposited elsewhere and so this is a duplicate.
       required:
-      - event_type
-      title: Card Dispute Financial Visa-specific details
+      - adjusted_transaction_id
+      - amount
+      - reason
+      title: Inbound Check Adjustment
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Card Dispute Financial Visa-specific details
+      x-title-plural: Inbound Check Adjustments
     transaction:
       additionalProperties: true
       description: Transactions are the immutable additions and removals of money from your bank account. They're the equivalent of line items on your bank statement. To learn more, see [Transactions and Transfers](/documentation/transactions-transfers).
@@ -3444,6 +4825,153 @@ components:
       x-stainless-empty-object: false
       x-tag: Transactions
       x-title-plural: Transactions
+    inbound_ach_transfer_return_intention:
+      additionalProperties: true
+      description: An Inbound ACH Transfer Return Intention is created when an ACH transfer is initiated at another bank and returned by Increase.
+      example:
+        inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+      properties:
+        inbound_ach_transfer_id:
+          description: The ID of the Inbound ACH Transfer that is being returned.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Inbound ACH Transfers
+      required:
+      - inbound_ach_transfer_id
+      title: Inbound ACH Transfer Return Intention
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound ACH Transfer Return Intentions
+    check_transfer_deposit:
+      additionalProperties: true
+      description: An Inbound Check is a check drawn on an Increase account that has been deposited by an external bank account. These types of checks are not pre-registered.
+      example:
+        back_image_file_id: file_makxrc67oh9l6sg7w9yc
+        bank_of_first_deposit_routing_number: null
+        deposited_at: '2020-01-31T23:59:59Z'
+        front_image_file_id: file_makxrc67oh9l6sg7w9yc
+        inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
+        transaction_id: transaction_uyrp7fld2ium70oa7oi
+        transfer_id: check_transfer_30b43acfu9vw8fyc4f5
+        type: check_transfer_deposit
+      properties:
+        back_image_file_id:
+          anyOf:
+          - description: The identifier of the API File object containing an image of the back of the deposited check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        bank_of_first_deposit_routing_number:
+          anyOf:
+          - description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the bank depositing this check. In some rare cases, this is not transmitted via Check21 and the value will be null.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        deposited_at:
+          description: When the check was deposited.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          anyOf:
+          - description: The identifier of the API File object containing an image of the front of the deposited check.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        inbound_check_deposit_id:
+          anyOf:
+          - description: The identifier of the Inbound Check Deposit object associated with this transaction.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Inbound Check Deposits
+          - type: 'null'
+        transaction_id:
+          anyOf:
+          - description: The identifier of the Transaction object created when the check was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        transfer_id:
+          anyOf:
+          - description: The identifier of the Check Transfer object that was deposited.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Check Transfers
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `check_transfer_deposit`.
+          enum:
+          - check_transfer_deposit
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - deposited_at
+      - transaction_id
+      - front_image_file_id
+      - back_image_file_id
+      - bank_of_first_deposit_routing_number
+      - inbound_check_deposit_id
+      - transfer_id
+      title: Check Transfer Deposit
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Check Transfer Deposits
+    transaction_list:
+      additionalProperties: true
+      description: A list of Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 100
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          id: transaction_uyrp7fld2ium70oa7oi
+          route_id: account_number_v18nkfqm6afpsrvy82b2
+          route_type: account_number
+          source:
+            category: inbound_ach_transfer
+            inbound_ach_transfer:
+              addenda: null
+              amount: 100
+              originator_company_descriptive_date: null
+              originator_company_discretionary_data: null
+              originator_company_entry_description: RESERVE
+              originator_company_id: 0987654321
+              originator_company_name: BIG BANK
+              receiver_id_number: '12345678900'
+              receiver_name: IAN CREASE
+              trace_number: 021000038461022
+              transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+          type: transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Transaction Lists
     card_financial:
       additionalProperties: true
       description: Card Financials are temporary holds placed on a customer's funds with the intent to later clear a transaction.
@@ -4405,1534 +5933,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Financials
-    inbound_check_adjustment:
-      additionalProperties: true
-      description: An Inbound Check Adjustment is created when Increase receives an adjustment for a check or return deposited through Check21.
-      example:
-        adjusted_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        amount: 1750
-        reason: late_return
-      properties:
-        adjusted_transaction_id:
-          description: The ID of the transaction that was adjusted.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Transactions
-        amount:
-          description: The amount of the check adjustment.
-          type: integer
-          x-documentation-priority: default
-        reason:
-          description: The reason for the adjustment.
-          enum:
-          - late_return
-          - wrong_payee_credit
-          - adjusted_amount
-          - non_conforming_item
-          - paid
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The return was initiated too late and the receiving institution has responded with a Late Return Claim.
-          - The check was deposited to the wrong payee and the depositing institution has reimbursed the funds with a Wrong Payee Credit.
-          - The check was deposited with a different amount than what was written on the check.
-          - The recipient was not able to process the check. This usually happens for e.g., low quality images.
-          - The check has already been deposited elsewhere and so this is a duplicate.
-      required:
-      - adjusted_transaction_id
-      - amount
-      - reason
-      title: Inbound Check Adjustment
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Check Adjustments
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    card_refund:
-      additionalProperties: true
-      description: Card Refunds move money back to the cardholder. While they are usually connected to a Card Settlement, an acquirer can also refund money directly to a card without relation to a transaction.
-      example:
-        amount: 100
-        card_payment_id: card_payment_nd3k2kacrqjli8482ave
-        cashback: null
-        currency: USD
-        id: card_refund_imgc2xwplh6t4r3gn16e
-        interchange:
-          amount: '0.137465'
-          code: '271'
-          currency: USD
-        merchant_acceptor_id: '5665270011000168'
-        merchant_category_code: '5734'
-        merchant_city: New York
-        merchant_country: US
-        merchant_name: AMAZON.COM
-        merchant_postal_code: '10045'
-        merchant_state: NY
-        network_identifiers:
-          acquirer_business_id: '69650702'
-          acquirer_reference_number: '83163715445437604865089'
-          authorization_identification_response: ABC123
-          transaction_id: '627199945183184'
-        presentment_amount: 100
-        presentment_currency: USD
-        purchase_details:
-          car_rental: null
-          customer_reference_identifier: '51201'
-          local_tax_amount: null
-          local_tax_currency: usd
-          lodging:
-            check_in_date: '2023-07-20'
-            daily_room_rate_amount: 1000
-            daily_room_rate_currency: usd
-            extra_charges: restaurant
-            folio_cash_advances_amount: 0
-            folio_cash_advances_currency: usd
-            food_beverage_charges_amount: 0
-            food_beverage_charges_currency: usd
-            no_show_indicator: no_show
-            prepaid_expenses_amount: 0
-            prepaid_expenses_currency: usd
-            room_nights: 1
-            total_room_tax_amount: 100
-            total_room_tax_currency: usd
-            total_tax_amount: 100
-            total_tax_currency: usd
-          national_tax_amount: null
-          national_tax_currency: usd
-          purchase_identifier: '10203'
-          purchase_identifier_format: order_number
-          travel: null
-        scheme_fees:
-        - amount: '0.137465'
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          fee_type: visa_corporate_acceptance_fee
-          fixed_component: null
-          variable_rate: '0.0002'
-        transaction_id: transaction_uyrp7fld2ium70oa7oi
-        type: card_refund
-      properties:
-        amount:
-          description: The amount in the minor unit of the transaction's settlement currency. For dollars, for example, this is cents.
-          type: integer
-          x-documentation-priority: default
-        card_payment_id:
-          description: The ID of the Card Payment this transaction belongs to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Card Payments
-        cashback:
-          anyOf:
-          - additionalProperties: false
-            description: Cashback debited for this transaction, if eligible. Cashback is paid out in aggregate, monthly.
-            example:
-              amount: '0.137465'
-              currency: USD
-            properties:
-              amount:
-                description: The cashback amount given as a string containing a decimal number. The amount is a positive number if it will be credited to you (e.g., settlements) and a negative number if it will be debited (e.g., refunds).
-                pattern: ^-?\d+(\.\d+)?$
-                type: string
-                x-documentation-priority: default
-              currency:
-                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the cashback.
-                enum:
-                - USD
-                type: string
-                x-documentation-priority: default
-                x-enum-descriptions:
-                - US Dollar (USD)
-            required:
-            - amount
-            - currency
-            title: Card Refund Cashback
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Cashbacks
-          - type: 'null'
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's settlement currency.
-          enum:
-          - USD
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - US Dollar (USD)
-        id:
-          description: The Card Refund identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Card Refunds
-        interchange:
-          anyOf:
-          - additionalProperties: false
-            description: Interchange assessed as a part of this transaction.
-            example:
-              amount: '0.137465'
-              code: '271'
-              currency: USD
-            properties:
-              amount:
-                description: The interchange amount given as a string containing a decimal number in major units (so e.g., "3.14" for $3.14). The amount is a positive number if it is credited to Increase (e.g., settlements) and a negative number if it is debited (e.g., refunds).
-                pattern: ^-?\d+(\.\d+)?$
-                type: string
-                x-documentation-priority: default
-              code:
-                anyOf:
-                - description: The card network specific interchange code.
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              currency:
-                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the interchange reimbursement.
-                enum:
-                - USD
-                type: string
-                x-documentation-priority: default
-                x-enum-descriptions:
-                - US Dollar (USD)
-            required:
-            - amount
-            - currency
-            - code
-            title: Card Refund Card Interchange
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Card Interchanges
-          - type: 'null'
-        merchant_acceptor_id:
-          description: The merchant identifier (commonly abbreviated as MID) of the merchant the card is transacting with.
-          type: string
-          x-documentation-priority: default
-        merchant_category_code:
-          description: The 4-digit MCC describing the merchant's business.
-          type: string
-          x-documentation-priority: default
-        merchant_city:
-          description: The city the merchant resides in.
-          type: string
-          x-documentation-priority: default
-        merchant_country:
-          description: The country the merchant resides in.
-          type: string
-          x-documentation-priority: default
-        merchant_name:
-          description: The name of the merchant.
-          type: string
-          x-documentation-priority: default
-        merchant_postal_code:
-          anyOf:
-          - description: The merchant's postal code. For US merchants this is always a 5-digit ZIP code.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        merchant_state:
-          anyOf:
-          - description: The state the merchant resides in.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        network_identifiers:
-          additionalProperties: false
-          description: Network-specific identifiers for this refund.
-          properties:
-            acquirer_business_id:
-              description: A network assigned business ID that identifies the acquirer that processed this transaction.
-              type: string
-              x-documentation-priority: default
-            acquirer_reference_number:
-              description: A globally unique identifier for this settlement.
-              type: string
-              x-documentation-priority: default
-            authorization_identification_response:
-              anyOf:
-              - description: The randomly generated 6-character Authorization Identification Response code sent back to the acquirer in an approved response.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-            transaction_id:
-              anyOf:
-              - description: A globally unique transaction identifier provided by the card network, used across multiple life-cycle requests.
-                type: string
-                x-documentation-priority: default
-              - type: 'null'
-          required:
-          - transaction_id
-          - acquirer_reference_number
-          - acquirer_business_id
-          - authorization_identification_response
-          title: Card Refund NetworkIdentifiers
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-          x-title-plural: NetworkIdentifiers
-        presentment_amount:
-          description: The amount in the minor unit of the transaction's presentment currency.
-          type: integer
-          x-documentation-priority: default
-        presentment_currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the transaction's presentment currency.
-          type: string
-          x-documentation-priority: default
-        purchase_details:
-          anyOf:
-          - additionalProperties: false
-            description: Additional details about the card purchase, such as tax and industry-specific fields.
-            example:
-              car_rental: null
-              customer_reference_identifier: '51201'
-              local_tax_amount: null
-              local_tax_currency: usd
-              lodging:
-                check_in_date: '2023-07-20'
-                daily_room_rate_amount: 1000
-                daily_room_rate_currency: usd
-                extra_charges: restaurant
-                folio_cash_advances_amount: 0
-                folio_cash_advances_currency: usd
-                food_beverage_charges_amount: 0
-                food_beverage_charges_currency: usd
-                no_show_indicator: no_show
-                prepaid_expenses_amount: 0
-                prepaid_expenses_currency: usd
-                room_nights: 1
-                total_room_tax_amount: 100
-                total_room_tax_currency: usd
-                total_tax_amount: 100
-                total_tax_currency: usd
-              national_tax_amount: null
-              national_tax_currency: usd
-              purchase_identifier: '10203'
-              purchase_identifier_format: order_number
-              travel: null
-            properties:
-              car_rental:
-                anyOf:
-                - additionalProperties: false
-                  description: Fields specific to car rentals.
-                  properties:
-                    car_class_code:
-                      anyOf:
-                      - description: Code indicating the vehicle's class.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    checkout_date:
-                      anyOf:
-                      - description: Date the customer picked up the car or, in the case of a no-show or pre-pay transaction, the scheduled pick up date.
-                        format: date
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    daily_rental_rate_amount:
-                      anyOf:
-                      - description: Daily rate being charged for the vehicle.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    daily_rental_rate_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the daily rental rate.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    days_rented:
-                      anyOf:
-                      - description: Number of days the vehicle was rented.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    extra_charges:
-                      anyOf:
-                      - description: Additional charges (gas, late fee, etc.) being billed.
-                        enum:
-                        - no_extra_charge
-                        - gas
-                        - extra_mileage
-                        - late_return
-                        - one_way_service_fee
-                        - parking_violation
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - No extra charge
-                        - Gas
-                        - Extra mileage
-                        - Late return
-                        - One way service fee
-                        - Parking violation
-                      - type: 'null'
-                    fuel_charges_amount:
-                      anyOf:
-                      - description: Fuel charges for the vehicle.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    fuel_charges_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the fuel charges assessed.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    insurance_charges_amount:
-                      anyOf:
-                      - description: Any insurance being charged for the vehicle.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    insurance_charges_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the insurance charges assessed.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    no_show_indicator:
-                      anyOf:
-                      - description: An indicator that the cardholder is being billed for a reserved vehicle that was not actually rented (that is, a "no-show" charge).
-                        enum:
-                        - not_applicable
-                        - no_show_for_specialized_vehicle
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - Not applicable
-                        - No show for specialized vehicle
-                      - type: 'null'
-                    one_way_drop_off_charges_amount:
-                      anyOf:
-                      - description: Charges for returning the vehicle at a different location than where it was picked up.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    one_way_drop_off_charges_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the one-way drop-off charges assessed.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    renter_name:
-                      anyOf:
-                      - description: Name of the person renting the vehicle.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    weekly_rental_rate_amount:
-                      anyOf:
-                      - description: Weekly rate being charged for the vehicle.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    weekly_rental_rate_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the weekly rental rate.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                  required:
-                  - extra_charges
-                  - days_rented
-                  - no_show_indicator
-                  - checkout_date
-                  - daily_rental_rate_amount
-                  - daily_rental_rate_currency
-                  - weekly_rental_rate_amount
-                  - weekly_rental_rate_currency
-                  - insurance_charges_amount
-                  - insurance_charges_currency
-                  - fuel_charges_amount
-                  - fuel_charges_currency
-                  - one_way_drop_off_charges_amount
-                  - one_way_drop_off_charges_currency
-                  - car_class_code
-                  - renter_name
-                  title: Card Refund Card Purchase Details CarRental
-                  type: object
-                  x-documentation-priority: default
-                  x-event-categories: []
-                  x-stainless-empty-object: false
-                  x-title-plural: CarRentals
-                - type: 'null'
-              customer_reference_identifier:
-                anyOf:
-                - description: An identifier from the merchant for the customer or consumer.
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              local_tax_amount:
-                anyOf:
-                - description: The state or provincial tax amount in minor units.
-                  type: integer
-                  x-documentation-priority: default
-                - type: 'null'
-              local_tax_currency:
-                anyOf:
-                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the local tax assessed.
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              lodging:
-                anyOf:
-                - additionalProperties: false
-                  description: Fields specific to lodging.
-                  properties:
-                    check_in_date:
-                      anyOf:
-                      - description: Date the customer checked in.
-                        format: date
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    daily_room_rate_amount:
-                      anyOf:
-                      - description: Daily rate being charged for the room.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    daily_room_rate_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the daily room rate.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    extra_charges:
-                      anyOf:
-                      - description: Additional charges (phone, late check-out, etc.) being billed.
-                        enum:
-                        - no_extra_charge
-                        - restaurant
-                        - gift_shop
-                        - mini_bar
-                        - telephone
-                        - other
-                        - laundry
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - No extra charge
-                        - Restaurant
-                        - Gift shop
-                        - Mini bar
-                        - Telephone
-                        - Other
-                        - Laundry
-                      - type: 'null'
-                    folio_cash_advances_amount:
-                      anyOf:
-                      - description: Folio cash advances for the room.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    folio_cash_advances_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the folio cash advances.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    food_beverage_charges_amount:
-                      anyOf:
-                      - description: Food and beverage charges for the room.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    food_beverage_charges_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the food and beverage charges.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    no_show_indicator:
-                      anyOf:
-                      - description: Indicator that the cardholder is being billed for a reserved room that was not actually used.
-                        enum:
-                        - not_applicable
-                        - no_show
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - Not applicable
-                        - No show
-                      - type: 'null'
-                    prepaid_expenses_amount:
-                      anyOf:
-                      - description: Prepaid expenses being charged for the room.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    prepaid_expenses_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the prepaid expenses.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    room_nights:
-                      anyOf:
-                      - description: Number of nights the room was rented.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    total_room_tax_amount:
-                      anyOf:
-                      - description: Total room tax being charged.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    total_room_tax_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the total room tax.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    total_tax_amount:
-                      anyOf:
-                      - description: Total tax being charged for the room.
-                        type: integer
-                        x-documentation-priority: default
-                      - type: 'null'
-                    total_tax_currency:
-                      anyOf:
-                      - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the total tax assessed.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                  required:
-                  - no_show_indicator
-                  - extra_charges
-                  - check_in_date
-                  - daily_room_rate_amount
-                  - daily_room_rate_currency
-                  - total_tax_amount
-                  - total_tax_currency
-                  - prepaid_expenses_amount
-                  - prepaid_expenses_currency
-                  - food_beverage_charges_amount
-                  - food_beverage_charges_currency
-                  - folio_cash_advances_amount
-                  - folio_cash_advances_currency
-                  - room_nights
-                  - total_room_tax_amount
-                  - total_room_tax_currency
-                  title: Card Refund Card Purchase Details Lodging
-                  type: object
-                  x-documentation-priority: default
-                  x-event-categories: []
-                  x-stainless-empty-object: false
-                  x-title-plural: Lodgings
-                - type: 'null'
-              national_tax_amount:
-                anyOf:
-                - description: The national tax amount in minor units.
-                  type: integer
-                  x-documentation-priority: default
-                - type: 'null'
-              national_tax_currency:
-                anyOf:
-                - description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the local tax assessed.
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              purchase_identifier:
-                anyOf:
-                - description: An identifier from the merchant for the purchase to the issuer and cardholder.
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              purchase_identifier_format:
-                anyOf:
-                - description: The format of the purchase identifier.
-                  enum:
-                  - free_text
-                  - order_number
-                  - rental_agreement_number
-                  - hotel_folio_number
-                  - invoice_number
-                  type: string
-                  x-documentation-priority: default
-                  x-enum-descriptions:
-                  - Free text
-                  - Order number
-                  - Rental agreement number
-                  - Hotel folio number
-                  - Invoice number
-                - type: 'null'
-              travel:
-                anyOf:
-                - additionalProperties: false
-                  description: Fields specific to travel.
-                  properties:
-                    ancillary:
-                      anyOf:
-                      - additionalProperties: false
-                        description: Ancillary purchases in addition to the airfare.
-                        properties:
-                          connected_ticket_document_number:
-                            anyOf:
-                            - description: If this purchase has a connection or relationship to another purchase, such as a baggage fee for a passenger transport ticket, this field should contain the ticket document number for the other purchase.
-                              type: string
-                              x-documentation-priority: default
-                            - type: 'null'
-                          credit_reason_indicator:
-                            anyOf:
-                            - description: Indicates the reason for a credit to the cardholder.
-                              enum:
-                              - no_credit
-                              - passenger_transport_ancillary_purchase_cancellation
-                              - airline_ticket_and_passenger_transport_ancillary_purchase_cancellation
-                              - other
-                              type: string
-                              x-documentation-priority: default
-                              x-enum-descriptions:
-                              - No credit
-                              - Passenger transport ancillary purchase cancellation
-                              - Airline ticket and passenger transport ancillary purchase cancellation
-                              - Other
-                            - type: 'null'
-                          passenger_name_or_description:
-                            anyOf:
-                            - description: Name of the passenger or description of the ancillary purchase.
-                              type: string
-                              x-documentation-priority: default
-                            - type: 'null'
-                          services:
-                            description: Additional travel charges, such as baggage fees.
-                            items:
-                              additionalProperties: false
-                              properties:
-                                category:
-                                  anyOf:
-                                  - description: Category of the ancillary service.
-                                    enum:
-                                    - none
-                                    - bundled_service
-                                    - baggage_fee
-                                    - change_fee
-                                    - cargo
-                                    - carbon_offset
-                                    - frequent_flyer
-                                    - gift_card
-                                    - ground_transport
-                                    - in_flight_entertainment
-                                    - lounge
-                                    - medical
-                                    - meal_beverage
-                                    - other
-                                    - passenger_assist_fee
-                                    - pets
-                                    - seat_fees
-                                    - standby
-                                    - service_fee
-                                    - store
-                                    - travel_service
-                                    - unaccompanied_travel
-                                    - upgrades
-                                    - wifi
-                                    type: string
-                                    x-documentation-priority: default
-                                    x-enum-descriptions:
-                                    - None
-                                    - Bundled service
-                                    - Baggage fee
-                                    - Change fee
-                                    - Cargo
-                                    - Carbon offset
-                                    - Frequent flyer
-                                    - Gift card
-                                    - Ground transport
-                                    - In-flight entertainment
-                                    - Lounge
-                                    - Medical
-                                    - Meal beverage
-                                    - Other
-                                    - Passenger assist fee
-                                    - Pets
-                                    - Seat fees
-                                    - Standby
-                                    - Service fee
-                                    - Store
-                                    - Travel service
-                                    - Unaccompanied travel
-                                    - Upgrades
-                                    - Wi-fi
-                                  - type: 'null'
-                                sub_category:
-                                  anyOf:
-                                  - description: Sub-category of the ancillary service, free-form.
-                                    type: string
-                                    x-documentation-priority: default
-                                  - type: 'null'
-                              required:
-                              - category
-                              - sub_category
-                              title: Card Refund Card Purchase Details Travel Ancillary ServicesElement
-                              type: object
-                              x-event-categories: []
-                              x-stainless-empty-object: false
-                              x-title-plural: ServicesElements
-                            type: array
-                            x-documentation-priority: default
-                          ticket_document_number:
-                            anyOf:
-                            - description: Ticket document number.
-                              type: string
-                              x-documentation-priority: default
-                            - type: 'null'
-                        required:
-                        - ticket_document_number
-                        - passenger_name_or_description
-                        - connected_ticket_document_number
-                        - credit_reason_indicator
-                        - services
-                        title: Card Refund Card Purchase Details Travel Ancillary
-                        type: object
-                        x-documentation-priority: default
-                        x-event-categories: []
-                        x-stainless-empty-object: false
-                        x-title-plural: Ancillaries
-                      - type: 'null'
-                    computerized_reservation_system:
-                      anyOf:
-                      - description: Indicates the computerized reservation system used to book the ticket.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    credit_reason_indicator:
-                      anyOf:
-                      - description: Indicates the reason for a credit to the cardholder.
-                        enum:
-                        - no_credit
-                        - passenger_transport_ancillary_purchase_cancellation
-                        - airline_ticket_and_passenger_transport_ancillary_purchase_cancellation
-                        - airline_ticket_cancellation
-                        - other
-                        - partial_refund_of_airline_ticket
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - No credit
-                        - Passenger transport ancillary purchase cancellation
-                        - Airline ticket and passenger transport ancillary purchase cancellation
-                        - Airline ticket cancellation
-                        - Other
-                        - Partial refund of airline ticket
-                      - type: 'null'
-                    departure_date:
-                      anyOf:
-                      - description: Date of departure.
-                        format: date
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    origination_city_airport_code:
-                      anyOf:
-                      - description: Code for the originating city or airport.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    passenger_name:
-                      anyOf:
-                      - description: Name of the passenger.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    restricted_ticket_indicator:
-                      anyOf:
-                      - description: Indicates whether this ticket is non-refundable.
-                        enum:
-                        - no_restrictions
-                        - restricted_non_refundable_ticket
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - No restrictions
-                        - Restricted non-refundable ticket
-                      - type: 'null'
-                    ticket_change_indicator:
-                      anyOf:
-                      - description: Indicates why a ticket was changed.
-                        enum:
-                        - none
-                        - change_to_existing_ticket
-                        - new_ticket
-                        type: string
-                        x-documentation-priority: default
-                        x-enum-descriptions:
-                        - None
-                        - Change to existing ticket
-                        - New ticket
-                      - type: 'null'
-                    ticket_number:
-                      anyOf:
-                      - description: Ticket number.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    travel_agency_code:
-                      anyOf:
-                      - description: Code for the travel agency if the ticket was issued by a travel agency.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    travel_agency_name:
-                      anyOf:
-                      - description: Name of the travel agency if the ticket was issued by a travel agency.
-                        type: string
-                        x-documentation-priority: default
-                      - type: 'null'
-                    trip_legs:
-                      anyOf:
-                      - description: Fields specific to each leg of the journey.
-                        items:
-                          additionalProperties: false
-                          properties:
-                            carrier_code:
-                              anyOf:
-                              - description: Carrier code (e.g., United Airlines, Jet Blue, etc.).
-                                type: string
-                                x-documentation-priority: default
-                              - type: 'null'
-                            destination_city_airport_code:
-                              anyOf:
-                              - description: Code for the destination city or airport.
-                                type: string
-                                x-documentation-priority: default
-                              - type: 'null'
-                            fare_basis_code:
-                              anyOf:
-                              - description: Fare basis code.
-                                type: string
-                                x-documentation-priority: default
-                              - type: 'null'
-                            flight_number:
-                              anyOf:
-                              - description: Flight number.
-                                type: string
-                                x-documentation-priority: default
-                              - type: 'null'
-                            service_class:
-                              anyOf:
-                              - description: Service class (e.g., first class, business class, etc.).
-                                type: string
-                                x-documentation-priority: default
-                              - type: 'null'
-                            stop_over_code:
-                              anyOf:
-                              - description: Indicates whether a stopover is allowed on this ticket.
-                                enum:
-                                - none
-                                - stop_over_allowed
-                                - stop_over_not_allowed
-                                type: string
-                                x-documentation-priority: default
-                                x-enum-descriptions:
-                                - None
-                                - Stop over allowed
-                                - Stop over not allowed
-                              - type: 'null'
-                          required:
-                          - flight_number
-                          - carrier_code
-                          - fare_basis_code
-                          - service_class
-                          - stop_over_code
-                          - destination_city_airport_code
-                          title: Card Refund Card Purchase Details Travel TripLegsElement
-                          type: object
-                          x-event-categories: []
-                          x-stainless-empty-object: false
-                          x-title-plural: TripLegsElements
-                        type: array
-                        x-documentation-priority: default
-                      - type: 'null'
-                  required:
-                  - ticket_number
-                  - passenger_name
-                  - departure_date
-                  - origination_city_airport_code
-                  - travel_agency_code
-                  - travel_agency_name
-                  - restricted_ticket_indicator
-                  - computerized_reservation_system
-                  - credit_reason_indicator
-                  - ticket_change_indicator
-                  - trip_legs
-                  - ancillary
-                  title: Card Refund Card Purchase Details Travel
-                  type: object
-                  x-documentation-priority: default
-                  x-event-categories: []
-                  x-stainless-empty-object: false
-                  x-title-plural: Travels
-                - type: 'null'
-            required:
-            - purchase_identifier
-            - purchase_identifier_format
-            - customer_reference_identifier
-            - local_tax_amount
-            - local_tax_currency
-            - national_tax_amount
-            - national_tax_currency
-            - car_rental
-            - lodging
-            - travel
-            title: Card Refund Card Purchase Details
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Card Purchase Details
-          - type: 'null'
-        scheme_fees:
-          description: The scheme fees associated with this card refund.
-          items:
-            additionalProperties: false
-            example:
-              amount: '0.137465'
-              created_at: '2020-01-31T23:59:59Z'
-              currency: USD
-              fee_type: visa_corporate_acceptance_fee
-              fixed_component: null
-              variable_rate: '0.0002'
-            properties:
-              amount:
-                description: The fee amount given as a string containing a decimal number.
-                pattern: ^-?\d+(\.\d+)?$
-                type: string
-                x-documentation-priority: default
-              created_at:
-                description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the fee was created.
-                format: date-time
-                type: string
-                x-documentation-priority: default
-              currency:
-                description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the fee reimbursement.
-                enum:
-                - USD
-                type: string
-                x-documentation-priority: default
-                x-enum-descriptions:
-                - US Dollar (USD)
-              fee_type:
-                description: The type of fee being assessed.
-                enum:
-                - visa_international_service_assessment_single_currency
-                - visa_international_service_assessment_cross_currency
-                - visa_authorization_domestic_point_of_sale
-                - visa_authorization_international_point_of_sale
-                - visa_authorization_canada_point_of_sale
-                - visa_authorization_reversal_point_of_sale
-                - visa_authorization_reversal_international_point_of_sale
-                - visa_authorization_address_verification_service
-                - visa_advanced_authorization
-                - visa_message_transmission
-                - visa_account_verification_domestic
-                - visa_account_verification_international
-                - visa_account_verification_canada
-                - visa_corporate_acceptance_fee
-                - visa_consumer_debit_acceptance_fee
-                - visa_business_debit_acceptance_fee
-                - visa_purchasing_acceptance_fee
-                - visa_purchase_domestic
-                - visa_purchase_international
-                - visa_credit_purchase_token
-                - visa_debit_purchase_token
-                - visa_clearing_transmission
-                - visa_direct_authorization
-                - visa_direct_transaction_domestic
-                - visa_service_commercial_credit
-                - visa_advertising_service_commercial_credit
-                - visa_community_growth_acceleration_program
-                - visa_processing_guarantee_commercial_credit
-                - pulse_switch_fee
-                type: string
-                x-documentation-priority: default
-                x-enum-descriptions:
-                - International Service Assessment (ISA) single-currency is a fee assessed by the card network for cross-border transactions presented and settled in the same currency.
-                - International Service Assessment (ISA) cross-currency is a fee assessed by the card network for cross-border transactions presented and settled in different currencies.
-                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
-                - Activity and charges for Visa Settlement System processing for POS (Point-Of-Sale) International authorization transactions. Authorization is the process of approving or declining the transaction amount specified. The fee is assessed to the Issuer.
-                - Activity and charges for Visa Settlement System processing for Canada Region POS (Point-of-Sale) authorization transactions. Authorization is the process of approving or declining the transaction amount specified.
-                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
-                - Activity only for Visa Settlement System authorization processing of POS (Point-Of-Sale) International reversal transactions. Authorization reversal represents a VSS message that undoes the complete or partial actions of a previous authorization request.
-                - A per Address Verification Service (AVS) result fee. Applies to all usable AVS result codes.
-                - Advanced Authorization is a fraud detection tool that monitors and risk evaluates 100 percent of US VisaNet authorizations in real-time. Activity related to Purchase (includes Signature Authenticated Visa and PIN Authenticated Visa Debit (PAVD) transactions).
-                - Issuer Transactions Visa represents a charge based on total actual monthly processing (Visa transactions only) through a VisaNet Access Point (VAP). Charges are assessed to the processor for each VisaNet Access Point.
-                - Activity, per inquiry, related to the domestic Issuer for Account Number Verification.
-                - Activity, per inquiry, related to the international Issuer for Account Number Verification.
-                - Activity, per inquiry, related to the US-Canada Issuer for Account Number Verification.
-                - The Corporate Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
-                - The Consumer Debit Acceptance Fee is charged to issuers and is based on the monthly sales volume of Consumer Debit or Prepaid card transactions. The cashback portion of a Debit and Prepaid card transaction is excluded from the sales volume calculation.
-                - The Business Acceptance Fee is charged to issuers and is based on the monthly sales volume on Business Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions. The cashback portion is included in the sales volume calculation with the exception of a Debit and Prepaid card transactions.
-                - The Purchasing Card Acceptance Fee is charged to issuers and is based on the monthly sales volume on Commercial and Government Debit, Prepaid, Credit, Charge, or Deferred Debit card transactions.
-                - Activity and fees for the processing of a sales draft original for a purchase transaction.
-                - Activity and fees for the processing of an international sales draft original for a purchase transaction.
-                - Apple Pay Credit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
-                - Apple Pay Debit Product Token Purchase Original Transactions. This fee is billed by Visa on behalf of Apple Inc. for Apple Pay transactions.
-                - A per transaction fee assessed for Base II financial draft - Issuer.
-                - Issuer charge for Non-Financial OCT/AFT Authorization 0100 and Declined Financial OCT/AFT 0200 transactions.
-                - Data processing charge for Visa Direct OCTs for all business application identifiers (BAIs) other than money transfer-bank initiated (BI). BASE II transactions.
-                - Issuer card service fee for Commercial Credit cards.
-                - Issuer Advertising Service Fee for Commercial Credit cards.
-                - Issuer Community Growth Acceleration Program Fee.
-                - Issuer Processing Guarantee for Commercial Credit cards.
-                - Pulse Switch Fee is a fee charged by the Pulse network for processing transactions on its network.
-              fixed_component:
-                anyOf:
-                - description: The fixed component of the fee, if applicable, given in major units of the fee amount.
-                  pattern: ^-?\d+(\.\d+)?$
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              variable_rate:
-                anyOf:
-                - description: The variable rate component of the fee, if applicable, given as a decimal (e.g., 0.015 for 1.5%).
-                  pattern: ^-?\d+(\.\d+)?$
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-            required:
-            - created_at
-            - amount
-            - currency
-            - fee_type
-            - variable_rate
-            - fixed_component
-            title: Card Refund Card Scheme Fee
-            type: object
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Card Scheme Fees
-          type: array
-          x-documentation-priority: default
-        transaction_id:
-          description: The identifier of the Transaction associated with this Transaction.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Transactions
-        type:
-          description: A constant representing the object's type. For this resource it will always be `card_refund`.
-          enum:
-          - card_refund
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - card_payment_id
-      - amount
-      - currency
-      - presentment_amount
-      - presentment_currency
-      - merchant_acceptor_id
-      - merchant_city
-      - merchant_state
-      - merchant_postal_code
-      - merchant_country
-      - merchant_name
-      - merchant_category_code
-      - interchange
-      - cashback
-      - purchase_details
-      - scheme_fees
-      - transaction_id
-      - network_identifiers
-      title: Card Refund
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Card Refunds
-    check_transfer_deposit:
-      additionalProperties: true
-      description: An Inbound Check is a check drawn on an Increase account that has been deposited by an external bank account. These types of checks are not pre-registered.
-      example:
-        back_image_file_id: file_makxrc67oh9l6sg7w9yc
-        bank_of_first_deposit_routing_number: null
-        deposited_at: '2020-01-31T23:59:59Z'
-        front_image_file_id: file_makxrc67oh9l6sg7w9yc
-        inbound_check_deposit_id: inbound_check_deposit_zoshvqybq0cjjm31mra
-        transaction_id: transaction_uyrp7fld2ium70oa7oi
-        transfer_id: check_transfer_30b43acfu9vw8fyc4f5
-        type: check_transfer_deposit
-      properties:
-        back_image_file_id:
-          anyOf:
-          - description: The identifier of the API File object containing an image of the back of the deposited check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        bank_of_first_deposit_routing_number:
-          anyOf:
-          - description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the bank depositing this check. In some rare cases, this is not transmitted via Check21 and the value will be null.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        deposited_at:
-          description: When the check was deposited.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        front_image_file_id:
-          anyOf:
-          - description: The identifier of the API File object containing an image of the front of the deposited check.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        inbound_check_deposit_id:
-          anyOf:
-          - description: The identifier of the Inbound Check Deposit object associated with this transaction.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Inbound Check Deposits
-          - type: 'null'
-        transaction_id:
-          anyOf:
-          - description: The identifier of the Transaction object created when the check was deposited.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        transfer_id:
-          anyOf:
-          - description: The identifier of the Check Transfer object that was deposited.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Check Transfers
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `check_transfer_deposit`.
-          enum:
-          - check_transfer_deposit
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - deposited_at
-      - transaction_id
-      - front_image_file_id
-      - back_image_file_id
-      - bank_of_first_deposit_routing_number
-      - inbound_check_deposit_id
-      - transfer_id
-      title: Check Transfer Deposit
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Check Transfer Deposits
   responses:
     errorResponse:
       content:

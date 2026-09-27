@@ -140,60 +140,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Supplemental Documents
       x-title-plural: Supplemental Documents
-    create_a_supplemental_document_for_an_entity_parameters:
-      additionalProperties: true
-      example:
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        file_id: file_makxrc67oh9l6sg7w9yc
-      properties:
-        entity_id:
-          description: The identifier of the Entity to associate with the supplemental document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        file_id:
-          description: The identifier of the File containing the document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-      required:
-      - entity_id
-      - file_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    entity_supplemental_document_list:
-      additionalProperties: true
-      description: A list of Supplemental Document objects.
-      example:
-        data:
-        - created_at: '2020-01-31T23:59:59Z'
-          entity_id: entity_n8y8tnk2p9339ti393yi
-          file_id: file_makxrc67oh9l6sg7w9yc
-          idempotency_key: null
-          type: entity_supplemental_document
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/entity_supplemental_document'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Supplemental Document List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Supplemental Document Lists
     error:
       anyOf:
       - properties:
@@ -505,6 +451,60 @@ components:
         - status
         type: object
         x-event-categories: []
+    create_a_supplemental_document_for_an_entity_parameters:
+      additionalProperties: true
+      example:
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        file_id: file_makxrc67oh9l6sg7w9yc
+      properties:
+        entity_id:
+          description: The identifier of the Entity to associate with the supplemental document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        file_id:
+          description: The identifier of the File containing the document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+      required:
+      - entity_id
+      - file_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    entity_supplemental_document_list:
+      additionalProperties: true
+      description: A list of Supplemental Document objects.
+      example:
+        data:
+        - created_at: '2020-01-31T23:59:59Z'
+          entity_id: entity_n8y8tnk2p9339ti393yi
+          file_id: file_makxrc67oh9l6sg7w9yc
+          idempotency_key: null
+          type: entity_supplemental_document
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity_supplemental_document'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Supplemental Document List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Supplemental Document Lists
   responses:
     errorResponse:
       content:

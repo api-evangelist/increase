@@ -189,90 +189,7 @@ paths:
       tags:
       - Inbound Check Deposits
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    return_an_inbound_check_deposit_parameters:
-      additionalProperties: false
-      example:
-        reason: altered_or_fictitious
-      properties:
-        reason:
-          description: The reason to return the Inbound Check Deposit.
-          enum:
-          - altered_or_fictitious
-          - not_authorized
-          - duplicate_presentment
-          - endorsement_missing
-          - endorsement_irregular
-          - refer_to_maker
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The check was altered or fictitious.
-          - The check was not authorized.
-          - The check was a duplicate presentment.
-          - The check was not endorsed.
-          - The check was not endorsed by the payee.
-          - The maker of the check requested its return.
-      required:
-      - reason
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    inbound_check_deposit_list:
-      additionalProperties: true
-      description: A list of Inbound Check Deposit objects.
-      example:
-        data:
-        - accepted_at: '2020-01-31T23:59:59Z'
-          account_id: account_in71c4amph0vgo2qllky
-          account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          adjustments: []
-          amount: 1000
-          back_image_file_id: file_makxrc67oh9l6sg7w9yc
-          bank_of_first_deposit_routing_number: '101050001'
-          check_number: '123'
-          check_transfer_id: check_transfer_30b43acfu9vw8fyc4f5
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          declined_at: null
-          declined_transaction_id: null
-          deposit_return: null
-          front_image_file_id: file_makxrc67oh9l6sg7w9yc
-          id: inbound_check_deposit_zoshvqybq0cjjm31mra
-          payee_name_analysis: name_matches
-          status: accepted
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: inbound_check_deposit
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_check_deposit'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound Check Deposit List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Check Deposit Lists
     inbound_check_deposit:
       additionalProperties: false
       description: Inbound Check Deposits are records of third-parties attempting to deposit checks against your account.
@@ -852,6 +769,89 @@ components:
         - status
         type: object
         x-event-categories: []
+    return_an_inbound_check_deposit_parameters:
+      additionalProperties: false
+      example:
+        reason: altered_or_fictitious
+      properties:
+        reason:
+          description: The reason to return the Inbound Check Deposit.
+          enum:
+          - altered_or_fictitious
+          - not_authorized
+          - duplicate_presentment
+          - endorsement_missing
+          - endorsement_irregular
+          - refer_to_maker
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The check was altered or fictitious.
+          - The check was not authorized.
+          - The check was a duplicate presentment.
+          - The check was not endorsed.
+          - The check was not endorsed by the payee.
+          - The maker of the check requested its return.
+      required:
+      - reason
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    inbound_check_deposit_list:
+      additionalProperties: true
+      description: A list of Inbound Check Deposit objects.
+      example:
+        data:
+        - accepted_at: '2020-01-31T23:59:59Z'
+          account_id: account_in71c4amph0vgo2qllky
+          account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          adjustments: []
+          amount: 1000
+          back_image_file_id: file_makxrc67oh9l6sg7w9yc
+          bank_of_first_deposit_routing_number: '101050001'
+          check_number: '123'
+          check_transfer_id: check_transfer_30b43acfu9vw8fyc4f5
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          declined_at: null
+          declined_transaction_id: null
+          deposit_return: null
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          id: inbound_check_deposit_zoshvqybq0cjjm31mra
+          payee_name_analysis: name_matches
+          status: accepted
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: inbound_check_deposit
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_check_deposit'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound Check Deposit List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Check Deposit Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

@@ -193,119 +193,7 @@ paths:
       tags:
       - Lockbox Recipients
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    lockbox_recipient_list:
-      additionalProperties: true
-      description: A list of Lockbox Recipient objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          created_at: '2020-01-31T23:59:59Z'
-          description: null
-          id: lockbox_3xt21ok13q19advds4t5
-          idempotency_key: null
-          lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
-          mail_stop_code: VRE6P
-          recipient_name: Company Inc.
-          status: active
-          type: lockbox_recipient
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/lockbox_recipient'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Lockbox Recipient List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Lockbox Recipient Lists
-    create_a_lockbox_recipient_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
-        recipient_name: Ian Crease
-      properties:
-        account_id:
-          description: The Account that checks sent to this Lockbox Recipient should be deposited into.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        description:
-          description: The description you choose for the Lockbox Recipient.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        lockbox_address_id:
-          description: The Lockbox Address where this Lockbox Recipient may receive mail.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Lockbox Addresses
-        recipient_name:
-          description: The name of the Lockbox Recipient
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - lockbox_address_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    update_a_lockbox_recipient_parameters:
-      additionalProperties: false
-      example:
-        status: active
-      properties:
-        description:
-          description: The description you choose for the Lockbox Recipient.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        recipient_name:
-          description: The name of the Lockbox Recipient.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        status:
-          description: The status of the Lockbox Recipient.
-          enum:
-          - active
-          - disabled
-          - canceled
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - This Lockbox Recipient is active.
-          - This Lockbox Recipient is disabled. Checks mailed to this Lockbox Recipient will be rejected.
-          - This Lockbox Recipient is canceled and cannot be modified. Checks mailed to this Lockbox Recipient will be rejected.
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     lockbox_recipient:
       additionalProperties: false
       description: Lockbox Recipients represent an inbox at a Lockbox Address. Checks received for a Lockbox Recipient are deposited into its associated Account.
@@ -402,6 +290,38 @@ components:
       x-stainless-empty-object: false
       x-tag: Lockbox Recipients
       x-title-plural: Lockbox Recipients
+    update_a_lockbox_recipient_parameters:
+      additionalProperties: false
+      example:
+        status: active
+      properties:
+        description:
+          description: The description you choose for the Lockbox Recipient.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        recipient_name:
+          description: The name of the Lockbox Recipient.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        status:
+          description: The status of the Lockbox Recipient.
+          enum:
+          - active
+          - disabled
+          - canceled
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - This Lockbox Recipient is active.
+          - This Lockbox Recipient is disabled. Checks mailed to this Lockbox Recipient will be rejected.
+          - This Lockbox Recipient is canceled and cannot be modified. Checks mailed to this Lockbox Recipient will be rejected.
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -713,6 +633,86 @@ components:
         - status
         type: object
         x-event-categories: []
+    create_a_lockbox_recipient_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+        recipient_name: Ian Crease
+      properties:
+        account_id:
+          description: The Account that checks sent to this Lockbox Recipient should be deposited into.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        description:
+          description: The description you choose for the Lockbox Recipient.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        lockbox_address_id:
+          description: The Lockbox Address where this Lockbox Recipient may receive mail.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Lockbox Addresses
+        recipient_name:
+          description: The name of the Lockbox Recipient
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - lockbox_address_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    lockbox_recipient_list:
+      additionalProperties: true
+      description: A list of Lockbox Recipient objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          created_at: '2020-01-31T23:59:59Z'
+          description: null
+          id: lockbox_3xt21ok13q19advds4t5
+          idempotency_key: null
+          lockbox_address_id: lockbox_address_lw6sbzl9ol5dfd8hdml6
+          mail_stop_code: VRE6P
+          recipient_name: Company Inc.
+          status: active
+          type: lockbox_recipient
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/lockbox_recipient'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Lockbox Recipient List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Lockbox Recipient Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

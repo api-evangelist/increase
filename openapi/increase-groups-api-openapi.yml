@@ -34,6 +34,14 @@ paths:
       tags:
       - Groups
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
     error:
       anyOf:
@@ -380,14 +388,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Groups
       x-title-plural: Groups
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

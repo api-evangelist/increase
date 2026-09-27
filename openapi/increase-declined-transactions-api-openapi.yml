@@ -152,15 +152,369 @@ paths:
       tags:
       - Declined Transactions
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
+    declined_transaction_list:
+      additionalProperties: true
+      description: A list of Declined Transaction objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 1750
+          created_at: '2020-01-31T23:59:59Z'
+          currency: USD
+          description: INVOICE 2468
+          id: declined_transaction_17jbn0yyhvkt4v4ooym8
+          route_id: account_number_v18nkfqm6afpsrvy82b2
+          route_type: account_number
+          source:
+            ach_decline:
+              amount: 1750
+              id: ach_decline_72v1mcwxudctq56efipa
+              inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
+              originator_company_descriptive_date: null
+              originator_company_discretionary_data: null
+              originator_company_id: 0987654321
+              originator_company_name: BIG BANK
+              reason: insufficient_funds
+              receiver_id_number: '12345678900'
+              receiver_name: IAN CREASE
+              trace_number: 021000038461022
+              type: ach_decline
+            category: ach_decline
+          type: declined_transaction
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/declined_transaction'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Declined Transaction List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Declined Transaction Lists
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     declined_transaction:
       additionalProperties: true
       description: Declined Transactions are refused additions and removals of money from your bank account. For example, Declined Transactions are caused when your Account has an insufficient balance or your Limits are triggered.
@@ -1867,368 +2221,14 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: ACH Declines
-    declined_transaction_list:
-      additionalProperties: true
-      description: A list of Declined Transaction objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 1750
-          created_at: '2020-01-31T23:59:59Z'
-          currency: USD
-          description: INVOICE 2468
-          id: declined_transaction_17jbn0yyhvkt4v4ooym8
-          route_id: account_number_v18nkfqm6afpsrvy82b2
-          route_type: account_number
-          source:
-            ach_decline:
-              amount: 1750
-              id: ach_decline_72v1mcwxudctq56efipa
-              inbound_ach_transfer_id: inbound_ach_transfer_tdrwqr3fq9gnnq49odev
-              originator_company_descriptive_date: null
-              originator_company_discretionary_data: null
-              originator_company_id: 0987654321
-              originator_company_name: BIG BANK
-              reason: insufficient_funds
-              receiver_id_number: '12345678900'
-              receiver_name: IAN CREASE
-              trace_number: 021000038461022
-              type: ach_decline
-            category: ach_decline
-          type: declined_transaction
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/declined_transaction'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Declined Transaction List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Declined Transaction Lists
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

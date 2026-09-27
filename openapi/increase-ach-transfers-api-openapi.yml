@@ -249,14 +249,6 @@ paths:
       tags:
       - ACH Transfers
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
     ach_transfer_list:
       additionalProperties: true
@@ -335,94 +327,317 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: ACH Transfer Lists
-    inbound_funds_hold:
-      additionalProperties: true
-      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
-      example:
-        amount: 100
-        automatically_releases_at: '2020-01-31T23:59:59Z'
-        created_at: '2020-01-31T23:59:59Z'
-        currency: USD
-        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
-        released_at: null
-        status: held
-        type: inbound_funds_hold
-      properties:
-        amount:
-          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
-          type: integer
-          x-documentation-priority: default
-        automatically_releases_at:
-          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
-          enum:
-          - USD
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - US Dollar (USD)
-        held_transaction_id:
-          anyOf:
-          - description: The ID of the Transaction for which funds were held.
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
             type: string
             x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        pending_transaction_id:
-          anyOf:
-          - description: The ID of the Pending Transaction representing the held funds.
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
             type: string
             x-documentation-priority: default
-            x-id-reference-to: Pending Transactions
-          - type: 'null'
-        released_at:
-          anyOf:
-          - description: When the hold was released (if it has been released).
-            format: date-time
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
             type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
             x-documentation-priority: default
-          - type: 'null'
-        status:
-          description: The status of the hold.
-          enum:
-          - held
-          - complete
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Funds are still being held.
-          - Funds have been released.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
-          enum:
-          - inbound_funds_hold
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - amount
-      - created_at
-      - currency
-      - automatically_releases_at
-      - released_at
-      - status
-      - held_transaction_id
-      - pending_transaction_id
-      title: Inbound Funds Hold
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Funds Holds
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     ach_transfer:
       additionalProperties: true
       description: ACH transfers move funds between your Increase account and any other account accessible by the Automated Clearing House (ACH).
@@ -1360,317 +1575,94 @@ components:
       x-stainless-empty-object: false
       x-tag: ACH Transfers
       x-title-plural: ACH Transfers
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
             type: string
             x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
             type: string
             x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
             type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
             x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
     create_an_ach_transfer_parameters:
       additionalProperties: true
       example:
@@ -1924,6 +1916,14 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

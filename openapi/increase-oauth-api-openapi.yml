@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Anything that you can achieve with PDFs, presence, and persistence in a bank branch you can do with our API.
-  title: Increase OAUTH API
+  title: Increase OAuth API
   version: 0.0.1
 servers:
 - url: https://api.increase.com
@@ -38,56 +38,7 @@ paths:
       tags:
       - OAuth
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    oauth_token:
-      additionalProperties: false
-      description: A token that is returned to your application when a user completes the OAuth flow and may be used to authenticate requests. Learn more about OAuth [here](/documentation/oauth).
-      example:
-        access_token: '12345'
-        group_id: group_1g4mhziu6kvrs3vz35um
-        token_type: bearer
-        type: oauth_token
-      properties:
-        access_token:
-          description: You may use this token in place of an API key to make OAuth requests on a user's behalf.
-          type: string
-          x-documentation-priority: default
-        group_id:
-          description: The Group's identifier. A Group is the top-level organization in Increase.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Groups
-        token_type:
-          description: The type of OAuth token.
-          enum:
-          - bearer
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `oauth_token`.
-          enum:
-          - oauth_token
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - access_token
-      - group_id
-      - token_type
-      title: OAuth Token
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-tag: OAuth Tokens
-      x-title-plural: OAuth Tokens
     create_an_oauth_token_parameters:
       additionalProperties: true
       example:
@@ -446,6 +397,55 @@ components:
         - status
         type: object
         x-event-categories: []
+    oauth_token:
+      additionalProperties: false
+      description: A token that is returned to your application when a user completes the OAuth flow and may be used to authenticate requests. Learn more about OAuth [here](/documentation/oauth).
+      example:
+        access_token: '12345'
+        group_id: group_1g4mhziu6kvrs3vz35um
+        token_type: bearer
+        type: oauth_token
+      properties:
+        access_token:
+          description: You may use this token in place of an API key to make OAuth requests on a user's behalf.
+          type: string
+          x-documentation-priority: default
+        group_id:
+          description: The Group's identifier. A Group is the top-level organization in Increase.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Groups
+        token_type:
+          description: The type of OAuth token.
+          enum:
+          - bearer
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `oauth_token`.
+          enum:
+          - oauth_token
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - access_token
+      - group_id
+      - token_type
+      title: OAuth Token
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: OAuth Tokens
+      x-title-plural: OAuth Tokens
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer
