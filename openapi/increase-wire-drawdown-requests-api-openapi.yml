@@ -443,6 +443,64 @@ components:
         - status
         type: object
         x-event-categories: []
+    wire_drawdown_request_list:
+      additionalProperties: true
+      description: A list of Wire Drawdown Request objects.
+      example:
+        data:
+        - account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 10000
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_account_number: '987654321'
+          debtor_address:
+            city: New York
+            country: US
+            line1: 33 Liberty Street
+            line2: null
+            postal_code: '10045'
+            state: NY
+          debtor_external_account_id: null
+          debtor_name: Ian Crease
+          debtor_routing_number: '101050001'
+          fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+          id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
+          idempotency_key: null
+          status: fulfilled
+          submission:
+            input_message_accountability_data: 20220118MMQFMP0P000003
+          type: wire_drawdown_request
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/wire_drawdown_request'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Wire Drawdown Request List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Wire Drawdown Request Lists
     wire_drawdown_request:
       additionalProperties: true
       description: Wire drawdown requests enable you to request that someone else send you a wire. Because there is nuance to making sure your counterparty's bank processes these correctly, we ask that you reach out to [support@increase.com](mailto:support@increase.com) to enable this feature so we can help you plan your integration. For more information, see our [Wire Drawdown Requests documentation](/documentation/wire-drawdown-requests).
@@ -904,64 +962,6 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    wire_drawdown_request_list:
-      additionalProperties: true
-      description: A list of Wire Drawdown Request objects.
-      example:
-        data:
-        - account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          amount: 10000
-          created_at: '2020-01-31T23:59:59Z'
-          creditor_address:
-            city: New York
-            country: US
-            line1: 33 Liberty Street
-            line2: null
-            postal_code: '10045'
-            state: NY
-          creditor_name: Ian Crease
-          currency: USD
-          debtor_account_number: '987654321'
-          debtor_address:
-            city: New York
-            country: US
-            line1: 33 Liberty Street
-            line2: null
-            postal_code: '10045'
-            state: NY
-          debtor_external_account_id: null
-          debtor_name: Ian Crease
-          debtor_routing_number: '101050001'
-          fulfillment_inbound_wire_transfer_id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-          id: wire_drawdown_request_q6lmocus3glo0lr2bfv3
-          idempotency_key: null
-          status: fulfilled
-          submission:
-            input_message_accountability_data: 20220118MMQFMP0P000003
-          type: wire_drawdown_request
-          unstructured_remittance_information: Invoice 29582
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/wire_drawdown_request'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Wire Drawdown Request List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Wire Drawdown Request Lists
   responses:
     errorResponse:
       content:

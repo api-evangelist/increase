@@ -118,160 +118,7 @@ paths:
       tags:
       - Account Statements
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
-    account_statement:
-      additionalProperties: false
-      description: Account Statements are generated monthly for every active Account. You can access the statement's data via the API or retrieve a PDF with its details via its associated File.
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        created_at: '2020-01-31T23:59:59Z'
-        ending_balance: 100
-        file_id: file_makxrc67oh9l6sg7w9yc
-        id: account_statement_lkc03a4skm2k7f38vj15
-        loan: null
-        starting_balance: 0
-        statement_period_end: '2020-01-31T23:59:59Z'
-        statement_period_start: '2020-01-31T23:59:59Z'
-        type: account_statement
-      properties:
-        account_id:
-          description: The identifier for the Account this Account Statement belongs to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account Statement was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        ending_balance:
-          description: The Account's balance at the end of its statement period.
-          type: integer
-          x-documentation-priority: default
-        file_id:
-          description: The identifier of the File containing a PDF of the statement.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        id:
-          description: The Account Statement identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Statements
-        loan:
-          anyOf:
-          - additionalProperties: false
-            description: The loan balances.
-            properties:
-              due_at:
-                anyOf:
-                - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the loan payment is due.
-                  format: date-time
-                  type: string
-                  x-documentation-priority: default
-                - type: 'null'
-              due_balance:
-                description: The total amount due on the loan.
-                type: integer
-                x-documentation-priority: default
-              past_due_balance:
-                description: The amount past due on the loan.
-                type: integer
-                x-documentation-priority: default
-            required:
-            - due_balance
-            - past_due_balance
-            - due_at
-            title: Account Statement Loan
-            type: object
-            x-documentation-priority: default
-            x-event-categories: []
-            x-stainless-empty-object: false
-            x-title-plural: Loans
-          - type: 'null'
-        starting_balance:
-          description: The Account's balance at the start of its statement period.
-          type: integer
-          x-documentation-priority: default
-        statement_period_end:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time representing the end of the period the Account Statement covers.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        statement_period_start:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time representing the start of the period the Account Statement covers.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `account_statement`.
-          enum:
-          - account_statement
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - account_id
-      - created_at
-      - file_id
-      - statement_period_start
-      - statement_period_end
-      - starting_balance
-      - ending_balance
-      - loan
-      title: Account Statement
-      type: object
-      x-event-categories:
-      - account_statement.created
-      x-stainless-empty-object: false
-      x-tag: Account Statements
-      x-title-plural: Account Statements
-    account_statement_list:
-      additionalProperties: true
-      description: A list of Account Statement objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          created_at: '2020-01-31T23:59:59Z'
-          ending_balance: 100
-          file_id: file_makxrc67oh9l6sg7w9yc
-          id: account_statement_lkc03a4skm2k7f38vj15
-          loan: null
-          starting_balance: 0
-          statement_period_end: '2020-01-31T23:59:59Z'
-          statement_period_start: '2020-01-31T23:59:59Z'
-          type: account_statement
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/account_statement'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Account Statement List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Account Statement Lists
     error:
       anyOf:
       - properties:
@@ -583,6 +430,159 @@ components:
         - status
         type: object
         x-event-categories: []
+    account_statement:
+      additionalProperties: false
+      description: Account Statements are generated monthly for every active Account. You can access the statement's data via the API or retrieve a PDF with its details via its associated File.
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        created_at: '2020-01-31T23:59:59Z'
+        ending_balance: 100
+        file_id: file_makxrc67oh9l6sg7w9yc
+        id: account_statement_lkc03a4skm2k7f38vj15
+        loan: null
+        starting_balance: 0
+        statement_period_end: '2020-01-31T23:59:59Z'
+        statement_period_start: '2020-01-31T23:59:59Z'
+        type: account_statement
+      properties:
+        account_id:
+          description: The identifier for the Account this Account Statement belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Account Statement was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        ending_balance:
+          description: The Account's balance at the end of its statement period.
+          type: integer
+          x-documentation-priority: default
+        file_id:
+          description: The identifier of the File containing a PDF of the statement.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        id:
+          description: The Account Statement identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Statements
+        loan:
+          anyOf:
+          - additionalProperties: false
+            description: The loan balances.
+            properties:
+              due_at:
+                anyOf:
+                - description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the loan payment is due.
+                  format: date-time
+                  type: string
+                  x-documentation-priority: default
+                - type: 'null'
+              due_balance:
+                description: The total amount due on the loan.
+                type: integer
+                x-documentation-priority: default
+              past_due_balance:
+                description: The amount past due on the loan.
+                type: integer
+                x-documentation-priority: default
+            required:
+            - due_balance
+            - past_due_balance
+            - due_at
+            title: Account Statement Loan
+            type: object
+            x-documentation-priority: default
+            x-event-categories: []
+            x-stainless-empty-object: false
+            x-title-plural: Loans
+          - type: 'null'
+        starting_balance:
+          description: The Account's balance at the start of its statement period.
+          type: integer
+          x-documentation-priority: default
+        statement_period_end:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time representing the end of the period the Account Statement covers.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        statement_period_start:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time representing the start of the period the Account Statement covers.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `account_statement`.
+          enum:
+          - account_statement
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - account_id
+      - created_at
+      - file_id
+      - statement_period_start
+      - statement_period_end
+      - starting_balance
+      - ending_balance
+      - loan
+      title: Account Statement
+      type: object
+      x-event-categories:
+      - account_statement.created
+      x-stainless-empty-object: false
+      x-tag: Account Statements
+      x-title-plural: Account Statements
+    account_statement_list:
+      additionalProperties: true
+      description: A list of Account Statement objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          created_at: '2020-01-31T23:59:59Z'
+          ending_balance: 100
+          file_id: file_makxrc67oh9l6sg7w9yc
+          id: account_statement_lkc03a4skm2k7f38vj15
+          loan: null
+          starting_balance: 0
+          statement_period_end: '2020-01-31T23:59:59Z'
+          statement_period_start: '2020-01-31T23:59:59Z'
+          type: account_statement
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/account_statement'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Account Statement List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Account Statement Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

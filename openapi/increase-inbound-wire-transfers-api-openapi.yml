@@ -501,6 +501,80 @@ components:
         - status
         type: object
         x-event-categories: []
+    reverse_an_inbound_wire_transfer_parameters:
+      additionalProperties: false
+      example:
+        reason: creditor_request
+      properties:
+        reason:
+          description: Reason for the reversal.
+          enum:
+          - duplicate
+          - creditor_request
+          - transaction_forbidden
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The inbound wire transfer was a duplicate.
+          - The recipient of the wire transfer requested the funds be returned to the sender.
+          - The account cannot currently receive inbound wires.
+      required:
+      - reason
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    inbound_wire_transfer_list:
+      additionalProperties: true
+      description: A list of Inbound Wire Transfer objects.
+      example:
+        data:
+        - acceptance: null
+          account_id: account_in71c4amph0vgo2qllky
+          account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 100
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_address_line1: null
+          creditor_address_line2: null
+          creditor_address_line3: null
+          creditor_name: null
+          debtor_address_line1: null
+          debtor_address_line2: null
+          debtor_address_line3: null
+          debtor_name: null
+          description: Inbound wire transfer
+          end_to_end_identification: null
+          id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
+          input_message_accountability_data: null
+          instructing_agent_routing_number: null
+          instruction_identification: null
+          reversal: null
+          status: accepted
+          type: inbound_wire_transfer
+          unique_end_to_end_transaction_reference: null
+          unstructured_remittance_information: null
+          wire_drawdown_request_id: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_wire_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound Wire Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Wire Transfer Lists
     inbound_wire_transfer:
       additionalProperties: true
       description: An Inbound Wire Transfer is a wire transfer initiated outside of Increase to your account.
@@ -761,80 +835,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound Wire Transfers
       x-title-plural: Inbound Wire Transfers
-    reverse_an_inbound_wire_transfer_parameters:
-      additionalProperties: false
-      example:
-        reason: creditor_request
-      properties:
-        reason:
-          description: Reason for the reversal.
-          enum:
-          - duplicate
-          - creditor_request
-          - transaction_forbidden
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The inbound wire transfer was a duplicate.
-          - The recipient of the wire transfer requested the funds be returned to the sender.
-          - The account cannot currently receive inbound wires.
-      required:
-      - reason
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-    inbound_wire_transfer_list:
-      additionalProperties: true
-      description: A list of Inbound Wire Transfer objects.
-      example:
-        data:
-        - acceptance: null
-          account_id: account_in71c4amph0vgo2qllky
-          account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          amount: 100
-          created_at: '2020-01-31T23:59:59Z'
-          creditor_address_line1: null
-          creditor_address_line2: null
-          creditor_address_line3: null
-          creditor_name: null
-          debtor_address_line1: null
-          debtor_address_line2: null
-          debtor_address_line3: null
-          debtor_name: null
-          description: Inbound wire transfer
-          end_to_end_identification: null
-          id: inbound_wire_transfer_f228m6bmhtcxjco9pwp0
-          input_message_accountability_data: null
-          instructing_agent_routing_number: null
-          instruction_identification: null
-          reversal: null
-          status: accepted
-          type: inbound_wire_transfer
-          unique_end_to_end_transaction_reference: null
-          unstructured_remittance_information: null
-          wire_drawdown_request_id: null
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_wire_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound Wire Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Wire Transfer Lists
   responses:
     errorResponse:
       content:

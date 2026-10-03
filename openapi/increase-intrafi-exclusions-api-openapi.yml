@@ -149,29 +149,6 @@ paths:
       - Intrafi Exclusions
 components:
   schemas:
-    create_an_intrafi_exclusion_parameters:
-      additionalProperties: true
-      example:
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        fdic_certificate_number: '314159'
-      properties:
-        entity_id:
-          description: The identifier of the Entity whose deposits will be excluded.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        fdic_certificate_number:
-          description: The FDIC certificate number of the financial institution to be excluded. An FDIC certificate number uniquely identifies a financial institution, and is different than a routing number. To find one, we recommend searching by Bank Name using the [FDIC's bankfind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - entity_id
-      - fdic_certificate_number
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -483,6 +460,29 @@ components:
         - status
         type: object
         x-event-categories: []
+    create_an_intrafi_exclusion_parameters:
+      additionalProperties: true
+      example:
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        fdic_certificate_number: '314159'
+      properties:
+        entity_id:
+          description: The identifier of the Entity whose deposits will be excluded.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        fdic_certificate_number:
+          description: The FDIC certificate number of the financial institution to be excluded. An FDIC certificate number uniquely identifies a financial institution, and is different than a routing number. To find one, we recommend searching by Bank Name using the [FDIC's bankfind tool](https://banks.data.fdic.gov/bankfind-suite/bankfind).
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - entity_id
+      - fdic_certificate_number
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     intrafi_exclusion:
       additionalProperties: false
       description: Certain institutions may be excluded per Entity when sweeping funds into the IntraFi network. This is useful when an Entity already has deposits at a particular bank, and does not want to sweep additional funds to it. It may take 5 business days for an exclusion to be processed.

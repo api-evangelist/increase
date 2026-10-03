@@ -126,51 +126,6 @@ paths:
       - Inbound Real Time Payments Transfers
 components:
   schemas:
-    inbound_real_time_payments_transfer_list:
-      additionalProperties: true
-      description: A list of Inbound Real-Time Payments Transfer objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          amount: 100
-          confirmation:
-            confirmed_at: '2020-01-31T23:59:59Z'
-            transaction_id: transaction_uyrp7fld2ium70oa7oi
-          created_at: '2020-01-31T23:59:59Z'
-          creditor_name: Ian Crease
-          currency: USD
-          debtor_account_number: '987654321'
-          debtor_name: National Phonograph Company
-          debtor_routing_number: '101050001'
-          decline: null
-          id: inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr
-          status: confirmed
-          transaction_identification: 20220501234567891T1BSLZO01745013025
-          type: inbound_real_time_payments_transfer
-          unstructured_remittance_information: Invoice 29582
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_real_time_payments_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound Real-Time Payments Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Real-Time Payments Transfer Lists
     error:
       anyOf:
       - properties:
@@ -677,6 +632,51 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound Real-Time Payments Transfers
       x-title-plural: Inbound Real-Time Payments Transfers
+    inbound_real_time_payments_transfer_list:
+      additionalProperties: true
+      description: A list of Inbound Real-Time Payments Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 100
+          confirmation:
+            confirmed_at: '2020-01-31T23:59:59Z'
+            transaction_id: transaction_uyrp7fld2ium70oa7oi
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_account_number: '987654321'
+          debtor_name: National Phonograph Company
+          debtor_routing_number: '101050001'
+          decline: null
+          id: inbound_real_time_payments_transfer_63hlz498vcxg644hcrzr
+          status: confirmed
+          transaction_identification: 20220501234567891T1BSLZO01745013025
+          type: inbound_real_time_payments_transfer
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_real_time_payments_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound Real-Time Payments Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Real-Time Payments Transfer Lists
   responses:
     errorResponse:
       content:

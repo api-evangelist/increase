@@ -60,14 +60,6 @@ paths:
       tags:
       - Routing Numbers
 components:
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   schemas:
     error:
       anyOf:
@@ -380,40 +372,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    routing_number_list:
-      additionalProperties: true
-      description: A list of Routing Number objects.
-      example:
-        data:
-        - ach_transfers: supported
-          fednow_transfers: supported
-          name: First Bank of the United States
-          real_time_payments_transfers: supported
-          routing_number: '021000021'
-          type: routing_number
-          wire_transfers: supported
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/routing_number'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Routing Number List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Routing Number Lists
     routing_number:
       additionalProperties: false
       description: Routing numbers are used to identify your bank in a financial transaction.
@@ -494,6 +452,48 @@ components:
       x-stainless-empty-object: false
       x-tag: Routing Numbers
       x-title-plural: Routing Numbers
+    routing_number_list:
+      additionalProperties: true
+      description: A list of Routing Number objects.
+      example:
+        data:
+        - ach_transfers: supported
+          fednow_transfers: supported
+          name: First Bank of the United States
+          real_time_payments_transfers: supported
+          routing_number: '021000021'
+          type: routing_number
+          wire_transfers: supported
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/routing_number'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Routing Number List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Routing Number Lists
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

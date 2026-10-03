@@ -482,65 +482,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    intrafi_account_enrollment_list:
-      additionalProperties: true
-      description: A list of IntraFi Account Enrollment objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          created_at: '2020-01-31T23:59:59Z'
-          email_address: null
-          id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
-          idempotency_key: null
-          intrafi_id: 01234abcd
-          status: pending_enrolling
-          type: intrafi_account_enrollment
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/intrafi_account_enrollment'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: IntraFi Account Enrollment List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: IntraFi Account Enrollment Lists
-    enroll_an_account_in_the_intrafi_deposit_sweep_network_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        email_address: user@example.com
-      properties:
-        account_id:
-          description: The identifier for the account to be added to IntraFi.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        email_address:
-          description: The contact email for the account owner, to be shared with IntraFi.
-          format: email
-          maxLength: 50
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-      required:
-      - account_id
-      - email_address
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     intrafi_account_enrollment:
       additionalProperties: false
       description: IntraFi is a [network of financial institutions](https://www.intrafi.com/network-banks) that allows Increase users to sweep funds to multiple banks. This enables accounts to become eligible for additional Federal Deposit Insurance Corporation (FDIC) insurance. An IntraFi Account Enrollment object represents the status of an account in the network. Sweeping an account to IntraFi doesn't affect funds availability.
@@ -624,6 +565,65 @@ components:
       x-stainless-empty-object: false
       x-tag: IntraFi Account Enrollments
       x-title-plural: IntraFi Account Enrollments
+    enroll_an_account_in_the_intrafi_deposit_sweep_network_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        email_address: user@example.com
+      properties:
+        account_id:
+          description: The identifier for the account to be added to IntraFi.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        email_address:
+          description: The contact email for the account owner, to be shared with IntraFi.
+          format: email
+          maxLength: 50
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+      required:
+      - account_id
+      - email_address
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+    intrafi_account_enrollment_list:
+      additionalProperties: true
+      description: A list of IntraFi Account Enrollment objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          created_at: '2020-01-31T23:59:59Z'
+          email_address: null
+          id: intrafi_account_enrollment_w8l97znzreopkwf2tg75
+          idempotency_key: null
+          intrafi_id: 01234abcd
+          status: pending_enrolling
+          type: intrafi_account_enrollment
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/intrafi_account_enrollment'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: IntraFi Account Enrollment List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: IntraFi Account Enrollment Lists
   responses:
     errorResponse:
       content:

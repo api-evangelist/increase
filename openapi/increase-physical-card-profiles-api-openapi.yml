@@ -200,47 +200,137 @@ paths:
       - Physical Card Profiles
 components:
   schemas:
-    physical_card_profile_list:
+    physical_card_profile:
       additionalProperties: true
-      description: A list of Physical Card Profile objects.
+      description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
       example:
-        data:
-        - back_image_file_id: file_makxrc67oh9l6sg7w9yc
-          carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
-          contact_phone: '+16505046304'
-          created_at: '2020-01-31T23:59:59Z'
-          creator: user
-          description: Corporate logo card
-          front_image_file_id: file_makxrc67oh9l6sg7w9yc
-          front_text: null
-          id: physical_card_profile_m534d5rn9qyy9ufqxoec
-          idempotency_key: null
-          is_default: false
-          program_id: program_i2v2os4mwza1oetokh9i
-          status: active
-          type: physical_card_profile
-        next_cursor: v57w5d
+        back_image_file_id: file_makxrc67oh9l6sg7w9yc
+        carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
+        contact_phone: '+16505046304'
+        created_at: '2020-01-31T23:59:59Z'
+        creator: user
+        description: Corporate logo card
+        front_image_file_id: file_makxrc67oh9l6sg7w9yc
+        front_text: null
+        id: physical_card_profile_m534d5rn9qyy9ufqxoec
+        idempotency_key: null
+        is_default: false
+        program_id: program_i2v2os4mwza1oetokh9i
+        status: active
+        type: physical_card_profile
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/physical_card_profile'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
+        back_image_file_id:
           anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+          - description: The identifier of the File containing the physical card's back image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        carrier_image_file_id:
+          anyOf:
+          - description: The identifier of the File containing the physical card's carrier image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        contact_phone:
+          anyOf:
+          - description: A phone number the user can contact to receive support for their card.
             type: string
             x-documentation-priority: default
           - type: 'null'
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Physical Card Profile was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        creator:
+          description: The creator of this Physical Card Profile.
+          enum:
+          - increase
+          - user
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - This Physical Card Profile was created by Increase.
+          - This Physical Card Profile was created by you.
+        description:
+          description: A description you can use to identify the Physical Card Profile.
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          anyOf:
+          - description: The identifier of the File containing the physical card's front image. This will be missing until the image has been post-processed.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Files
+          - type: 'null'
+        id:
+          description: The Card Profile identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Physical Card Profiles
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        is_default:
+          description: Whether this Physical Card Profile is the default for all cards in its Increase group.
+          type: boolean
+          x-documentation-priority: default
+        program_id:
+          description: The identifier for the Program this Physical Card Profile belongs to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+        status:
+          description: The status of the Physical Card Profile.
+          enum:
+          - pending_creating
+          - pending_reviewing
+          - rejected
+          - pending_submitting
+          - active
+          - archived
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The Card Profile has not yet been processed by Increase.
+          - The card profile is awaiting review by Increase.
+          - There is an issue with the Physical Card Profile preventing it from use.
+          - The card profile is awaiting submission to the fulfillment provider.
+          - The Physical Card Profile has been submitted to the fulfillment provider and is ready to use.
+          - The Physical Card Profile has been archived.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `physical_card_profile`.
+          enum:
+          - physical_card_profile
+          type: string
+          x-documentation-priority: default
       required:
-      - data
-      - next_cursor
-      title: Physical Card Profile List
+      - type
+      - id
+      - created_at
+      - status
+      - description
+      - program_id
+      - is_default
+      - creator
+      - contact_phone
+      - front_image_file_id
+      - back_image_file_id
+      - carrier_image_file_id
+      - idempotency_key
+      title: Physical Card Profile
       type: object
-      x-event-categories: []
+      x-event-categories:
+      - physical_card_profile.created
+      - physical_card_profile.updated
       x-stainless-empty-object: false
-      x-title-plural: Physical Card Profile Lists
+      x-tag: Physical Card Profiles
+      x-title-plural: Physical Card Profiles
     error:
       anyOf:
       - properties:
@@ -609,137 +699,6 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    physical_card_profile:
-      additionalProperties: true
-      description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
-      example:
-        back_image_file_id: file_makxrc67oh9l6sg7w9yc
-        carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
-        contact_phone: '+16505046304'
-        created_at: '2020-01-31T23:59:59Z'
-        creator: user
-        description: Corporate logo card
-        front_image_file_id: file_makxrc67oh9l6sg7w9yc
-        front_text: null
-        id: physical_card_profile_m534d5rn9qyy9ufqxoec
-        idempotency_key: null
-        is_default: false
-        program_id: program_i2v2os4mwza1oetokh9i
-        status: active
-        type: physical_card_profile
-      properties:
-        back_image_file_id:
-          anyOf:
-          - description: The identifier of the File containing the physical card's back image. This will be missing until the image has been post-processed.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        carrier_image_file_id:
-          anyOf:
-          - description: The identifier of the File containing the physical card's carrier image. This will be missing until the image has been post-processed.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        contact_phone:
-          anyOf:
-          - description: A phone number the user can contact to receive support for their card.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the Physical Card Profile was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        creator:
-          description: The creator of this Physical Card Profile.
-          enum:
-          - increase
-          - user
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - This Physical Card Profile was created by Increase.
-          - This Physical Card Profile was created by you.
-        description:
-          description: A description you can use to identify the Physical Card Profile.
-          type: string
-          x-documentation-priority: default
-        front_image_file_id:
-          anyOf:
-          - description: The identifier of the File containing the physical card's front image. This will be missing until the image has been post-processed.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Files
-          - type: 'null'
-        id:
-          description: The Card Profile identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Physical Card Profiles
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        is_default:
-          description: Whether this Physical Card Profile is the default for all cards in its Increase group.
-          type: boolean
-          x-documentation-priority: default
-        program_id:
-          description: The identifier for the Program this Physical Card Profile belongs to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Programs
-        status:
-          description: The status of the Physical Card Profile.
-          enum:
-          - pending_creating
-          - pending_reviewing
-          - rejected
-          - pending_submitting
-          - active
-          - archived
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The Card Profile has not yet been processed by Increase.
-          - The card profile is awaiting review by Increase.
-          - There is an issue with the Physical Card Profile preventing it from use.
-          - The card profile is awaiting submission to the fulfillment provider.
-          - The Physical Card Profile has been submitted to the fulfillment provider and is ready to use.
-          - The Physical Card Profile has been archived.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `physical_card_profile`.
-          enum:
-          - physical_card_profile
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - created_at
-      - status
-      - description
-      - program_id
-      - is_default
-      - creator
-      - contact_phone
-      - front_image_file_id
-      - back_image_file_id
-      - carrier_image_file_id
-      - idempotency_key
-      title: Physical Card Profile
-      type: object
-      x-event-categories:
-      - physical_card_profile.created
-      - physical_card_profile.updated
-      x-stainless-empty-object: false
-      x-tag: Physical Card Profiles
-      x-title-plural: Physical Card Profiles
     create_a_physical_card_profile_parameters:
       additionalProperties: true
       example:
@@ -807,6 +766,47 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
+    physical_card_profile_list:
+      additionalProperties: true
+      description: A list of Physical Card Profile objects.
+      example:
+        data:
+        - back_image_file_id: file_makxrc67oh9l6sg7w9yc
+          carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
+          contact_phone: '+16505046304'
+          created_at: '2020-01-31T23:59:59Z'
+          creator: user
+          description: Corporate logo card
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          front_text: null
+          id: physical_card_profile_m534d5rn9qyy9ufqxoec
+          idempotency_key: null
+          is_default: false
+          program_id: program_i2v2os4mwza1oetokh9i
+          status: active
+          type: physical_card_profile
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/physical_card_profile'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Physical Card Profile List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Physical Card Profile Lists
   responses:
     errorResponse:
       content:

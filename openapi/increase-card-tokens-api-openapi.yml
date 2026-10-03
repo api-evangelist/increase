@@ -451,6 +451,65 @@ components:
         - status
         type: object
         x-event-categories: []
+    card_token:
+      additionalProperties: false
+      description: Card Tokens represent a tokenized card number that can be used for Card Push Transfers and Card Validations.
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        expiration_date: '2020-01-31'
+        id: outbound_card_token_zlt0ml6youq3q7vcdlg0
+        last4: '1234'
+        length: 16
+        prefix: '46637100'
+        type: card_token
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the card token was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        expiration_date:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the card expires.
+          format: date
+          type: string
+          x-documentation-priority: default
+        id:
+          description: The Card Token's identifier.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Card Tokens
+        last4:
+          description: The last 4 digits of the card number.
+          type: string
+          x-documentation-priority: default
+        length:
+          description: The length of the card number.
+          type: integer
+          x-documentation-priority: default
+        prefix:
+          description: The prefix of the card number, usually 8 digits.
+          type: string
+          x-documentation-priority: default
+        type:
+          description: A constant representing the object's type. For this resource it will always be `card_token`.
+          enum:
+          - card_token
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - id
+      - created_at
+      - prefix
+      - last4
+      - length
+      - expiration_date
+      title: Card Token
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Card Tokens
+      x-title-plural: Card Tokens
     card_token_list:
       additionalProperties: true
       description: A list of Card Token objects.
@@ -563,65 +622,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Card Token Capabilities
-    card_token:
-      additionalProperties: false
-      description: Card Tokens represent a tokenized card number that can be used for Card Push Transfers and Card Validations.
-      example:
-        created_at: '2020-01-31T23:59:59Z'
-        expiration_date: '2020-01-31'
-        id: outbound_card_token_zlt0ml6youq3q7vcdlg0
-        last4: '1234'
-        length: 16
-        prefix: '46637100'
-        type: card_token
-      properties:
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time at which the card token was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        expiration_date:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date when the card expires.
-          format: date
-          type: string
-          x-documentation-priority: default
-        id:
-          description: The Card Token's identifier.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Card Tokens
-        last4:
-          description: The last 4 digits of the card number.
-          type: string
-          x-documentation-priority: default
-        length:
-          description: The length of the card number.
-          type: integer
-          x-documentation-priority: default
-        prefix:
-          description: The prefix of the card number, usually 8 digits.
-          type: string
-          x-documentation-priority: default
-        type:
-          description: A constant representing the object's type. For this resource it will always be `card_token`.
-          enum:
-          - card_token
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - id
-      - created_at
-      - prefix
-      - last4
-      - length
-      - expiration_date
-      title: Card Token
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-tag: Card Tokens
-      x-title-plural: Card Tokens
   responses:
     errorResponse:
       content:

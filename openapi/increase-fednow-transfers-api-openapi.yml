@@ -248,160 +248,6 @@ paths:
       - Fednow Transfers
 components:
   schemas:
-    create_a_fednow_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        account_number: '987654321'
-        amount: 100
-        creditor_address:
-          city: New York
-          line1: 33 Liberty Street
-          postal_code: '10045'
-          state: NY
-        creditor_name: Ian Crease
-        debtor_name: National Phonograph Company
-        routing_number: '101050001'
-        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-        unstructured_remittance_information: Invoice 29582
-      properties:
-        account_number:
-          description: The creditor's account number.
-          maxLength: 34
-          minLength: 1
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        amount:
-          description: The amount, in minor units, to send to the creditor.
-          minimum: 1
-          type: integer
-          x-documentation-priority: default
-        creditor_address:
-          additionalProperties: false
-          description: The creditor's address.
-          properties:
-            city:
-              description: The city, district, town, or village of the address.
-              maxLength: 35
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            line1:
-              description: The first line of the address. This is usually the street number and street.
-              maxLength: 70
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            postal_code:
-              description: The postal code component of the address.
-              maxLength: 10
-              minLength: 1
-              pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
-              type: string
-              x-documentation-priority: default
-            state:
-              description: The US state component of the address.
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-documentation-priority: default
-          required:
-          - city
-          - state
-          - postal_code
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        creditor_name:
-          description: The creditor's name.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
-          type: string
-          x-documentation-priority: default
-        debtor_address:
-          additionalProperties: false
-          description: The debtor's address.
-          properties:
-            city:
-              description: The city, district, town, or village of the address.
-              maxLength: 35
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            line1:
-              description: The first line of the address. This is usually the street number and street.
-              maxLength: 70
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            postal_code:
-              description: The postal code component of the address.
-              maxLength: 10
-              minLength: 1
-              pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
-              type: string
-              x-documentation-priority: default
-            state:
-              description: The US state component of the address.
-              maxLength: 2
-              minLength: 2
-              type: string
-              x-documentation-priority: default
-          required:
-          - city
-          - state
-          - postal_code
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        debtor_name:
-          description: The debtor's name.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
-          type: string
-          x-documentation-priority: default
-        external_account_id:
-          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: External Accounts
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        routing_number:
-          description: The creditor's bank account routing number.
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        source_account_number_id:
-          description: The Account Number to include in the transfer as the debtor's account number.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-        unstructured_remittance_information:
-          description: Unstructured remittance information to include in the transfer.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
-          type: string
-          x-documentation-priority: default
-      required:
-      - source_account_number_id
-      - amount
-      - unstructured_remittance_information
-      - creditor_name
-      - debtor_name
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     error:
       anyOf:
       - properties:
@@ -1202,6 +1048,160 @@ components:
       x-stainless-empty-object: false
       x-tag: FedNow Transfers
       x-title-plural: FedNow Transfers
+    create_a_fednow_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        creditor_address:
+          city: New York
+          line1: 33 Liberty Street
+          postal_code: '10045'
+          state: NY
+        creditor_name: Ian Crease
+        debtor_name: National Phonograph Company
+        routing_number: '101050001'
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number:
+          description: The creditor's account number.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The amount, in minor units, to send to the creditor.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        creditor_address:
+          additionalProperties: false
+          description: The creditor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address. This is usually the street number and street.
+              maxLength: 70
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The postal code component of the address.
+              maxLength: 10
+              minLength: 1
+              pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The US state component of the address.
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-documentation-priority: default
+          required:
+          - city
+          - state
+          - postal_code
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        creditor_name:
+          description: The creditor's name.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
+          type: string
+          x-documentation-priority: default
+        debtor_address:
+          additionalProperties: false
+          description: The debtor's address.
+          properties:
+            city:
+              description: The city, district, town, or village of the address.
+              maxLength: 35
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line1:
+              description: The first line of the address. This is usually the street number and street.
+              maxLength: 70
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            postal_code:
+              description: The postal code component of the address.
+              maxLength: 10
+              minLength: 1
+              pattern: ^[0-9]{5}(?:-?[0-9]{4})?$
+              type: string
+              x-documentation-priority: default
+            state:
+              description: The US state component of the address.
+              maxLength: 2
+              minLength: 2
+              type: string
+              x-documentation-priority: default
+          required:
+          - city
+          - state
+          - postal_code
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        debtor_name:
+          description: The debtor's name.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
+          type: string
+          x-documentation-priority: default
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The creditor's bank account routing number.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The Account Number to include in the transfer as the debtor's account number.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        unstructured_remittance_information:
+          description: Unstructured remittance information to include in the transfer.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuüvwxyýz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòó÷øùúûþÿ]*$
+          type: string
+          x-documentation-priority: default
+      required:
+      - source_account_number_id
+      - amount
+      - unstructured_remittance_information
+      - creditor_name
+      - debtor_name
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

@@ -119,72 +119,317 @@ paths:
       - Card Purchase Supplements
 components:
   schemas:
-    card_purchase_supplement_list:
-      additionalProperties: true
-      description: A list of Card Purchase Supplement objects.
-      example:
-        data:
-        - card_payment_id: card_payment_nd3k2kacrqjli8482ave
-          id: card_purchase_supplement_ijuc45iym4jchnh2sfk3
-          invoice:
-            discount_amount: 100
-            discount_currency: USD
-            discount_treatment_code: null
-            duty_tax_amount: 200
-            duty_tax_currency: USD
-            order_date: '2023-07-20'
-            shipping_amount: 300
-            shipping_currency: USD
-            shipping_destination_country_code: US
-            shipping_destination_postal_code: '10045'
-            shipping_source_postal_code: '10045'
-            shipping_tax_amount: 400
-            shipping_tax_currency: USD
-            shipping_tax_rate: '0.2'
-            tax_treatments: null
-            unique_value_added_tax_invoice_reference: '12302'
-          line_items:
-          - detail_indicator: normal
-            discount_amount: null
-            discount_currency: null
-            discount_treatment_code: null
-            id: card_purchase_supplement_invoice_line_item_nf9760lz0apqy5retmqh
-            item_commodity_code: '001'
-            item_descriptor: Coffee
-            item_quantity: '1.0'
-            product_code: '101'
-            sales_tax_amount: null
-            sales_tax_currency: null
-            sales_tax_rate: null
-            total_amount: 500
-            total_amount_currency: USD
-            unit_cost: '5.0'
-            unit_cost_currency: USD
-            unit_of_measure_code: NMB
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: card_purchase_supplement
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/card_purchase_supplement'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
             type: string
             x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Card Purchase Supplement List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Card Purchase Supplement Lists
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     card_purchase_supplement:
       additionalProperties: true
       description: Additional information about a card purchase (e.g., settlement or refund), such as level 3 line item data.
@@ -564,317 +809,72 @@ components:
       x-stainless-empty-object: false
       x-tag: Card Purchase Supplements
       x-title-plural: Card Purchase Supplements
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
+    card_purchase_supplement_list:
+      additionalProperties: true
+      description: A list of Card Purchase Supplement objects.
+      example:
+        data:
+        - card_payment_id: card_payment_nd3k2kacrqjli8482ave
+          id: card_purchase_supplement_ijuc45iym4jchnh2sfk3
+          invoice:
+            discount_amount: 100
+            discount_currency: USD
+            discount_treatment_code: null
+            duty_tax_amount: 200
+            duty_tax_currency: USD
+            order_date: '2023-07-20'
+            shipping_amount: 300
+            shipping_currency: USD
+            shipping_destination_country_code: US
+            shipping_destination_postal_code: '10045'
+            shipping_source_postal_code: '10045'
+            shipping_tax_amount: 400
+            shipping_tax_currency: USD
+            shipping_tax_rate: '0.2'
+            tax_treatments: null
+            unique_value_added_tax_invoice_reference: '12302'
+          line_items:
+          - detail_indicator: normal
+            discount_amount: null
+            discount_currency: null
+            discount_treatment_code: null
+            id: card_purchase_supplement_invoice_line_item_nf9760lz0apqy5retmqh
+            item_commodity_code: '001'
+            item_descriptor: Coffee
+            item_quantity: '1.0'
+            product_code: '101'
+            sales_tax_amount: null
+            sales_tax_currency: null
+            sales_tax_rate: null
+            total_amount: 500
+            total_amount_currency: USD
+            unit_cost: '5.0'
+            unit_cost_currency: USD
+            unit_of_measure_code: NMB
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: card_purchase_supplement
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/card_purchase_supplement'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
             type: string
             x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Card Purchase Supplement List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Card Purchase Supplement Lists
   responses:
     errorResponse:
       content:

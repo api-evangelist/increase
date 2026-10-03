@@ -119,50 +119,6 @@ paths:
       - Digital Wallet Tokens
 components:
   schemas:
-    digital_wallet_token_list:
-      additionalProperties: true
-      description: A list of Digital Wallet Token objects.
-      example:
-        data:
-        - card_id: card_oubs0hwk5rn6knuecxg2
-          cardholder:
-            name: John Smith
-          created_at: '2020-01-31T23:59:59Z'
-          device:
-            device_type: mobile_phone
-            identifier: 04393EADF4149002225811273840459271E36516DA4875FF
-            ip_address: 1.2.3.4
-            name: My Work Phone
-          dynamic_primary_account_number: null
-          id: digital_wallet_token_izi62go3h51p369jrie0
-          status: active
-          token_requestor: apple_pay
-          type: digital_wallet_token
-          updates:
-          - status: inactive
-            timestamp: '2020-01-31T23:59:59Z'
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/digital_wallet_token'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Digital Wallet Token List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Digital Wallet Token Lists
     error:
       anyOf:
       - properties:
@@ -698,6 +654,50 @@ components:
       x-stainless-empty-object: false
       x-tag: Digital Wallet Tokens
       x-title-plural: Digital Wallet Tokens
+    digital_wallet_token_list:
+      additionalProperties: true
+      description: A list of Digital Wallet Token objects.
+      example:
+        data:
+        - card_id: card_oubs0hwk5rn6knuecxg2
+          cardholder:
+            name: John Smith
+          created_at: '2020-01-31T23:59:59Z'
+          device:
+            device_type: mobile_phone
+            identifier: 04393EADF4149002225811273840459271E36516DA4875FF
+            ip_address: 1.2.3.4
+            name: My Work Phone
+          dynamic_primary_account_number: null
+          id: digital_wallet_token_izi62go3h51p369jrie0
+          status: active
+          token_requestor: apple_pay
+          type: digital_wallet_token
+          updates:
+          - status: inactive
+            timestamp: '2020-01-31T23:59:59Z'
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/digital_wallet_token'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Digital Wallet Token List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Digital Wallet Token Lists
   responses:
     errorResponse:
       content:
