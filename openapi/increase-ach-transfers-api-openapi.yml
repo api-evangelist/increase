@@ -250,658 +250,6 @@ paths:
       - ACH Transfers
 components:
   schemas:
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    inbound_funds_hold:
-      additionalProperties: true
-      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
-      example:
-        amount: 100
-        automatically_releases_at: '2020-01-31T23:59:59Z'
-        created_at: '2020-01-31T23:59:59Z'
-        currency: USD
-        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
-        released_at: null
-        status: held
-        type: inbound_funds_hold
-      properties:
-        amount:
-          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
-          type: integer
-          x-documentation-priority: default
-        automatically_releases_at:
-          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
-          enum:
-          - USD
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - US Dollar (USD)
-        held_transaction_id:
-          anyOf:
-          - description: The ID of the Transaction for which funds were held.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        pending_transaction_id:
-          anyOf:
-          - description: The ID of the Pending Transaction representing the held funds.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Pending Transactions
-          - type: 'null'
-        released_at:
-          anyOf:
-          - description: When the hold was released (if it has been released).
-            format: date-time
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        status:
-          description: The status of the hold.
-          enum:
-          - held
-          - complete
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Funds are still being held.
-          - Funds have been released.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
-          enum:
-          - inbound_funds_hold
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - amount
-      - created_at
-      - currency
-      - automatically_releases_at
-      - released_at
-      - status
-      - held_transaction_id
-      - pending_transaction_id
-      title: Inbound Funds Hold
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound Funds Holds
-    create_an_ach_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        account_number: '987654321'
-        amount: 100
-        routing_number: '101050001'
-        statement_descriptor: New ACH transfer
-      properties:
-        account_id:
-          description: The Increase identifier for the account that will send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        account_number:
-          description: The account number for the destination account.
-          maxLength: 17
-          minLength: 1
-          pattern: ^[a-zA-Z0-9]*$
-          type: string
-          x-documentation-priority: default
-        addenda:
-          additionalProperties: false
-          description: Additional information that will be sent to the recipient. This is included in the transfer data sent to the receiving bank.
-          properties:
-            category:
-              description: The type of addenda to pass with the transfer.
-              enum:
-              - freeform
-              - payment_order_remittance_advice
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - Unstructured `payment_related_information` passed through with the transfer.
-              - Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information.
-            freeform:
-              additionalProperties: false
-              description: Unstructured `payment_related_information` passed through with the transfer. Required if and only if `category` is `freeform`.
-              properties:
-                entries:
-                  description: Each entry represents an addendum sent with the transfer. Sending more than one addendum is only supported for transfers with `standard_entry_class_code` of `corporate_trade_exchange` (CTX).
-                  items:
-                    additionalProperties: false
-                    properties:
-                      payment_related_information:
-                        description: The payment related information passed in the addendum.
-                        maxLength: 80
-                        minLength: 1
-                        pattern: ^[ -~]*$
-                        type: string
-                        x-documentation-priority: default
-                    required:
-                    - payment_related_information
-                    type: object
-                    x-event-categories: []
-                    x-stainless-empty-object: false
-                  type: array
-                  x-documentation-priority: default
-              required:
-              - entries
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-            payment_order_remittance_advice:
-              additionalProperties: false
-              description: Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information. Required if and only if `category` is `payment_order_remittance_advice`.
-              properties:
-                invoices:
-                  description: ASC X12 RMR records for this specific transfer.
-                  items:
-                    additionalProperties: false
-                    properties:
-                      invoice_number:
-                        description: The invoice number for this reference, determined in advance with the receiver.
-                        maxLength: 50
-                        minLength: 1
-                        pattern: ^[a-zA-Z0-9]*$
-                        type: string
-                        x-documentation-priority: default
-                      paid_amount:
-                        description: The amount that was paid for this invoice in the minor unit of its currency. For dollars, for example, this is cents.
-                        type: integer
-                        x-documentation-priority: default
-                    required:
-                    - invoice_number
-                    - paid_amount
-                    type: object
-                    x-event-categories: []
-                    x-stainless-empty-object: false
-                  type: array
-                  x-documentation-priority: default
-              required:
-              - invoices
-              type: object
-              x-documentation-priority: default
-              x-event-categories: []
-              x-stainless-empty-object: false
-          required:
-          - category
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        amount:
-          description: The transfer amount in USD cents. A positive amount originates a credit transfer pushing funds to the receiving account. A negative amount originates a debit transfer pulling funds from the receiving account.
-          maximum: 9999999999
-          minimum: -9999999999
-          type: integer
-          x-documentation-priority: default
-        company_descriptive_date:
-          description: The description of the date of the transfer, usually in the format `YYMMDD`. This is included in the transfer data sent to the receiving bank.
-          maxLength: 6
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        company_discretionary_data:
-          description: The data you choose to associate with the transfer. This is included in the transfer data sent to the receiving bank.
-          maxLength: 20
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        company_entry_description:
-          description: A description of the transfer, included in the transfer data sent to the receiving bank. Standardized formatting may be required, for example `PAYROLL` for payroll-related Prearranged Payments and Deposits (PPD) credit transfers.
-          maxLength: 10
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        company_name:
-          description: The name by which the recipient knows you. This is included in the transfer data sent to the receiving bank.
-          maxLength: 16
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        destination_account_holder:
-          description: The type of entity that owns the account to which the ACH Transfer is being sent.
-          enum:
-          - business
-          - individual
-          - unknown
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - The External Account is owned by a business.
-          - The External Account is owned by an individual.
-          - It's unknown what kind of entity owns the External Account.
-        external_account_id:
-          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number`, `routing_number`, and `funding` must be absent.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: External Accounts
-        funding:
-          description: The type of the account to which the transfer will be sent.
-          enum:
-          - checking
-          - savings
-          - general_ledger
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - A checking account.
-          - A savings account.
-          - A bank's general ledger. Uncommon.
-        individual_id:
-          description: Your identifier for the transfer recipient.
-          maxLength: 15
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        individual_name:
-          description: The name of the transfer recipient. This value is informational and not verified by the recipient's bank.
-          maxLength: 22
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        preferred_effective_date:
-          additionalProperties: false
-          description: Configuration for how the effective date of the transfer will be set. This determines same-day vs future-dated settlement timing. If not set, defaults to a `settlement_schedule` of `same_day`. If set, exactly one of the child attributes must be set.
-          properties:
-            date:
-              description: A specific date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format to use as the effective date when submitting this transfer.
-              format: date
-              type: string
-              x-documentation-priority: default
-            settlement_schedule:
-              description: A schedule by which Increase will choose an effective date for the transfer.
-              enum:
-              - same_day
-              - future_dated
-              type: string
-              x-documentation-priority: default
-              x-enum-descriptions:
-              - 'The chosen effective date will be the same as the ACH processing date on which the transfer is submitted. This is necessary, but not sufficient for the transfer to be settled same-day: it must also be submitted before the last same-day cutoff and be less than or equal to $1,000.000.00.'
-              - The chosen effective date will be the business day following the ACH processing date on which the transfer is submitted. The transfer will be settled on that future day.
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        routing_number:
-          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        standard_entry_class_code:
-          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the transfer.
-          enum:
-          - corporate_credit_or_debit
-          - corporate_trade_exchange
-          - prearranged_payments_and_deposit
-          - internet_initiated
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
-          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
-          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
-          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
-        statement_descriptor:
-          description: A description you choose to give the transfer. This will be saved with the transfer details, displayed in the dashboard, and returned by the API. If `individual_name` and `company_name` are not explicitly set by this API, the `statement_descriptor` will be sent in those fields to the receiving bank to help the customer recognize the transfer. You are highly encouraged to pass `individual_name` and `company_name` instead of relying on this fallback.
-          maxLength: 200
-          minLength: 1
-          pattern: ^[ -~]*$
-          type: string
-          x-documentation-priority: default
-        transaction_timing:
-          description: The timing of the transaction.
-          enum:
-          - synchronous
-          - asynchronous
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - A Transaction will be created immediately.
-          - A Transaction will be created when the funds settle at the Federal Reserve.
-      required:
-      - account_id
-      - amount
-      - statement_descriptor
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     ach_transfer_list:
       additionalProperties: true
       description: A list of ACH Transfer objects.
@@ -1916,6 +1264,658 @@ components:
       x-stainless-empty-object: false
       x-tag: ACH Transfers
       x-title-plural: ACH Transfers
+    inbound_funds_hold:
+      additionalProperties: true
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      example:
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
+      properties:
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
+          x-documentation-priority: default
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
+          anyOf:
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound Funds Holds
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    create_an_ach_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        account_number: '987654321'
+        amount: 100
+        routing_number: '101050001'
+        statement_descriptor: New ACH transfer
+      properties:
+        account_id:
+          description: The Increase identifier for the account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        account_number:
+          description: The account number for the destination account.
+          maxLength: 17
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        addenda:
+          additionalProperties: false
+          description: Additional information that will be sent to the recipient. This is included in the transfer data sent to the receiving bank.
+          properties:
+            category:
+              description: The type of addenda to pass with the transfer.
+              enum:
+              - freeform
+              - payment_order_remittance_advice
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - Unstructured `payment_related_information` passed through with the transfer.
+              - Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information.
+            freeform:
+              additionalProperties: false
+              description: Unstructured `payment_related_information` passed through with the transfer. Required if and only if `category` is `freeform`.
+              properties:
+                entries:
+                  description: Each entry represents an addendum sent with the transfer. Sending more than one addendum is only supported for transfers with `standard_entry_class_code` of `corporate_trade_exchange` (CTX).
+                  items:
+                    additionalProperties: false
+                    properties:
+                      payment_related_information:
+                        description: The payment related information passed in the addendum.
+                        maxLength: 80
+                        minLength: 1
+                        pattern: ^[ -~]*$
+                        type: string
+                        x-documentation-priority: default
+                    required:
+                    - payment_related_information
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              required:
+              - entries
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+            payment_order_remittance_advice:
+              additionalProperties: false
+              description: Structured ASC X12 820 remittance advice records. Please reach out to [support@increase.com](mailto:support@increase.com) for more information. Required if and only if `category` is `payment_order_remittance_advice`.
+              properties:
+                invoices:
+                  description: ASC X12 RMR records for this specific transfer.
+                  items:
+                    additionalProperties: false
+                    properties:
+                      invoice_number:
+                        description: The invoice number for this reference, determined in advance with the receiver.
+                        maxLength: 50
+                        minLength: 1
+                        pattern: ^[a-zA-Z0-9]*$
+                        type: string
+                        x-documentation-priority: default
+                      paid_amount:
+                        description: The amount that was paid for this invoice in the minor unit of its currency. For dollars, for example, this is cents.
+                        type: integer
+                        x-documentation-priority: default
+                    required:
+                    - invoice_number
+                    - paid_amount
+                    type: object
+                    x-event-categories: []
+                    x-stainless-empty-object: false
+                  type: array
+                  x-documentation-priority: default
+              required:
+              - invoices
+              type: object
+              x-documentation-priority: default
+              x-event-categories: []
+              x-stainless-empty-object: false
+          required:
+          - category
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        amount:
+          description: The transfer amount in USD cents. A positive amount originates a credit transfer pushing funds to the receiving account. A negative amount originates a debit transfer pulling funds from the receiving account.
+          maximum: 9999999999
+          minimum: -9999999999
+          type: integer
+          x-documentation-priority: default
+        company_descriptive_date:
+          description: The description of the date of the transfer, usually in the format `YYMMDD`. This is included in the transfer data sent to the receiving bank.
+          maxLength: 6
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_discretionary_data:
+          description: The data you choose to associate with the transfer. This is included in the transfer data sent to the receiving bank.
+          maxLength: 20
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_entry_description:
+          description: A description of the transfer, included in the transfer data sent to the receiving bank. Standardized formatting may be required, for example `PAYROLL` for payroll-related Prearranged Payments and Deposits (PPD) credit transfers.
+          maxLength: 10
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        company_name:
+          description: The name by which the recipient knows you. This is included in the transfer data sent to the receiving bank.
+          maxLength: 16
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        destination_account_holder:
+          description: The type of entity that owns the account to which the ACH Transfer is being sent.
+          enum:
+          - business
+          - individual
+          - unknown
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - The External Account is owned by a business.
+          - The External Account is owned by an individual.
+          - It's unknown what kind of entity owns the External Account.
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number`, `routing_number`, and `funding` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        funding:
+          description: The type of the account to which the transfer will be sent.
+          enum:
+          - checking
+          - savings
+          - general_ledger
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A checking account.
+          - A savings account.
+          - A bank's general ledger. Uncommon.
+        individual_id:
+          description: Your identifier for the transfer recipient.
+          maxLength: 15
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        individual_name:
+          description: The name of the transfer recipient. This value is informational and not verified by the recipient's bank.
+          maxLength: 22
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        preferred_effective_date:
+          additionalProperties: false
+          description: Configuration for how the effective date of the transfer will be set. This determines same-day vs future-dated settlement timing. If not set, defaults to a `settlement_schedule` of `same_day`. If set, exactly one of the child attributes must be set.
+          properties:
+            date:
+              description: A specific date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format to use as the effective date when submitting this transfer.
+              format: date
+              type: string
+              x-documentation-priority: default
+            settlement_schedule:
+              description: A schedule by which Increase will choose an effective date for the transfer.
+              enum:
+              - same_day
+              - future_dated
+              type: string
+              x-documentation-priority: default
+              x-enum-descriptions:
+              - 'The chosen effective date will be the same as the ACH processing date on which the transfer is submitted. This is necessary, but not sufficient for the transfer to be settled same-day: it must also be submitted before the last same-day cutoff and be less than or equal to $1,000.000.00.'
+              - The chosen effective date will be the business day following the ACH processing date on which the transfer is submitted. The transfer will be settled on that future day.
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The American Bankers' Association (ABA) Routing Transit Number (RTN) for the destination account.
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        standard_entry_class_code:
+          description: The [Standard Entry Class (SEC) code](/documentation/ach-standard-entry-class-codes) to use for the transfer.
+          enum:
+          - corporate_credit_or_debit
+          - corporate_trade_exchange
+          - prearranged_payments_and_deposit
+          - internet_initiated
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Corporate Credit and Debit (CCD) is used for business-to-business payments.
+          - Corporate Trade Exchange (CTX) allows for including extensive remittance information with business-to-business payments.
+          - Prearranged Payments and Deposits (PPD) is used for credits or debits originated by an organization to a consumer, such as payroll direct deposits.
+          - Internet Initiated (WEB) is used for consumer payments initiated or authorized via the Internet. Debits can only be initiated by non-consumers to debit a consumer’s account. Credits can only be used for consumer to consumer transactions.
+        statement_descriptor:
+          description: A description you choose to give the transfer. This will be saved with the transfer details, displayed in the dashboard, and returned by the API. If `individual_name` and `company_name` are not explicitly set by this API, the `statement_descriptor` will be sent in those fields to the receiving bank to help the customer recognize the transfer. You are highly encouraged to pass `individual_name` and `company_name` instead of relying on this fallback.
+          maxLength: 200
+          minLength: 1
+          pattern: ^[ -~]*$
+          type: string
+          x-documentation-priority: default
+        transaction_timing:
+          description: The timing of the transaction.
+          enum:
+          - synchronous
+          - asynchronous
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - A Transaction will be created immediately.
+          - A Transaction will be created when the funds settle at the Federal Reserve.
+      required:
+      - account_id
+      - amount
+      - statement_descriptor
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

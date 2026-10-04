@@ -118,6 +118,14 @@ paths:
       tags:
       - Digital Wallet Tokens
 components:
+  responses:
+    errorResponse:
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/error'
+      description: Error
   schemas:
     error:
       anyOf:
@@ -698,14 +706,6 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Digital Wallet Token Lists
-  responses:
-    errorResponse:
-      content:
-        application/json:
-          schema:
-            allOf:
-            - $ref: '#/components/schemas/error'
-      description: Error
   securitySchemes:
     bearerAuth:
       scheme: bearer

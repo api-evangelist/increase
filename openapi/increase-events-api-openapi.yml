@@ -678,39 +678,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    event_list:
-      additionalProperties: true
-      description: A list of Event objects.
-      example:
-        data:
-        - associated_object_id: account_in71c4amph0vgo2qllky
-          associated_object_type: account
-          category: account.created
-          created_at: '2020-01-31T23:59:59Z'
-          id: event_001dzz0r20rzr4zrhrr1364hy80
-          type: event
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/event'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Event List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Event Lists
     event:
       additionalProperties: false
       description: Events are records of things that happened to objects at Increase. Events are accessible via the List Events endpoint and can be delivered to your application via webhooks. For more information, see our [webhooks guide](https://increase.com/documentation/webhooks).
@@ -979,6 +946,39 @@ components:
       x-stainless-empty-object: false
       x-tag: Events
       x-title-plural: Events
+    event_list:
+      additionalProperties: true
+      description: A list of Event objects.
+      example:
+        data:
+        - associated_object_id: account_in71c4amph0vgo2qllky
+          associated_object_type: account
+          category: account.created
+          created_at: '2020-01-31T23:59:59Z'
+          id: event_001dzz0r20rzr4zrhrr1364hy80
+          type: event
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/event'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Event List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Event Lists
   responses:
     errorResponse:
       content:

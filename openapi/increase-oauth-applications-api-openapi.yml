@@ -125,6 +125,40 @@ paths:
       - OAuth Applications
 components:
   schemas:
+    oauth_application_list:
+      additionalProperties: true
+      description: A list of OAuth Application objects.
+      example:
+        data:
+        - client_id: client_id_ec79nb1bukwwafdewe88
+          created_at: '2020-01-31T23:59:59Z'
+          deleted_at: null
+          id: application_gj9ufmpgh5i56k4vyriy
+          name: Ian Crease's App
+          status: active
+          type: oauth_application
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/oauth_application'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: OAuth Application List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: OAuth Application Lists
     error:
       anyOf:
       - properties:
@@ -436,40 +470,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    oauth_application_list:
-      additionalProperties: true
-      description: A list of OAuth Application objects.
-      example:
-        data:
-        - client_id: client_id_ec79nb1bukwwafdewe88
-          created_at: '2020-01-31T23:59:59Z'
-          deleted_at: null
-          id: application_gj9ufmpgh5i56k4vyriy
-          name: Ian Crease's App
-          status: active
-          type: oauth_application
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/oauth_application'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: OAuth Application List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: OAuth Application Lists
     oauth_application:
       additionalProperties: false
       description: An OAuth Application lets you build an application for others to use with their Increase data. You can create an OAuth Application via the Dashboard and read information about it with the API. Learn more about OAuth [here](https://increase.com/documentation/oauth).

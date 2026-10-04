@@ -153,405 +153,62 @@ paths:
       - Check Deposits
 components:
   schemas:
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    inbound_funds_hold:
+    check_deposit_list:
       additionalProperties: true
-      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
+      description: A list of Check Deposit objects.
       example:
-        amount: 100
-        automatically_releases_at: '2020-01-31T23:59:59Z'
-        created_at: '2020-01-31T23:59:59Z'
-        currency: USD
-        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
-        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
-        released_at: null
-        status: held
-        type: inbound_funds_hold
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          amount: 1000
+          back_image_file_id: file_26khfk98mzfz90a11oqx
+          created_at: '2020-01-31T23:59:59Z'
+          deposit_acceptance:
+            account_number: '987654321'
+            amount: 1000
+            auxiliary_on_us: '101'
+            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
+            currency: USD
+            routing_number: '101050001'
+            serial_number: null
+          deposit_adjustments: []
+          deposit_rejection: null
+          deposit_return: null
+          deposit_submission:
+            back_file_id: file_frhw4s443nh7noss55kq
+            front_file_id: file_j7ed9mrve741m6yui9ju
+            submitted_at: '2020-02-01T00:59:59+00:00'
+          description: null
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          id: check_deposit_f06n9gpg7sxn8t19lfc1
+          idempotency_key: null
+          inbound_funds_hold: null
+          inbound_mail_item_id: null
+          lockbox_recipient_id: null
+          status: submitted
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: check_deposit
+        next_cursor: v57w5d
       properties:
-        amount:
-          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
-          type: integer
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/check_deposit'
+          type: array
           x-documentation-priority: default
-        automatically_releases_at:
-          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        currency:
-          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
-          enum:
-          - USD
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - US Dollar (USD)
-        held_transaction_id:
+        next_cursor:
           anyOf:
-          - description: The ID of the Transaction for which funds were held.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Transactions
-          - type: 'null'
-        pending_transaction_id:
-          anyOf:
-          - description: The ID of the Pending Transaction representing the held funds.
-            type: string
-            x-documentation-priority: default
-            x-id-reference-to: Pending Transactions
-          - type: 'null'
-        released_at:
-          anyOf:
-          - description: When the hold was released (if it has been released).
-            format: date-time
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
             type: string
             x-documentation-priority: default
           - type: 'null'
-        status:
-          description: The status of the hold.
-          enum:
-          - held
-          - complete
-          type: string
-          x-documentation-priority: default
-          x-enum-descriptions:
-          - Funds are still being held.
-          - Funds have been released.
-        type:
-          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
-          enum:
-          - inbound_funds_hold
-          type: string
-          x-documentation-priority: default
       required:
-      - type
-      - amount
-      - created_at
-      - currency
-      - automatically_releases_at
-      - released_at
-      - status
-      - held_transaction_id
-      - pending_transaction_id
-      title: Inbound Funds Hold
+      - data
+      - next_cursor
+      title: Check Deposit List
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Inbound Funds Holds
+      x-title-plural: Check Deposit Lists
     check_deposit:
       additionalProperties: true
       description: Check Deposits allow you to deposit images of paper checks into your account.
@@ -1046,62 +703,405 @@ components:
       x-stainless-empty-object: false
       x-tag: Check Deposits
       x-title-plural: Check Deposits
-    check_deposit_list:
+    inbound_funds_hold:
       additionalProperties: true
-      description: A list of Check Deposit objects.
+      description: We hold funds for certain transaction types to account for return windows where funds might still be clawed back by the sending institution.
       example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          amount: 1000
-          back_image_file_id: file_26khfk98mzfz90a11oqx
-          created_at: '2020-01-31T23:59:59Z'
-          deposit_acceptance:
-            account_number: '987654321'
-            amount: 1000
-            auxiliary_on_us: '101'
-            check_deposit_id: check_deposit_f06n9gpg7sxn8t19lfc1
-            currency: USD
-            routing_number: '101050001'
-            serial_number: null
-          deposit_adjustments: []
-          deposit_rejection: null
-          deposit_return: null
-          deposit_submission:
-            back_file_id: file_frhw4s443nh7noss55kq
-            front_file_id: file_j7ed9mrve741m6yui9ju
-            submitted_at: '2020-02-01T00:59:59+00:00'
-          description: null
-          front_image_file_id: file_makxrc67oh9l6sg7w9yc
-          id: check_deposit_f06n9gpg7sxn8t19lfc1
-          idempotency_key: null
-          inbound_funds_hold: null
-          inbound_mail_item_id: null
-          lockbox_recipient_id: null
-          status: submitted
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: check_deposit
-        next_cursor: v57w5d
+        amount: 100
+        automatically_releases_at: '2020-01-31T23:59:59Z'
+        created_at: '2020-01-31T23:59:59Z'
+        currency: USD
+        held_transaction_id: transaction_uyrp7fld2ium70oa7oi
+        pending_transaction_id: pending_transaction_k1sfetcau2qbvjbzgju4
+        released_at: null
+        status: held
+        type: inbound_funds_hold
       properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/check_deposit'
-          type: array
+        amount:
+          description: The held amount in the minor unit of the account's currency. For dollars, for example, this is cents.
+          type: integer
           x-documentation-priority: default
-        next_cursor:
+        automatically_releases_at:
+          description: When the hold will be released automatically. Certain conditions may cause it to be released before this time.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the hold was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        currency:
+          description: The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) code for the hold's currency.
+          enum:
+          - USD
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - US Dollar (USD)
+        held_transaction_id:
           anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+          - description: The ID of the Transaction for which funds were held.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Transactions
+          - type: 'null'
+        pending_transaction_id:
+          anyOf:
+          - description: The ID of the Pending Transaction representing the held funds.
+            type: string
+            x-documentation-priority: default
+            x-id-reference-to: Pending Transactions
+          - type: 'null'
+        released_at:
+          anyOf:
+          - description: When the hold was released (if it has been released).
+            format: date-time
             type: string
             x-documentation-priority: default
           - type: 'null'
+        status:
+          description: The status of the hold.
+          enum:
+          - held
+          - complete
+          type: string
+          x-documentation-priority: default
+          x-enum-descriptions:
+          - Funds are still being held.
+          - Funds have been released.
+        type:
+          description: A constant representing the object's type. For this resource it will always be `inbound_funds_hold`.
+          enum:
+          - inbound_funds_hold
+          type: string
+          x-documentation-priority: default
       required:
-      - data
-      - next_cursor
-      title: Check Deposit List
+      - type
+      - amount
+      - created_at
+      - currency
+      - automatically_releases_at
+      - released_at
+      - status
+      - held_transaction_id
+      - pending_transaction_id
+      title: Inbound Funds Hold
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-      x-title-plural: Check Deposit Lists
+      x-title-plural: Inbound Funds Holds
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
     create_a_check_deposit_parameters:
       additionalProperties: true
       example:

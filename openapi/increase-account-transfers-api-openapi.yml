@@ -800,47 +800,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Account Transfers
       x-title-plural: Account Transfers
-    create_an_account_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_id: account_in71c4amph0vgo2qllky
-        amount: 100
-        description: Creating liquidity
-        destination_account_id: account_uf16sut2ct5bevmq3eh
-      properties:
-        account_id:
-          description: The identifier for the originating Account that will send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        amount:
-          description: The transfer amount in the minor unit of the account currency. For dollars, for example, this is cents.
-          minimum: 1
-          type: integer
-          x-documentation-priority: default
-        description:
-          description: An internal-facing description for the transfer for display in the API and dashboard. This will also show in the description of the created Transactions.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        destination_account_id:
-          description: The identifier for the destination Account that will receive the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Accounts
-        require_approval:
-          description: Whether the transfer should require explicit approval via the dashboard or API. For more information, see [Transfer Approvals](/documentation/transfer-approvals).
-          type: boolean
-          x-documentation-priority: default
-      required:
-      - account_id
-      - amount
-      - description
-      - destination_account_id
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     account_transfer_list:
       additionalProperties: true
       description: A list of Account Transfer objects.
@@ -889,6 +848,47 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Account Transfer Lists
+    create_an_account_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_id: account_in71c4amph0vgo2qllky
+        amount: 100
+        description: Creating liquidity
+        destination_account_id: account_uf16sut2ct5bevmq3eh
+      properties:
+        account_id:
+          description: The identifier for the originating Account that will send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        amount:
+          description: The transfer amount in the minor unit of the account currency. For dollars, for example, this is cents.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        description:
+          description: An internal-facing description for the transfer for display in the API and dashboard. This will also show in the description of the created Transactions.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        destination_account_id:
+          description: The identifier for the destination Account that will receive the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Accounts
+        require_approval:
+          description: Whether the transfer should require explicit approval via the dashboard or API. For more information, see [Transfer Approvals](/documentation/transfer-approvals).
+          type: boolean
+          x-documentation-priority: default
+      required:
+      - account_id
+      - amount
+      - description
+      - destination_account_id
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

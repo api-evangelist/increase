@@ -200,6 +200,63 @@ paths:
       - Physical Card Profiles
 components:
   schemas:
+    clone_a_physical_card_profile_parameters:
+      additionalProperties: true
+      example:
+        front_image_file_id: file_o6aex13wm1jcc36sgcj1
+      properties:
+        carrier_image_file_id:
+          description: The identifier of the File containing the physical card's carrier image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        contact_phone:
+          description: A phone number the user can contact to receive support for their card.
+          maxLength: 32
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        description:
+          description: A description you can use to identify the Card Profile.
+          maxLength: 200
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        front_image_file_id:
+          description: The identifier of the File containing the physical card's front image.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        front_text:
+          additionalProperties: false
+          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
+          properties:
+            line1:
+              description: The first line of text on the front of the card.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+            line2:
+              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
+              maxLength: 33
+              minLength: 1
+              type: string
+              x-documentation-priority: default
+          required:
+          - line1
+          type: object
+          x-documentation-priority: default
+          x-event-categories: []
+          x-stainless-empty-object: false
+        program_id:
+          description: The identifier of the Program to use for the cloned Physical Card Profile.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Programs
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     physical_card_profile:
       additionalProperties: true
       description: This contains artwork and metadata relating to a Physical Card's appearance. For more information, see our guide on [physical card artwork](https://increase.com/documentation/card-art-physical-cards).
@@ -331,6 +388,47 @@ components:
       x-stainless-empty-object: false
       x-tag: Physical Card Profiles
       x-title-plural: Physical Card Profiles
+    physical_card_profile_list:
+      additionalProperties: true
+      description: A list of Physical Card Profile objects.
+      example:
+        data:
+        - back_image_file_id: file_makxrc67oh9l6sg7w9yc
+          carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
+          contact_phone: '+16505046304'
+          created_at: '2020-01-31T23:59:59Z'
+          creator: user
+          description: Corporate logo card
+          front_image_file_id: file_makxrc67oh9l6sg7w9yc
+          front_text: null
+          id: physical_card_profile_m534d5rn9qyy9ufqxoec
+          idempotency_key: null
+          is_default: false
+          program_id: program_i2v2os4mwza1oetokh9i
+          status: active
+          type: physical_card_profile
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/physical_card_profile'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Physical Card Profile List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Physical Card Profile Lists
     error:
       anyOf:
       - properties:
@@ -642,63 +740,6 @@ components:
         - status
         type: object
         x-event-categories: []
-    clone_a_physical_card_profile_parameters:
-      additionalProperties: true
-      example:
-        front_image_file_id: file_o6aex13wm1jcc36sgcj1
-      properties:
-        carrier_image_file_id:
-          description: The identifier of the File containing the physical card's carrier image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        contact_phone:
-          description: A phone number the user can contact to receive support for their card.
-          maxLength: 32
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        description:
-          description: A description you can use to identify the Card Profile.
-          maxLength: 200
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        front_image_file_id:
-          description: The identifier of the File containing the physical card's front image.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        front_text:
-          additionalProperties: false
-          description: Text printed on the front of the card. Reach out to [support@increase.com](mailto:support@increase.com) for more information.
-          properties:
-            line1:
-              description: The first line of text on the front of the card.
-              maxLength: 33
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-            line2:
-              description: The second line of text on the front of the card. Providing a second line moves the first line slightly higher and prints the second line in the spot where the first line would have otherwise been printed.
-              maxLength: 33
-              minLength: 1
-              type: string
-              x-documentation-priority: default
-          required:
-          - line1
-          type: object
-          x-documentation-priority: default
-          x-event-categories: []
-          x-stainless-empty-object: false
-        program_id:
-          description: The identifier of the Program to use for the cloned Physical Card Profile.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Programs
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
     create_a_physical_card_profile_parameters:
       additionalProperties: true
       example:
@@ -766,47 +807,6 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
-    physical_card_profile_list:
-      additionalProperties: true
-      description: A list of Physical Card Profile objects.
-      example:
-        data:
-        - back_image_file_id: file_makxrc67oh9l6sg7w9yc
-          carrier_image_file_id: file_makxrc67oh9l6sg7w9yc
-          contact_phone: '+16505046304'
-          created_at: '2020-01-31T23:59:59Z'
-          creator: user
-          description: Corporate logo card
-          front_image_file_id: file_makxrc67oh9l6sg7w9yc
-          front_text: null
-          id: physical_card_profile_m534d5rn9qyy9ufqxoec
-          idempotency_key: null
-          is_default: false
-          program_id: program_i2v2os4mwza1oetokh9i
-          status: active
-          type: physical_card_profile
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/physical_card_profile'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Physical Card Profile List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Physical Card Profile Lists
   responses:
     errorResponse:
       content:

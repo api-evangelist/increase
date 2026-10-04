@@ -559,6 +559,64 @@ components:
         - status
         type: object
         x-event-categories: []
+    real_time_payments_transfer_list:
+      additionalProperties: true
+      description: A list of Real-Time Payments Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number: '987654321'
+          acknowledgement:
+            acknowledged_at: '2020-01-31T23:59:59Z'
+          amount: 100
+          approval: null
+          cancellation: null
+          created_at: '2020-01-31T23:59:59Z'
+          created_by:
+            category: user
+            user:
+              email: user@example.com
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_name: null
+          external_account_id: null
+          id: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
+          idempotency_key: null
+          pending_transaction_id: null
+          rejection: null
+          routing_number: '101050001'
+          source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          status: complete
+          submission:
+            submitted_at: '2020-01-31T23:59:59Z'
+            transaction_identification: 20220501234567891T1BSLZO01745013025
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: real_time_payments_transfer
+          ultimate_creditor_name: null
+          ultimate_debtor_name: null
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/real_time_payments_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Real-Time Payments Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Real-Time Payments Transfer Lists
     real_time_payments_transfer:
       additionalProperties: true
       description: Real-Time Payments transfers move funds, within seconds, between your Increase account and any other account on the Real-Time Payments network.
@@ -1025,64 +1083,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Real-Time Payments Transfers
       x-title-plural: Real-Time Payments Transfers
-    real_time_payments_transfer_list:
-      additionalProperties: true
-      description: A list of Real-Time Payments Transfer objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          account_number: '987654321'
-          acknowledgement:
-            acknowledged_at: '2020-01-31T23:59:59Z'
-          amount: 100
-          approval: null
-          cancellation: null
-          created_at: '2020-01-31T23:59:59Z'
-          created_by:
-            category: user
-            user:
-              email: user@example.com
-          creditor_name: Ian Crease
-          currency: USD
-          debtor_name: null
-          external_account_id: null
-          id: real_time_payments_transfer_iyuhl5kdn7ssmup83mvq
-          idempotency_key: null
-          pending_transaction_id: null
-          rejection: null
-          routing_number: '101050001'
-          source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          status: complete
-          submission:
-            submitted_at: '2020-01-31T23:59:59Z'
-            transaction_identification: 20220501234567891T1BSLZO01745013025
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: real_time_payments_transfer
-          ultimate_creditor_name: null
-          ultimate_debtor_name: null
-          unstructured_remittance_information: Invoice 29582
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/real_time_payments_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Real-Time Payments Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Real-Time Payments Transfer Lists
     create_a_real_time_payments_transfer_parameters:
       additionalProperties: true
       example:
