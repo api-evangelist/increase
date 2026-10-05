@@ -1,0 +1,12 @@
+{
+ "url": "https://increase.com/openapi.json",
+ "requested_url": "https://increase.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 4309576,
+ "sha256": "f94f3e3a92cfcf07b00ec95634260f3403c35ae0376a35ae0f405478abc9831b",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.937), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
