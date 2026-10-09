@@ -150,3 +150,208 @@ plans:
   unit: account number
   included_quota: First 10 free
   overage: Contact Sales
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  - metered
+  - subscription
+  units:
+  - object
+  - request
+  - transaction
+  plans:
+  - name: Monthly fees
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - month
+  - name: Same-day ACH origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Next-day ACH origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: ACH returns
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Unauthorized returns
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Late return request processing
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Wire origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Wire drawdown origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Check printing and mailing fulfilled by Increase
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Additional pages
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - object
+    periods:
+    - other
+  - name: Printing and mailing fulfilled by a third party
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Overnight shipping
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Remote deposit capture
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Lockbox addresses
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - month
+  - name: Lockbox check deposits
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Check returns
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - request
+    periods:
+    - other
+  - name: Virtual card creation
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Card disputes
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Physical card creation
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
+  - name: Additional card services
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: RTP origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Request for payments origination
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: FedNow origination
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - transaction
+    periods:
+    - other
+  - name: Extended deposit insurance through IntraFi
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Account number creation
+    access: other
+    model: metered
+    model_how: derived
+    units:
+    - other
+    periods:
+    - other
