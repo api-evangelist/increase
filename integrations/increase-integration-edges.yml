@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/increase/integrations
 - https://n8n.io/integrations/increase/
@@ -12,5 +12,20 @@ checked:
 - https://zapier.com/apps/increase/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: plaid
+  partner: plaid
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: processor-connection
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/plaid/blob/main/openapi/plaid-plaid-api-openapi.yml
+  contract_reference:
+    repo: plaid
+    spec_file: plaid-plaid-api-openapi.yml
+    value: increase
+    property: schemas.ProcessorTokenCreateRequest.processor
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
 templates: []
