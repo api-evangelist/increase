@@ -126,6 +126,52 @@ paths:
       - Inbound Fednow Transfers
 components:
   schemas:
+    inbound_fednow_transfer_list:
+      additionalProperties: true
+      description: A list of Inbound FedNow Transfer objects.
+      example:
+        data:
+        - account_id: account_in71c4amph0vgo2qllky
+          account_number_id: account_number_v18nkfqm6afpsrvy82b2
+          amount: 100
+          confirmation:
+            transfer_id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
+          created_at: '2020-01-31T23:59:59Z'
+          creditor_name: Ian Crease
+          currency: USD
+          debtor_account_number: '987654321'
+          debtor_name: National Phonograph Company
+          debtor_routing_number: '101050001'
+          decline:
+            reason: account_number_disabled
+            transfer_id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
+          id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
+          status: confirmed
+          transaction_id: transaction_uyrp7fld2ium70oa7oi
+          type: inbound_fednow_transfer
+          unstructured_remittance_information: Invoice 29582
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/inbound_fednow_transfer'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Inbound FedNow Transfer List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Inbound FedNow Transfer Lists
     error:
       anyOf:
       - properties:
@@ -631,52 +677,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Inbound FedNow Transfers
       x-title-plural: Inbound FedNow Transfers
-    inbound_fednow_transfer_list:
-      additionalProperties: true
-      description: A list of Inbound FedNow Transfer objects.
-      example:
-        data:
-        - account_id: account_in71c4amph0vgo2qllky
-          account_number_id: account_number_v18nkfqm6afpsrvy82b2
-          amount: 100
-          confirmation:
-            transfer_id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
-          created_at: '2020-01-31T23:59:59Z'
-          creditor_name: Ian Crease
-          currency: USD
-          debtor_account_number: '987654321'
-          debtor_name: National Phonograph Company
-          debtor_routing_number: '101050001'
-          decline:
-            reason: account_number_disabled
-            transfer_id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
-          id: inbound_fednow_transfer_ctxxbc07oh5ke5w1hk20
-          status: confirmed
-          transaction_id: transaction_uyrp7fld2ium70oa7oi
-          type: inbound_fednow_transfer
-          unstructured_remittance_information: Invoice 29582
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/inbound_fednow_transfer'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Inbound FedNow Transfer List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Inbound FedNow Transfer Lists
   responses:
     errorResponse:
       content:

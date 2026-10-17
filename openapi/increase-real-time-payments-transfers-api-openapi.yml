@@ -617,6 +617,91 @@ components:
       x-event-categories: []
       x-stainless-empty-object: false
       x-title-plural: Real-Time Payments Transfer Lists
+    create_a_real_time_payments_transfer_parameters:
+      additionalProperties: true
+      example:
+        account_number: '987654321'
+        amount: 100
+        creditor_name: Ian Crease
+        routing_number: '101050001'
+        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
+        unstructured_remittance_information: Invoice 29582
+      properties:
+        account_number:
+          description: The destination account number.
+          maxLength: 34
+          minLength: 1
+          pattern: ^[a-zA-Z0-9]*$
+          type: string
+          x-documentation-priority: default
+        amount:
+          description: The transfer amount in USD cents. For Real-Time Payments transfers, must be positive.
+          minimum: 1
+          type: integer
+          x-documentation-priority: default
+        creditor_name:
+          description: The name of the transfer's recipient.
+          maxLength: 140
+          minLength: 1
+          type: string
+          x-documentation-priority: default
+        debtor_name:
+          description: The name of the transfer's sender. If not provided, defaults to the name of the account's entity.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        external_account_id:
+          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: External Accounts
+        require_approval:
+          description: Whether the transfer requires explicit approval via the dashboard or API.
+          type: boolean
+          x-documentation-priority: default
+        routing_number:
+          description: The destination American Bankers' Association (ABA) Routing Transit Number (RTN).
+          maxLength: 9
+          minLength: 9
+          pattern: ^[0-9]*$
+          type: string
+          x-documentation-priority: default
+        source_account_number_id:
+          description: The identifier of the Account Number from which to send the transfer.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Account Numbers
+        ultimate_creditor_name:
+          description: The name of the ultimate recipient of the transfer. Set this if the creditor is an intermediary receiving the payment for someone else.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        ultimate_debtor_name:
+          description: The name of the ultimate sender of the transfer. Set this if the funds are being sent on behalf of someone who is not the account holder at Increase.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+        unstructured_remittance_information:
+          description: Unstructured information that will show on the recipient's bank statement.
+          maxLength: 140
+          minLength: 1
+          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
+          type: string
+          x-documentation-priority: default
+      required:
+      - source_account_number_id
+      - amount
+      - creditor_name
+      - unstructured_remittance_information
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
     real_time_payments_transfer:
       additionalProperties: true
       description: Real-Time Payments transfers move funds, within seconds, between your Increase account and any other account on the Real-Time Payments network.
@@ -1083,91 +1168,6 @@ components:
       x-stainless-empty-object: false
       x-tag: Real-Time Payments Transfers
       x-title-plural: Real-Time Payments Transfers
-    create_a_real_time_payments_transfer_parameters:
-      additionalProperties: true
-      example:
-        account_number: '987654321'
-        amount: 100
-        creditor_name: Ian Crease
-        routing_number: '101050001'
-        source_account_number_id: account_number_v18nkfqm6afpsrvy82b2
-        unstructured_remittance_information: Invoice 29582
-      properties:
-        account_number:
-          description: The destination account number.
-          maxLength: 34
-          minLength: 1
-          pattern: ^[a-zA-Z0-9]*$
-          type: string
-          x-documentation-priority: default
-        amount:
-          description: The transfer amount in USD cents. For Real-Time Payments transfers, must be positive.
-          minimum: 1
-          type: integer
-          x-documentation-priority: default
-        creditor_name:
-          description: The name of the transfer's recipient.
-          maxLength: 140
-          minLength: 1
-          type: string
-          x-documentation-priority: default
-        debtor_name:
-          description: The name of the transfer's sender. If not provided, defaults to the name of the account's entity.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
-          type: string
-          x-documentation-priority: default
-        external_account_id:
-          description: The ID of an External Account to initiate a transfer to. If this parameter is provided, `account_number` and `routing_number` must be absent.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: External Accounts
-        require_approval:
-          description: Whether the transfer requires explicit approval via the dashboard or API.
-          type: boolean
-          x-documentation-priority: default
-        routing_number:
-          description: The destination American Bankers' Association (ABA) Routing Transit Number (RTN).
-          maxLength: 9
-          minLength: 9
-          pattern: ^[0-9]*$
-          type: string
-          x-documentation-priority: default
-        source_account_number_id:
-          description: The identifier of the Account Number from which to send the transfer.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Account Numbers
-        ultimate_creditor_name:
-          description: The name of the ultimate recipient of the transfer. Set this if the creditor is an intermediary receiving the payment for someone else.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
-          type: string
-          x-documentation-priority: default
-        ultimate_debtor_name:
-          description: The name of the ultimate sender of the transfer. Set this if the funds are being sent on behalf of someone who is not the account holder at Increase.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
-          type: string
-          x-documentation-priority: default
-        unstructured_remittance_information:
-          description: Unstructured information that will show on the recipient's bank statement.
-          maxLength: 140
-          minLength: 1
-          pattern: ^[\ !"\#\$%&'\(\)\*\+,\-\./0123456789:;<=>\?@ABCDEFGHIJKLMNOPQRSTUVWXYZ\[\\\]\^_`abcdefghijklmnopqrstuvwxyz\{\|\}~ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ]*$
-          type: string
-          x-documentation-priority: default
-      required:
-      - source_account_number_id
-      - amount
-      - creditor_name
-      - unstructured_remittance_information
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
   responses:
     errorResponse:
       content:

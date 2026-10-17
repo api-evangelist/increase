@@ -225,454 +225,6 @@ paths:
       - Entities
 components:
   schemas:
-    entity_supplemental_document:
-      additionalProperties: false
-      description: Supplemental Documents are uploaded files connected to an Entity during onboarding.
-      example:
-        created_at: '2020-01-31T23:59:59Z'
-        entity_id: entity_n8y8tnk2p9339ti393yi
-        file_id: file_makxrc67oh9l6sg7w9yc
-        idempotency_key: null
-        type: entity_supplemental_document
-      properties:
-        created_at:
-          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Supplemental Document was created.
-          format: date-time
-          type: string
-          x-documentation-priority: default
-        entity_id:
-          description: The Entity the supplemental document is attached to.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Entities
-        file_id:
-          description: The File containing the document.
-          type: string
-          x-documentation-priority: default
-          x-id-reference-to: Files
-        idempotency_key:
-          anyOf:
-          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-        type:
-          description: A constant representing the object's type. For this resource it will always be `entity_supplemental_document`.
-          enum:
-          - entity_supplemental_document
-          type: string
-          x-documentation-priority: default
-      required:
-      - type
-      - entity_id
-      - file_id
-      - created_at
-      - idempotency_key
-      title: Supplemental Document
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-tag: Supplemental Documents
-      x-title-plural: Supplemental Documents
-    error:
-      anyOf:
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - api_method_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - environment_mismatch_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          resource_id:
-            description: ''
-            type: string
-            x-documentation-priority: default
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - idempotency_key_already_used_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - resource_id
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - insufficient_permissions_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 500
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - internal_server_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          reason:
-            description: ''
-            enum:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-            type: string
-            x-documentation-priority: default
-            x-enum-descriptions:
-            - deleted_credential
-            - expired_credential
-            - ip_not_allowed
-            - no_credential
-            - no_header
-            - no_api_access
-            - wrong_environment
-          status:
-            enum:
-            - 401
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_api_key_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - reason
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 409
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_operation_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          errors:
-            description: All errors related to parsing the request parameters.
-            items:
-              additionalProperties: true
-              properties: {}
-              title: ErrorsElement
-              type: object
-              x-event-categories: []
-              x-stainless-empty-object: false
-              x-title-plural: ErrorsElements
-            type: array
-            x-documentation-priority: default
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - invalid_parameters_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        - errors
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 400
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - malformed_request_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 404
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - object_not_found_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          status:
-            enum:
-            - 403
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - private_feature_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-      - properties:
-          detail:
-            anyOf:
-            - type: string
-            - type: 'null'
-          retry_after:
-            anyOf:
-            - description: ''
-              type: integer
-              x-documentation-priority: default
-            - type: 'null'
-          status:
-            enum:
-            - 429
-            type: integer
-          title:
-            type: string
-          type:
-            enum:
-            - rate_limited_error
-            type: string
-        required:
-        - type
-        - title
-        - detail
-        - status
-        type: object
-        x-event-categories: []
-    entity_list:
-      additionalProperties: true
-      description: A list of Entity objects.
-      example:
-        data:
-        - corporation:
-            address:
-              city: New York
-              country: US
-              line1: 33 Liberty Street
-              line2: null
-              state: NY
-              zip: '10045'
-            beneficial_owners:
-            - company_title: CEO
-              id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
-              individual:
-                address:
-                  city: New York
-                  country: US
-                  line1: 33 Liberty Street
-                  line2: null
-                  state: NY
-                  zip: '10045'
-                date_of_birth: '1970-01-31'
-                identification:
-                  method: social_security_number
-                  number_last4: '1120'
-                name: Ian Crease
-              prongs:
-              - control
-              - ownership
-            email: null
-            incorporation_state: NY
-            industry_code: null
-            legal_identifier:
-              category: us_employer_identification_number
-              value: '602214076'
-            name: National Phonograph Company
-            website: https://example.com
-          created_at: '2020-01-31T23:59:59Z'
-          creating_entity_onboarding_session_id: null
-          description: null
-          details_confirmed_at: null
-          government_authority: null
-          id: entity_n8y8tnk2p9339ti393yi
-          idempotency_key: null
-          joint: null
-          natural_person: null
-          risk_rating: null
-          status: active
-          structure: corporation
-          supplemental_documents:
-          - created_at: '2020-01-31T23:59:59Z'
-            entity_id: entity_n8y8tnk2p9339ti393yi
-            file_id: file_makxrc67oh9l6sg7w9yc
-            idempotency_key: null
-            type: entity_supplemental_document
-          terms_agreements:
-          - agreed_at: '2020-01-31T23:59:59Z'
-            ip_address: 128.32.0.1
-            terms_url: https://increase.com/example_terms
-          third_party_verification: null
-          trust: null
-          type: entity
-          validation: null
-        next_cursor: v57w5d
-      properties:
-        data:
-          description: The contents of the list.
-          items:
-            $ref: '#/components/schemas/entity'
-          type: array
-          x-documentation-priority: default
-        next_cursor:
-          anyOf:
-          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
-            type: string
-            x-documentation-priority: default
-          - type: 'null'
-      required:
-      - data
-      - next_cursor
-      title: Entity List
-      type: object
-      x-event-categories: []
-      x-stainless-empty-object: false
-      x-title-plural: Entity Lists
     update_an_entity_parameters:
       additionalProperties: false
       example:
@@ -1212,6 +764,454 @@ components:
       type: object
       x-event-categories: []
       x-stainless-empty-object: false
+    error:
+      anyOf:
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - api_method_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - environment_mismatch_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          resource_id:
+            description: ''
+            type: string
+            x-documentation-priority: default
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - idempotency_key_already_used_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - resource_id
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - insufficient_permissions_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 500
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - internal_server_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          reason:
+            description: ''
+            enum:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+            type: string
+            x-documentation-priority: default
+            x-enum-descriptions:
+            - deleted_credential
+            - expired_credential
+            - ip_not_allowed
+            - no_credential
+            - no_header
+            - no_api_access
+            - wrong_environment
+          status:
+            enum:
+            - 401
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_api_key_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - reason
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 409
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_operation_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          errors:
+            description: All errors related to parsing the request parameters.
+            items:
+              additionalProperties: true
+              properties: {}
+              title: ErrorsElement
+              type: object
+              x-event-categories: []
+              x-stainless-empty-object: false
+              x-title-plural: ErrorsElements
+            type: array
+            x-documentation-priority: default
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - invalid_parameters_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        - errors
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 400
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - malformed_request_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 404
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - object_not_found_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          status:
+            enum:
+            - 403
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - private_feature_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+      - properties:
+          detail:
+            anyOf:
+            - type: string
+            - type: 'null'
+          retry_after:
+            anyOf:
+            - description: ''
+              type: integer
+              x-documentation-priority: default
+            - type: 'null'
+          status:
+            enum:
+            - 429
+            type: integer
+          title:
+            type: string
+          type:
+            enum:
+            - rate_limited_error
+            type: string
+        required:
+        - type
+        - title
+        - detail
+        - status
+        type: object
+        x-event-categories: []
+    entity_supplemental_document:
+      additionalProperties: false
+      description: Supplemental Documents are uploaded files connected to an Entity during onboarding.
+      example:
+        created_at: '2020-01-31T23:59:59Z'
+        entity_id: entity_n8y8tnk2p9339ti393yi
+        file_id: file_makxrc67oh9l6sg7w9yc
+        idempotency_key: null
+        type: entity_supplemental_document
+      properties:
+        created_at:
+          description: The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) time at which the Supplemental Document was created.
+          format: date-time
+          type: string
+          x-documentation-priority: default
+        entity_id:
+          description: The Entity the supplemental document is attached to.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Entities
+        file_id:
+          description: The File containing the document.
+          type: string
+          x-documentation-priority: default
+          x-id-reference-to: Files
+        idempotency_key:
+          anyOf:
+          - description: The idempotency key you chose for this object. This value is unique across Increase and is used to ensure that a request is only processed once. Learn more about [idempotency](https://increase.com/documentation/idempotency-keys).
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+        type:
+          description: A constant representing the object's type. For this resource it will always be `entity_supplemental_document`.
+          enum:
+          - entity_supplemental_document
+          type: string
+          x-documentation-priority: default
+      required:
+      - type
+      - entity_id
+      - file_id
+      - created_at
+      - idempotency_key
+      title: Supplemental Document
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-tag: Supplemental Documents
+      x-title-plural: Supplemental Documents
+    entity_list:
+      additionalProperties: true
+      description: A list of Entity objects.
+      example:
+        data:
+        - corporation:
+            address:
+              city: New York
+              country: US
+              line1: 33 Liberty Street
+              line2: null
+              state: NY
+              zip: '10045'
+            beneficial_owners:
+            - company_title: CEO
+              id: entity_beneficial_owner_vozma8szzu1sxezp5zq6
+              individual:
+                address:
+                  city: New York
+                  country: US
+                  line1: 33 Liberty Street
+                  line2: null
+                  state: NY
+                  zip: '10045'
+                date_of_birth: '1970-01-31'
+                identification:
+                  method: social_security_number
+                  number_last4: '1120'
+                name: Ian Crease
+              prongs:
+              - control
+              - ownership
+            email: null
+            incorporation_state: NY
+            industry_code: null
+            legal_identifier:
+              category: us_employer_identification_number
+              value: '602214076'
+            name: National Phonograph Company
+            website: https://example.com
+          created_at: '2020-01-31T23:59:59Z'
+          creating_entity_onboarding_session_id: null
+          description: null
+          details_confirmed_at: null
+          government_authority: null
+          id: entity_n8y8tnk2p9339ti393yi
+          idempotency_key: null
+          joint: null
+          natural_person: null
+          risk_rating: null
+          status: active
+          structure: corporation
+          supplemental_documents:
+          - created_at: '2020-01-31T23:59:59Z'
+            entity_id: entity_n8y8tnk2p9339ti393yi
+            file_id: file_makxrc67oh9l6sg7w9yc
+            idempotency_key: null
+            type: entity_supplemental_document
+          terms_agreements:
+          - agreed_at: '2020-01-31T23:59:59Z'
+            ip_address: 128.32.0.1
+            terms_url: https://increase.com/example_terms
+          third_party_verification: null
+          trust: null
+          type: entity
+          validation: null
+        next_cursor: v57w5d
+      properties:
+        data:
+          description: The contents of the list.
+          items:
+            $ref: '#/components/schemas/entity'
+          type: array
+          x-documentation-priority: default
+        next_cursor:
+          anyOf:
+          - description: A pointer to a place in the list. Pass this as the `cursor` parameter to retrieve the next page of results. If there are no more results, the value will be `null`.
+            type: string
+            x-documentation-priority: default
+          - type: 'null'
+      required:
+      - data
+      - next_cursor
+      title: Entity List
+      type: object
+      x-event-categories: []
+      x-stainless-empty-object: false
+      x-title-plural: Entity Lists
     create_an_entity_parameters:
       additionalProperties: true
       example:
