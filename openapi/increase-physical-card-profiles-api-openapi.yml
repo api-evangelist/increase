@@ -910,3 +910,9 @@ x-tagGroups:
   - IntraFi Account Enrollments
   - IntraFi Balances
   - IntraFi Exclusions
+x-provenance:
+  method: harvested
+  publisher: Increase
+  source: https://increase.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
